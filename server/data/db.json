@@ -37,7 +37,8 @@
         "s_2584nm99": "A面选拔（第1排 center）",
         "s_ng2yeb1e": "A面选拔（第1排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第3排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -52,6 +53,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第9位"
         }
       ],
       "admireSenior": [
@@ -99,7 +104,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -114,6 +120,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第20位"
         }
       ],
       "admireSenior": [
@@ -159,7 +169,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -174,6 +185,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第18位"
         }
       ],
       "admireSenior": [
@@ -220,7 +235,8 @@
         "s_2584nm99": "A面选拔（第1排 center）",
         "s_ng2yeb1e": "A面选拔（第1排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第3排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -235,6 +251,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第8位"
         }
       ],
       "admireSenior": [
@@ -280,7 +300,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -295,6 +316,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "admireSenior": [
@@ -342,7 +367,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -357,6 +383,10 @@
         {
           "edition": "第3届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第19位"
         }
       ],
       "admireSenior": [
@@ -405,7 +435,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -420,6 +451,10 @@
         {
           "edition": "第3届",
           "rank": "十六位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "admireSenior": [
@@ -521,7 +556,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "A面选拔（第1排 center）",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -536,6 +572,10 @@
         {
           "edition": "第3届",
           "rank": "二十一位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "admireSenior": [
@@ -582,7 +622,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "A面选拔（第2排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -597,6 +638,10 @@
         {
           "edition": "第3届",
           "rank": "二十三位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第15位"
         }
       ],
       "admireSenior": [
@@ -643,7 +688,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "A面选拔（第2排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -658,6 +704,10 @@
         {
           "edition": "第3届",
           "rank": "二十五位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第21位"
         }
       ],
       "admireSenior": [
@@ -760,7 +810,8 @@
         "s_2584nm99": "A面选拔（第2排）",
         "s_ng2yeb1e": "A面选拔（第2排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第1排 center）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -775,6 +826,10 @@
         {
           "edition": "第3届",
           "rank": "十二位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第1位"
         }
       ],
       "admireSenior": [
@@ -821,7 +876,8 @@
         "s_2584nm99": "A面选拔（第2排）",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -836,6 +892,10 @@
         {
           "edition": "第3届",
           "rank": "十四位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第16位"
         }
       ],
       "favoriteSong": "Big Mistake?! (A-side)"
@@ -920,7 +980,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "A面选拔（第2排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第1排 护法）"
+        "s_1qjvgq11": "A面选拔（第1排 护法）",
+        "s_syvyq01g": "A面选拔（第1排 护法）"
       },
       "selectionCount": 5,
       "electionRanks": [
@@ -935,6 +996,10 @@
         {
           "edition": "第3届",
           "rank": "五位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第3位"
         }
       ],
       "favoriteSong": "Knock Knock(今日优center)"
@@ -977,7 +1042,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "A面选拔（第2排）"
       },
       "selectionCount": 2,
       "electionRanks": [
@@ -992,6 +1058,10 @@
         {
           "edition": "第3届",
           "rank": "十五位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第7位"
         }
       ],
       "favoriteSong": "(not) Good Enough "
@@ -1126,7 +1196,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "A面选拔（第3排）"
       },
       "selectionCount": 5,
       "electionRanks": [
@@ -1141,6 +1212,10 @@
         {
           "edition": "第3届",
           "rank": "九位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第11位"
         }
       ],
       "favoriteSong": "Emerald (A-side)"
@@ -1183,7 +1258,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "A面选拔（第2排 护法）",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -1198,6 +1274,10 @@
         {
           "edition": "第3届",
           "rank": "三十位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第13位"
         }
       ],
       "favoriteSong": "already decided?! (A-side)"
@@ -1240,7 +1320,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 3,
       "electionRanks": [
@@ -1255,6 +1336,10 @@
         {
           "edition": "第3届",
           "rank": "十三位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第17位"
         }
       ],
       "favoriteSong": "BE US (A-side)"
@@ -1297,7 +1382,8 @@
         "s_2584nm99": "A面选拔（第2排）",
         "s_ng2yeb1e": "A面选拔（第2排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第1排 护法）"
+        "s_1qjvgq11": "A面选拔（第1排 护法）",
+        "s_syvyq01g": "A面选拔（第1排 护法）"
       },
       "selectionCount": 7,
       "electionRanks": [
@@ -1312,6 +1398,10 @@
         {
           "edition": "第3届",
           "rank": "三位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第2位"
         }
       ],
       "favoriteSong": "GIMME AMI"
@@ -1354,7 +1444,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -1369,6 +1460,10 @@
         {
           "edition": "第3届",
           "rank": "二十九位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "favoriteSong": "Love Again（松村珠理奈）"
@@ -1462,7 +1557,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -1477,6 +1573,10 @@
         {
           "edition": "第3届",
           "rank": "二十二位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "favoriteSong": "SAY MY NAME"
@@ -1519,7 +1619,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "A面选拔（第2排 护法）",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "A面选拔（第3排）"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -1534,6 +1635,10 @@
         {
           "edition": "第3届",
           "rank": "十七位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第12位"
         }
       ],
       "favoriteSong": "The Meaning of Unforgetable Things (A-side)"
@@ -1576,7 +1681,8 @@
         "s_2584nm99": "A面选拔（第3排）",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "A面选拔（第3排）",
-        "s_1qjvgq11": "A面选拔（第3排）"
+        "s_1qjvgq11": "A面选拔（第3排）",
+        "s_syvyq01g": "落选"
       },
       "selectionCount": 4,
       "electionRanks": [
@@ -1591,6 +1697,10 @@
         {
           "edition": "第3届",
           "rank": "十位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第14位"
         }
       ],
       "favoriteSong": "Last Angel"
@@ -1633,7 +1743,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "A面选拔（第1排 center）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第2排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1648,6 +1759,10 @@
         {
           "edition": "第3届",
           "rank": "十一位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第6位"
         }
       ],
       "favoriteSong": "NO PRESSURE (A-side)"
@@ -1659,7 +1774,7 @@
       "origin": "埼玉 • 川口",
       "generation": "1期",
       "avatar": "/uploads/1768591329871.jpg",
-      "isActive": true,
+      "isActive": false,
       "profile": {
         "height": "154cm",
         "birthday": "2008-06-08",
@@ -1707,7 +1822,9 @@
           "rank": "十九位"
         }
       ],
-      "favoriteSong": "already decided?! (A-side)"
+      "favoriteSong": "already decided?! (A-side)",
+      "graduationDate": "2026-03-01",
+      "graduationSongTitle": "无"
     },
     {
       "id": "m_ys0s465i",
@@ -1842,7 +1959,8 @@
         "s_2584nm99": "A面选拔（第2排）",
         "s_ng2yeb1e": "A面选拔（第1排）",
         "s_vh9w6l9m": "A面选拔（第2排）",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第2排）"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -1859,6 +1977,10 @@
         {
           "edition": "第3届",
           "rank": "八位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第5位"
         }
       ],
       "favoriteSong": "Star with Moon（竹内星月 with 宫月）"
@@ -2009,7 +2131,7 @@
         "s_vh9w6l9m": "落选",
         "s_1qjvgq11": "A面选拔（第1排 center）"
       },
-      "isActive": true,
+      "isActive": false,
       "selectionCount": 4,
       "romaji": "HINA SAKAGUCHI",
       "electionRanks": [
@@ -2026,7 +2148,9 @@
           "rank": "一位"
         }
       ],
-      "favoriteSong": "SAY MY NAME"
+      "favoriteSong": "SAY MY NAME",
+      "graduationDate": "2026-03-01",
+      "graduationSongTitle": "Wish You Well"
     },
     {
       "id": "m_mika",
@@ -2064,7 +2188,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -2081,6 +2206,10 @@
         {
           "edition": "第3届",
           "rank": "十八位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "favoriteSong": "V.S. (坂口阳菜 x 中村樱)"
@@ -2121,7 +2250,8 @@
         "s_2584nm99": "A面选拔（第2排）",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第3排）"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -2138,6 +2268,10 @@
         {
           "edition": "第3届",
           "rank": "七位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第10位"
         }
       ],
       "favoriteSong": "Am I a Bad Girl? (A-side)"
@@ -2223,7 +2357,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "A面选拔（第3排）",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "A面选拔（第2排）"
+        "s_1qjvgq11": "A面选拔（第2排）",
+        "s_syvyq01g": "A面选拔（第2排）"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -2240,6 +2375,10 @@
         {
           "edition": "第3届",
           "rank": "四位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第4位"
         }
       ],
       "favoriteSong": "J ONE (A-side)"
@@ -2331,7 +2470,8 @@
         "s_2584nm99": "落选",
         "s_ng2yeb1e": "落选",
         "s_vh9w6l9m": "落选",
-        "s_1qjvgq11": "落选"
+        "s_1qjvgq11": "落选",
+        "s_syvyq01g": "落选"
       },
       "isActive": true,
       "selectionCount": 0,
@@ -2348,6 +2488,10 @@
         {
           "edition": "第3届",
           "rank": "二十位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
         }
       ],
       "favoriteSong": "Love Again（松村珠理奈）"
@@ -3472,6 +3616,61 @@
         }
       },
       "notes": "第四届总选举的投票单曲，也是坂口阳菜最后的center曲，选拔阵容太豪华了吧，这是现在xp的最强阵容了吧！"
+    },
+    {
+      "id": "s_syvyq01g",
+      "title": "23rd Single · The Fate of Yuria",
+      "release": "2026-03-02",
+      "cover": "/uploads/1772445182008.jpg",
+      "tags": [],
+      "tracks": [
+        {
+          "no": 1,
+          "title": "The Fate of Yuria (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1772445194703-xvhrql.mp4"
+        },
+        {
+          "no": 2,
+          "title": "I Think... (秦美美树 center)",
+          "isAside": false,
+          "audio": ""
+        },
+        {
+          "no": 3,
+          "title": "Wish You Well (坂口阳菜 毕业曲)",
+          "isAside": false,
+          "audio": ""
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          5,
+          4,
+          3
+        ],
+        "slots": [
+          "m_blncyp2k",
+          "m_6gen_1_4821",
+          "m_6gen_4_6829",
+          "m_mayu",
+          "m_bm7qiehk",
+          "m_m8fltj0e",
+          "m_hina",
+          "m_akari",
+          "m_batr9qfj",
+          "m_gbojk371",
+          "m_5gen_7_2141",
+          "m_rjli97s6"
+        ],
+        "slotRoles": {
+          "9": "guardian",
+          "10": "center",
+          "11": "guardian"
+        }
+      },
+      "notes": "xp初代双c毕业以后的首次总选举，仓野尤利娅杀出重围直接获得第一！怎么佐伯美情还进选拔了啊"
     }
   ],
   "posts": [

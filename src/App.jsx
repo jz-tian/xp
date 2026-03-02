@@ -899,7 +899,7 @@ function AppShell({ children }) {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 text-sm text-slate-600">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4" />
-            <span>XJP56 Showcase App</span>
+            <span>XP Showcase App</span>
             <Badge className="ml-2" variant="secondary">
               Local Demo
             </Badge>
@@ -933,7 +933,7 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="text-left">
-            <div className="text-base font-semibold leading-tight">XJP56</div>
+            <div className="text-base font-semibold leading-tight">XP</div>
             <div className="flex items-center gap-2">
             <div className="text-xs text-slate-500">Modern Showcase</div>
             {admin ? (
@@ -1054,7 +1054,7 @@ function Hero({ activeMembersCount, totalMembersCount, singlesCount, postsCount,
         <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
           <CardHeader>
             <CardTitle className="text-3xl md:text-4xl">
-              XJP56 官方主页（Demo）
+              XP 官方主页（Demo）
             </CardTitle>
             <CardDescription className="text-slate-600">
               现代、大气、时尚的组合展示：成员 · 单曲 · Blog，以及完整的管理员编辑与站位拖拽。
