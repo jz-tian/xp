@@ -247,6 +247,13 @@ function generationBadgeStyle(gen = "") {
   if (g.startsWith("3")) return { backgroundColor: "#DDE8FF", color: "#154ECF", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };
   if (g.startsWith("5")) return { backgroundColor: "#C9F3FF", color: "#00303A", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };
   if (g.startsWith("6")) return { backgroundColor: "#E9D5FF", color: "#5B21B6", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };;
+  if (g.startsWith("7")) return { 
+  backgroundColor: "#FED7AA", 
+  color: "#9A3412",
+  padding: '0.125rem 0.75rem', 
+  borderRadius: '9999px', 
+  fontWeight: 600 
+};
   return undefined;
 }
 
@@ -1586,7 +1593,7 @@ function MembersPage({ data, setData, admin }) {
 
                 
 
-                {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
+                {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
                   <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
                     <CardHeader>
                       <CardTitle className="text-base">憧憬的前辈</CardTitle>
