@@ -1202,11 +1202,11 @@ function AudioUploader({ label, value, onChange, hint }) {
 // DialogContent wrapper: fixed height + inner scroll (prevents dialogs being cut off)
 function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
-    "top-[5vh] translate-y-0 w-[calc(100vw-2rem)] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 " +
+    "top-[3vh] translate-y-0 w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
     "rounded-none border border-[#E0E0E0] bg-white text-[#1C1C1C] shadow-lg";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
-      <div className="p-6">{children}</div>
+      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-6">{children}</div>
     </DialogContent>
   );
 }
@@ -1447,278 +1447,225 @@ function MembersPage({ data, setData, admin }) {
       >
         <ScrollDialogContent className="max-w-4xl">
           {selected ? (
-            <div className="grid gap-6 md:grid-cols-2 items-start">
-              <div className="grid gap-3">
-                <div className="overflow-hidden border border-[#E0E0E0] aspect-[3/4]">
-                  <img
-                    src={resolveMediaUrl(selected.avatar)}
-                    alt={selected.name}
-                    className={"h-full w-full object-cover object-top bg-[#F0F0F0] " + (!selected.isActive ? "grayscale" : "")}
-                  />
-                </div>
+          <div className="grid gap-10">
 
-                <div className="border border-[#E0E0E0] bg-white">
-                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                    <div className="text-sm font-medium text-[#1C1C1C]">总选举顺位</div>
+            {/* Name + romaji — centered */}
+            <div className="text-center">
+              <div className="text-2xl font-light text-[#1C1C1C] tracking-tight">
+                {selected.name}{!selected.isActive ? " 卒" : ""}
+              </div>
+              {selected.romaji ? (
+                <div className="text-[11px] tracking-[0.2em] text-[#6B6B6B] mt-1">{selected.romaji}</div>
+              ) : null}
+              <div className="text-xs text-[#6B6B6B] mt-1">
+                {[selected.origin, selected.generation].filter(Boolean).join(" · ")}
+              </div>
+            </div>
+
+            {/* Centered portrait photo */}
+            <div className="flex justify-center">
+              <div className={"overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px]" + (!selected.isActive ? " grayscale opacity-80" : "")}>
+                <img
+                  src={resolveMediaUrl(selected.avatar)}
+                  alt={selected.name}
+                  className="aspect-[3/4] w-full object-cover object-top"
+                />
+              </div>
+            </div>
+
+            {/* PROFILE */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-5 h-px bg-[#1C1C1C]" />
+                <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Profile</div>
+              </div>
+              <div>
+                {[
+                  ["身高", selected.profile?.height],
+                  ["生日", selected.profile?.birthday],
+                  ["血型", selected.profile?.blood],
+                  ["爱好", selected.profile?.hobby],
+                  ["特长", selected.profile?.skill],
+                  ...(!selected.isActive && selected.graduationDate
+                    ? [["毕业", isoDate(selected.graduationDate) + ((selected.graduationSongTitle || "").trim() && (selected.graduationSongTitle || "").trim() !== "无" ? " · " + selected.graduationSongTitle : "")]]
+                    : []),
+                ].filter(([, v]) => v).map(([label, value], i, arr) => (
+                  <div
+                    key={label}
+                    className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}
+                  >
+                    <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
+                    <span className="text-sm text-[#1C1C1C]">{value}</span>
                   </div>
-                  <div className="p-4 grid gap-2 text-sm">
-                    {(selected.electionRanks || []).length ? (
-                      (selected.electionRanks || []).map((r, idx) => (
-                        <div
-                          key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
-                          className="flex items-center justify-between border border-[#E0E0E0] px-3 py-2"
-                        >
-                          <div className="text-[#6B6B6B]">{r.edition || "—"}</div>
-                          {(() => {
-                            const b = getElectionBadge(r.rank, r.edition);
-                            return (
-                              <span className={"inline-flex items-center border px-2.5 py-0.5 text-xs font-medium " + b.className}>
-                                {b.text}
-                              </span>
-                            );
-                          })()}
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-[#6B6B6B]">—</div>
-                    )}
+                ))}
+                {selected.profile?.catchphrase ? (
+                  <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0]">
+                    <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
+                    <span className="text-sm text-[#1C1C1C] leading-relaxed">{selected.profile.catchphrase}</span>
                   </div>
+                ) : null}
+              </div>
+            </div>
+
+            {/* ELECTION */}
+            {(selected.electionRanks || []).length ? (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#1C1C1C]" />
+                  <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Election</div>
+                </div>
+                <div>
+                  {(selected.electionRanks || []).map((r, idx) => {
+                    const b = getElectionBadge(r.rank, r.edition);
+                    return (
+                      <div
+                        key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
+                        className={"flex items-center justify-between py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                      >
+                        <span className="text-sm text-[#6B6B6B]">{r.edition || "—"}</span>
+                        <span className={"inline-flex items-center border px-2.5 py-0.5 text-xs font-medium " + b.className}>{b.text}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-              <div className="grid gap-4">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-light text-[#1C1C1C]">
-                    <div className="flex items-baseline gap-3">
-                      <div>{selected.name}</div>
-                      {selected.romaji ? <div className="text-sm font-normal text-[#6B6B6B]">{selected.romaji}</div> : null}
-                    </div>
-                  </DialogTitle>
-                  <DialogDescription className="text-[#6B6B6B]">
-                    {selected.origin} · {selected.generation}
-                    {!selected.isActive && selected.graduationDate ? (
-                      <span className="ml-2">· 毕业：{isoDate(selected.graduationDate)}</span>
-                    ) : null}
-                    {!selected.isActive && (selected.graduationSongTitle || "").trim() && (selected.graduationSongTitle || "").trim() !== "无" ? (
-                      <span className="ml-2">· 毕业曲：{selected.graduationSongTitle}</span>
-                    ) : null}
-                  </DialogDescription>
-                </DialogHeader>
+            ) : null}
 
-                <div className="border border-[#E0E0E0] bg-white">
-                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                    <div className="text-sm font-medium text-[#1C1C1C]">基础信息</div>
-                  </div>
-                  <div className="p-4 grid grid-cols-2 gap-3 text-sm">
-                    <Info label="身高" value={selected.profile.height} />
-                    <Info label="生日" value={selected.profile.birthday} />
-                    <Info label="血型" value={selected.profile.blood} />
-                    <Info label="爱好" value={selected.profile.hobby} />
-                    <Info label="特长" value={selected.profile.skill} />
-                    <div className="col-span-2">
-                      <div className="text-xs text-[#6B6B6B]">口号</div>
-                      <div className="mt-1 text-[#1C1C1C]">{selected.profile.catchphrase}</div>
-                    </div>
-                  </div>
+            {/* FAVORITES */}
+            {(selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length) || selected.favoriteSong ? (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-5 h-px bg-[#1C1C1C]" />
+                  <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Favorites</div>
                 </div>
-
-                
-
-                {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
-                  <div className="border border-[#E0E0E0] bg-white">
-                    <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                      <div className="text-sm font-medium text-[#1C1C1C]">憧憬的前辈</div>
-                    </div>
-                    <div className="p-4 grid gap-1 text-sm text-[#1C1C1C]">
-                      {selected.admireSenior.map((id) => {
-                        const mm = (data.members || []).find((x) => x.id === id);
-                        return mm ? <div key={id}>{mm.name}</div> : null;
-                      })}
-                    </div>
-                  </div>
-                ) : null}
-
-                {selected.favoriteSong ? (
-                  <div className="border border-[#E0E0E0] bg-white">
-                    <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                      <div className="text-sm font-medium text-[#1C1C1C]">最喜欢的歌曲</div>
-                      <div className="text-[10px] text-[#6B6B6B] mt-0.5">从目前为止已发布曲目中随机选择</div>
-                    </div>
-                    <div className="p-4 grid gap-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <Music className="h-4 w-4 text-[#6B6B6B]" />
-                        <div className="font-medium text-[#1C1C1C]">{selected.favoriteSong}</div>
+                <div>
+                  {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
+                    <div className="flex items-baseline gap-6 py-2.5 border-t border-b border-[#E0E0E0]">
+                      <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">前辈</span>
+                      <div className="flex flex-wrap gap-x-3 gap-y-1">
+                        {selected.admireSenior.map((id) => {
+                          const mm = (data.members || []).find((x) => x.id === id);
+                          return mm ? <span key={id} className="text-sm text-[#1C1C1C]">{mm.name}</span> : null;
+                        })}
                       </div>
-                      {(() => {
-                        const song = selected.favoriteSong;
-                        const single = (data.singles || []).find((sg) =>
-                          (sg.tracks || []).some((t) => (typeof t === "string" ? t : t?.title) === song)
-                        );
-                        if (!single) return null;
-                        const sp = splitSingleTitle(single.title);
-                        const singleName = sp.prefix ? `${sp.prefix} · ${sp.name}` : single.title;
-                        return (
-                          <div className="text-xs text-[#6B6B6B]">
-                            收录：{singleName}（{single.release}）
-                          </div>
-                        );
-                      })()}
                     </div>
-                  </div>
-                ) : null}
-                <div className="border border-[#E0E0E0] bg-white">
-                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                    <div className="text-sm font-medium text-[#1C1C1C]">历代单曲选拔状况</div>
-                  </div>
-                  <div className="p-4 grid gap-2 text-sm">
-                  {(() => {
-                    const raw = selected?.selectionHistory || {};
-                    const gradLast = (!selected?.isActive && selected?.graduationDate)
-                      ? getLastSingleBeforeGrad(selected, data?.singles || [])
-                      : { lastSingleId: null, lastRelease: "" };
-                    const lastSingleIdBeforeGrad = gradLast.lastSingleId;
-                    const entries = Object.entries(raw).map(([k, v]) => {
-                      if (v && typeof v === "object") {
-                        return {
-                          k,
-                          label: v.label ?? k,
-                          value: v.value ?? "",
-                        };
-                      }
-                      return { k, label: k, value: String(v ?? "") };
-                    });
-                    if (entries.length === 0) {
-                      return (
-                        <div className="border border-[#E0E0E0] bg-white px-4 py-3 text-[#6B6B6B]">
-                          —
+                  ) : null}
+                  {selected.favoriteSong ? (() => {
+                    const song = selected.favoriteSong;
+                    const single = (data.singles || []).find((sg) =>
+                      (sg.tracks || []).some((t) => (typeof t === "string" ? t : t?.title) === song)
+                    );
+                    const sp = single ? splitSingleTitle(single.title) : null;
+                    const singleName = sp?.prefix ? `${sp.prefix} · ${sp.name}` : single?.title;
+                    return (
+                      <div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (!(selected.admireSenior?.length) ? "border-t border-[#E0E0E0]" : "")}>
+                        <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
+                        <div>
+                          <div className="text-sm text-[#1C1C1C]">{song}</div>
+                          {singleName ? <div className="text-xs text-[#6B6B6B] mt-0.5">收录于 {singleName}</div> : null}
                         </div>
-                      );
-                    }
+                      </div>
+                    );
+                  })() : null}
+                </div>
+              </div>
+            ) : null}
 
-                    return entries.map(({ k, label, value }) => {
-                      // selectionHistory 的 key 通常是 single.id（例如 s1/s2）。
-                      // 为避免显示成 "s1"，优先用 singles 里真实的 title。
+            {/* DISCOGRAPHY */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-5 h-px bg-[#1C1C1C]" />
+                <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Discography</div>
+              </div>
+              {(() => {
+                const raw = selected?.selectionHistory || {};
+                const gradLast = (!selected?.isActive && selected?.graduationDate)
+                  ? getLastSingleBeforeGrad(selected, data?.singles || [])
+                  : { lastSingleId: null, lastRelease: "" };
+                const lastSingleIdBeforeGrad = gradLast.lastSingleId;
+                const entries = Object.entries(raw).map(([k, v]) => {
+                  if (v && typeof v === "object") return { k, label: v.label ?? k, value: v.value ?? "" };
+                  return { k, label: k, value: String(v ?? "") };
+                });
+                if (entries.length === 0) return <div className="text-sm text-[#6B6B6B]">—</div>;
+
+                return (
+                  <div>
+                    {entries.map(({ k, label, value }, rowIdx) => {
                       const singleObj = (data?.singles || []).find((s) => s.id === k);
-                      // label 可能是旧版本写入的显示标题；如果 singleObj 存在就用它。
                       let title = (singleObj?.title ?? label ?? "").toString();
-                      // If old data had something like "1st Single · 1st Single · X", keep only the last 2 segments
                       const parts = title.split("·").map((s) => s.trim()).filter(Boolean);
                       if (parts.length >= 3) title = parts.slice(parts.length - 2).join(" · ");
-
                       const { prefix, name } = splitSingleTitle(title);
 
-                      // value format examples: "A面选拔（第1排 center）" / "B面（第2排 护法）" / "未入选"
-                      const pickType = value.includes("加入前")
-                        ? "加入前"
-                        : value.includes("A面")
-                        ? "A面选拔"
-                        : value.includes("B面")
-                        ? "B面"
-                        : value.includes("落选") || value.includes("未入选")
-                        ? "落选"
+                      const pickType = value.includes("加入前") ? "加入前"
+                        : value.includes("A面") ? "A面选拔"
+                        : value.includes("B面") ? "B面"
+                        : value.includes("落选") || value.includes("未入选") ? "落选"
                         : "";
-                      const typeTagClass = pickType === "A面选拔"
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                        : pickType === "B面"
-                        ? "border-sky-200 bg-sky-50 text-sky-800"
-                        : pickType === "加入前"
-                        ? "border-violet-200 bg-violet-50 text-violet-800"
-                        : pickType === "落选"
-                        ? "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]"
-                        : "border-[#E0E0E0] bg-white text-[#6B6B6B]";
+                      const typeTagClass = pickType === "A面选拔" ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                        : pickType === "B面" ? "border-sky-200 bg-sky-50 text-sky-800"
+                        : pickType === "加入前" ? "border-violet-200 bg-violet-50 text-violet-800"
+                        : "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]";
 
                       const rowM = value.match(/第(\d+)排/);
                       const rowNum = rowM ? Number(rowM[1]) : null;
-                      const role = value.includes("center")
-                        ? "center"
-                        : value.includes("护法") || value.includes("guardian")
-                        ? "guardian"
+                      const role = value.includes("center") ? "center"
+                        : value.includes("护法") || value.includes("guardian") ? "guardian"
                         : null;
 
-                      // 规则：若成员站位在前两排（第1/2排），则除 center/护法 外，不显示"第1排/第2排"；
-                      //      改为显示"x福神"，其中 x 为该单曲前两排（含 center/护法）总人数。
-                      const top2Count =
-                        rowNum && rowNum <= 2
-                          ? (data?.members || []).reduce((acc, mm) => {
-                              const vv = mm?.selectionHistory?.[k];
-                              const s =
-                                vv && typeof vv === "object"
-                                  ? String(vv.value ?? "")
-                                  : String(vv ?? "");
-                              const rm = s.match(/第(\d+)排/);
-                              const rn = rm ? Number(rm[1]) : null;
-                              return rn && rn <= 2 ? acc + 1 : acc;
-                            }, 0)
-                          : 0;
+                      const top2Count = rowNum && rowNum <= 2
+                        ? (data?.members || []).reduce((acc, mm) => {
+                            const vv = mm?.selectionHistory?.[k];
+                            const s = vv && typeof vv === "object" ? String(vv.value ?? "") : String(vv ?? "");
+                            const rm = s.match(/第(\d+)排/);
+                            const rn = rm ? Number(rm[1]) : null;
+                            return rn && rn <= 2 ? acc + 1 : acc;
+                          }, 0)
+                        : 0;
 
-                      // 第1/2排（福神圈）显示"x福神"；第3排及以后不显示排数tag（已有"A面选拔"tag）
-                      const rowTagText =
-                        role === "center" || role === "guardian"
-                          ? ""
-                          : rowNum && rowNum <= 2 && top2Count
-                          ? `${top2Count}福神`
-                          : "";
-
-                      const isFukujinRowTag =
-                        typeof rowTagText === "string" && /福神$/.test(rowTagText);
-
+                      const rowTagText = role === "center" || role === "guardian" ? ""
+                        : rowNum && rowNum <= 2 && top2Count ? `${top2Count}福神` : "";
+                      const isFukujinRowTag = typeof rowTagText === "string" && /福神$/.test(rowTagText);
 
                       return (
-                        <div key={k} className="border border-[#E0E0E0] bg-white px-4 py-3">
-                          <div className="flex flex-col gap-2">
-                            <div className="text-sm font-medium text-[#1C1C1C]">
-                              {prefix ? `${prefix}: ${name}` : name}
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-2 text-xs">
-                              {!selected?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
-                                <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-2 py-0.5 text-fuchsia-800">
-                                  毕业前最后一单
-                                </span>
-                              ) : null}
-                              {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
-                                <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-2 py-0.5 text-amber-800">
-                                  纪念单
-                                </span>
-                              ) : null}
-                              {pickType ? (
-                                <span className={"inline-flex items-center border px-2 py-0.5 " + typeTagClass}>
-                                  {pickType}
-                                </span>
-                              ) : null}
-
-                              {rowTagText ? (
-                                <span
-                                  className={
-                                    "inline-flex items-center border px-2 py-0.5 " +
-                                    (isFukujinRowTag
-                                      ? "border-rose-200 bg-rose-50 text-rose-700"
-                                      : "border-[#E0E0E0] text-[#6B6B6B]")
-                                  }
-                                >
-                                  {rowTagText}
-                                </span>
-                              ) : null}
-
-                              {role === "center" ? (
-                                <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900">
-                                  CENTER
-                                </span>
-                              ) : role === "guardian" ? (
-                                <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-2 py-0.5 text-xs font-medium text-[#1C1C1C]">
-                                  护法
-                                </span>
-                              ) : null}
-                            </div>
+                        <div
+                          key={k}
+                          className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                        >
+                          <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-20">
+                            {prefix || ""}
+                          </div>
+                          <div className="text-sm text-[#1C1C1C] flex-1 min-w-0 truncate">{name}</div>
+                          <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
+                            {!selected?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
+                              <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
+                            ) : null}
+                            {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
+                              <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
+                            ) : null}
+                            {pickType ? (
+                              <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
+                            ) : null}
+                            {rowTagText ? (
+                              <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
+                            ) : null}
+                            {role === "center" ? (
+                              <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
+                            ) : role === "guardian" ? (
+                              <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
+                            ) : null}
                           </div>
                         </div>
                       );
-                    });
-                  })()}
-                </div>
-                </div>
-              </div>
+                    })}
+                  </div>
+                );
+              })()}
             </div>
-          ) : null}
+
+          </div>
+        ) : null}
         </ScrollDialogContent>
       </Dialog>
 
