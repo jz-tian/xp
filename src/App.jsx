@@ -68,7 +68,7 @@ import {
 const uid = () => Math.random().toString(36).slice(2, 10);
 
 
-// --- 总选举顺位展示：把“十四位/14位/14/圈外/加入前”等统一格式化 ---
+// --- 总选举顺位展示：把"十四位/14位/14/圈外/加入前"等统一格式化 ---
 const _cnDigit = { "零":0,"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9 };
 function chineseToInt(s) {
   // 仅需支持到几十位（本项目足够用）
@@ -86,33 +86,41 @@ function chineseToInt(s) {
   return tens * 10 + ones;
 }
 
-function getElectionBadge(raw) {
+// edition 参数可选，用于判断圈外阈值：第四届及以后22+为圈外，之前20+为圈外
+function getElectionBadge(raw, edition) {
   const v = (raw ?? "").toString().trim();
-  if (!v) return { text: "—", className: "bg-slate-50 text-slate-500 border-teal-100" };
-  if (v === "加入前") return { text: "加入前", className: "bg-zinc-100 text-slate-600 border-teal-100" };
-  if (v === "圈外") return { text: "圈外", className: "bg-slate-50 text-slate-500 border-teal-100" };
+  if (!v) return { text: "—", className: "bg-[#F0F0F0] text-[#6B6B6B] border-[#E0E0E0]" };
+  if (v === "加入前") return { text: "加入前", className: "bg-[#F0F0F0] text-[#6B6B6B] border-[#E0E0E0]" };
+  if (v === "圈外") return { text: "圈外", className: "bg-[#F0F0F0] text-[#6B6B6B] border-[#E0E0E0]" };
 
   // 允许输入：14位 / 14 / 十四位 / 十四
   const numFromDigits = v.match(/\d+/);
   const n = numFromDigits ? parseInt(numFromDigits[0], 10) : chineseToInt(v);
 
   if (!Number.isFinite(n)) {
-    return { text: v, className: "bg-slate-50 text-slate-600 border-teal-100" };
+    return { text: v, className: "bg-[#F0F0F0] text-[#1C1C1C] border-[#E0E0E0]" };
   }
 
-  // 规则：1-12 选拔，13-19 UG，20+ 圈外
-  if (n >= 20) return { text: "圈外", className: "bg-slate-50 text-slate-500 border-teal-100" };
+  // 判断本届是否为第四届及以后
+  const editionStr = String(edition || "");
+  const editionNum = editionStr.match(/\d+/)
+    ? parseInt(editionStr.match(/\d+/)[0], 10)
+    : chineseToInt(editionStr.replace(/届/g, "").replace(/第/g, "").trim());
+  const isFrom4th = Number.isFinite(editionNum) && editionNum >= 4;
+  const outerThreshold = isFrom4th ? 22 : 20;
+
+  if (n >= outerThreshold) return { text: "圈外", className: "bg-[#F0F0F0] text-[#6B6B6B] border-[#E0E0E0]" };
 
   const group = n >= 13 ? "UG" : "选拔";
   const text = `${n}位（${group}）`;
 
-  // 配色：1 金，2 银，3-7 粉，8-12 选拔底色，13-19 UG 底色
-  let className = "bg-sky-100 text-sky-900 border-sky-200";
-  if (n === 1) className = "bg-amber-200 text-amber-900 border-amber-300";
-  else if (n === 2) className = "bg-zinc-200 text-slate-900 border-teal-200";
-  else if (n >= 3 && n <= 7) className = "bg-pink-200 text-pink-900 border-pink-300";
-  else if (n <= 12) className = "bg-sky-100 text-sky-900 border-sky-200";
-  else className = "bg-purple-100 text-purple-900 border-purple-200";
+  // 配色：1 金，2 银，3-7 粉，8-12 蓝，13-19 紫
+  let className = "bg-sky-50 text-sky-800 border-sky-200";
+  if (n === 1) className = "bg-amber-100 text-amber-800 border-amber-200";
+  else if (n === 2) className = "bg-[#F0F0F0] text-[#1C1C1C] border-[#E0E0E0]";
+  else if (n >= 3 && n <= 7) className = "bg-rose-50 text-rose-700 border-rose-200";
+  else if (n <= 12) className = "bg-sky-50 text-sky-800 border-sky-200";
+  else className = "bg-violet-50 text-violet-800 border-violet-200";
 
   return { text, className };
 }
@@ -143,7 +151,7 @@ const getRowFromFrontBySlot = (rows, slotIndex) => {
   for (const r of meta) {
     if (slotIndex >= r.start && slotIndex < r.end) {
       const totalRows = meta.length || 1;
-      // 约定：rows 数组从“后排”到“前排”，所以越靠后的 rowIndexFromBack 越前排
+      // 约定：rows 数组从"后排"到"前排"，所以越靠后的 rowIndexFromBack 越前排
       const rowFromFront = totalRows - r.rowIndexFromBack + 1;
       return rowFromFront;
     }
@@ -151,8 +159,8 @@ const getRowFromFrontBySlot = (rows, slotIndex) => {
   return 1;
 };
 
-// rows 数组按“后排 -> 前排”顺序存储：例如 [5,5,1] 代表 3 排，其中最后的 1 是“第 1 排（最前）”。
-// 这里返回“从后往前数”的排数：1 表示最后排（最靠后），rows.length 表示最前排。
+// rows 数组按"后排 -> 前排"顺序存储：例如 [5,5,1] 代表 3 排，其中最后的 1 是"第 1 排（最前）"。
+// 这里返回"从后往前数"的排数：1 表示最后排（最靠后），rows.length 表示最前排。
 const getRowFromBack = (rows, slotIndex) => {
   const meta = buildRowMeta(rows);
   for (const r of meta) {
@@ -196,14 +204,14 @@ const computeMemberLineupHistory = (memberId, singles) => {
 };
 
 const selectionKindTag = (kind) => {
-  if (kind === "A面选拔") return { text: "A面选拔", className: "bg-emerald-50 text-emerald-800 border-emerald-200" };
-  if (kind === "B面") return { text: "B面", className: "bg-sky-50 text-sky-800 border-sky-200" };
-  return { text: "未入选", className: "bg-slate-50 text-slate-600 border-teal-100" };
+  if (kind === "A面选拔") return { text: "A面选拔", className: "bg-emerald-50 text-emerald-700 border-emerald-200" };
+  if (kind === "B面") return { text: "B面", className: "bg-sky-50 text-sky-700 border-sky-200" };
+  return { text: "未入选", className: "bg-[#F0F0F0] text-[#6B6B6B] border-[#E0E0E0]" };
 };
 
 const roleBadge = (role) => {
-  if (role === "center") return { text: "CENTER", className: "bg-amber-200 text-amber-900 border-amber-300" };
-  if (role === "guardian") return { text: "护法", className: "bg-zinc-200 text-slate-900 border-teal-200" };
+  if (role === "center") return { text: "CENTER", className: "bg-amber-100 text-amber-800 border-amber-200" };
+  if (role === "guardian") return { text: "护法", className: "bg-[#F0F0F0] text-[#1C1C1C] border-[#E0E0E0]" };
   return null;
 };
 
@@ -231,30 +239,25 @@ const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
 
 function generationBadgeClass(gen = "") {
-  // return Tailwind-like class strings for default generations; for 3期/5期 we return empty so styles handle colors.
   const g = String(gen || "");
-  if (g.startsWith("1")) return "bg-pink-100 text-pink-900";
-  if (g.startsWith("2")) return "bg-green-100 text-green-900";
+  if (g.startsWith("1")) return "bg-rose-50 text-rose-700";
+  if (g.startsWith("2")) return "bg-emerald-50 text-emerald-700";
   if (g.startsWith("3")) return ""; // styled via generationBadgeStyle
-  if (g.startsWith("4")) return "bg-yellow-100 text-yellow-900";
+  if (g.startsWith("4")) return "bg-amber-50 text-amber-700";
   if (g.startsWith("5")) return ""; // styled via generationBadgeStyle
   if (g.startsWith("6")) return ""; // styled via generationBadgeStyle
-  return "bg-black/5 text-slate-900";
+  if (g.startsWith("7")) return ""; // styled via generationBadgeStyle
+  return "bg-[#F0F0F0] text-[#6B6B6B]";
 }
 
 function generationBadgeStyle(gen = "") {
   const g = String(gen || "");
-  if (g.startsWith("3")) return { backgroundColor: "#DDE8FF", color: "#154ECF", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };
-  if (g.startsWith("5")) return { backgroundColor: "#C9F3FF", color: "#00303A", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };
-  if (g.startsWith("6")) return { backgroundColor: "#E9D5FF", color: "#5B21B6", padding: '0.125rem 0.75rem', borderRadius: '9999px', fontWeight: 600 };;
-  if (g.startsWith("7")) return { 
-  backgroundColor: "#FED7AA", 
-  color: "#9A3412",
-  padding: '0.125rem 0.75rem', 
-  borderRadius: '9999px', 
-  fontWeight: 600 
-};
-  return undefined;
+  const base = { padding: '2px 8px', fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em' };
+  if (g.startsWith("3")) return { ...base, backgroundColor: "#EEF2FF", color: "#4338CA" };
+  if (g.startsWith("5")) return { ...base, backgroundColor: "#F0FDFA", color: "#0F766E" };
+  if (g.startsWith("6")) return { ...base, backgroundColor: "#FAF5FF", color: "#7C3AED" };
+  if (g.startsWith("7")) return { ...base, backgroundColor: "#FFF7ED", color: "#C2410C" };
+  return base;
 }
 
 function readFileAsDataURL(file) {
@@ -768,7 +771,7 @@ function withRecomputedSelections(data) {
       }
 
       const manual = (prev?.[sid] ?? "").toString().trim();
-      // 允许在成员编辑里“手动标记为加入前”，此时不受站位影响
+      // 允许在成员编辑里"手动标记为加入前"，此时不受站位影响
       if (manual.includes("加入前")) {
         next[sid] = "加入前";
         continue;
@@ -786,7 +789,7 @@ function withRecomputedSelections(data) {
       if (slotIndex === -1) {
         // 没出现在站位里：
         // - 对于毕业后的单曲，默认不记录；
-        // - 对于毕业前（含毕业单曲）仍保持旧逻辑：记录为“落选”。
+        // - 对于毕业前（含毕业单曲）仍保持旧逻辑：记录为"落选"。
         if (gradLimit && sRelease && sRelease > gradLimit) {
           continue;
         }
@@ -814,7 +817,7 @@ function withRecomputedSelections(data) {
 
   return { ...data, members: nextMembers };
 }
-// 兼容旧数据：早期 selectionHistory 可能以“标题/描述”作为 key。
+// 兼容旧数据：早期 selectionHistory 可能以"标题/描述"作为 key。
 // 这里把能识别出来的条目迁移成以 single.id 为 key（避免改标题后展示为空 & 避免重复）。
 function migrateSelectionHistoryKeys(members, singles) {
   const norm = (s) => (s || "").replace(/\s+/g, " ").trim();
@@ -876,7 +879,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-                        <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+        <div className="border border-red-200 bg-red-50 p-4 text-sm text-red-800">
           <div className="font-semibold">页面渲染出错（已拦截，避免白屏）</div>
           <div className="mt-2 break-words whitespace-pre-wrap">
             {String(this.state.error || "")}
@@ -893,28 +896,16 @@ class ErrorBoundary extends React.Component {
 
 function AppShell({ children }) {
   return (
-    <div className="min-h-screen bg-[radial-gradient(1200px_600px_at_50%_-100px,rgba(20,184,166,0.18),transparent_60%),radial-gradient(900px_500px_at_0%_0%,rgba(45,212,191,0.14),transparent_60%),radial-gradient(900px_500px_at_100%_20%,rgba(99,102,241,0.10),transparent_55%)] bg-white text-slate-900">
-      <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-teal-400/25 blur-3xl" />
-        <div className="absolute top-40 left-10 h-[420px] w-[420px] rounded-full bg-emerald-400/18 blur-3xl" />
-        <div className="absolute top-52 right-10 h-[420px] w-[420px] rounded-full bg-sky-400/16 blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 pb-16">{children}</div>
-
-      <footer className="relative border-t border-teal-100/70 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 text-sm text-slate-600">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4" />
-            <span>XP Showcase App</span>
-            <Badge className="ml-2" variant="secondary">
-              Local Demo
-            </Badge>
+    <div className="min-h-screen bg-white text-[#1C1C1C]">
+      {children}
+      <footer className="border-t border-[#E0E0E0] py-10 mt-16">
+        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between">
+          <div className="text-xs text-[#6B6B6B]">
+            <span className="font-semibold tracking-widest">XP</span>
+            <span className="mx-2">·</span>
+            <span>Official Website</span>
           </div>
-          <div className="text-slate-500">
-            数据将通过后端 API 保存（不再使用 localStorage）。音频较大时建议后续升级
-            后端存储 / 对象存储。
-          </div>
+          <div className="text-[10px] text-[#B0B0B0] tracking-wider">DATA SAVED VIA API</div>
         </div>
       </footer>
     </div>
@@ -923,235 +914,201 @@ function AppShell({ children }) {
 
 function TopBar({ page, setPage, admin, setAdmin, onReset }) {
   const tabs = [
-    { key: "home", label: "主页", icon: Sparkles },
-    { key: "members", label: "成员", icon: Users },
-    { key: "singles", label: "单曲", icon: Disc3 },
-    { key: "blog", label: "Blog", icon: Newspaper },
+    { key: "home", cn: "主页", en: "HOME" },
+    { key: "members", cn: "成员", en: "MEMBER" },
+    { key: "singles", cn: "单曲", en: "SINGLES" },
+    { key: "blog", cn: "部落格", en: "BLOG" },
   ];
+  const isActive = (key) => page === key || (page === "member-detail" && key === "members");
 
   return (
-    <div className="sticky top-0 z-40 -mx-4 mb-10 border-b border-teal-100/70 bg-white/70 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 px-4 py-4">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-        <button
-          className="flex items-center gap-2 rounded-2xl px-3 py-2 hover:bg-teal-50/80 transition-colors"
-          onClick={() => setPage("home")}
-        >
-          <div className="grid h-9 w-9 place-items-center rounded-2xl bg-teal-500/10 ring-1 ring-teal-500/10">
-            <Sparkles className="h-5 w-5" />
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#E0E0E0]">
+      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <button onClick={() => setPage("home")} className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2L19.5 12L30 16L19.5 20L16 30L12.5 20L2 16L12.5 12Z" fill="#1C1C1C"/>
+            </svg>
+            <span className="text-[15px] font-bold tracking-[0.12em] text-[#1C1C1C] leading-none">XP</span>
           </div>
-          <div className="text-left">
-            <div className="text-base font-semibold leading-tight">XP</div>
-            <div className="flex items-center gap-2">
-            <div className="text-xs text-slate-500">Modern Showcase</div>
-            {admin ? (
-              <Badge className="rounded-full bg-indigo-600 text-white" variant="secondary">
-                ADMIN
-              </Badge>
-            ) : null}
-          </div>
-          </div>
+          {admin && (
+            <span className="text-[9px] tracking-widest bg-[#1C1C1C] text-white px-2 py-0.5">ADMIN</span>
+          )}
         </button>
 
-        <div className="hidden items-center gap-1 rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-1 md:flex">
-          {tabs.map((t) => {
-            const Icon = t.icon;
-            const active = page === t.key;
-            return (
-              <button
-                key={t.key}
-                onClick={() => setPage(t.key)}
-                className={
-                  "flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition " +
-                  (active
-                    ? "bg-slate-900 text-white"
-                    : "text-zinc-800 hover:bg-black/5")
-                }
-              >
-                <Icon className="h-4 w-4" />
-                {t.label}
-              </button>
-            );
-          })}
-        </div>
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {tabs.map((t) => (
+            <button
+              key={t.key}
+              onClick={() => setPage(t.key)}
+              className={
+                "flex flex-col items-center pb-1 border-b-2 transition-all duration-200 " +
+                (isActive(t.key)
+                  ? "border-[#1C1C1C]"
+                  : "border-transparent hover:border-[#D0D0D0]")
+              }
+            >
+              <span className={"text-sm font-medium leading-tight " + (isActive(t.key) ? "text-[#1C1C1C]" : "text-[#6B6B6B]")}>
+                {t.cn}
+              </span>
+              <span className="text-[9px] tracking-[0.15em] text-[#B0B0B0] leading-tight">{t.en}</span>
+            </button>
+          ))}
+        </nav>
 
+        {/* Right controls */}
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant={admin ? "default" : "secondary"}>
-                <Settings className="mr-2 h-4 w-4" />
-                {admin ? "管理员模式" : "浏览模式"}
-              </Button>
+              <button className="flex items-center gap-1.5 text-xs border border-[#E0E0E0] px-3 py-1.5 hover:bg-[#F0F0F0] transition-colors">
+                <Settings className="h-3.5 w-3.5 text-[#6B6B6B]" />
+                <span className="hidden sm:block text-[#6B6B6B]">{admin ? "管理员" : "设置"}</span>
+              </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-60
-    bg-white
-    text-slate-900
-    border border-teal-100
-    shadow-lg">
-              <DropdownMenuLabel>控制台</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+            <DropdownMenuContent align="end" className="w-44 bg-white border border-[#E0E0E0] shadow-lg rounded-none p-0">
+              <DropdownMenuLabel className="text-[10px] tracking-wider text-[#A0A0A0] px-3 py-2">控制台</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-[#E0E0E0] my-0" />
               <DropdownMenuItem
-                onSelect={(e) => {
-                  e.preventDefault();
-                  setAdmin((v) => !v);
-                }}
+                onSelect={(e) => { e.preventDefault(); setAdmin((v) => !v); }}
+                className="text-xs px-3 py-2 cursor-pointer hover:bg-[#F0F0F0] focus:bg-[#F0F0F0] rounded-none"
               >
                 {admin ? "退出管理员" : "进入管理员"}
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-[#E0E0E0] my-0" />
               <DropdownMenuItem
-                className="text-red-600"
-                onSelect={(e) => {
-                  e.preventDefault();
-                  onReset();
-                }}
+                className="text-xs text-red-600 px-3 py-2 cursor-pointer hover:bg-red-50 focus:bg-red-50 rounded-none"
+                onSelect={(e) => { e.preventDefault(); onReset(); }}
               >
                 重置为示例数据
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Mobile hamburger */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="secondary" className="md:hidden">
-                <LayoutGrid className="mr-2 h-4 w-4" />
-                菜单
-              </Button>
+              <button className="md:hidden flex items-center justify-center border border-[#E0E0E0] w-9 h-9 hover:bg-[#F0F0F0] transition-colors">
+                <LayoutGrid className="h-4 w-4 text-[#6B6B6B]" />
+              </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[360px] max-w-[90vw] max-h-[90vh] overflow-y-auto bg-white text-slate-900">
-              <SheetHeader>
-                <SheetTitle className="text-slate-900">导航</SheetTitle>
-                <SheetDescription className="text-slate-500">
-                  快速切换页面
-                </SheetDescription>
+            <SheetContent side="right" className="w-64 bg-white border-l border-[#E0E0E0] rounded-none p-0">
+              <SheetHeader className="px-6 py-5 border-b border-[#E0E0E0]">
+                <SheetTitle className="text-sm font-medium text-[#1C1C1C]">导航</SheetTitle>
+                <SheetDescription className="text-[10px] tracking-widest text-[#B0B0B0]">NAVIGATION</SheetDescription>
               </SheetHeader>
-              <div className="mt-6 grid gap-2">
-                {tabs.map((t) => {
-                  const Icon = t.icon;
-                  const active = page === t.key;
-                  return (
-                    <Button
-                      key={t.key}
-                      variant={active ? "default" : "secondary"}
-                      className="justify-start"
-                      onClick={() => setPage(t.key)}
-                    >
-                      <Icon className="mr-2 h-4 w-4" />
-                      {t.label}
-                    </Button>
-                  );
-                })}
-              </div>
+              <nav className="py-4">
+                {tabs.map((t) => (
+                  <button
+                    key={t.key}
+                    onClick={() => setPage(t.key)}
+                    className={
+                      "w-full flex items-center justify-between px-6 py-3 text-sm transition-colors " +
+                      (isActive(t.key)
+                        ? "bg-[#1C1C1C] text-white"
+                        : "hover:bg-[#F0F0F0] text-[#1C1C1C]")
+                    }
+                  >
+                    <span className="font-medium">{t.cn}</span>
+                    <span className={"text-[9px] tracking-widest " + (isActive(t.key) ? "text-white/50" : "text-[#B0B0B0]")}>{t.en}</span>
+                  </button>
+                ))}
+              </nav>
             </SheetContent>
           </Sheet>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
-function Hero({ activeMembersCount, totalMembersCount, singlesCount, postsCount, onGo }) {
-  return (
-    <div className="grid gap-6 md:grid-cols-12">
-      <motion.div
-        className="md:col-span-7"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-3xl md:text-4xl">
-              XP 官方主页（Demo）
-            </CardTitle>
-            <CardDescription className="text-slate-600">
-              现代、大气、时尚的组合展示：成员 · 单曲 · Blog，以及完整的管理员编辑与站位拖拽。
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <div className="grid grid-cols-3 gap-3">
-              <Stat label="成员（在籍 / 历代）" value={`${activeMembersCount} / ${totalMembersCount}`} />
-              <Stat label="单曲" value={singlesCount} />
-              <Stat label="新闻" value={postsCount} />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={() => onGo("members")}>
-                <Users className="mr-2 h-4 w-4" />
-                看成员
-              </Button>
-              <Button variant="secondary" onClick={() => onGo("singles")}>
-                <Disc3 className="mr-2 h-4 w-4" />
-                看单曲
-              </Button>
-              <Button variant="secondary" onClick={() => onGo("blog")}>
-                <Newspaper className="mr-2 h-4 w-4" />
-                看新闻
-              </Button>
-            </div>
-            <div className="rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4 text-sm text-slate-600">
-              提示：进入「管理员模式」后，在各页面都能新增/编辑/删除数据；单曲页面支持「输入排数与每排人数→生成占位框→拖动成员公式照排站位→保存」。
-              <br />
-              新增：A面支持上传音频并在详情页播放。
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+// ---- 无限横向滚动成员条 ----
+function MemberMarquee({ members }) {
 
-      <motion.div
-        className="md:col-span-5"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.05 }}
-      >
-        <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle>快速预览</CardTitle>
-            <CardDescription className="text-slate-600">
-              视觉主色随内容变化的“极简豪华”风格。
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-3">
-              <PreviewTile
-                title="成员展示"
-                desc="点击头像放大 + 右侧详情卡"
-                icon={<Users className="h-4 w-4" />}
-              />
-              <PreviewTile
-                title="单曲展示"
-                desc="封面放大 + 选拔站位 + 拖拽编辑 + A面音源"
-                icon={<Disc3 className="h-4 w-4" />}
-              />
-              <PreviewTile
-                title="Blog"
-                desc="新闻列表 + 详情页 + 编辑器/图片"
-                icon={<Newspaper className="h-4 w-4" />}
-              />
+  if (!members.length) return null;
+  const items = [...members, ...members];
+  return (
+    <div className="overflow-hidden border-b border-[#E0E0E0] bg-white">
+      <div className="xp-marquee-track flex w-max py-5 gap-8 px-4">
+        {items.map((m, i) => (
+          <div key={i} className="flex flex-col items-center gap-1.5 w-16 shrink-0">
+            <div className={"w-14 h-14 overflow-hidden bg-[#F0F0F0] " + (!m.isActive ? "grayscale opacity-60" : "")}>
+              <img src={resolveMediaUrl(m.avatar)} alt={m.name} className="w-full h-full object-cover object-top" />
             </div>
-          </CardContent>
-        </Card>
-      </motion.div>
-    </div>
-  );
-}
-
-function Stat({ label, value }) {
-  return (
-    <div className="rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4">
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-semibold">{value}</div>
-    </div>
-  );
-}
-
-function PreviewTile({ title, desc, icon }) {
-  return (
-    <div className="flex items-start gap-3 rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4">
-      <div className="grid h-9 w-9 place-items-center rounded-2xl bg-teal-500/10 ring-1 ring-teal-500/10">
-        {icon}
+            <span className="text-[9px] text-[#6B6B6B] text-center leading-tight">{m.name}</span>
+          </div>
+        ))}
       </div>
-      <div>
-        <div className="font-medium">{title}</div>
-        <div className="text-sm text-slate-500">{desc}</div>
+    </div>
+  );
+}
+
+// ---- Hero 区域 ----
+function Hero({ latestSingle, members, activeMembersCount, totalMembersCount, singlesCount, onGo }) {
+  const { prefix, name } = latestSingle ? splitSingleTitle(latestSingle.title) : { prefix: "", name: "" };
+
+  return (
+    <div>
+      {/* Full-bleed hero image */}
+      <div className="relative overflow-hidden" style={{ height: "72vh", minHeight: 360 }}>
+        {latestSingle?.cover ? (
+          <img
+            src={resolveMediaUrl(latestSingle.cover)}
+            alt={latestSingle.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[#1C1C1C]" />
+        )}
+        {/* gradient overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%)" }}
+        />
+        {/* text content */}
+        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-[10px] tracking-[0.25em] text-white/50 mb-3">XP · LATEST SINGLE</div>
+            {prefix && <div className="text-sm text-white/60 mb-1">{prefix}</div>}
+            <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-none">{name || "XP"}</h1>
+            {latestSingle?.release && (
+              <div className="mt-3 text-sm text-white/50 tracking-wider">{latestSingle.release.replace(/-/g, ".")}</div>
+            )}
+            <div className="mt-6 flex gap-3">
+              <button
+                onClick={() => onGo("singles")}
+                className="text-xs tracking-widest bg-white text-[#1C1C1C] px-6 py-2.5 hover:bg-[#F0F0F0] transition-colors"
+              >
+                查看详情
+              </button>
+              <button
+                onClick={() => onGo("members")}
+                className="text-xs tracking-widest border border-white/40 text-white px-6 py-2.5 hover:bg-white/10 transition-colors"
+              >
+                成员
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Member scroll strip */}
+      <MemberMarquee members={members} />
+
+      {/* Stats bar */}
+      <div className="border-b border-[#E0E0E0] py-4">
+        <div className="mx-auto max-w-7xl px-4 flex items-center justify-center gap-6 text-xs text-[#6B6B6B] tracking-wider">
+          <span><span className="text-[#1C1C1C] font-medium">{activeMembersCount}</span> 位在籍成员</span>
+          <span className="text-[#D0D0D0]">·</span>
+          <span><span className="text-[#1C1C1C] font-medium">{totalMembersCount}</span> 位历代成员</span>
+          <span className="text-[#D0D0D0]">·</span>
+          <span><span className="text-[#1C1C1C] font-medium">{singlesCount}</span> 张单曲</span>
+        </div>
       </div>
     </div>
   );
@@ -1159,10 +1116,10 @@ function PreviewTile({ title, desc, icon }) {
 
 function SectionHeader({ title, subtitle, right }) {
   return (
-    <div className="mb-5 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end">
+    <div className="mb-6 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end">
       <div>
-        <div className="text-2xl font-semibold">{title}</div>
-        {subtitle ? <div className="mt-1 text-slate-500">{subtitle}</div> : null}
+        <div className="text-2xl font-light text-[#1C1C1C] tracking-tight">{title}</div>
+        {subtitle ? <div className="mt-1 text-sm text-[#6B6B6B]">{subtitle}</div> : null}
       </div>
       {right ? <div className="flex items-center gap-2">{right}</div> : null}
     </div>
@@ -1174,18 +1131,18 @@ function ImageUploader({ label, value, onChange, hint }) {
     <div className="grid gap-2">
       <div className="flex items-center justify-between">
         <div className="text-sm font-medium">{label}</div>
-        {hint ? <div className="text-xs text-slate-500">{hint}</div> : null}
+        {hint ? <div className="text-xs text-[#6B6B6B]">{hint}</div> : null}
       </div>
       <div className="grid gap-2 md:grid-cols-[140px_1fr]">
-        <div className="relative overflow-hidden rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="overflow-hidden border border-[#E0E0E0] bg-white">
           {value ? (
             <img
               src={resolveMediaUrl(value)}
               alt="preview"
-              className="h-[140px] w-[140px] object-cover bg-zinc-100"
+              className="h-[140px] w-[140px] object-cover bg-[#F0F0F0]"
             />
           ) : (
-            <div className="grid h-[140px] w-[140px] place-items-center text-slate-500">
+            <div className="grid h-[140px] w-[140px] place-items-center text-[#6B6B6B]">
               <ImageIcon className="h-5 w-5" />
             </div>
           )}
@@ -1202,7 +1159,7 @@ function ImageUploader({ label, value, onChange, hint }) {
               e.target.value = "";
             }}
           />
-          <div className="text-xs text-slate-500">
+          <div className="text-xs text-[#6B6B6B]">
             上传后会上传到后端并自动压缩（前端只保存 URL）。
           </div>
         </div>
@@ -1216,7 +1173,7 @@ function AudioUploader({ label, value, onChange, hint }) {
     <div className="grid gap-2">
       <div className="flex items-center justify-between">
         <div className="text-sm font-medium">{label}</div>
-        {hint ? <div className="text-xs text-slate-500">{hint}</div> : null}
+        {hint ? <div className="text-xs text-[#6B6B6B]">{hint}</div> : null}
       </div>
       <div className="grid gap-2">
         <Input
@@ -1230,7 +1187,7 @@ function AudioUploader({ label, value, onChange, hint }) {
             e.target.value = "";
           }}
         />
-        <div className="text-xs text-slate-500">
+        <div className="text-xs text-[#6B6B6B]">
           {value ? "已上传音源（可播放）。" : "未上传音源。"}
           {" "}
           （音频将上传到服务器）
@@ -1244,10 +1201,9 @@ function AudioUploader({ label, value, onChange, hint }) {
 
 // DialogContent wrapper: fixed height + inner scroll (prevents dialogs being cut off)
 function ScrollDialogContent({ className = "", children, ...props }) {
-  // Mobile-friendly: make the whole dialog scrollable so details (e.g. “最喜欢的歌曲”) are reachable on small screens.
   const base =
     "top-[5vh] translate-y-0 w-[calc(100vw-2rem)] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 " +
-    "border-teal-100/70 bg-white text-slate-900 shadow-xl";
+    "rounded-none border border-[#E0E0E0] bg-white text-[#1C1C1C] shadow-lg";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
       <div className="p-6">{children}</div>
@@ -1322,7 +1278,7 @@ function MembersPage({ data, setData, admin }) {
   };
 
   const saveMember = () => {
-    // 切换到毕业（isActive === false）时，必须填写毕业日期与毕业曲（可以写“无”）
+    // 切换到毕业（isActive === false）时，必须填写毕业日期与毕业曲（可以写"无"）
     if (editing && editing.isActive === false) {
       const gd = isoDate(editing.graduationDate);
       if (!gd) {
@@ -1333,7 +1289,7 @@ function MembersPage({ data, setData, admin }) {
       const gTitle = (editing.graduationSongTitle || "").toString().trim();
       if (!gTitle) {
         // eslint-disable-next-line no-alert
-        alert("请填写毕业曲的 title（填写“无”表示没有毕业曲且在成员界面不显示）");
+        alert("请填写毕业曲的 title（填写'无'表示没有毕业曲且在成员界面不显示)");
         return;
       }
     }
@@ -1392,50 +1348,43 @@ function MembersPage({ data, setData, admin }) {
       />
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <div className="text-sm text-slate-500 mr-2">筛选：</div>
-        <Button
-          variant={statusFilter === "all" ? "default" : "secondary"}
-          size="sm"
-          onClick={() => setStatusFilter("all")}
-        >
-          全部
-        </Button>
-        <Button
-          variant={statusFilter === "active" ? "default" : "secondary"}
-          size="sm"
-          onClick={() => setStatusFilter("active")}
-        >
-          在籍
-        </Button>
-        <Button
-          variant={statusFilter === "inactive" ? "default" : "secondary"}
-          size="sm"
-          onClick={() => setStatusFilter("inactive")}
-        >
-          毕业
-        </Button>
-
-        <div className="mx-2 h-4 w-px bg-zinc-200/70" />
-        <div className="text-sm text-slate-500 mr-1">期数：</div>
-        <Button
-          variant={genFilter === "all" ? "default" : "secondary"}
-          size="sm"
-          onClick={() => setGenFilter("all")}
-        >
-          全部期
-        </Button>
-        {generations.map((g) => (
-          <Button
-            key={g}
-            variant={genFilter === g ? "default" : "secondary"}
-            size="sm"
-            onClick={() => setGenFilter(g)}
+        {[
+          { key: "all", label: "全部" },
+          { key: "active", label: "在籍" },
+          { key: "inactive", label: "毕业" },
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setStatusFilter(key)}
+            className={
+              "text-xs tracking-wider px-3 py-1 border transition-colors " +
+              (statusFilter === key
+                ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+            }
           >
-            {g}
-          </Button>
+            {label}
+          </button>
         ))}
 
-        <div className="ml-auto text-xs text-slate-500">
+        <div className="mx-2 h-4 w-px bg-[#E0E0E0]" />
+
+        {[{ key: "all", label: "全部期" }, ...generations.map((g) => ({ key: g, label: g }))].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setGenFilter(key)}
+            className={
+              "text-xs tracking-wider px-3 py-1 border transition-colors " +
+              (genFilter === key
+                ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+            }
+          >
+            {label}
+          </button>
+        ))}
+
+        <div className="ml-auto text-xs text-[#6B6B6B]">
           共 {filteredMembers.length} 人
         </div>
       </div>
@@ -1448,58 +1397,48 @@ function MembersPage({ data, setData, admin }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <Card className="group overflow-hidden border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="group overflow-hidden border border-[#E0E0E0] bg-white">
               <div className="relative">
                 <button className="block w-full" onClick={() => setSelected(m)}>
                   <img
                     src={resolveMediaUrl(m.avatar)}
                     alt={m.name}
-                    className={"aspect-[3/4] w-full object-cover bg-zinc-100 transition duration-300 group-hover:scale-[1.02] " + (!m.isActive ? "grayscale" : "") }
+                    className={"aspect-[3/4] w-full object-cover object-top bg-[#F0F0F0] transition duration-300 group-hover:scale-[1.02] " + (!m.isActive ? "grayscale opacity-70" : "")}
                   />
                 </button>
-                <div className="absolute left-2 top-2 flex gap-2">
-                  <Badge
-                    className={generationBadgeClass(m.generation)} style={generationBadgeStyle(m.generation)}
-                    variant="secondary"
-                  >
+                <div className="absolute left-2 top-2 flex gap-1">
+                  <span className={generationBadgeClass(m.generation)} style={generationBadgeStyle(m.generation)}>
                     {m.generation}
-                  </Badge>
+                  </span>
                 </div>
-              </div>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <div className="text-base font-semibold leading-tight">{m.name}{!m.isActive ? "（卒）" : ""}</div>
-                    <div className="mt-0.5 text-xs text-slate-500">{m.romaji || ""}</div>
-                  </div>
-                  {admin ? (
+                {admin ? (
+                  <div className="absolute right-2 top-2">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="secondary" className="h-8 w-8">
-                          <Settings className="h-4 w-4" />
-                        </Button>
-
-
+                        <button className="w-7 h-7 flex items-center justify-center bg-white/90 border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors">
+                          <Settings className="h-3.5 w-3.5 text-[#1C1C1C]" />
+                        </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white opacity-100">
+                      <DropdownMenuContent align="end" className="bg-white border-[#E0E0E0] rounded-none shadow-md">
                         <DropdownMenuItem onClick={() => openEdit(m)}>
                           <Pencil className="mr-2 h-4 w-4" />
                           编辑
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          className="text-red-500"
-                          onClick={() => deleteMember(m.id)}
-                        >
+                        <DropdownMenuItem className="text-red-500" onClick={() => deleteMember(m.id)}>
                           <Trash2 className="mr-2 h-4 w-4" />
                           删除
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  ) : null}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                ) : null}
+              </div>
+              <div className="p-3">
+                <div className="text-sm font-medium text-[#1C1C1C] leading-tight">{m.name}{!m.isActive ? " 卒" : ""}</div>
+                <div className="mt-0.5 text-[10px] text-[#6B6B6B] tracking-wide">{m.romaji || ""}</div>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -1508,40 +1447,34 @@ function MembersPage({ data, setData, admin }) {
         open={!!selected}
         onOpenChange={(v) => (!v ? setSelected(null) : null)}
       >
-        <ScrollDialogContent className="max-w-4xl border-teal-100/70 bg-white text-slate-900">
+        <ScrollDialogContent className="max-w-4xl">
           {selected ? (
             <div className="grid gap-6 md:grid-cols-2 items-start">
               <div className="grid gap-3">
-                {/* 需求：移除照片与“总选举顺位”之间的大块空白，让布局更紧凑（不改其他结构） */}
-                <div className="overflow-hidden rounded-2xl border border-teal-100/70 bg-white aspect-[3/4]">
+                <div className="overflow-hidden border border-[#E0E0E0] aspect-[3/4]">
                   <img
                     src={resolveMediaUrl(selected.avatar)}
                     alt={selected.name}
-                    className={"h-full w-full object-cover bg-zinc-100 " + (!selected.isActive ? "grayscale" : "") }
+                    className={"h-full w-full object-cover object-top bg-[#F0F0F0] " + (!selected.isActive ? "grayscale" : "")}
                   />
                 </div>
 
-                <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-base">总选举顺位</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid gap-2 text-sm">
+                <div className="border border-[#E0E0E0] bg-white">
+                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                    <div className="text-sm font-medium text-[#1C1C1C]">总选举顺位</div>
+                  </div>
+                  <div className="p-4 grid gap-2 text-sm">
                     {(selected.electionRanks || []).length ? (
                       (selected.electionRanks || []).map((r, idx) => (
                         <div
                           key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
-                          className="flex items-center justify-between rounded-xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow px-3 py-2"
+                          className="flex items-center justify-between border border-[#E0E0E0] px-3 py-2"
                         >
-                          <div className="text-slate-600">{r.edition || "—"}</div>
+                          <div className="text-[#6B6B6B]">{r.edition || "—"}</div>
                           {(() => {
-                            const b = getElectionBadge(r.rank);
+                            const b = getElectionBadge(r.rank, r.edition);
                             return (
-                              <span
-                                className={
-                                  "inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium " +
-                                  b.className
-                                }
-                              >
+                              <span className={"inline-flex items-center border px-2.5 py-0.5 text-xs font-medium " + b.className}>
                                 {b.text}
                               </span>
                             );
@@ -1549,76 +1482,74 @@ function MembersPage({ data, setData, admin }) {
                         </div>
                       ))
                     ) : (
-                      <div className="text-slate-500">—</div>
+                      <div className="text-[#6B6B6B]">—</div>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
               <div className="grid gap-4">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl">
+                  <DialogTitle className="text-2xl font-light text-[#1C1C1C]">
                     <div className="flex items-baseline gap-3">
                       <div>{selected.name}</div>
-                      {selected.romaji ? <div className="text-sm text-slate-500">{selected.romaji}</div> : null}
+                      {selected.romaji ? <div className="text-sm font-normal text-[#6B6B6B]">{selected.romaji}</div> : null}
                     </div>
                   </DialogTitle>
-                  <DialogDescription className="text-slate-500">
+                  <DialogDescription className="text-[#6B6B6B]">
                     {selected.origin} · {selected.generation}
                     {!selected.isActive && selected.graduationDate ? (
                       <span className="ml-2">· 毕业：{isoDate(selected.graduationDate)}</span>
                     ) : null}
-                    {/* 毕业曲：有且不为 "无" 时显示 */}
                     {!selected.isActive && (selected.graduationSongTitle || "").trim() && (selected.graduationSongTitle || "").trim() !== "无" ? (
                       <span className="ml-2">· 毕业曲：{selected.graduationSongTitle}</span>
                     ) : null}
                   </DialogDescription>
                 </DialogHeader>
 
-                <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-base">基础信息</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                <div className="border border-[#E0E0E0] bg-white">
+                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                    <div className="text-sm font-medium text-[#1C1C1C]">基础信息</div>
+                  </div>
+                  <div className="p-4 grid grid-cols-2 gap-3 text-sm">
                     <Info label="身高" value={selected.profile.height} />
                     <Info label="生日" value={selected.profile.birthday} />
                     <Info label="血型" value={selected.profile.blood} />
                     <Info label="爱好" value={selected.profile.hobby} />
                     <Info label="特长" value={selected.profile.skill} />
                     <div className="col-span-2">
-                      <div className="text-xs text-slate-500">口号</div>
-                      <div className="mt-1">{selected.profile.catchphrase}</div>
+                      <div className="text-xs text-[#6B6B6B]">口号</div>
+                      <div className="mt-1 text-[#1C1C1C]">{selected.profile.catchphrase}</div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
                 
 
                 {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
-                  <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="text-base">憧憬的前辈</CardTitle>
-                    </CardHeader>
-                    <CardContent className="grid gap-1 text-sm">
+                  <div className="border border-[#E0E0E0] bg-white">
+                    <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                      <div className="text-sm font-medium text-[#1C1C1C]">憧憬的前辈</div>
+                    </div>
+                    <div className="p-4 grid gap-1 text-sm text-[#1C1C1C]">
                       {selected.admireSenior.map((id) => {
                         const mm = (data.members || []).find((x) => x.id === id);
                         return mm ? <div key={id}>{mm.name}</div> : null;
                       })}
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 ) : null}
 
                 {selected.favoriteSong ? (
-                  <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="text-base">最喜欢的歌曲</CardTitle>
-                      <CardDescription className="text-xs">从目前为止已发布曲目中随机选择</CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-2 text-sm">
+                  <div className="border border-[#E0E0E0] bg-white">
+                    <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                      <div className="text-sm font-medium text-[#1C1C1C]">最喜欢的歌曲</div>
+                      <div className="text-[10px] text-[#6B6B6B] mt-0.5">从目前为止已发布曲目中随机选择</div>
+                    </div>
+                    <div className="p-4 grid gap-2 text-sm">
                       <div className="flex items-center gap-2">
-                        <Music className="h-4 w-4 text-slate-500" />
-                        <div className="font-medium">{selected.favoriteSong}</div>
+                        <Music className="h-4 w-4 text-[#6B6B6B]" />
+                        <div className="font-medium text-[#1C1C1C]">{selected.favoriteSong}</div>
                       </div>
-
                       {(() => {
                         const song = selected.favoriteSong;
                         const single = (data.singles || []).find((sg) =>
@@ -1628,19 +1559,19 @@ function MembersPage({ data, setData, admin }) {
                         const sp = splitSingleTitle(single.title);
                         const singleName = sp.prefix ? `${sp.prefix} · ${sp.name}` : single.title;
                         return (
-                          <div className="text-xs text-slate-500">
+                          <div className="text-xs text-[#6B6B6B]">
                             收录：{singleName}（{single.release}）
                           </div>
                         );
                       })()}
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 ) : null}
-<Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-base">历代单曲选拔状况</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid gap-2 text-sm">
+                <div className="border border-[#E0E0E0] bg-white">
+                  <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                    <div className="text-sm font-medium text-[#1C1C1C]">历代单曲选拔状况</div>
+                  </div>
+                  <div className="p-4 grid gap-2 text-sm">
                   {(() => {
                     const raw = selected?.selectionHistory || {};
                     const gradLast = (!selected?.isActive && selected?.graduationDate)
@@ -1659,7 +1590,7 @@ function MembersPage({ data, setData, admin }) {
                     });
                     if (entries.length === 0) {
                       return (
-                        <div className="rounded-2xl border border-teal-100/70 bg-white px-4 py-3 text-slate-500">
+                        <div className="border border-[#E0E0E0] bg-white px-4 py-3 text-[#6B6B6B]">
                           —
                         </div>
                       );
@@ -1667,7 +1598,7 @@ function MembersPage({ data, setData, admin }) {
 
                     return entries.map(({ k, label, value }) => {
                       // selectionHistory 的 key 通常是 single.id（例如 s1/s2）。
-                      // 为避免显示成 “s1”，优先用 singles 里真实的 title。
+                      // 为避免显示成 "s1"，优先用 singles 里真实的 title。
                       const singleObj = (data?.singles || []).find((s) => s.id === k);
                       // label 可能是旧版本写入的显示标题；如果 singleObj 存在就用它。
                       let title = (singleObj?.title ?? label ?? "").toString();
@@ -1694,20 +1625,19 @@ function MembersPage({ data, setData, admin }) {
                         : pickType === "加入前"
                         ? "border-violet-200 bg-violet-50 text-violet-800"
                         : pickType === "落选"
-                        ? "border-teal-100 bg-slate-50 text-slate-500"
-                        : "border-teal-100 bg-white text-slate-600";
+                        ? "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]"
+                        : "border-[#E0E0E0] bg-white text-[#6B6B6B]";
 
                       const rowM = value.match(/第(\d+)排/);
                       const rowNum = rowM ? Number(rowM[1]) : null;
-                      const rowText = rowNum ? `第${rowNum}排` : "";
                       const role = value.includes("center")
                         ? "center"
                         : value.includes("护法") || value.includes("guardian")
                         ? "guardian"
                         : null;
 
-                      // 规则：若成员站位在前两排（第1/2排），则除 center/护法 外，不显示“第1排/第2排”；
-                      //      改为显示“x福神”，其中 x 为该单曲前两排（含 center/护法）总人数。
+                      // 规则：若成员站位在前两排（第1/2排），则除 center/护法 外，不显示"第1排/第2排"；
+                      //      改为显示"x福神"，其中 x 为该单曲前两排（含 center/护法）总人数。
                       const top2Count =
                         rowNum && rowNum <= 2
                           ? (data?.members || []).reduce((acc, mm) => {
@@ -1722,37 +1652,38 @@ function MembersPage({ data, setData, admin }) {
                             }, 0)
                           : 0;
 
+                      // 第1/2排（福神圈）显示"x福神"；第3排及以后不显示排数tag（已有"A面选拔"tag）
                       const rowTagText =
                         role === "center" || role === "guardian"
                           ? ""
                           : rowNum && rowNum <= 2 && top2Count
                           ? `${top2Count}福神`
-                          : rowText;
+                          : "";
 
                       const isFukujinRowTag =
                         typeof rowTagText === "string" && /福神$/.test(rowTagText);
 
 
                       return (
-                        <div key={k} className="rounded-2xl border border-teal-100/70 bg-white px-4 py-3">
+                        <div key={k} className="border border-[#E0E0E0] bg-white px-4 py-3">
                           <div className="flex flex-col gap-2">
-                            <div className="text-sm font-medium text-slate-900">
+                            <div className="text-sm font-medium text-[#1C1C1C]">
                               {prefix ? `${prefix}: ${name}` : name}
                             </div>
 
                             <div className="flex flex-wrap items-center gap-2 text-xs">
                               {!selected?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
-                                <span className="inline-flex items-center rounded-full border border-fuchsia-200 bg-fuchsia-50 px-2 py-0.5 text-fuchsia-800">
+                                <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-2 py-0.5 text-fuchsia-800">
                                   毕业前最后一单
                                 </span>
                               ) : null}
                               {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
-                                <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-amber-800">
+                                <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-2 py-0.5 text-amber-800">
                                   纪念单
                                 </span>
                               ) : null}
                               {pickType ? (
-                                <span className={"inline-flex items-center rounded-full border px-2 py-0.5 " + typeTagClass}>
+                                <span className={"inline-flex items-center border px-2 py-0.5 " + typeTagClass}>
                                   {pickType}
                                 </span>
                               ) : null}
@@ -1760,10 +1691,10 @@ function MembersPage({ data, setData, admin }) {
                               {rowTagText ? (
                                 <span
                                   className={
-                                    "inline-flex items-center rounded-full border px-2 py-0.5 " +
+                                    "inline-flex items-center border px-2 py-0.5 " +
                                     (isFukujinRowTag
-                                      ? "border-rose-200/70 bg-gradient-to-r from-rose-50 to-amber-50 text-rose-700 shadow-sm"
-                                      : "border-teal-100 text-slate-600")
+                                      ? "border-rose-200 bg-rose-50 text-rose-700"
+                                      : "border-[#E0E0E0] text-[#6B6B6B]")
                                   }
                                 >
                                   {rowTagText}
@@ -1771,11 +1702,11 @@ function MembersPage({ data, setData, admin }) {
                               ) : null}
 
                               {role === "center" ? (
-                                <span className="inline-flex items-center rounded-full border border-amber-300/80 bg-amber-200/80 px-2 py-0.5 text-xs font-medium text-amber-950 shadow-sm shadow-amber-300/40 ring-1 ring-amber-300/30">
+                                <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900">
                                   CENTER
                                 </span>
                               ) : role === "guardian" ? (
-                                <span className="inline-flex items-center rounded-full border border-teal-200/80 bg-zinc-200/80 px-2 py-0.5 text-xs font-medium text-slate-900 shadow-sm shadow-zinc-400/40 ring-1 ring-white/40">
+                                <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-2 py-0.5 text-xs font-medium text-[#1C1C1C]">
                                   护法
                                 </span>
                               ) : null}
@@ -1785,8 +1716,8 @@ function MembersPage({ data, setData, admin }) {
                       );
                     });
                   })()}
-                </CardContent>
-                </Card>
+                </div>
+                </div>
               </div>
             </div>
           ) : null}
@@ -1794,10 +1725,10 @@ function MembersPage({ data, setData, admin }) {
       </Dialog>
 
       <Dialog open={editorOpen} onOpenChange={setEditorOpen}>
-        <ScrollDialogContent className="max-w-3xl border-teal-100/70 bg-white text-slate-900">
+        <ScrollDialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle>{editing?.name ? "编辑成员" : "新增成员"}</DialogTitle>
-            <DialogDescription className="text-slate-500">
+            <DialogDescription className="text-[#6B6B6B]">
               上传公式照（大头照）并编辑基础信息。
             </DialogDescription>
           </DialogHeader>
@@ -1848,7 +1779,7 @@ function MembersPage({ data, setData, admin }) {
                 </div>
                 <div className="grid gap-2">
                   <div className="text-sm font-medium">是否在籍</div>
-                  <div className="flex items-center gap-3 rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow px-3 py-2">
+                  <div className="flex items-center gap-3 border border-[#E0E0E0] bg-white px-3 py-2">
                     <input
                       type="checkbox"
                       checked={!!editing.isActive}
@@ -1860,7 +1791,7 @@ function MembersPage({ data, setData, admin }) {
                         }))
                       }
                     />
-                    <div className="text-sm text-slate-600">在籍</div>
+                    <div className="text-sm text-[#6B6B6B]">在籍</div>
                   </div>
                 </div>
 
@@ -1872,13 +1803,13 @@ function MembersPage({ data, setData, admin }) {
                       onChange={(e) => setEditing((p) => ({ ...p, graduationDate: e.target.value }))}
                       placeholder="YYYY-MM-DD"
                     />
-                    <div className="text-sm font-medium">毕业曲（填“无”表示不显示）</div>
+                    <div className="text-sm font-medium">毕业曲（填"无"表示不显示）</div>
                     <Input
                       value={editing.graduationSongTitle || ""}
                       onChange={(e) => setEditing((p) => ({ ...p, graduationSongTitle: e.target.value }))}
                       placeholder="例如：Farewell Song / 无"
                     />
-                    <div className="text-xs text-slate-500">把成员从在籍改为毕业时必须填写。</div>
+                    <div className="text-xs text-[#6B6B6B]">把成员从在籍改为毕业时必须填写。</div>
                   </div>
                 ) : null}
               </div>
@@ -1890,11 +1821,11 @@ function MembersPage({ data, setData, admin }) {
                 hint="建议 1:1"
               />
 
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-base">基础信息</CardTitle>
-                </CardHeader>
-                <CardContent className="grid gap-3 md:grid-cols-2">
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">基础信息</div>
+                </div>
+                <div className="p-4 grid gap-3 md:grid-cols-2">
                   <LabeledInput
                     label="身高"
                     value={editing.profile.height}
@@ -1961,17 +1892,15 @@ function MembersPage({ data, setData, admin }) {
                       placeholder="例如：把光带到舞台上。"
                     />
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-base">总选举顺位</CardTitle>
-                  <CardDescription className="text-slate-500">
-                    每行填写一届总选举的排名：输入数字 1-19 会自动标注（选拔/UG），20 及以后自动显示为「圈外」。不在榜单可写「加入前」。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-3">
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">总选举顺位</div>
+                  <div className="text-xs text-[#6B6B6B] mt-0.5">每行填写一届总选举的排名：输入数字 1-19 会自动标注（选拔/UG），20 及以后自动显示为「圈外」。不在榜单可写「加入前」。</div>
+                </div>
+                <div className="p-4 grid gap-3">
                   {(editing.electionRanks || []).length ? (
                     (editing.electionRanks || []).map((r, idx) => (
                       <div
@@ -2018,7 +1947,7 @@ function MembersPage({ data, setData, admin }) {
                       </div>
                     ))
                   ) : (
-                    <div className="text-sm text-slate-500">—</div>
+                    <div className="text-sm text-[#6B6B6B]">—</div>
                   )}
 
                   <div className="flex items-center justify-end">
@@ -2035,17 +1964,15 @@ function MembersPage({ data, setData, admin }) {
                       新增一条
                     </Button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-base">历代单曲选拔状况</CardTitle>
-                  <CardDescription className="text-slate-500">
-                    这里给你预留了 1st/2nd 两条；你也可以改 key。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-3">
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">历代单曲选拔状况</div>
+                  <div className="text-xs text-[#6B6B6B] mt-0.5">这里给你预留了 1st/2nd 两条；你也可以改 key。</div>
+                </div>
+                <div className="p-4 grid gap-3">
                   {Object.entries(editing.selectionHistory || {}).map(([k, v]) => (
                     <div key={k} className="grid gap-2 md:grid-cols-[160px_1fr_auto]">
                       <Input
@@ -2109,8 +2036,8 @@ function MembersPage({ data, setData, admin }) {
                     <Plus className="mr-2 h-4 w-4" />
                     新增一条
                   </Button>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               <div className="flex items-center justify-end gap-2">
                 <Button variant="secondary" onClick={() => setEditorOpen(false)}>
@@ -2123,7 +2050,7 @@ function MembersPage({ data, setData, admin }) {
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-teal-100 bg-white p-4 text-sm text-slate-500">
+            <div className="border border-[#E0E0E0] bg-white p-4 text-sm text-[#6B6B6B]">
               加载中…（editing 为空）
             </div>
           )}
@@ -2149,8 +2076,8 @@ function LabeledInput({ label, value, onChange, placeholder }) {
 function Info({ label, value }) {
   return (
     <div>
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="mt-1 text-slate-900">{value || "—"}</div>
+      <div className="text-xs text-[#6B6B6B]">{label}</div>
+      <div className="mt-1 text-[#1C1C1C]">{value || "—"}</div>
     </div>
   );
 }
@@ -2182,7 +2109,7 @@ function SinglesPage({ data, setData, admin }) {
     return () => window.cancelAnimationFrame(raf);
   }, [selectedId]);
 
-  // ✅ 单曲站位显示：截止到当前单曲“发布顺序(按 release 升序)”的累计选拔次数
+  // ✅ 单曲站位显示：截止到当前单曲"发布顺序(按 release 升序)"的累计选拔次数
   // - 第 1 张单曲：站位成员显示（初）
   // - 第 N 张单曲：显示截至该张单曲为止的累计次数（1 -> 初，2+ -> 数字）
   const cumulativeCounts = useMemo(() => {
@@ -2207,7 +2134,7 @@ function SinglesPage({ data, setData, admin }) {
         })
       : withIndex;
 
-    // 2) 累计统计：每张单曲的 asideLineup 里出现一次算“进入一次”
+    // 2) 累计统计：每张单曲的 asideLineup 里出现一次算"进入一次"
     const counts = new Map();
     const countsBySingleId = new Map(); // singleId -> Map(memberId -> count)
 
@@ -2270,7 +2197,7 @@ function SinglesPage({ data, setData, admin }) {
 
   const saveSingle = () => {
     setData((prev) => {
-      // 纪念单：如果选拔里包含“以毕业身份参选”的成员，则自动打 tag「纪念单」
+      // 纪念单：如果选拔里包含"以毕业身份参选"的成员，则自动打 tag「纪念单」
       const computeMemorialTag = (single, allMembers) => {
         const sRelease = isoDate(single?.release);
         const tags = Array.isArray(single?.tags) ? [...single.tags] : [];
@@ -2343,63 +2270,63 @@ function SinglesPage({ data, setData, admin }) {
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] ">
         <div className="grid gap-4">
           {data.singles.map((s) => (
-            <Card
+            <div
               key={s.id}
               className={
-                "overflow-hidden border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow transition " +
-                (selectedId === s.id ? "ring-2 ring-zinc-300/70" : "")
+                "overflow-hidden border bg-white transition-colors cursor-pointer " +
+                (selectedId === s.id ? "border-[#1C1C1C]" : "border-[#E0E0E0] hover:border-[#B0B0B0]")
               }
+              onClick={() => setSelectedId(s.id)}
             >
-              <div className="grid md:grid-cols-[160px_1fr]">
-                <button className="block w-full" onClick={() => setSelectedId(s.id)}>
-                  <img
-                    src={resolveMediaUrl(s.cover)}
-                    alt={s.title}
-                    // 手机端：封面完整显示不裁切；电脑版保持原样
-                    className="w-full object-contain bg-zinc-100 md:h-[160px] md:w-[160px] md:object-cover"
-                  />
-                </button>
+              <div className="grid md:grid-cols-[140px_1fr]">
+                <img
+                  src={resolveMediaUrl(s.cover)}
+                  alt={s.title}
+                  className="w-full object-contain bg-[#F0F0F0] md:h-[140px] md:w-[140px] md:object-cover"
+                />
                 <div className="flex items-start justify-between gap-3 p-4">
                   <div>
-                    <div className="text-base font-semibold leading-tight">{s.title}</div>
-                    <div className="mt-1 text-sm text-slate-500">
-                      Release: {s.release || "—"}
+                    <div className="text-sm font-medium text-[#1C1C1C] leading-tight">{s.title}</div>
+                    <div className="mt-1 text-xs text-[#6B6B6B] tracking-wider">
+                      {s.release ? s.release.replace(/-/g, ".") : "—"}
                     </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="bg-black/5">
-                        {s.tracks?.length || 0} Tracks
-                      </Badge>
-                      <Badge variant="secondary" className="bg-black/5">
-                        A面选拔：{s.asideLineup?.selectionCount || 0}
-                      </Badge>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
+                        {s.tracks?.length || 0} tracks
+                      </span>
+                      <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
+                        选拔 {s.asideLineup?.selectionCount || 0}人
+                      </span>
                       {Array.isArray(s.tags) && s.tags.includes("纪念单") ? (
-                        <Badge variant="secondary" className="bg-black/5">
+                        <span className="text-[10px] tracking-wider border border-amber-200 bg-amber-50 text-amber-800 px-2 py-0.5">
                           纪念单
-                        </Badge>
+                        </span>
                       ) : null}
-                      <Badge variant="secondary" className="bg-black/5">
-                        {s.tracks?.[0]?.audio ? "A面有音源" : "A面无音源"}
-                      </Badge>
+                      {s.tracks?.[0]?.audio ? (
+                        <span className="text-[10px] tracking-wider border border-emerald-200 bg-emerald-50 text-emerald-800 px-2 py-0.5">
+                          ♪ 音源
+                        </span>
+                      ) : null}
                     </div>
                   </div>
 
                   {admin ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="secondary" className="h-8 w-8">
-                          <Settings className="h-4 w-4" />
-                        </Button>
+                        <button
+                          className="w-7 h-7 flex items-center justify-center border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Settings className="h-3.5 w-3.5 text-[#1C1C1C]" />
+                        </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white opacity-100">
-                        <DropdownMenuItem onClick={() => openEdit(s)}>
+                      <DropdownMenuContent align="end" className="bg-white border-[#E0E0E0] rounded-none shadow-md">
+                        <DropdownMenuItem onClick={(e) => { e.stopPropagation(); openEdit(s); }}>
                           <Pencil className="mr-2 h-4 w-4" />
                           编辑
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          className="text-red-500"
-                          onClick={() => deleteSingle(s.id)}
-                        >
+                        <DropdownMenuItem className="text-red-500" onClick={(e) => { e.stopPropagation(); deleteSingle(s.id); }}>
                           <Trash2 className="mr-2 h-4 w-4" />
                           删除
                         </DropdownMenuItem>
@@ -2408,7 +2335,7 @@ function SinglesPage({ data, setData, admin }) {
                   ) : null}
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
@@ -2434,14 +2361,10 @@ function SinglesPage({ data, setData, admin }) {
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.25 }}
               >
-                <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                  <CardHeader>
-                    <CardTitle>选择一首单曲</CardTitle>
-                    <CardDescription className="text-slate-500">
-                      点击左侧列表中的封面进入详情页。
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
+                <div className="border border-[#E0E0E0] bg-white p-6">
+                  <div className="text-sm font-medium text-[#1C1C1C]">选择一首单曲</div>
+                  <div className="mt-1 text-xs text-[#6B6B6B]">点击左侧列表中的封面进入详情页。</div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -2449,10 +2372,10 @@ function SinglesPage({ data, setData, admin }) {
       </div>
 
       <Dialog open={editorOpen} onOpenChange={setEditorOpen}>
-        <ScrollDialogContent className="max-w-5xl border-teal-100/70 bg-white text-slate-900">
+        <ScrollDialogContent className="max-w-5xl">
           <DialogHeader>
             <DialogTitle>{editing?.title ? "编辑单曲" : "新增单曲"}</DialogTitle>
-            <DialogDescription className="text-slate-500">
+            <DialogDescription className="text-[#6B6B6B]">
               可上传封面、编辑曲目与 A 面曲选拔站位（拖拽公式照），并上传 A 面音源。
             </DialogDescription>
           </DialogHeader>
@@ -2481,18 +2404,15 @@ function SinglesPage({ data, setData, admin }) {
                 hint="建议 1:1"
               />
 
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader className="flex flex-row items-center justify-between gap-3">
-                  <CardTitle className="text-base">
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0] flex items-center justify-between gap-3">
+                  <div className="text-sm font-medium text-[#1C1C1C]">
                     曲目收录（{editing.tracks?.length || 0} tracks）
-                  </CardTitle>
-
+                  </div>
                   <div className="flex items-center gap-2">
-                    <Button
+                    <button
                       type="button"
-                      variant="secondary"
-                      size="icon"
-                      className="h-8 w-8"
+                      className="w-7 h-7 flex items-center justify-center border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors"
                       onClick={() => {
                         setEditing((p) => {
                           const prevTracks = Array.isArray(p.tracks) ? p.tracks : [];
@@ -2509,18 +2429,15 @@ function SinglesPage({ data, setData, admin }) {
                       }}
                       title="增加曲目"
                     >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-
-                    <Button
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                    <button
                       type="button"
-                      variant="secondary"
-                      size="icon"
-                      className="h-8 w-8"
+                      className="w-7 h-7 flex items-center justify-center border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors disabled:opacity-40"
                       onClick={() => {
                         setEditing((p) => {
                           const prevTracks = Array.isArray(p.tracks) ? p.tracks : [];
-                          if (prevTracks.length <= 1) return p; // 至少保留 A面
+                          if (prevTracks.length <= 1) return p;
                           const trimmed = prevTracks.slice(0, -1);
                           const next = trimmed.map((t, i) => ({
                             ...t,
@@ -2534,14 +2451,14 @@ function SinglesPage({ data, setData, admin }) {
                       disabled={(editing.tracks?.length || 0) <= 1}
                       title="减少曲目（从末尾删除）"
                     >
-                      <Minus className="h-4 w-4" />
-                    </Button>
+                      <Minus className="h-3.5 w-3.5" />
+                    </button>
                   </div>
-                </CardHeader>
-                <CardContent className="grid gap-3">
+                </div>
+                <div className="p-4 grid gap-3">
                   {(Array.isArray(editing.tracks) ? editing.tracks : []).map((t, idx) => (
                     <div key={idx} className="grid gap-2 md:grid-cols-[120px_1fr_140px]">
-                      <Input value={`Track ${t.no}`} disabled className="bg-white/75" />
+                      <Input value={`Track ${t.no}`} disabled className="bg-[#F0F0F0]" />
                       <Input
                         value={t.title}
                         onChange={(e) => {
@@ -2559,7 +2476,7 @@ function SinglesPage({ data, setData, admin }) {
                           {t.isAside ? "A-side" : "B-side"}
                         </Badge>
                         {idx === 0 ? (
-                          <div className="text-xs text-slate-500">A面支持音源与站位</div>
+                          <div className="text-xs text-[#6B6B6B]">A面支持音源与站位</div>
                         ) : null}
                       </div>
 
@@ -2579,19 +2496,17 @@ function SinglesPage({ data, setData, admin }) {
                         </div>
                     </div>
                   ))}
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-base">A 面曲选拔站位编辑</CardTitle>
-                  <CardDescription className="text-slate-500">
-                    1) 输入排数与每排人数；2) 生成占位框；3) 从下方成员池拖拽公式照到占位框；4) 保存。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-4">
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">A 面曲选拔站位编辑</div>
+                  <div className="text-xs text-[#6B6B6B] mt-0.5">1) 输入排数与每排人数；2) 生成占位框；3) 从下方成员池拖拽公式照到占位框；4) 保存。</div>
+                </div>
+                <div className="p-4 grid gap-4">
                   <div className="grid gap-3 md:grid-cols-3">
-                                        <LabeledInput
+                    <LabeledInput
                       label="每排人数（用逗号分隔）"
                       value={lineupCfg.rowsText}
                       onChange={(v) => setLineupCfg((p) => ({ ...p, rowsText: v }))}
@@ -2625,8 +2540,8 @@ function SinglesPage({ data, setData, admin }) {
                   </div>
 
                   <LineupEditor singleDraft={editing} setSingleDraft={setEditing} members={data.members} />
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               <div className="grid gap-2">
                 <div className="text-sm font-medium">备注</div>
@@ -2665,11 +2580,11 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
   const slotRolesForView = single.asideLineup?.slotRoles || {};
 
   // 站位展示规则（按你的需求重做）：
-  // 1) 不管每排人数是多少，头像/卡片尺寸都固定为“每排 3 人”时的大小，不做缩放；
+  // 1) 不管每排人数是多少，头像/卡片尺寸都固定为"每排 3 人"时的大小，不做缩放；
   // 2) 人数/排数过多时，不拉伸外层卡片，改为站位区域内部滚动查看；
   // 3) 手机端同样保持不变形：必要时支持横向/纵向滚动。
   const maxPerRow = rows.length ? Math.max(...rows.map((n) => Number(n) || 0)) : 0;
-  const lineupScale = 1; // 基于“每排 5 人”时的尺寸（不随人数变化缩放）
+  const lineupScale = 1; // 基于"每排 5 人"时的尺寸（不随人数变化缩放）
   const tileW = 96;
   const tileH = 176;
   const imgH = 92;
@@ -2692,7 +2607,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
   const hasAnyAudio = tracks.some((t) => !!t?.audio);
   const hasAsideAudio = !!asideTrack?.audio;
 
-  // 切换单曲时，默认选中“有音源的优先轨道”（优先 A 面）
+  // 切换单曲时，默认选中"有音源的优先轨道"（优先 A 面）
   useEffect(() => {
     const preferred = (hasAsideAudio ? asideTrack : null) || tracks.find((t) => !!t?.audio) || null;
     setCurrentTrack(preferred);
@@ -2712,99 +2627,91 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
   }, [currentTrack?.audio]);
 
   return (
-    <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-      <CardHeader>
-        <CardTitle className="text-xl">{single.title}</CardTitle>
-        <CardDescription className="text-slate-600">
-          Release: {single.release || "—"}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <div className="grid gap-4 md:grid-cols-[220px_1fr]">
+    <div className="border border-[#E0E0E0] bg-white">
+      <div className="px-4 py-3 border-b border-[#E0E0E0]">
+        <div className="text-base font-medium text-[#1C1C1C]">{single.title}</div>
+        <div className="text-xs text-[#6B6B6B] tracking-wider mt-0.5">
+          {single.release ? single.release.replace(/-/g, ".") : "—"}
+        </div>
+      </div>
+      <div className="p-4 grid gap-4">
+        <div className="grid gap-4 md:grid-cols-[200px_1fr]">
           <button
-            className="overflow-hidden rounded-2xl border border-teal-100/70 bg-white"
+            className="overflow-hidden border border-[#E0E0E0] bg-white"
             onClick={() => setCoverZoom(true)}
             title="点击放大封面"
           >
             <img
               src={resolveMediaUrl(single.cover)}
               alt={single.title}
-              className="aspect-square w-full object-contain bg-white"
+              className="aspect-square w-full object-contain bg-[#F0F0F0]"
             />
           </button>
           <div className="grid gap-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="secondary" className="bg-black/5">
-                A面选拔：{single.asideLineup?.selectionCount || 0}
-              </Badge>
-              <Badge variant="secondary" className="bg-black/5">
-                站位排数：{single.asideLineup?.rows?.length || 0}
-              </Badge>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
+                选拔 {single.asideLineup?.selectionCount || 0}人
+              </span>
+              <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
+                {single.asideLineup?.rows?.length || 0} 排
+              </span>
               {Array.isArray(single.tags) && single.tags.includes("纪念单") ? (
-                <Badge variant="secondary" className="bg-black/5">
-                  纪念单
-                </Badge>
+                <span className="text-[10px] tracking-wider border border-amber-200 bg-amber-50 text-amber-800 px-2 py-0.5">纪念单</span>
               ) : null}
-              <Badge variant="secondary" className="bg-black/5">
-                {hasAnyAudio ? "已上传音源" : "未上传音源"}
-              </Badge>
+              {hasAnyAudio ? (
+                <span className="text-[10px] tracking-wider border border-emerald-200 bg-emerald-50 text-emerald-800 px-2 py-0.5">♪ 音源</span>
+              ) : null}
             </div>
 
-            <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base">曲目收录</CardTitle>
-              </CardHeader>
-              <CardContent className="grid gap-2">
+            <div className="border border-[#E0E0E0] bg-white">
+              <div className="px-4 py-2.5 border-b border-[#E0E0E0]">
+                <div className="text-sm font-medium text-[#1C1C1C]">曲目收录</div>
+              </div>
+              <div className="p-3 grid gap-2">
                 {tracks.map((t) => (
                   <div
                     key={t.no}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow px-3 py-2"
+                    className="flex items-center justify-between gap-3 border border-[#E0E0E0] bg-white px-3 py-2"
                   >
                     <div className="text-sm">
-                      <span className="text-slate-500">Track {t.no}</span>
-                      <span className="mx-2">·</span>
-                      <span className="font-medium">{t.title}</span>
+                      <span className="text-[#6B6B6B]">Track {t.no}</span>
+                      <span className="mx-2 text-[#D0D0D0]">·</span>
+                      <span className="font-medium text-[#1C1C1C]">{t.title}</span>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="bg-black/5">
+                      <span className="text-[10px] border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
                         {t.isAside ? "A-side" : "B-side"}
-                      </Badge>
-
+                      </span>
                       {t.audio ? (
-                        <Button
-                          variant="secondary"
-                          size="sm"
+                        <button
+                          className="flex items-center gap-1 text-xs border border-[#1C1C1C] text-[#1C1C1C] px-3 py-1 hover:bg-[#1C1C1C] hover:text-white transition-colors"
                           onClick={() => {
                             setCurrentTrack({ no: t.no, title: t.title, audio: t.audio });
-                            // 如果当前已经选中该曲，直接触发播放
                             if (currentTrack?.no === t.no) {
                               audioRef.current?.play().catch(() => {});
                             }
                           }}
-                          title={`播放 Track ${t.no}`}
                         >
-                          <Music className="mr-2 h-4 w-4" />
+                          <Music className="h-3 w-3" />
                           播放
-                        </Button>
+                        </button>
                       ) : (
-                        <Badge variant="secondary" className="bg-black/5">
-                          未上传音源
-                        </Badge>
+                        <span className="text-[10px] border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">无音源</span>
                       )}
                     </div>
                   </div>
                 ))}
 
                 {currentTrack?.audio ? (
-                  <div className="mt-2 rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-3">
+                  <div className="mt-1 border border-[#E0E0E0] bg-[#F7F7F7] p-3">
                     <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                      <div className="text-sm font-medium text-slate-900">
-                        正在播放：Track {currentTrack.no} · {currentTrack.title}
+                      <div className="text-xs font-medium text-[#1C1C1C]">
+                        ♪ Track {currentTrack.no} · {currentTrack.title}
                       </div>
-                      <Badge variant="secondary" className="bg-black/5">
+                      <span className="text-[10px] border border-[#E0E0E0] bg-white text-[#6B6B6B] px-2 py-0.5">
                         {tracks.find((t) => t.no === currentTrack.no)?.isAside ? "A-side" : "B-side"}
-                      </Badge>
+                      </span>
                     </div>
                     <audio
                       ref={audioRef}
@@ -2812,30 +2719,24 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
                       controls
                       className="w-full"
                     />
-                    <div className="mt-2 text-xs text-slate-500">
-                      音源为本地上传并保存为服务器文件 URL。
-                    </div>
                   </div>
                 ) : null}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
             {single.notes ? (
-              <div className="rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4 text-sm text-slate-600">
+              <div className="border border-[#E0E0E0] bg-[#F7F7F7] p-4 text-sm text-[#6B6B6B]">
                 {single.notes}
               </div>
             ) : null}
           </div>
         </div>
 
-        <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base">A 面曲选拔站位</CardTitle>
-            <CardDescription className="text-slate-500">
-              以成员公式照排开（示例站位）。
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
+        <div className="border border-[#E0E0E0] bg-white">
+          <div className="px-4 py-3 border-b border-[#E0E0E0]">
+            <div className="text-sm font-medium text-[#1C1C1C]">A 面曲选拔站位</div>
+          </div>
+          <div className="p-4 grid gap-4">
             {/* 站位区域：固定卡片尺寸，不随人数缩放；人数过多时使用横向滚动查看 */}
             <div className="grid gap-3 overflow-x-auto overflow-y-visible pb-2 px-4" style={{ scrollPaddingLeft: 16, scrollPaddingRight: 16 }}>
               {rowMetaForView.map((r, rIdx) => (
@@ -2866,30 +2767,27 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
                       <div
                         key={`${rIdx}-${i}`}
                         className={
-                          "group relative overflow-hidden rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow flex-none " +
-                          frameCls
+                          "group relative overflow-hidden border bg-white flex-none " +
+                          (role === "center" ? "border-amber-400 ring-1 ring-amber-300" : role === "guardian" ? "border-[#B0B0B0]" : "border-[#E0E0E0]")
                         }
                         style={{ width: tileW, height: tileH }}
                         title={m ? m.name : "空位"}
                       >
                         {m ? (
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
-                            <div className="overflow-hidden rounded-xl bg-white">
+                            <div className="overflow-hidden bg-[#F0F0F0]">
                               <img
                                 src={resolveMediaUrl(m.avatar)}
                                 alt={m.name}
-                                className={"h-full w-full object-contain bg-white " + (!m.isActive ? "grayscale" : "")}
+                                className={"h-full w-full object-contain bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
                               />
                             </div>
 
-                            <div className="px-2 pt-2 pb-2 text-center">
+                            <div className="px-2 pt-1 pb-1 text-center">
                               {genText ? (
-                                <div className="mb-1 flex justify-center">
+                                <div className="mb-0.5 flex justify-center">
                                   <span
-                                    className={
-                                      "inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-semibold " +
-                                      generationBadgeClass(genText)
-                                    }
+                                    className={generationBadgeClass(genText)}
                                     style={{ fontSize: badgeFont, ...generationBadgeStyle(genText) }}
                                   >
                                     {genText}
@@ -2898,20 +2796,17 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
                               ) : null}
 
                               <div
-                                className="text-slate-900"
+                                className="text-[#1C1C1C]"
                                 style={{ fontSize: nameFont, lineHeight: 1.2, wordBreak: "break-word" }}
                               >
-                                {!m.isActive ? "OG - " : ""}{m.name}
+                                {!m.isActive ? "OG · " : ""}{m.name}
                                 {countText}
                               </div>
 
                               {rb ? (
-                                <div className="mt-2 flex justify-center">
+                                <div className="mt-1 flex justify-center">
                                   <span
-                                    className={
-                                      "inline-flex items-center rounded-full border px-3 py-1 font-semibold " +
-                                      rb.className
-                                    }
+                                    className={"inline-flex items-center border px-2 py-0.5 font-medium " + rb.className}
                                     style={{ fontSize: badgeFont }}
                                   >
                                     {rb.text}
@@ -2921,7 +2816,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
                             </div>
                           </div>
                         ) : (
-                          <div className="grid h-full w-full place-items-center text-xs text-slate-500">空位</div>
+                          <div className="grid h-full w-full place-items-center text-xs text-[#6B6B6B]">空位</div>
                         )}
                       </div>
                     );
@@ -2929,28 +2824,28 @@ function SingleDetail({single, membersById, admin, cumulativeCounts}) {
                 </div>
               ))}            </div>
             {admin ? (
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-[#6B6B6B]">
                 站位编辑请在「编辑单曲」弹窗里操作。
               </div>
             ) : null}
-          </CardContent>
-        </Card>
-      </CardContent>
+          </div>
+        </div>
+      </div>
 
       <Dialog open={coverZoom} onOpenChange={setCoverZoom}>
-        <ScrollDialogContent className="max-w-4xl border-teal-100/70 bg-white text-slate-900">
+        <ScrollDialogContent className="max-w-4xl">
           <DialogHeader>
             <DialogTitle>封面放大</DialogTitle>
-            <DialogDescription className="text-slate-500">
+            <DialogDescription className="text-[#6B6B6B]">
               点击外部或按 ESC 关闭。
             </DialogDescription>
           </DialogHeader>
-          <div className="overflow-hidden rounded-2xl border border-teal-100/70 bg-white">
+          <div className="overflow-hidden border border-[#E0E0E0] bg-white">
             <img src={resolveMediaUrl(single.cover)} alt={single.title} className="w-full" />
           </div>
         </ScrollDialogContent>
       </Dialog>
-    </Card>
+    </div>
   );
 }
 
@@ -2958,7 +2853,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
   // 防御：进入编辑页的首帧 editing 可能还是 null/undefined，避免直接白屏
   if (!singleDraft) {
     return (
-      <div className="rounded-2xl border border-teal-100 bg-white p-4 text-sm text-slate-500">
+      <div className="border border-[#E0E0E0] bg-white p-4 text-sm text-[#6B6B6B]">
         加载中…（singleDraft 为空）
       </div>
     );
@@ -3053,7 +2948,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
 
   // 成员选择池（保持原逻辑）：
   // - 现役成员永远可选
-  // - 已毕业成员：仅当单曲 release 早于/等于毕业日（即当时仍是现役）才出现在“现役/当期成员”池
+  // - 已毕业成员：仅当单曲 release 早于/等于毕业日（即当时仍是现役）才出现在"现役/当期成员"池
   const activeEligibleMembers = useMemo(() => {
     if (!singleRelease) return members;
     return (members || []).filter((m) => {
@@ -3064,7 +2959,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
     });
   }, [members, singleRelease]);
 
-  // OG（已毕业）成员池：仅展示“在该单曲 release 时已毕业”的成员
+  // OG（已毕业）成员池：仅展示"在该单曲 release 时已毕业"的成员
   const ogEligibleMembers = useMemo(() => {
     const sRelease = singleRelease;
     return (members || []).filter((m) => {
@@ -3101,7 +2996,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
     const role = (lineup.slotRoles || {})[slotIndex];
     if (role === "center") {
       return (
-        <div className="absolute left-1 top-1 rounded-full bg-yellow-400/95 px-2 py-0.5 text-[10px] font-semibold text-slate-900 shadow">
+        <div className="absolute left-1 top-1 rounded-full bg-yellow-400/95 px-2 py-0.5 text-[10px] font-semibold text-[#1C1C1C] shadow">
           center
         </div>
       );
@@ -3129,13 +3024,12 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
 
   return (
     <div className="grid gap-4">
-      <div className="rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4 text-xs text-slate-500">
+      <div className="border border-[#E0E0E0] bg-[#F7F7F7] p-3 text-xs text-[#6B6B6B]">
         点击站位框选择成员（所有位置可设置 普通 / center / 护法）。
       </div>
 
-      <div className="rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4">
+      <div className="border border-[#E0E0E0] bg-white p-4">
         <div className="grid gap-3">
-          {/* 展示顺序：最上面=第1排（rows 最后一项），最下面=最后排 */}
           {rowMeta.map((r) => (
             <div key={`${r.start}-${r.end}`} className="flex justify-center gap-3">
               {Array.from({ length: r.n }).map((_, ci) => {
@@ -3147,8 +3041,12 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                   <div key={slotIndex} className="flex flex-col items-center gap-2">
                     <div
                       className={
-                        "relative overflow-hidden rounded-2xl border border-dashed border-teal-200/80 bg-white/75 " +
-                        roleFrameClass(slotIndex)
+                        "relative overflow-hidden border border-dashed cursor-pointer " +
+                        (slotRolesForView[slotIndex] === "center"
+                          ? "border-amber-400 ring-1 ring-amber-300"
+                          : slotRolesForView[slotIndex] === "guardian"
+                          ? "border-[#B0B0B0]"
+                          : "border-[#D0D0D0]")
                       }
                       style={{ width: 90, height: 140 }}
                       onClick={() => openPickerForSlot(slotIndex)}
@@ -3160,32 +3058,26 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                           <img
                             src={resolveMediaUrl(m.avatar)}
                             alt={m.name}
-                            className={
-                              "h-full w-full object-cover bg-zinc-100 " +
-                              (!m.isActive ? "grayscale" : "")
-                            }
+                            className={"h-full w-full object-cover bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
                           />
                           <button
                             type="button"
-                            className="absolute right-1 top-1 rounded-full bg-white/95 px-2 py-0.5 text-[10px] text-slate-600 shadow"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              clearSlot(slotIndex);
-                            }}
+                            className="absolute right-1 top-1 bg-white/95 border border-[#E0E0E0] px-1.5 py-0.5 text-[10px] text-[#1C1C1C]"
+                            onClick={(e) => { e.stopPropagation(); clearSlot(slotIndex); }}
                             title="清空"
                           >
                             清空
                           </button>
                         </>
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center text-xs text-slate-400">
+                        <div className="flex h-full w-full items-center justify-center text-xs text-[#B0B0B0]">
                           —
                         </div>
                       )}
                     </div>
 
-                    <div className="text-xs font-medium text-zinc-800">
-                      {m ? `${m.name}${!m.isActive ? "（卒業）" : ""}` : ""}
+                    <div className="text-xs font-medium text-[#1C1C1C]">
+                      {m ? `${m.name}${!m.isActive ? "（卒）" : ""}` : ""}
                     </div>
                   </div>
                 );
@@ -3196,70 +3088,57 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
       </div>
 
       <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
-        <DialogContent className="max-w-5xl border-teal-100/70 bg-white text-slate-900">
+        <DialogContent className="max-w-5xl border-[#E0E0E0] rounded-none bg-white text-[#1C1C1C]">
           <DialogHeader>
             <DialogTitle>选择成员</DialogTitle>
-            <DialogDescription className="text-slate-500">
+            <DialogDescription className="text-[#6B6B6B]">
               点击成员即可填入当前站位{pickerSlotIndex !== null ? `（#${pickerSlotIndex + 1}）` : ""}。
             </DialogDescription>
           </DialogHeader>
 
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <div className="text-xs text-slate-500 mr-1">位置类型：</div>
-            <button
-              type="button"
-              className={
-                "px-3 py-1 rounded-md border text-sm " +
-                (pickerRole === null ? "bg-zinc-100 border-teal-200" : "bg-white border-teal-100")
-              }
-              onClick={() => setPickerRole(null)}
-            >
-              普通
-            </button>
-            <button
-              type="button"
-              className={
-                "px-3 py-1 rounded-md border text-sm " +
-                (pickerRole === "center" ? "bg-yellow-100 border-yellow-300" : "bg-white border-teal-100")
-              }
-              onClick={() => setPickerRole("center")}
-            >
-              center
-            </button>
-            <button
-              type="button"
-              className={
-                "px-3 py-1 rounded-md border text-sm " +
-                (pickerRole === "guardian" ? "bg-zinc-100 border-teal-200" : "bg-white border-teal-100")
-              }
-              onClick={() => setPickerRole("guardian")}
-            >
-              护法
-            </button>
+            <div className="text-xs text-[#6B6B6B] mr-1">位置类型：</div>
+            {[
+              { val: null, label: "普通" },
+              { val: "center", label: "center" },
+              { val: "guardian", label: "护法" },
+            ].map(({ val, label }) => (
+              <button
+                key={String(val)}
+                type="button"
+                className={
+                  "px-3 py-1 border text-xs tracking-wider " +
+                  (pickerRole === val
+                    ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                    : "bg-white text-[#1C1C1C] border-[#E0E0E0] hover:bg-[#F0F0F0]")
+                }
+                onClick={() => setPickerRole(val)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <div className="text-xs text-slate-500 mr-1">成员池：</div>
-            <button
-              type="button"
-              className={
-                "px-3 py-1 rounded-md border text-sm " +
-                (pickerPool === "active" ? "bg-zinc-100 border-teal-200" : "bg-white border-teal-100")
-              }
-              onClick={() => setPickerPool("active")}
-            >
-              现役 / 当期
-            </button>
-            <button
-              type="button"
-              className={
-                "px-3 py-1 rounded-md border text-sm " +
-                (pickerPool === "og" ? "bg-zinc-100 border-teal-200" : "bg-white border-teal-100")
-              }
-              onClick={() => setPickerPool("og")}
-            >
-              OG（已毕业）
-            </button>
+            <div className="text-xs text-[#6B6B6B] mr-1">成员池：</div>
+            {[
+              { val: "active", label: "现役 / 当期" },
+              { val: "og", label: "OG（已毕业）" },
+            ].map(({ val, label }) => (
+              <button
+                key={val}
+                type="button"
+                className={
+                  "px-3 py-1 border text-xs tracking-wider " +
+                  (pickerPool === val
+                    ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                    : "bg-white text-[#1C1C1C] border-[#E0E0E0] hover:bg-[#F0F0F0]")
+                }
+                onClick={() => setPickerPool(val)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
           <div className="grid max-h-[70vh] grid-cols-2 gap-3 overflow-auto p-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
@@ -3268,13 +3147,10 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                 key={m.id}
                 type="button"
                 onClick={() => assignMemberToSlot(m.id)}
-                className={
-                  "group overflow-hidden rounded-2xl border border-teal-100/70 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md flex flex-col " +
-                  (used.has(m.id) ? "opacity-70" : "")
-                }
+                className={"overflow-hidden border border-[#E0E0E0] bg-white hover:border-[#1C1C1C] transition-colors flex flex-col " + (used.has(m.id) ? "opacity-50" : "")}
                 title={m.name}
               >
-                <div className="aspect-[3/4] w-full bg-zinc-100 rounded-xl overflow-hidden">
+                <div className="aspect-[3/4] w-full bg-[#F0F0F0] overflow-hidden">
                   <img
                     src={resolveMediaUrl(m.avatar)}
                     alt={m.name}
@@ -3282,10 +3158,10 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                   />
                 </div>
                 <div className="px-2 py-2">
-                  <div className="text-xs font-medium text-slate-900">
-                    {m.name}{!m.isActive ? "（卒業）" : ""}
+                  <div className="text-xs font-medium text-[#1C1C1C]">
+                    {m.name}{!m.isActive ? "（卒）" : ""}
                   </div>
-                  <div className="text-[10px] text-slate-500">{m.romaji || ""}</div>
+                  <div className="text-[10px] text-[#6B6B6B]">{m.romaji || ""}</div>
                 </div>
               </button>
             ))}
@@ -3376,43 +3252,42 @@ function BlogPage({ data, setData, admin }) {
       <div className="grid gap-4 md:grid-cols-[1fr_1.4fr]">
         <div className="grid gap-4">
           {data.posts.map((p) => (
-            <Card
+            <div
               key={p.id}
               className={
-                "overflow-hidden border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow transition " +
-                (selectedId === p.id ? "ring-2 ring-zinc-300/70" : "")
+                "overflow-hidden border bg-white transition-colors cursor-pointer " +
+                (selectedId === p.id ? "border-[#1C1C1C]" : "border-[#E0E0E0] hover:border-[#B0B0B0]")
               }
+              onClick={() => setSelectedId(p.id)}
             >
-              <div className="grid md:grid-cols-[160px_1fr]">
-                <button className="block" onClick={() => setSelectedId(p.id)}>
-                  <img
-                    src={resolveMediaUrl(p.cover)}
-                    alt={p.title}
-                    className="h-[140px] w-full object-cover md:h-[160px] md:w-[160px]"
-                  />
-                </button>
+              <div className="grid md:grid-cols-[140px_1fr]">
+                <img
+                  src={resolveMediaUrl(p.cover)}
+                  alt={p.title}
+                  className="h-[120px] w-full object-cover bg-[#F0F0F0] md:h-[140px] md:w-[140px]"
+                />
                 <div className="flex items-start justify-between gap-3 p-4">
                   <div>
-                    <div className="text-base font-semibold leading-tight">{p.title}</div>
-                    <div className="mt-2 text-sm text-slate-500">{p.date}</div>
+                    <div className="text-sm font-medium text-[#1C1C1C] leading-tight">{p.title}</div>
+                    <div className="mt-1 text-xs text-[#6B6B6B] tracking-wider">{p.date}</div>
                   </div>
                   {admin ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="secondary" className="h-8 w-8">
-                          <Settings className="h-4 w-4" />
-                        </Button>
+                        <button
+                          className="w-7 h-7 flex items-center justify-center border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Settings className="h-3.5 w-3.5 text-[#1C1C1C]" />
+                        </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white opacity-100">
-                        <DropdownMenuItem onClick={() => openEdit(p)}>
+                      <DropdownMenuContent align="end" className="bg-white border-[#E0E0E0] rounded-none shadow-md">
+                        <DropdownMenuItem onClick={(e) => { e.stopPropagation(); openEdit(p); }}>
                           <Pencil className="mr-2 h-4 w-4" />
                           编辑
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          className="text-red-500"
-                          onClick={() => deletePost(p.id)}
-                        >
+                        <DropdownMenuItem className="text-red-500" onClick={(e) => { e.stopPropagation(); deletePost(p.id); }}>
                           <Trash2 className="mr-2 h-4 w-4" />
                           删除
                         </DropdownMenuItem>
@@ -3421,19 +3296,19 @@ function BlogPage({ data, setData, admin }) {
                   ) : null}
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
         <div className="md:sticky md:top-[96px] md:self-start md:max-h-[calc(100vh-96px)] md:overflow-y-auto md:min-h-0">
           {selected ? (
-            <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-xl">{selected.title}</CardTitle>
-                <CardDescription className="text-slate-600">{selected.date}</CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-4">
-                <div className="overflow-hidden rounded-2xl border border-teal-100/70 bg-white">
+            <div className="border border-[#E0E0E0] bg-white">
+              <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                <div className="text-base font-medium text-[#1C1C1C]">{selected.title}</div>
+                <div className="text-xs text-[#6B6B6B] tracking-wider mt-0.5">{selected.date}</div>
+              </div>
+              <div className="p-4 grid gap-4">
+                <div className="overflow-hidden border border-[#E0E0E0] bg-white">
                   <img
                     src={resolveMediaUrl(selected.cover)}
                     alt={selected.title}
@@ -3441,27 +3316,25 @@ function BlogPage({ data, setData, admin }) {
                   />
                 </div>
                 <div
-                  className="prose prose-invert max-w-none prose-p:text-zinc-800 prose-li:text-zinc-800 prose-strong:text-slate-900"
+                  className="prose max-w-none prose-p:text-[#1C1C1C] prose-li:text-[#1C1C1C] prose-strong:text-[#1C1C1C] text-sm leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: resolveHtmlMedia(selected.content) }}
                 />
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ) : (
-            <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle>暂无新闻</CardTitle>
-                <CardDescription className="text-slate-500">你可以在管理员模式下新增。</CardDescription>
-              </CardHeader>
-            </Card>
+            <div className="border border-[#E0E0E0] bg-white p-6">
+              <div className="text-sm font-medium text-[#1C1C1C]">暂无新闻</div>
+              <div className="mt-1 text-xs text-[#6B6B6B]">你可以在管理员模式下新增。</div>
+            </div>
           )}
         </div>
       </div>
 
       <Dialog open={editorOpen} onOpenChange={setEditorOpen}>
-        <ScrollDialogContent className="max-w-5xl border-teal-100/70 bg-white text-slate-900">
+        <ScrollDialogContent className="max-w-5xl">
           <DialogHeader>
             <DialogTitle>{editing?.title ? "编辑新闻" : "新增新闻"}</DialogTitle>
-            <DialogDescription className="text-slate-500">
+            <DialogDescription className="text-[#6B6B6B]">
               简易 Blog 编辑器（contenteditable）：支持粘贴文本、加粗、列表；可上传图片插入到光标处。
             </DialogDescription>
           </DialogHeader>
@@ -3494,21 +3367,13 @@ function BlogPage({ data, setData, admin }) {
                 <Button variant="secondary" size="sm" onClick={() => document.execCommand("bold")}>
                   加粗
                 </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => document.execCommand("insertUnorderedList")}
-                >
+                <Button variant="secondary" size="sm" onClick={() => document.execCommand("insertUnorderedList")}>
                   无序列表
                 </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => document.execCommand("insertOrderedList")}
-                >
+                <Button variant="secondary" size="sm" onClick={() => document.execCommand("insertOrderedList")}>
                   有序列表
                 </Button>
-                <div className="flex items-center gap-2 rounded-xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow px-3 py-2">
+                <div className="flex items-center gap-2 border border-[#E0E0E0] bg-white px-3 py-2">
                   <Input
                     type="file"
                     accept="image/*"
@@ -3524,15 +3389,15 @@ function BlogPage({ data, setData, admin }) {
               </div>
 
               <div className="grid gap-2">
-                <div className="text-sm font-medium">正文</div>
+                <div className="text-sm font-medium text-[#1C1C1C]">正文</div>
                 <div
                   ref={editorRef}
                   contentEditable
                   suppressContentEditableWarning
-                  className="min-h-[240px] rounded-2xl border border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow p-4 text-slate-900 outline-none"
+                  className="min-h-[240px] border border-[#E0E0E0] bg-white p-4 text-[#1C1C1C] outline-none focus:border-[#1C1C1C]"
                   dangerouslySetInnerHTML={{ __html: editing.content }}
                 />
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-[#6B6B6B]">
                   小提示：可以直接复制粘贴外部文本/图片（不同浏览器表现略有差异）。
                 </div>
               </div>
@@ -3602,7 +3467,7 @@ export default function XJP56App() {
   if (!loaded) {
     return (
       <AppShell>
-        <div className="py-20 text-center text-slate-500">Loading…</div>
+        <div className="py-20 text-center text-[#6B6B6B]">Loading…</div>
       </AppShell>
     );
   }
@@ -3610,7 +3475,7 @@ export default function XJP56App() {
   if (error) {
     return (
       <AppShell>
-        <div className="mx-auto mt-16 max-w-xl rounded-2xl border border-red-200 bg-red-50 p-6 text-red-900">
+        <div className="mx-auto mt-16 max-w-xl border border-red-200 bg-red-50 p-6 text-red-900">
           <div className="font-semibold">后端连接失败</div>
           <div className="mt-2 text-sm break-words">{error}</div>
           <div className="mt-4 flex gap-2">
@@ -3627,7 +3492,7 @@ export default function XJP56App() {
   if (!data) {
     return (
       <AppShell>
-        <div className="py-20 text-center text-slate-500">No data</div>
+        <div className="py-20 text-center text-[#6B6B6B]">No data</div>
       </AppShell>
     );
   }
@@ -3637,9 +3502,9 @@ export default function XJP56App() {
       <TopBar page={page} setPage={setPage} admin={admin} setAdmin={setAdmin} onReset={onReset} />
 
       {admin ? (
-        <div className="mb-6 rounded-2xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm text-indigo-900">
-          <span className="font-semibold">管理员模式已开启：</span>
-          你可以新增 / 编辑 / 删除成员、单曲和新闻；并在单曲里拖拽编辑站位与上传音源。
+        <div className="mb-6 border border-[#E0E0E0] bg-[#F7F7F7] px-4 py-3 text-sm text-[#1C1C1C]">
+          <span className="font-medium">管理员模式已开启：</span>
+          {" "}你可以新增 / 编辑 / 删除成员、单曲和新闻；并在单曲里拖拽编辑站位与上传音源。
         </div>
       ) : null}
 
@@ -3653,69 +3518,17 @@ export default function XJP56App() {
             transition={{ duration: 0.25 }}
           >
             <Hero
+              latestSingle={[...data.singles].sort((a, b) => {
+                const ta = Date.parse(a.release || "");
+                const tb = Date.parse(b.release || "");
+                return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
+              })[0] || null}
+              members={data.members}
               activeMembersCount={data.members.filter((m) => m.isActive).length}
               totalMembersCount={data.members.length}
               singlesCount={data.singles.length}
-              postsCount={data.posts.length}
               onGo={setPage}
             />
-
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              <QuickCard
-                title="成员"
-                desc="点击头像看详情；管理员可新增/编辑/删除。"
-                icon={<Users className="h-4 w-4" />}
-                actionLabel="进入成员页"
-                onAction={() => setPage("members")}
-              />
-              <QuickCard
-                title="单曲"
-                desc="封面放大、曲目收录、A面站位；管理员可拖拽排位并上传音源。"
-                icon={<Disc3 className="h-4 w-4" />}
-                actionLabel="进入单曲页"
-                onAction={() => setPage("singles")}
-              />
-              <QuickCard
-                title="Blog"
-                desc="新闻列表与详情；管理员有编辑器与图片上传。"
-                icon={<Newspaper className="h-4 w-4" />}
-                actionLabel="进入 Blog"
-                onAction={() => setPage("blog")}
-              />
-            </div>
-
-            <div className="mt-8">
-              <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-base">测试清单</CardTitle>
-                  <CardDescription className="text-slate-500">
-                    你可以按下面步骤验证需求是否全部满足。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-2 text-sm text-zinc-800">
-                    <ChecklistItem>
-                      成员页：逐个展示头像与姓名；点击头像弹窗放大；右侧显示姓名/出身/期数/选拔状况。
-                    </ChecklistItem>
-                    <ChecklistItem>
-                      成员页（管理员）：新增/编辑/删除成员；上传照片；编辑基础信息与选拔记录。
-                    </ChecklistItem>
-                    <ChecklistItem>
-                      单曲页：列表展示封面与 title；点入详情封面可放大；显示 Track1~3。
-                    </ChecklistItem>
-                    <ChecklistItem>
-                      单曲详情：A面支持音频播放（上传后出现播放器）；展示 A 面选拔站位（按排数排开）。
-                    </ChecklistItem>
-                    <ChecklistItem>
-                      单曲编辑：输入选拔人数 + 排数/每排人数 → 生成占位框；从成员池拖拽头像到占位框；保存后站位永久保存。
-                    </ChecklistItem>
-                    <ChecklistItem>
-                      Blog：新闻列表 + 详情；管理员可新增/编辑/删除；编辑器支持插图。
-                    </ChecklistItem>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </motion.div>
         ) : null}
 
@@ -3759,34 +3572,3 @@ export default function XJP56App() {
   );
 }
 
-function QuickCard({ title, desc, icon, actionLabel, onAction }) {
-  return (
-    <Card className="border-teal-100/80 bg-white/75 backdrop-blur-xl shadow-sm hover:shadow-md transition-shadow">
-      <CardHeader>
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <CardTitle className="text-lg">{title}</CardTitle>
-            <CardDescription className="text-slate-600">{desc}</CardDescription>
-          </div>
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-teal-500/10 ring-1 ring-teal-500/10">
-            {icon}
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <Button onClick={onAction} className="w-full">
-          {actionLabel}
-        </Button>
-      </CardContent>
-    </Card>
-  );
-}
-
-function ChecklistItem({ children }) {
-  return (
-    <div className="flex gap-2">
-      <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-white/75" />
-      <div>{children}</div>
-    </div>
-  );
-}
