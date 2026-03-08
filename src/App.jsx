@@ -49,6 +49,8 @@ import {
   Move,
   Image as ImageIcon,
   Music,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 /**
@@ -1045,56 +1047,120 @@ function MemberMarquee({ members }) {
 }
 
 // ---- Hero 区域 ----
-function Hero({ latestSingle, members, activeMembersCount, totalMembersCount, singlesCount, onGo }) {
-  const { prefix, name } = latestSingle ? splitSingleTitle(latestSingle.title) : { prefix: "", name: "" };
+function Hero({ singles, members, activeMembersCount, totalMembersCount, singlesCount, onGo }) {
+  // Build carousel: latest first + 4 random others, chosen once per mount
+  const slides = useMemo(() => {
+    if (!singles.length) return [];
+    const [latest, ...rest] = singles;
+    const shuffled = [...rest].sort(() => Math.random() - 0.5).slice(0, 4);
+    return [latest, ...shuffled];
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const [idx, setIdx] = useState(0);
+  const current = slides[idx] || null;
+  const { prefix, name } = current ? splitSingleTitle(current.title) : { prefix: "", name: "" };
+
+  const prev = () => setIdx((i) => (i - 1 + slides.length) % slides.length);
+  const next = () => setIdx((i) => (i + 1) % slides.length);
 
   return (
     <div>
       {/* Full-bleed hero image */}
       <div className="relative overflow-hidden" style={{ height: "72vh", minHeight: 360 }}>
-        {latestSingle?.cover ? (
-          <img
-            src={resolveMediaUrl(latestSingle.cover)}
-            alt={latestSingle.title}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-[#1C1C1C]" />
-        )}
+        {/* Background slides */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className="absolute inset-0"
+          >
+            {current?.cover ? (
+              <img
+                src={resolveMediaUrl(current.cover)}
+                alt={current.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-[#1C1C1C]" />
+            )}
+          </motion.div>
+        </AnimatePresence>
+
         {/* gradient overlay */}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%)" }}
         />
+
         {/* text content */}
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="text-[10px] tracking-[0.25em] text-white/50 mb-3">XP · LATEST SINGLE</div>
-            {prefix && <div className="text-sm text-white/60 mb-1">{prefix}</div>}
-            <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-none">{name || "XP"}</h1>
-            {latestSingle?.release && (
-              <div className="mt-3 text-sm text-white/50 tracking-wider">{latestSingle.release.replace(/-/g, ".")}</div>
-            )}
-            <div className="mt-6 flex gap-3">
-              <button
-                onClick={() => onGo("singles")}
-                className="text-xs tracking-widest bg-white text-[#1C1C1C] px-6 py-2.5 hover:bg-[#F0F0F0] transition-colors"
-              >
-                查看详情
-              </button>
-              <button
-                onClick={() => onGo("members")}
-                className="text-xs tracking-widest border border-white/40 text-white px-6 py-2.5 hover:bg-white/10 transition-colors"
-              >
-                成员
-              </button>
-            </div>
-          </motion.div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="text-[10px] tracking-[0.25em] text-white/50 mb-3">
+                {idx === 0 ? "XP · LATEST SINGLE" : "XP · SINGLE"}
+              </div>
+              {prefix && <div className="text-sm text-white/60 mb-1">{prefix}</div>}
+              <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-none">{name || "XP"}</h1>
+              {current?.release && (
+                <div className="mt-3 text-sm text-white/50 tracking-wider">{current.release.replace(/-/g, ".")}</div>
+              )}
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => onGo("singles")}
+                  className="text-xs tracking-widest bg-white text-[#1C1C1C] px-6 py-2.5 hover:bg-[#F0F0F0] transition-colors"
+                >
+                  查看详情
+                </button>
+                <button
+                  onClick={() => onGo("members")}
+                  className="text-xs tracking-widest border border-white/40 text-white px-6 py-2.5 hover:bg-white/10 transition-colors"
+                >
+                  成员
+                </button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+        {/* Arrow navigation */}
+        {slides.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </>
+        )}
+
+        {/* Dot indicators */}
+        {slides.length > 1 && (
+          <div className="absolute bottom-8 right-8 flex gap-2 items-center">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIdx(i)}
+                className={"transition-all duration-300 rounded-full " + (i === idx ? "w-4 h-[3px] bg-white rounded-none" : "w-[3px] h-[3px] bg-white/40 hover:bg-white/70")}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Member scroll strip */}
@@ -1202,11 +1268,12 @@ function AudioUploader({ label, value, onChange, hint }) {
 // DialogContent wrapper: fixed height + inner scroll (prevents dialogs being cut off)
 function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
-    "top-[3vh] translate-y-0 w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
+    "left-1/2 top-[3vh] -translate-x-1/2 translate-y-0 " +
+    "w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
     "rounded-none border border-[#E0E0E0] bg-white text-[#1C1C1C] shadow-lg";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
-      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-6">{children}</div>
+      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-6 w-full box-border">{children}</div>
     </DialogContent>
   );
 }
@@ -1495,13 +1562,13 @@ function MembersPage({ data, setData, admin }) {
                     className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}
                   >
                     <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
-                    <span className="text-sm text-[#1C1C1C]">{value}</span>
+                    <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
                   </div>
                 ))}
                 {selected.profile?.catchphrase ? (
                   <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0]">
                     <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
-                    <span className="text-sm text-[#1C1C1C] leading-relaxed">{selected.profile.catchphrase}</span>
+                    <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em] leading-relaxed">{selected.profile.catchphrase}</span>
                   </div>
                 ) : null}
               </div>
@@ -1520,10 +1587,10 @@ function MembersPage({ data, setData, admin }) {
                     return (
                       <div
                         key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
-                        className={"flex items-center justify-between py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                        className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
                       >
-                        <span className="text-sm text-[#6B6B6B]">{r.edition || "—"}</span>
-                        <span className={"inline-flex items-center border px-2.5 py-0.5 text-xs font-medium " + b.className}>{b.text}</span>
+                        <span className="text-[13px] text-[#6B6B6B] tracking-[0.04em] shrink-0">{r.edition || "—"}</span>
+                        <span className={"inline-flex items-center border px-2 py-0.5 text-[10px] font-medium shrink-0 " + b.className}>{b.text}</span>
                       </div>
                     );
                   })}
@@ -1545,7 +1612,7 @@ function MembersPage({ data, setData, admin }) {
                       <div className="flex flex-wrap gap-x-3 gap-y-1">
                         {selected.admireSenior.map((id) => {
                           const mm = (data.members || []).find((x) => x.id === id);
-                          return mm ? <span key={id} className="text-sm text-[#1C1C1C]">{mm.name}</span> : null;
+                          return mm ? <span key={id} className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{mm.name}</span> : null;
                         })}
                       </div>
                     </div>
@@ -1560,9 +1627,9 @@ function MembersPage({ data, setData, admin }) {
                     return (
                       <div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (!(selected.admireSenior?.length) ? "border-t border-[#E0E0E0]" : "")}>
                         <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
-                        <div>
-                          <div className="text-sm text-[#1C1C1C]">{song}</div>
-                          {singleName ? <div className="text-xs text-[#6B6B6B] mt-0.5">收录于 {singleName}</div> : null}
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words">{song}</div>
+                          {singleName ? <div className="text-xs text-[#6B6B6B] mt-0.5 tracking-[0.04em] break-words">收录于 {singleName}</div> : null}
                         </div>
                       </div>
                     );
@@ -1631,13 +1698,13 @@ function MembersPage({ data, setData, admin }) {
                       return (
                         <div
                           key={k}
-                          className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                          className={"flex items-center justify-between gap-2 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
                         >
-                          <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-20">
+                          <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-14">
                             {prefix || ""}
                           </div>
-                          <div className="text-sm text-[#1C1C1C] flex-1 min-w-0 truncate">{name}</div>
-                          <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
+                          <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
+                          <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
                             {!selected?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
                               <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
                             ) : null}
@@ -3434,11 +3501,11 @@ export default function XJP56App() {
             transition={{ duration: 0.25 }}
           >
             <Hero
-              latestSingle={[...data.singles].sort((a, b) => {
+              singles={[...data.singles].sort((a, b) => {
                 const ta = Date.parse(a.release || "");
                 const tb = Date.parse(b.release || "");
                 return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
-              })[0] || null}
+              })}
               members={data.members}
               activeMembersCount={data.members.filter((m) => m.isActive).length}
               totalMembersCount={data.members.length}
