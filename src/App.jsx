@@ -51,6 +51,8 @@ import {
   Music,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
+  ChevronDown,
 } from "lucide-react";
 
 /**
@@ -127,6 +129,29 @@ function getElectionBadge(raw, edition) {
   return { text, className };
 }
 
+function parseRankNum(raw) {
+  const v = (raw ?? "").toString().trim();
+  if (!v || v === "加入前") return Infinity;
+  if (v === "圈外") return 9999;
+  const m = v.match(/\d+/);
+  if (m) return Number(m[0]);
+  const n = chineseToInt(v);
+  return Number.isFinite(n) ? n : Infinity;
+}
+
+function parseEditionNum(edition) {
+  const s = (edition ?? "").toString();
+  const m = s.match(/\d+/);
+  if (m) return Number(m[0]);
+  return chineseToInt(s);
+}
+
+const ELECTION_SUBTITLES = {
+  "第1届": "面对未知",
+  "第2届": "被选择的幸福",
+  "第3届": "搅动风云",
+  "第4届": "百家争鸣之战",
+};
 
 const splitSingleTitle = (fullTitle) => {
   // Expect formats like: "1st Single · Neon Bloom"
@@ -919,6 +944,7 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
     { key: "home", cn: "主页", en: "HOME" },
     { key: "members", cn: "成员", en: "MEMBER" },
     { key: "singles", cn: "单曲", en: "SINGLES" },
+    { key: "election", cn: "总选举", en: "ELECTION" },
     { key: "blog", cn: "部落格", en: "BLOG" },
   ];
   const isActive = (key) => page === key || (page === "member-detail" && key === "members");
@@ -1180,6 +1206,211 @@ function Hero({ singles, members, activeMembersCount, totalMembersCount, singles
   );
 }
 
+// ---- 总选举页面 ----
+function ElectionPage({ data }) {
+  const editions = useMemo(() => {
+    const set = new Set();
+    (data.members || []).forEach((m) =>
+      (m.electionRanks || []).forEach((r) => { if (r.edition) set.add(r.edition); })
+    );
+    return [...set].sort((a, b) => parseEditionNum(a) - parseEditionNum(b));
+  }, [data.members]);
+
+  const [activeEdition, setActiveEdition] = useState(() => editions[editions.length - 1] ?? "");
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  useEffect(() => {
+    if (editions.length && !editions.includes(activeEdition)) {
+      setActiveEdition(editions[editions.length - 1]);
+    }
+  }, [editions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const prevEdition = useMemo(() => {
+    const idx = editions.indexOf(activeEdition);
+    return idx > 0 ? editions[idx - 1] : null;
+  }, [editions, activeEdition]);
+
+  const rows = useMemo(() => {
+    const editionNum = parseEditionNum(activeEdition);
+    const threshold = editionNum >= 4 ? 22 : 20; // 第4届起22名圈外，之前20名圈外
+    const result = [];
+    (data.members || []).forEach((m) => {
+      const entry = (m.electionRanks || []).find((r) => r.edition === activeEdition);
+      if (!entry) return;
+      const rankNum = parseRankNum(entry.rank);
+      if (rankNum === Infinity || rankNum >= threshold) return; // 加入前、圈外 — 不显示
+      result.push({ member: m, rank: entry.rank, rankNum });
+    });
+    result.sort((a, b) => a.rankNum - b.rankNum);
+    return result;
+  }, [data.members, activeEdition]);
+
+  function getDelta(member, currRankNum) {
+    if (!prevEdition) return null;
+    const prev = (member.electionRanks || []).find((r) => r.edition === prevEdition);
+    if (!prev) return { type: "new" };
+    const pv = (prev.rank ?? "").toString().trim();
+    if (pv === "加入前") return { type: "joinBefore" };
+    const prevNum = parseRankNum(pv);
+    if (prevNum === 9999) return { type: "outside" };
+    if (!Number.isFinite(prevNum) || !Number.isFinite(currRankNum)) return null;
+    const diff = prevNum - currRankNum;
+    if (diff > 0) return { type: "up", diff };
+    if (diff < 0) return { type: "down", diff: Math.abs(diff) };
+    return { type: "same" };
+  }
+
+  return (
+    <div className="px-4 py-8 mx-auto max-w-3xl">
+      {/* Section label */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-5 h-px bg-[#1C1C1C]" />
+        <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">General Election</div>
+      </div>
+
+      {/* Edition picker */}
+      {editions.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {editions.map((ed) => (
+            <button
+              key={ed}
+              onClick={() => setActiveEdition(ed)}
+              className={
+                "text-xs tracking-wider px-4 py-1.5 border transition-colors " +
+                (ed === activeEdition
+                  ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                  : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+              }
+            >
+              {ed}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Big title — fades when edition changes */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeEdition + "_title"}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3 }}
+          className="text-center my-10 md:my-14"
+        >
+          <div className="text-3xl md:text-5xl font-light text-[#1C1C1C] tracking-tight">
+            XP{activeEdition}总选举
+          </div>
+          {ELECTION_SUBTITLES[activeEdition] && (
+            <div className="mt-3 text-sm text-[#6B6B6B] tracking-[0.25em]">
+              ～{ELECTION_SUBTITLES[activeEdition]}～
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Rank list — staggered entry, fades on edition switch */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeEdition + "_list"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {rows.length === 0 ? (
+            <div className="text-sm text-[#AAAAAA] text-center py-16">暂无数据</div>
+          ) : (
+            <div>
+              {rows.map(({ member, rankNum }, i) => {
+                const delta = getDelta(member, rankNum);
+                return (
+                  <motion.div
+                    key={member.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: i * 0.04 }}
+                    onClick={() => setSelectedMember(member)}
+                    className="flex items-center gap-4 sm:gap-6 py-3.5 border-b border-[#E0E0E0] first:border-t first:border-[#E0E0E0] cursor-pointer hover:bg-[#F7F7F7] transition-colors px-2 -mx-2"
+                  >
+                    {/* 排名 */}
+                    <div className="w-8 shrink-0 text-center">
+                      <span className="text-xl font-light text-[#1C1C1C] tabular-nums leading-none">
+                        {String(rankNum).padStart(2, "0")}
+                      </span>
+                    </div>
+
+                    {/* 头像 */}
+                    <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 overflow-hidden bg-[#F0F0F0]">
+                      {member.avatar ? (
+                        <img
+                          src={resolveMediaUrl(member.avatar)}
+                          alt={member.name}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-[#E0E0E0]" />
+                      )}
+                    </div>
+
+                    {/* 期数 + 姓名 + romaji */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {member.generation && (
+                          <span
+                            style={generationBadgeStyle(member.generation)}
+                            className={generationBadgeClass(member.generation)}
+                          >
+                            {member.generation}
+                          </span>
+                        )}
+                        <span className="text-sm font-medium text-[#1C1C1C] tracking-[0.04em]">
+                          {member.name}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-[#AAAAAA] tracking-[0.08em] mt-0.5">
+                        {member.romaji}
+                      </div>
+                    </div>
+
+                    {/* 上届变化 */}
+                    <div className="shrink-0 w-12 sm:w-16 flex items-center justify-end">
+                      {delta === null && <span className="text-xs text-[#AAAAAA]">—</span>}
+                      {delta?.type === "new" && <span className="text-[10px] tracking-wider text-[#AAAAAA]">NEW</span>}
+                      {delta?.type === "joinBefore" && <span className="text-[10px] tracking-wider text-[#AAAAAA]">加入前</span>}
+                      {delta?.type === "outside" && <span className="text-[10px] tracking-wider text-[#AAAAAA]">圈外</span>}
+                      {delta?.type === "same" && <span className="text-xs text-[#AAAAAA]">—</span>}
+                      {delta?.type === "up" && (
+                        <span className="flex items-center gap-0.5 text-rose-500">
+                          <ChevronUp className="w-3.5 h-3.5 shrink-0" />
+                          <span className="text-xs font-medium tabular-nums">{delta.diff}</span>
+                        </span>
+                      )}
+                      {delta?.type === "down" && (
+                        <span className="flex items-center gap-0.5 text-emerald-600">
+                          <ChevronDown className="w-3.5 h-3.5 shrink-0" />
+                          <span className="text-xs font-medium tabular-nums">{delta.diff}</span>
+                        </span>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Member detail modal */}
+      <Dialog open={!!selectedMember} onOpenChange={(v) => { if (!v) setSelectedMember(null); }}>
+        <ScrollDialogContent className="max-w-4xl">
+          <MemberDetailContent member={selectedMember} data={data} />
+        </ScrollDialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
 function SectionHeader({ title, subtitle, right }) {
   return (
     <div className="mb-6 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end">
@@ -1278,7 +1509,222 @@ function ScrollDialogContent({ className = "", children, ...props }) {
   );
 }
 
+// ---- 成员详情内容（MembersPage 和 ElectionPage 共用）----
+function MemberDetailContent({ member, data }) {
+  if (!member) return null;
+  return (
+    <div className="grid gap-10">
 
+      {/* Name + romaji — centered */}
+      <div className="text-center">
+        <div className="text-2xl font-light text-[#1C1C1C] tracking-tight">
+          {member.name}{!member.isActive ? " 卒" : ""}
+        </div>
+        {member.romaji ? (
+          <div className="text-[11px] tracking-[0.2em] text-[#6B6B6B] mt-1">{member.romaji}</div>
+        ) : null}
+        <div className="text-xs text-[#6B6B6B] mt-1">
+          {[member.origin, member.generation].filter(Boolean).join(" · ")}
+        </div>
+      </div>
+
+      {/* Centered portrait photo */}
+      <div className="flex justify-center">
+        <div className={"overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px]" + (!member.isActive ? " grayscale opacity-80" : "")}>
+          <img
+            src={resolveMediaUrl(member.avatar)}
+            alt={member.name}
+            className="aspect-[3/4] w-full object-cover object-top"
+          />
+        </div>
+      </div>
+
+      {/* PROFILE */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-5 h-px bg-[#1C1C1C]" />
+          <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Profile</div>
+        </div>
+        <div>
+          {[
+            ["身高", member.profile?.height],
+            ["生日", member.profile?.birthday],
+            ["血型", member.profile?.blood],
+            ["爱好", member.profile?.hobby],
+            ["特长", member.profile?.skill],
+            ...(!member.isActive && member.graduationDate
+              ? [["毕业", isoDate(member.graduationDate) + ((member.graduationSongTitle || "").trim() && (member.graduationSongTitle || "").trim() !== "无" ? " · " + member.graduationSongTitle : "")]]
+              : []),
+          ].filter(([, v]) => v).map(([label, value], i) => (
+            <div
+              key={label}
+              className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}
+            >
+              <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
+              <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
+            </div>
+          ))}
+          {member.profile?.catchphrase ? (
+            <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0]">
+              <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
+              <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em] leading-relaxed">{member.profile.catchphrase}</span>
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+      {/* ELECTION */}
+      {(member.electionRanks || []).length ? (
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-5 h-px bg-[#1C1C1C]" />
+            <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Election</div>
+          </div>
+          <div>
+            {(member.electionRanks || []).map((r, idx) => {
+              const b = getElectionBadge(r.rank, r.edition);
+              return (
+                <div
+                  key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
+                  className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                >
+                  <span className="text-[13px] text-[#6B6B6B] tracking-[0.04em] shrink-0">{r.edition || "—"}</span>
+                  <span className={"inline-flex items-center border px-2 py-0.5 text-[10px] font-medium shrink-0 " + b.className}>{b.text}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
+      {/* FAVORITES */}
+      {(member.generation && (String(member.generation).startsWith("5") || String(member.generation).startsWith("6") || String(member.generation).startsWith("7")) && Array.isArray(member.admireSenior) && member.admireSenior.length) || member.favoriteSong ? (
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-5 h-px bg-[#1C1C1C]" />
+            <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Favorites</div>
+          </div>
+          <div>
+            {member.generation && (String(member.generation).startsWith("5") || String(member.generation).startsWith("6") || String(member.generation).startsWith("7")) && Array.isArray(member.admireSenior) && member.admireSenior.length ? (
+              <div className="flex items-baseline gap-6 py-2.5 border-t border-b border-[#E0E0E0]">
+                <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">前辈</span>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  {member.admireSenior.map((id) => {
+                    const mm = (data.members || []).find((x) => x.id === id);
+                    return mm ? <span key={id} className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{mm.name}</span> : null;
+                  })}
+                </div>
+              </div>
+            ) : null}
+            {member.favoriteSong ? (() => {
+              const song = member.favoriteSong;
+              const single = (data.singles || []).find((sg) =>
+                (sg.tracks || []).some((t) => (typeof t === "string" ? t : t?.title) === song)
+              );
+              const sp = single ? splitSingleTitle(single.title) : null;
+              const singleName = sp?.prefix ? `${sp.prefix} · ${sp.name}` : single?.title;
+              return (
+                <div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (!(member.admireSenior?.length) ? "border-t border-[#E0E0E0]" : "")}>
+                  <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words">{song}</div>
+                    {singleName ? <div className="text-xs text-[#6B6B6B] mt-0.5 tracking-[0.04em] break-words">收录于 {singleName}</div> : null}
+                  </div>
+                </div>
+              );
+            })() : null}
+          </div>
+        </div>
+      ) : null}
+
+      {/* DISCOGRAPHY */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-5 h-px bg-[#1C1C1C]" />
+          <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Discography</div>
+        </div>
+        {(() => {
+          const raw = member?.selectionHistory || {};
+          const gradLast = (!member?.isActive && member?.graduationDate)
+            ? getLastSingleBeforeGrad(member, data?.singles || [])
+            : { lastSingleId: null, lastRelease: "" };
+          const lastSingleIdBeforeGrad = gradLast.lastSingleId;
+          const entries = Object.entries(raw).map(([k, v]) => {
+            if (v && typeof v === "object") return { k, label: v.label ?? k, value: v.value ?? "" };
+            return { k, label: k, value: String(v ?? "") };
+          });
+          if (entries.length === 0) return <div className="text-sm text-[#6B6B6B]">—</div>;
+          return (
+            <div>
+              {entries.map(({ k, label, value }, rowIdx) => {
+                const singleObj = (data?.singles || []).find((s) => s.id === k);
+                let title = (singleObj?.title ?? label ?? "").toString();
+                const parts = title.split("·").map((s) => s.trim()).filter(Boolean);
+                if (parts.length >= 3) title = parts.slice(parts.length - 2).join(" · ");
+                const { prefix, name } = splitSingleTitle(title);
+                const pickType = value.includes("加入前") ? "加入前"
+                  : value.includes("A面") ? "A面选拔"
+                  : value.includes("B面") ? "B面"
+                  : value.includes("落选") || value.includes("未入选") ? "落选"
+                  : "";
+                const typeTagClass = pickType === "A面选拔" ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                  : pickType === "B面" ? "border-sky-200 bg-sky-50 text-sky-800"
+                  : pickType === "加入前" ? "border-violet-200 bg-violet-50 text-violet-800"
+                  : "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]";
+                const rowM = value.match(/第(\d+)排/);
+                const rowNum = rowM ? Number(rowM[1]) : null;
+                const role = value.includes("center") ? "center"
+                  : value.includes("护法") || value.includes("guardian") ? "guardian"
+                  : null;
+                const top2Count = rowNum && rowNum <= 2
+                  ? (data?.members || []).reduce((acc, mm) => {
+                      const vv = mm?.selectionHistory?.[k];
+                      const s = vv && typeof vv === "object" ? String(vv.value ?? "") : String(vv ?? "");
+                      const rm = s.match(/第(\d+)排/);
+                      const rn = rm ? Number(rm[1]) : null;
+                      return rn && rn <= 2 ? acc + 1 : acc;
+                    }, 0)
+                  : 0;
+                const rowTagText = role === "center" || role === "guardian" ? ""
+                  : rowNum && rowNum <= 2 && top2Count ? `${top2Count}福神` : "";
+                const isFukujinRowTag = typeof rowTagText === "string" && /福神$/.test(rowTagText);
+                return (
+                  <div
+                    key={k}
+                    className={"flex items-center justify-between gap-2 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                  >
+                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-14">{prefix || ""}</div>
+                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
+                    <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
+                      {!member?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
+                        <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
+                      ) : null}
+                      {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
+                        <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
+                      ) : null}
+                      {pickType ? (
+                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
+                      ) : null}
+                      {rowTagText ? (
+                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
+                      ) : null}
+                      {role === "center" ? (
+                        <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
+                      ) : role === "guardian" ? (
+                        <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
+      </div>
+
+    </div>
+  );
+}
 
 function MembersPage({ data, setData, admin }) {
   const [selected, setSelected] = useState(null);
@@ -1513,226 +1959,7 @@ function MembersPage({ data, setData, admin }) {
         onOpenChange={(v) => (!v ? setSelected(null) : null)}
       >
         <ScrollDialogContent className="max-w-4xl">
-          {selected ? (
-          <div className="grid gap-10">
-
-            {/* Name + romaji — centered */}
-            <div className="text-center">
-              <div className="text-2xl font-light text-[#1C1C1C] tracking-tight">
-                {selected.name}{!selected.isActive ? " 卒" : ""}
-              </div>
-              {selected.romaji ? (
-                <div className="text-[11px] tracking-[0.2em] text-[#6B6B6B] mt-1">{selected.romaji}</div>
-              ) : null}
-              <div className="text-xs text-[#6B6B6B] mt-1">
-                {[selected.origin, selected.generation].filter(Boolean).join(" · ")}
-              </div>
-            </div>
-
-            {/* Centered portrait photo */}
-            <div className="flex justify-center">
-              <div className={"overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px]" + (!selected.isActive ? " grayscale opacity-80" : "")}>
-                <img
-                  src={resolveMediaUrl(selected.avatar)}
-                  alt={selected.name}
-                  className="aspect-[3/4] w-full object-cover object-top"
-                />
-              </div>
-            </div>
-
-            {/* PROFILE */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-5 h-px bg-[#1C1C1C]" />
-                <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Profile</div>
-              </div>
-              <div>
-                {[
-                  ["身高", selected.profile?.height],
-                  ["生日", selected.profile?.birthday],
-                  ["血型", selected.profile?.blood],
-                  ["爱好", selected.profile?.hobby],
-                  ["特长", selected.profile?.skill],
-                  ...(!selected.isActive && selected.graduationDate
-                    ? [["毕业", isoDate(selected.graduationDate) + ((selected.graduationSongTitle || "").trim() && (selected.graduationSongTitle || "").trim() !== "无" ? " · " + selected.graduationSongTitle : "")]]
-                    : []),
-                ].filter(([, v]) => v).map(([label, value], i, arr) => (
-                  <div
-                    key={label}
-                    className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}
-                  >
-                    <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
-                    <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
-                  </div>
-                ))}
-                {selected.profile?.catchphrase ? (
-                  <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0]">
-                    <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
-                    <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em] leading-relaxed">{selected.profile.catchphrase}</span>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-
-            {/* ELECTION */}
-            {(selected.electionRanks || []).length ? (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#1C1C1C]" />
-                  <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Election</div>
-                </div>
-                <div>
-                  {(selected.electionRanks || []).map((r, idx) => {
-                    const b = getElectionBadge(r.rank, r.edition);
-                    return (
-                      <div
-                        key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
-                        className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
-                      >
-                        <span className="text-[13px] text-[#6B6B6B] tracking-[0.04em] shrink-0">{r.edition || "—"}</span>
-                        <span className={"inline-flex items-center border px-2 py-0.5 text-[10px] font-medium shrink-0 " + b.className}>{b.text}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : null}
-
-            {/* FAVORITES */}
-            {(selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length) || selected.favoriteSong ? (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-5 h-px bg-[#1C1C1C]" />
-                  <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Favorites</div>
-                </div>
-                <div>
-                  {selected.generation && (String(selected.generation).startsWith("5") || String(selected.generation).startsWith("6") || String(selected.generation).startsWith("7")) && Array.isArray(selected.admireSenior) && selected.admireSenior.length ? (
-                    <div className="flex items-baseline gap-6 py-2.5 border-t border-b border-[#E0E0E0]">
-                      <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">前辈</span>
-                      <div className="flex flex-wrap gap-x-3 gap-y-1">
-                        {selected.admireSenior.map((id) => {
-                          const mm = (data.members || []).find((x) => x.id === id);
-                          return mm ? <span key={id} className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{mm.name}</span> : null;
-                        })}
-                      </div>
-                    </div>
-                  ) : null}
-                  {selected.favoriteSong ? (() => {
-                    const song = selected.favoriteSong;
-                    const single = (data.singles || []).find((sg) =>
-                      (sg.tracks || []).some((t) => (typeof t === "string" ? t : t?.title) === song)
-                    );
-                    const sp = single ? splitSingleTitle(single.title) : null;
-                    const singleName = sp?.prefix ? `${sp.prefix} · ${sp.name}` : single?.title;
-                    return (
-                      <div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (!(selected.admireSenior?.length) ? "border-t border-[#E0E0E0]" : "")}>
-                        <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words">{song}</div>
-                          {singleName ? <div className="text-xs text-[#6B6B6B] mt-0.5 tracking-[0.04em] break-words">收录于 {singleName}</div> : null}
-                        </div>
-                      </div>
-                    );
-                  })() : null}
-                </div>
-              </div>
-            ) : null}
-
-            {/* DISCOGRAPHY */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-5 h-px bg-[#1C1C1C]" />
-                <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Discography</div>
-              </div>
-              {(() => {
-                const raw = selected?.selectionHistory || {};
-                const gradLast = (!selected?.isActive && selected?.graduationDate)
-                  ? getLastSingleBeforeGrad(selected, data?.singles || [])
-                  : { lastSingleId: null, lastRelease: "" };
-                const lastSingleIdBeforeGrad = gradLast.lastSingleId;
-                const entries = Object.entries(raw).map(([k, v]) => {
-                  if (v && typeof v === "object") return { k, label: v.label ?? k, value: v.value ?? "" };
-                  return { k, label: k, value: String(v ?? "") };
-                });
-                if (entries.length === 0) return <div className="text-sm text-[#6B6B6B]">—</div>;
-
-                return (
-                  <div>
-                    {entries.map(({ k, label, value }, rowIdx) => {
-                      const singleObj = (data?.singles || []).find((s) => s.id === k);
-                      let title = (singleObj?.title ?? label ?? "").toString();
-                      const parts = title.split("·").map((s) => s.trim()).filter(Boolean);
-                      if (parts.length >= 3) title = parts.slice(parts.length - 2).join(" · ");
-                      const { prefix, name } = splitSingleTitle(title);
-
-                      const pickType = value.includes("加入前") ? "加入前"
-                        : value.includes("A面") ? "A面选拔"
-                        : value.includes("B面") ? "B面"
-                        : value.includes("落选") || value.includes("未入选") ? "落选"
-                        : "";
-                      const typeTagClass = pickType === "A面选拔" ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                        : pickType === "B面" ? "border-sky-200 bg-sky-50 text-sky-800"
-                        : pickType === "加入前" ? "border-violet-200 bg-violet-50 text-violet-800"
-                        : "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]";
-
-                      const rowM = value.match(/第(\d+)排/);
-                      const rowNum = rowM ? Number(rowM[1]) : null;
-                      const role = value.includes("center") ? "center"
-                        : value.includes("护法") || value.includes("guardian") ? "guardian"
-                        : null;
-
-                      const top2Count = rowNum && rowNum <= 2
-                        ? (data?.members || []).reduce((acc, mm) => {
-                            const vv = mm?.selectionHistory?.[k];
-                            const s = vv && typeof vv === "object" ? String(vv.value ?? "") : String(vv ?? "");
-                            const rm = s.match(/第(\d+)排/);
-                            const rn = rm ? Number(rm[1]) : null;
-                            return rn && rn <= 2 ? acc + 1 : acc;
-                          }, 0)
-                        : 0;
-
-                      const rowTagText = role === "center" || role === "guardian" ? ""
-                        : rowNum && rowNum <= 2 && top2Count ? `${top2Count}福神` : "";
-                      const isFukujinRowTag = typeof rowTagText === "string" && /福神$/.test(rowTagText);
-
-                      return (
-                        <div
-                          key={k}
-                          className={"flex items-center justify-between gap-2 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
-                        >
-                          <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-14">
-                            {prefix || ""}
-                          </div>
-                          <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
-                          <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
-                            {!selected?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
-                              <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
-                            ) : null}
-                            {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
-                              <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
-                            ) : null}
-                            {pickType ? (
-                              <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
-                            ) : null}
-                            {rowTagText ? (
-                              <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
-                            ) : null}
-                            {role === "center" ? (
-                              <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
-                            ) : role === "guardian" ? (
-                              <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
-                            ) : null}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })()}
-            </div>
-
-          </div>
-        ) : null}
+          <MemberDetailContent member={selected} data={data} />
         </ScrollDialogContent>
       </Dialog>
 
@@ -3548,6 +3775,18 @@ export default function XJP56App() {
             transition={{ duration: 0.25 }}
           >
             <BlogPage data={data} setData={setData} admin={admin} />
+          </motion.div>
+        ) : null}
+
+        {page === "election" ? (
+          <motion.div
+            key="election"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.25 }}
+          >
+            <ElectionPage data={data} />
           </motion.div>
         ) : null}
       </AnimatePresence>
