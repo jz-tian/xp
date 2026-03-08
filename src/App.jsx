@@ -1331,7 +1331,7 @@ function ElectionPage({ data }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: i * 0.04 }}
                     onClick={() => setSelectedMember(member)}
-                    className="flex items-center gap-4 sm:gap-6 py-3.5 border-b border-[#E0E0E0] first:border-t first:border-[#E0E0E0] cursor-pointer hover:bg-[#F7F7F7] transition-colors px-2 -mx-2"
+                    className="flex items-center gap-4 sm:gap-6 py-3.5 border-b border-[#E0E0E0] last:border-b-0 cursor-pointer hover:bg-[#F7F7F7] transition-colors px-2 -mx-2"
                   >
                     {/* 排名 */}
                     <div className="w-8 shrink-0 text-center">
@@ -1558,14 +1558,14 @@ function MemberDetailContent({ member, data }) {
           ].filter(([, v]) => v).map(([label, value], i) => (
             <div
               key={label}
-              className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}
+              className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
             >
               <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
               <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
             </div>
           ))}
           {member.profile?.catchphrase ? (
-            <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0]">
+            <div className="flex items-baseline gap-6 py-2.5">
               <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
               <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em] leading-relaxed">{member.profile.catchphrase}</span>
             </div>
@@ -1586,7 +1586,7 @@ function MemberDetailContent({ member, data }) {
               return (
                 <div
                   key={`${r.edition || ""}-${r.rank || ""}-${idx}`}
-                  className={"flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] " + (idx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                  className="flex items-center justify-between gap-3 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
                 >
                   <span className="text-[13px] text-[#6B6B6B] tracking-[0.04em] shrink-0">{r.edition || "—"}</span>
                   <span className={"inline-flex items-center border px-2 py-0.5 text-[10px] font-medium shrink-0 " + b.className}>{b.text}</span>
@@ -1606,7 +1606,7 @@ function MemberDetailContent({ member, data }) {
           </div>
           <div>
             {member.generation && (String(member.generation).startsWith("5") || String(member.generation).startsWith("6") || String(member.generation).startsWith("7")) && Array.isArray(member.admireSenior) && member.admireSenior.length ? (
-              <div className="flex items-baseline gap-6 py-2.5 border-t border-b border-[#E0E0E0]">
+              <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                 <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">前辈</span>
                 <div className="flex flex-wrap gap-x-3 gap-y-1">
                   {member.admireSenior.map((id) => {
@@ -1624,7 +1624,7 @@ function MemberDetailContent({ member, data }) {
               const sp = single ? splitSingleTitle(single.title) : null;
               const singleName = sp?.prefix ? `${sp.prefix} · ${sp.name}` : single?.title;
               return (
-                <div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (!(member.admireSenior?.length) ? "border-t border-[#E0E0E0]" : "")}>
+                <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                   <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words">{song}</div>
@@ -1685,8 +1685,8 @@ function MemberDetailContent({ member, data }) {
           return (
             <div>
               {/* 统计摘要 */}
-              {selectionCount > 0 && (
-                <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 py-3 mb-2 border-t border-b border-[#E0E0E0]">
+              {(
+                <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 py-3 mb-2">
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-[10px] tracking-[0.15em] text-[#AAAAAA] uppercase">选拔</span>
                     <span className="text-base font-light text-[#1C1C1C] tabular-nums leading-none">{selectionCount}</span>
@@ -1747,9 +1747,9 @@ function MemberDetailContent({ member, data }) {
                 return (
                   <div
                     key={k}
-                    className={"flex items-center justify-between gap-2 py-2.5 border-b border-[#E0E0E0] " + (rowIdx === 0 ? "border-t border-[#E0E0E0]" : "")}
+                    className="flex items-start justify-between gap-2 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
                   >
-                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-14">{prefix || ""}</div>
+                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-10">{prefix || ""}</div>
                     <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
                     <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
                       {!member?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
@@ -2966,7 +2966,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
             {tracks.map((t) => (
               <div
                 key={t.no}
-                className="flex items-center gap-4 py-3 border-b border-[#E0E0E0] first:border-t first:border-[#E0E0E0]"
+                className="flex items-center gap-4 py-3 border-b border-[#E0E0E0] last:border-b-0"
               >
                 {/* Play button or track number */}
                 {t.audio ? (
