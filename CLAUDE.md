@@ -58,12 +58,14 @@ Current section labels: TRACKLIST, INTRODUCTION, FORMATION, PROFILE, ELECTION, F
 
 ### Row List Pattern (used inside sections)
 ```jsx
-<div className={"flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] " + (i === 0 ? "border-t border-[#E0E0E0]" : "")}>
+<div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
   <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
-  <span className="text-sm text-[#1C1C1C]">{value}</span>
+  <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
 </div>
 ```
-No border boxes — everything uses `border-b` rows and `—— SECTION` headers.
+- No top border on first row, no bottom border on last row (`last:border-b-0`)
+- No border boxes — everything uses `border-b` rows and `—— SECTION` headers
+- Value text: `text-[13px]` (not `text-sm`) with `tracking-[0.04em]`
 
 ### Cards / Grids
 - Member grid: `grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8`, no card border
@@ -141,10 +143,33 @@ Member detail modal: `max-w-4xl`
 ### Blog Page
 - Left list + right detail layout (desktop), stacked (mobile)
 
+### Election Page (`key: "election"`, tab label: 总选举 / ELECTION)
+- Between 单曲 and 部落格 in nav
+- Edition picker pills → animated list of ranked members
+- 圈外 threshold: editions 1–3 hide rank ≥ 20, edition 4+ hide rank ≥ 22
+- Clicking a row opens `MemberDetailContent` in a `ScrollDialogContent`
+- `ELECTION_SUBTITLES` constant maps edition → subtitle string
+- `ElectionPage` component uses `AnimatePresence mode="wait"` for edition switch + staggered `motion.div` rows
+
+### MemberDetailContent (reusable component)
+- Extracted from MembersPage, used by both MembersPage and ElectionPage
+- Props: `{ member, data }`
+- Contains: name/romaji header, portrait, PROFILE rows, ELECTION, FAVORITES, DISCOGRAPHY
+- DISCOGRAPHY stats summary: 选拔 count (always shown, even if 0), 福神, 护法, Center (fractional + solo raw count in parens), centered with `justify-center`, Center has `bg-amber-50` highlight
+- Graduated members: no grayscale filter, no 卒 badge in ElectionPage context
+
+### Hero Carousel
+- 5 slides: latest single first + 4 random others (chosen once per mount)
+- Background: 3-layer effect — heavily blurred base fill + left/right accent copies with `mix-blend-mode: screen` + radial vignette
+- Foreground: crisp cover at native aspect ratio (`h-full w-auto object-contain`)
+- Arrow navigation + dot indicators
+
 ## Important Helper Functions (do not modify logic)
 
 - `splitSingleTitle(title)` — splits `"3rd Single · Robot Girlfriend"` → `{ prefix, name }`
 - `getElectionBadge(rank, edition)` — returns badge `{ text, className }`. From 4th edition onwards, rank 22+ = 圈外 (was 20+)
+- `parseRankNum(raw)` — converts rank string to sortable number (圈外=9999, 加入前=Infinity)
+- `parseEditionNum(edition)` — converts edition string ("第4届") to number for sorting
 - `computeMemberLineupHistory(memberId, singles)` — selection history per member
 - `buildRowMeta(rows)` — computes row/slot metadata for formation display
 - `generationBadgeClass(gen)` / `generationBadgeStyle(gen)` — generation badge styling
@@ -183,7 +208,7 @@ data = {
 - [ ] Badge areas: `shrink-0 flex-wrap` so multiple badges stack rather than overflow
 - [ ] Long text (song titles, single names): use `break-words` so Chinese/English long strings wrap
 - [ ] Padding in modals: `p-4 sm:p-6` — narrower on mobile to preserve content width
-- [ ] Fixed-width elements (label columns): use `w-10` or `w-14` max — avoid `w-20`+ inside modals on mobile
+- [ ] Fixed-width elements (label columns): use `w-10` max inside modals on mobile (discography prefix is `w-10` to ensure consistent wrapping of "Xth Single")
 - [ ] Page containers: always `px-4` minimum horizontal padding, never flush to screen edge
 
 ### iOS Safari quirks

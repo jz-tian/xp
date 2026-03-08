@@ -153,6 +153,17 @@ const ELECTION_SUBTITLES = {
   "第4届": "百家争鸣之战",
 };
 
+const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲"];
+
+function singleKindBadge(kind) {
+  if (!kind || kind === "常规单曲") return null;
+  if (kind === "投票单曲") return { text: "投票单曲", className: "border-sky-200 bg-sky-50 text-sky-800" };
+  if (kind === "总选单曲") return { text: "总选单曲", className: "border-orange-200 bg-orange-50 text-orange-800" };
+  if (kind === "猜拳单曲") return { text: "猜拳单曲", className: "border-violet-200 bg-violet-50 text-violet-800" };
+  if (kind === "企划单曲") return { text: "企划单曲", className: "border-teal-200 bg-teal-50 text-teal-700" };
+  return { text: kind, className: "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]" };
+}
+
 const splitSingleTitle = (fullTitle) => {
   // Expect formats like: "1st Single · Neon Bloom"
   const t = (fullTitle ?? "").toString().trim();
@@ -940,6 +951,7 @@ function AppShell({ children }) {
 }
 
 function TopBar({ page, setPage, admin, setAdmin, onReset }) {
+  const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
   const tabs = [
     { key: "home", cn: "主页", en: "HOME" },
     { key: "members", cn: "成员", en: "MEMBER" },
@@ -988,7 +1000,7 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
 
         {/* Right controls */}
         <div className="flex items-center gap-2">
-          <DropdownMenu>
+          {isLocalhost && <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-1.5 text-xs border border-[#E0E0E0] px-3 py-1.5 hover:bg-[#F0F0F0] transition-colors">
                 <Settings className="h-3.5 w-3.5 text-[#6B6B6B]" />
@@ -1012,7 +1024,7 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
                 重置为示例数据
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu>}
 
           {/* Mobile hamburger */}
           <Sheet>
@@ -1803,25 +1815,32 @@ function MemberDetailContent({ member, data }) {
                     className="flex items-start justify-between gap-2 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
                   >
                     <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-10">{prefix || ""}</div>
-                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
+                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em] md:pl-6">{name}</div>
                     <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
-                      {!member?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
-                        <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
-                      ) : null}
-                      {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
-                        <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
-                      ) : null}
-                      {pickType ? (
-                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
-                      ) : null}
-                      {rowTagText ? (
-                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
-                      ) : null}
-                      {role === "center" ? (
-                        <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
-                      ) : role === "guardian" ? (
-                        <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
-                      ) : null}
+                      {pickType === "加入前" ? (
+                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>加入前</span>
+                      ) : <>
+                        {!member?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
+                          <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
+                        ) : null}
+                        {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
+                          <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
+                        ) : null}
+                        {(() => { const kb = singleObj ? singleKindBadge(singleObj.singleKind) : null; return kb ? (
+                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + kb.className}>{kb.text}</span>
+                        ) : null; })()}
+                        {pickType ? (
+                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
+                        ) : null}
+                        {rowTagText ? (
+                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
+                        ) : null}
+                        {role === "center" ? (
+                          <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
+                        ) : role === "guardian" ? (
+                          <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
+                        ) : null}
+                      </>}
                     </div>
                   </div>
                 );
@@ -2527,6 +2546,7 @@ function SinglesPage({ data, setData, admin }) {
         release: "",
         cover: "",
         tags: [],
+        singleKind: "常规单曲",
         tracks: [
           { no: 1, title: "(A-side)", isAside: true, audio: "" },
           { no: 2, title: "", isAside: false, audio: "" },
@@ -2707,6 +2727,31 @@ function SinglesPage({ data, setData, admin }) {
                   onChange={(v) => setEditing((p) => ({ ...p, release: v }))}
                   placeholder="YYYY-MM-DD"
                 />
+              </div>
+
+              {/* 单曲类型选择器 */}
+              <div>
+                <div className="text-[10px] tracking-[0.15em] text-[#6B6B6B] uppercase mb-2">单曲类型</div>
+                <div className="flex flex-wrap gap-2">
+                  {SINGLE_KIND_OPTIONS.map((opt) => {
+                    const active = (editing.singleKind || "常规单曲") === opt;
+                    return (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setEditing((p) => ({ ...p, singleKind: opt }))}
+                        className={
+                          "text-[11px] tracking-wider px-3 py-1 border transition-colors " +
+                          (active
+                            ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                            : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                        }
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               <ImageUploader
@@ -2971,6 +3016,9 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
             />
           </button>
           <div className="flex flex-wrap justify-center gap-2">
+            {(() => { const kb = singleKindBadge(single.singleKind); return kb ? (
+              <span className={"text-[10px] tracking-wider border px-2 py-0.5 " + kb.className}>{kb.text}</span>
+            ) : null; })()}
             <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
               选拔 {single.asideLineup?.selectionCount || 0}人
             </span>
