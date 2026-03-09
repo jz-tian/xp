@@ -3718,7 +3718,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
       </div>
 
       <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
-        <DialogContent className="max-w-5xl border-[#E0E0E0] rounded-none bg-white text-[#1C1C1C]">
+        <ScrollDialogContent className="max-w-4xl">
           <DialogHeader>
             <DialogTitle>选择成员</DialogTitle>
             <DialogDescription className="text-[#6B6B6B]">
@@ -3726,7 +3726,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="mb-3 flex flex-wrap items-center gap-2">
+          <div className="mb-4 flex flex-wrap items-center gap-2">
             <div className="text-xs text-[#6B6B6B] mr-1">位置类型：</div>
             {[
               { val: null, label: "普通" },
@@ -3749,7 +3749,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
             ))}
           </div>
 
-          <div className="grid max-h-[70vh] grid-cols-3 gap-4 overflow-auto p-1 sm:grid-cols-4 md:grid-cols-5">
+          <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
             {members.filter((m) => m.isActive).map((m) => (
               <button
                 key={m.id}
@@ -3758,23 +3758,21 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                 className={"overflow-hidden border border-[#E0E0E0] bg-white hover:border-[#1C1C1C] transition-colors flex flex-col " + (used.has(m.id) ? "opacity-50" : "")}
                 title={m.name}
               >
-                <div className="aspect-[3/4] w-full bg-[#F0F0F0] overflow-hidden">
+                <div className="w-full bg-[#F0F0F0] overflow-hidden">
                   <img
                     src={resolveMediaUrl(m.avatar)}
                     alt={m.name}
-                    className={"h-full w-full object-contain " + (!m.isActive ? "grayscale" : "")}
+                    className={"aspect-[3/4] w-full object-contain " + (!m.isActive ? "grayscale" : "")}
                   />
                 </div>
                 <div className="px-2 py-2">
-                  <div className="text-xs font-medium text-[#1C1C1C]">
-                    {m.name}{!m.isActive ? "（卒）" : ""}
-                  </div>
+                  <div className="text-xs font-medium text-[#1C1C1C]">{m.name}</div>
                   <div className="text-[10px] text-[#6B6B6B]">{m.romaji || ""}</div>
                 </div>
               </button>
             ))}
           </div>
-        </DialogContent>
+        </ScrollDialogContent>
       </Dialog>
     </div>
   );
