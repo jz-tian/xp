@@ -1810,33 +1810,37 @@ function MemberDetailContent({ member, data }) {
                 const rowTagText = role === "center" || role === "guardian" ? ""
                   : rowNum && rowNum <= 2 && top2Count ? `${top2Count}福神` : "";
                 const isFukujinRowTag = typeof rowTagText === "string" && /福神$/.test(rowTagText);
+                const tagNodes = pickType === "加入前" ? (
+                  <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>加入前</span>
+                ) : <>
+                  {pickType === "落选" ? (
+                    <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>落选</span>
+                  ) : null}
+                  {pickType === "A面选拔" && !rowTagText && !role ? (
+                    <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>A面选拔</span>
+                  ) : null}
+                  {rowTagText ? (
+                    <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
+                  ) : null}
+                  {role === "center" ? (
+                    <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
+                  ) : role === "guardian" ? (
+                    <span className="inline-flex items-center border border-indigo-200 bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">护法</span>
+                  ) : null}
+                </>;
                 return (
-                  <div
-                    key={k}
-                    className="flex items-center justify-between gap-2 md:gap-5 py-2.5 md:py-3.5 border-b border-[#E0E0E0] last:border-b-0"
-                  >
-                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-10 md:w-20">{prefix || ""}</div>
-                    <div className="text-[10px] tracking-[0.08em] text-[#AAAAAA] shrink-0 hidden sm:block w-16">{singleObj?.singleKind || "常规单曲"}</div>
-                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
-                    <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[40%]">
-                      {pickType === "加入前" ? (
-                        <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>加入前</span>
-                      ) : <>
-                        {pickType === "落选" ? (
-                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>落选</span>
-                        ) : null}
-                        {pickType === "A面选拔" && !rowTagText && !role ? (
-                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>A面选拔</span>
-                        ) : null}
-                        {rowTagText ? (
-                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
-                        ) : null}
-                        {role === "center" ? (
-                          <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
-                        ) : role === "guardian" ? (
-                          <span className="inline-flex items-center border border-indigo-200 bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">护法</span>
-                        ) : null}
-                      </>}
+                  <div key={k} className="py-2.5 md:py-3.5 border-b border-[#E0E0E0] last:border-b-0">
+                    {/* 手机：两行布局 */}
+                    <div className="flex md:hidden items-baseline gap-1.5 mb-1">
+                      <span className="text-[10px] tracking-wider text-[#6B6B6B]">{prefix || ""}</span>
+                      <span className="text-[10px] tracking-[0.08em] text-[#AAAAAA]">{singleObj?.singleKind || "常规单曲"}</span>
+                    </div>
+                    <div className="flex items-center gap-2 md:gap-5">
+                      {/* 桌面：编号 + 类型列 */}
+                      <div className="hidden md:block text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-20">{prefix || ""}</div>
+                      <div className="hidden md:block text-[10px] tracking-[0.08em] text-[#AAAAAA] shrink-0 w-16">{singleObj?.singleKind || "常规单曲"}</div>
+                      <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
+                      <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end">{tagNodes}</div>
                     </div>
                   </div>
                 );
