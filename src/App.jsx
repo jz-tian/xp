@@ -3749,7 +3749,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
             ))}
           </div>
 
-          <div className="grid max-h-[70vh] grid-cols-2 gap-3 overflow-auto p-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          <div className="grid max-h-[70vh] grid-cols-3 gap-4 overflow-auto p-1 sm:grid-cols-4 md:grid-cols-5">
             {members.filter((m) => m.isActive).map((m) => (
               <button
                 key={m.id}
