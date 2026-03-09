@@ -153,7 +153,7 @@ const ELECTION_SUBTITLES = {
   "第4届": "百家争鸣之战",
 };
 
-const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲"];
+const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲", "纪念单曲"];
 
 function singleKindBadge(kind) {
   if (!kind || kind === "常规单曲") return null;
@@ -161,6 +161,7 @@ function singleKindBadge(kind) {
   if (kind === "总选单曲") return { text: "总选单曲", className: "border-orange-200 bg-orange-50 text-orange-800" };
   if (kind === "猜拳单曲") return { text: "猜拳单曲", className: "border-violet-200 bg-violet-50 text-violet-800" };
   if (kind === "企划单曲") return { text: "企划单曲", className: "border-teal-200 bg-teal-50 text-teal-700" };
+  if (kind === "纪念单曲") return { text: "纪念单曲", className: "border-amber-200 bg-amber-50 text-amber-800" };
   return { text: kind, className: "border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B]" };
 }
 
@@ -1812,25 +1813,20 @@ function MemberDetailContent({ member, data }) {
                 return (
                   <div
                     key={k}
-                    className="flex items-start justify-between gap-2 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
+                    className="flex items-center justify-between gap-2 md:gap-5 py-2.5 md:py-3.5 border-b border-[#E0E0E0] last:border-b-0"
                   >
-                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-10">{prefix || ""}</div>
-                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em] md:pl-6">{name}</div>
-                    <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[45%]">
+                    <div className="text-[11px] tracking-wider text-[#6B6B6B] shrink-0 w-10 md:w-20">{prefix || ""}</div>
+                    <div className="text-[10px] tracking-[0.08em] text-[#AAAAAA] shrink-0 hidden sm:block w-16">{singleObj?.singleKind || "常规单曲"}</div>
+                    <div className="text-[13px] text-[#1C1C1C] flex-1 min-w-0 truncate tracking-[0.04em]">{name}</div>
+                    <div className="flex items-center gap-1 shrink-0 flex-wrap justify-end max-w-[40%]">
                       {pickType === "加入前" ? (
                         <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>加入前</span>
                       ) : <>
-                        {!member?.isActive && lastSingleIdBeforeGrad && k === lastSingleIdBeforeGrad ? (
-                          <span className="inline-flex items-center border border-fuchsia-200 bg-fuchsia-50 px-1.5 py-0.5 text-[10px] text-fuchsia-800">毕业单</span>
+                        {pickType === "落选" ? (
+                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>落选</span>
                         ) : null}
-                        {singleObj && Array.isArray(singleObj.tags) && singleObj.tags.includes("纪念单") ? (
-                          <span className="inline-flex items-center border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-800">纪念单</span>
-                        ) : null}
-                        {(() => { const kb = singleObj ? singleKindBadge(singleObj.singleKind) : null; return kb ? (
-                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + kb.className}>{kb.text}</span>
-                        ) : null; })()}
-                        {pickType ? (
-                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>{pickType}</span>
+                        {pickType === "A面选拔" && !rowTagText && !role ? (
+                          <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + typeTagClass}>A面选拔</span>
                         ) : null}
                         {rowTagText ? (
                           <span className={"inline-flex items-center border px-1.5 py-0.5 text-[10px] " + (isFukujinRowTag ? "border-rose-200 bg-rose-50 text-rose-700" : "border-[#E0E0E0] text-[#6B6B6B]")}>{rowTagText}</span>
@@ -1838,7 +1834,7 @@ function MemberDetailContent({ member, data }) {
                         {role === "center" ? (
                           <span className="inline-flex items-center border border-amber-300 bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-900">CENTER</span>
                         ) : role === "guardian" ? (
-                          <span className="inline-flex items-center border border-[#E0E0E0] bg-[#F0F0F0] px-1.5 py-0.5 text-[10px] font-medium text-[#1C1C1C]">护法</span>
+                          <span className="inline-flex items-center border border-indigo-200 bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">护法</span>
                         ) : null}
                       </>}
                     </div>
@@ -2458,6 +2454,7 @@ function SinglesPage({ data, setData, admin }) {
 
   const [selectedId, setSelectedId] = useState(null);
   const selected = data.singles.find((s) => s.id === selectedId) || null;
+  const [kindFilter, setKindFilter] = useState("全部");
 
   // ✅ 手机端：点击单曲后自动滚动到详情区域（不影响电脑版）
   const detailAnchorRef = useRef(null);
@@ -2578,31 +2575,7 @@ function SinglesPage({ data, setData, admin }) {
 
   const saveSingle = () => {
     setData((prev) => {
-      // 纪念单：如果选拔里包含"以毕业身份参选"的成员，则自动打 tag「纪念单」
-      const computeMemorialTag = (single, allMembers) => {
-        const sRelease = isoDate(single?.release);
-        const tags = Array.isArray(single?.tags) ? [...single.tags] : [];
-        const filtered = tags.filter((t) => String(t || "").trim() && String(t).trim() !== "纪念单");
-
-        const slots = Array.isArray(single?.asideLineup?.slots) ? single.asideLineup.slots : [];
-        const membersById = new Map((allMembers || []).map((m) => [m.id, m]));
-        const hasOG = slots.some((mid) => {
-          if (!mid) return false;
-          const m = membersById.get(mid);
-          if (!m || m?.isActive) return false;
-          const gd = isoDate(m?.graduationDate);
-          if (!sRelease) return true;
-          if (!gd) return true;
-          return sRelease > gd;
-        });
-
-        return {
-          ...single,
-          tags: hasOG ? [...filtered, "纪念单"] : filtered,
-        };
-      };
-
-      const nextEditing = computeMemorialTag(editing, prev.members);
+      const nextEditing = editing;
       const exists = prev.singles.some((x) => x.id === editing.id);
       const nextSingles = exists
         ? prev.singles.map((x) =>
@@ -2641,13 +2614,44 @@ function SinglesPage({ data, setData, admin }) {
         }
       />
 
+      {/* Kind filter */}
+      {(() => {
+        const usedKinds = [...new Set(data.singles.map((s) => s.singleKind || "常规单曲"))];
+        const options = ["全部", ...SINGLE_KIND_OPTIONS.filter((k) => usedKinds.includes(k))];
+        if (options.length <= 2) return null;
+        return (
+          <div className="flex flex-wrap gap-2 mb-8">
+            {options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => setKindFilter(opt)}
+                className={
+                  "text-[11px] tracking-wider px-3 py-1 border transition-colors " +
+                  (kindFilter === opt
+                    ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                    : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                }
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        );
+      })()}
+
       {/* Discography grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
-        {data.singles.map((s) => {
+        <AnimatePresence mode="popLayout">
+        {data.singles.filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
           const { prefix, name } = splitSingleTitle(s.title);
           return (
-            <div
+            <motion.div
               key={s.id}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.28, delay: idx * 0.035, ease: [0.25, 0.1, 0.25, 1] }}
               className="cursor-pointer group"
               onClick={() => setSelectedId(s.id)}
             >
@@ -2687,9 +2691,10 @@ function SinglesPage({ data, setData, admin }) {
                   {s.release ? s.release.replace(/-/g, ".") : "—"}
                 </div>
               </div>
-            </div>
+            </motion.div>
           );
         })}
+        </AnimatePresence>
       </div>
 
       {/* Single detail modal */}
@@ -3025,9 +3030,6 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
             <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
               {single.asideLineup?.rows?.length || 0} 排
             </span>
-            {Array.isArray(single.tags) && single.tags.includes("纪念单") ? (
-              <span className="text-[10px] tracking-wider border border-amber-200 bg-amber-50 text-amber-800 px-2 py-0.5">纪念单</span>
-            ) : null}
             {hasAnyAudio ? (
               <span className="text-[10px] tracking-wider border border-emerald-200 bg-emerald-50 text-emerald-800 px-2 py-0.5">♪ 音源</span>
             ) : null}
