@@ -1700,6 +1700,71 @@ function AudioUploader({ label, value, onChange, hint }) {
 }
 
 
+function OfficialPhotosGalleryDialog({ open, onClose, photos, displayAvatar, memberName }) {
+  const safePhotos = Array.isArray(photos) && photos.length > 0
+    ? photos
+    : displayAvatar ? [{ url: displayAvatar, version: 1 }] : [];
+
+  const count = safePhotos.length;
+
+  const gridClass = count === 1
+    ? "flex justify-center"
+    : count === 2
+    ? "flex justify-center gap-6 sm:gap-10"
+    : "grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3";
+
+  return (
+    <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
+      <ScrollDialogContent className="max-w-2xl">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-5 h-px bg-[#1C1C1C]" />
+          <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Official Photos</div>
+        </div>
+
+        {safePhotos.length === 0 ? (
+          <div className="text-sm text-[#6B6B6B] text-center py-8">暂无公式照</div>
+        ) : (
+          <div className={gridClass}>
+            {safePhotos.map((photo) => {
+              const versionLabel = `第${photo.version}版`;
+              const isDisplay = photo.url === displayAvatar;
+              return (
+                <div
+                  key={photo.version}
+                  className={
+                    "flex flex-col items-center gap-2 " +
+                    (count === 1 ? "max-w-[200px] sm:max-w-[240px] w-full" : "w-full")
+                  }
+                >
+                  <div className="overflow-hidden bg-[#F0F0F0] w-full">
+                    <img
+                      src={resolveMediaUrl(photo.url)}
+                      alt={versionLabel}
+                      className="aspect-[3/4] w-full object-cover object-top"
+                    />
+                  </div>
+                  <div className="text-center w-full">
+                    <div className="text-[10px] tracking-[0.25em] text-[#6B6B6B] uppercase">{versionLabel}</div>
+                    {isDisplay && (
+                      <div className="mt-1 w-full h-px bg-[#1C1C1C]" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {safePhotos.length > 1 && (
+          <div className="mt-6 text-[10px] text-[#AAAAAA] tracking-wider text-center">
+            下划线标注为当前展示版
+          </div>
+        )}
+      </ScrollDialogContent>
+    </Dialog>
+  );
+}
+
 // DialogContent wrapper: fixed height + inner scroll (prevents dialogs being cut off)
 function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
@@ -1715,6 +1780,9 @@ function ScrollDialogContent({ className = "", children, ...props }) {
 
 // ---- 成员详情内容（MembersPage 和 ElectionPage 共用）----
 function MemberDetailContent({ member, data }) {
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const officialPhotos = Array.isArray(member?.officialPhotos) ? member.officialPhotos : [];
+  const hasMultiplePhotos = officialPhotos.length > 1;
   if (!member) return null;
   return (
     <div className="grid gap-10">
@@ -1733,15 +1801,44 @@ function MemberDetailContent({ member, data }) {
       </div>
 
       {/* Centered portrait photo */}
-      <div className="flex justify-center">
-        <div className={"overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px]" + (!member.isActive ? " grayscale opacity-80" : "")}>
+      <div className="flex flex-col items-center gap-2">
+        <button
+          type="button"
+          className={
+            "overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px] " +
+            (hasMultiplePhotos ? "cursor-pointer hover:opacity-90 transition-opacity" : "cursor-default") +
+            (!member.isActive ? " grayscale opacity-80" : "")
+          }
+          onClick={() => { if (hasMultiplePhotos) setGalleryOpen(true); }}
+          title={hasMultiplePhotos ? "点击查看全部公式照" : undefined}
+        >
           <img
             src={resolveMediaUrl(member.avatar)}
             alt={member.name}
             className="aspect-[3/4] w-full object-cover object-top"
           />
-        </div>
+        </button>
+        {hasMultiplePhotos && (
+          <button
+            type="button"
+            onClick={() => setGalleryOpen(true)}
+            className="text-[10px] tracking-[0.2em] text-[#AAAAAA] hover:text-[#1C1C1C] transition-colors uppercase"
+          >
+            查看全部公式照 ({officialPhotos.length})
+          </button>
+        )}
+        {officialPhotos.length === 1 && (
+          <div className="text-[10px] tracking-[0.15em] text-[#AAAAAA]">第1版</div>
+        )}
       </div>
+
+      <OfficialPhotosGalleryDialog
+        open={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+        photos={officialPhotos}
+        displayAvatar={member.avatar}
+        memberName={member.name}
+      />
 
       {/* PROFILE */}
       <div>
