@@ -1572,14 +1572,18 @@ function ImageUploader({ label, value, onChange, hint }) {
 
 function OfficialPhotosEditor({ photos, displayAvatar, onChangePhotos, onChangeAvatar }) {
   const safePhotos = Array.isArray(photos) ? photos : [];
+  // 若 officialPhotos 为空但 avatar 存在，把 avatar 视为隐式第一版
+  const hasImplicitV1 = safePhotos.length === 0 && !!displayAvatar;
 
   const handleUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = await uploadImage(file);
-    const nextVersion = safePhotos.length > 0 ? Math.max(...safePhotos.map((p) => p.version || 0)) + 1 : 1;
+    // 若 officialPhotos 为空，先把现有 avatar 迁入为第一版，新图为第二版
+    const base = hasImplicitV1 ? [{ url: displayAvatar, version: 1 }] : safePhotos;
+    const nextVersion = base.length > 0 ? Math.max(...base.map((p) => p.version || 0)) + 1 : 1;
     const newPhoto = { url, version: nextVersion };
-    const next = [...safePhotos, newPhoto];
+    const next = [...base, newPhoto];
     onChangePhotos(next);
     onChangeAvatar(url);
     e.target.value = "";
@@ -1605,9 +1609,10 @@ function OfficialPhotosEditor({ photos, displayAvatar, onChangePhotos, onChangeA
         <div className="text-xs text-[#6B6B6B]">最新上传的默认展示</div>
       </div>
 
-      {safePhotos.length > 0 && (
+      {/* 显示照片列表：officialPhotos 有内容时用它，否则把 avatar 显示为第一版 */}
+      {(safePhotos.length > 0 || hasImplicitV1) && (
         <div className="flex flex-wrap gap-3">
-          {safePhotos.map((photo) => {
+          {(safePhotos.length > 0 ? safePhotos : [{ url: displayAvatar, version: 1, _implicit: true }]).map((photo) => {
             const isDisplay = photo.url === displayAvatar || safePhotos.length === 1;
             const versionLabel = `第${photo.version}版`;
             return (
@@ -1631,24 +1636,27 @@ function OfficialPhotosEditor({ photos, displayAvatar, onChangePhotos, onChangeA
                   )}
                 </div>
                 <div className="text-[10px] tracking-[0.15em] text-[#6B6B6B]">{versionLabel}</div>
-                <div className="flex gap-1">
-                  {!isDisplay && (
+                {/* 隐式第一版（尚未迁入 officialPhotos）只读，无操作按钮 */}
+                {!photo._implicit && (
+                  <div className="flex gap-1">
+                    {!isDisplay && (
+                      <button
+                        type="button"
+                        onClick={() => handleSetDisplay(photo.url)}
+                        className="text-[9px] px-1.5 py-0.5 border border-[#1C1C1C] text-[#1C1C1C] hover:bg-[#F0F0F0] tracking-wider"
+                      >
+                        展示
+                      </button>
+                    )}
                     <button
                       type="button"
-                      onClick={() => handleSetDisplay(photo.url)}
-                      className="text-[9px] px-1.5 py-0.5 border border-[#1C1C1C] text-[#1C1C1C] hover:bg-[#F0F0F0] tracking-wider"
+                      onClick={() => handleDelete(photo.version)}
+                      className="text-[9px] px-1.5 py-0.5 border border-[#E0E0E0] text-[#6B6B6B] hover:border-red-300 hover:text-red-600 tracking-wider"
                     >
-                      展示
+                      删除
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(photo.version)}
-                    className="text-[9px] px-1.5 py-0.5 border border-[#E0E0E0] text-[#6B6B6B] hover:border-red-300 hover:text-red-600 tracking-wider"
-                  >
-                    删除
-                  </button>
-                </div>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -1662,7 +1670,7 @@ function OfficialPhotosEditor({ photos, displayAvatar, onChangePhotos, onChangeA
           onChange={handleUpload}
         />
         <div className="text-xs text-[#6B6B6B]">
-          上传后自动设为展示版（第{safePhotos.length + 1}版）。上传到后端并保存 URL。
+          上传后自动设为展示版（第{hasImplicitV1 ? 2 : safePhotos.length + 1}版）。上传到后端并保存 URL。
         </div>
       </div>
     </div>
