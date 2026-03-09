@@ -1447,9 +1447,9 @@ function ElectionPage({ data }) {
 
                     {/* 头像 */}
                     <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 overflow-hidden bg-[#F0F0F0]">
-                      {member.avatar ? (
+                      {(member.avatar || member.officialPhotos?.length > 0) ? (
                         <img
-                          src={resolveMediaUrl(member.avatar)}
+                          src={resolveMediaUrl(getOfficialPhotoUrl(member, isEditionNewContext(activeEdition)))}
                           alt={member.name}
                           className="w-full h-full object-cover object-top"
                         />
@@ -3174,6 +3174,7 @@ function SinglesPage({ data, setData, admin }) {
 
 function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
   const [coverZoom, setCoverZoom] = useState(false);
+  const useNewPhoto = isSingleNewContext(single);
   const audioRef = useRef(null);
   const [currentTrack, setCurrentTrack] = useState(null); // { no, title, audio }
 
@@ -3399,7 +3400,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
                             <div className="overflow-hidden bg-[#F0F0F0]">
                               <img
-                                src={resolveMediaUrl(m.avatar)}
+                                src={resolveMediaUrl(getOfficialPhotoUrl(m, useNewPhoto))}
                                 alt={m.name}
                                 className={"h-full w-full object-contain bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
                               />
