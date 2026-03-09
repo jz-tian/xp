@@ -3749,8 +3749,11 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
             ))}
           </div>
 
-          <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
-            {(singleDraft.singleKind === "纪念单曲" ? members : members.filter((m) => m.isActive)).map((m) => (
+          {(() => {
+            const isMemorial = singleDraft.singleKind === "纪念单曲";
+            const activeList = members.filter((m) => m.isActive);
+            const ogList = members.filter((m) => !m.isActive);
+            const renderCard = (m) => (
               <button
                 key={m.id}
                 type="button"
@@ -3764,12 +3767,36 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                   className={"aspect-[3/4] w-full object-cover object-top " + (!m.isActive ? "grayscale" : "")}
                 />
                 <div className="px-2 py-1.5 bg-white w-full">
-                  <div className="text-xs font-medium text-[#1C1C1C] truncate">{m.name}{!m.isActive ? " OG" : ""}</div>
+                  <div className="text-xs font-medium text-[#1C1C1C] truncate">{m.name}</div>
                   <div className="text-[10px] text-[#6B6B6B] truncate">{m.romaji || ""}</div>
                 </div>
               </button>
-            ))}
-          </div>
+            );
+            return (
+              <div className="grid gap-6">
+                {isMemorial && (
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-px bg-[#1C1C1C]" />
+                    <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">在籍</div>
+                  </div>
+                )}
+                <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
+                  {activeList.map(renderCard)}
+                </div>
+                {isMemorial && ogList.length > 0 && (
+                  <>
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-px bg-[#1C1C1C]" />
+                      <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">OG</div>
+                    </div>
+                    <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
+                      {ogList.map(renderCard)}
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })()}
         </ScrollDialogContent>
       </Dialog>
     </div>
