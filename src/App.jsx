@@ -721,8 +721,17 @@ function sanitizeDbPayload(db) {
   const out = JSON.parse(JSON.stringify(db));
   if (Array.isArray(out.members)) {
     for (const m of out.members) {
-      if (m && typeof m === "object" && typeof m.avatar === "string") {
-        m.avatar = toRelativeUploadsUrl(m.avatar);
+      if (m && typeof m === "object") {
+        if (typeof m.avatar === "string") {
+          m.avatar = toRelativeUploadsUrl(m.avatar);
+        }
+        if (Array.isArray(m.officialPhotos)) {
+          m.officialPhotos = m.officialPhotos.map((p) =>
+            p && typeof p === "object" && typeof p.url === "string"
+              ? { ...p, url: toRelativeUploadsUrl(p.url) }
+              : p
+          );
+        }
       }
     }
   }
@@ -1888,7 +1897,7 @@ function MembersPage({ data, setData, admin }) {
   const [selected, setSelected] = useState(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [editing, setEditing] = useState(null);
-  const [statusFilter, setStatusFilter] = useState("all"); // all | active | inactive
+  const [statusFilter, setStatusFilter] = useState("active"); // all | active | inactive
   const [genFilter, setGenFilter] = useState("all"); // all | "1期" | "2期" ...
 
   const members = data.members;
@@ -1927,6 +1936,7 @@ function MembersPage({ data, setData, admin }) {
         origin: "",
         generation: "",
         avatar: "",
+        officialPhotos: [],
         isActive: true,
         graduationDate: "",
         // 总选举顺位：[{ edition: "第一届", rank: "一位" }, ...]
