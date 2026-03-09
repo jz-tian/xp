@@ -3750,7 +3750,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
           </div>
 
           <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
-            {members.filter((m) => m.isActive).map((m) => (
+            {(singleDraft.singleKind === "纪念单曲" ? members : members.filter((m) => m.isActive)).map((m) => (
               <button
                 key={m.id}
                 type="button"
@@ -3764,7 +3764,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                   className={"aspect-[3/4] w-full object-cover object-top " + (!m.isActive ? "grayscale" : "")}
                 />
                 <div className="px-2 py-1.5 bg-white w-full">
-                  <div className="text-xs font-medium text-[#1C1C1C] truncate">{m.name}</div>
+                  <div className="text-xs font-medium text-[#1C1C1C] truncate">{m.name}{!m.isActive ? " OG" : ""}</div>
                   <div className="text-[10px] text-[#6B6B6B] truncate">{m.romaji || ""}</div>
                 </div>
               </button>
