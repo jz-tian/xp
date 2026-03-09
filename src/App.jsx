@@ -3762,7 +3762,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                   <img
                     src={resolveMediaUrl(m.avatar)}
                     alt={m.name}
-                    className={"h-full w-full object-cover " + (!m.isActive ? "grayscale" : "")}
+                    className={"h-full w-full object-contain " + (!m.isActive ? "grayscale" : "")}
                   />
                 </div>
                 <div className="px-2 py-2">
