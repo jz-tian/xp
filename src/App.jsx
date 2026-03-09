@@ -371,7 +371,7 @@ function migrateData(raw) {
       tracks: [t1, t2, t3],
       asideLineup: {
         selectionCount: s.asideLineup?.selectionCount ?? 12,
-        rows: Array.isArray(s.asideLineup?.rows) ? s.asideLineup.rows : [5, 7],
+        rows: Array.isArray(s.asideLineup?.rows) ? s.asideLineup.rows : [7, 4, 1],
         slots: Array.isArray(s.asideLineup?.slots)
           ? s.asideLineup.slots
           : Array((s.asideLineup?.selectionCount ?? 12) || 12).fill(null),
@@ -604,7 +604,7 @@ const seedSingles = [
     ],
     asideLineup: {
       selectionCount: 12,
-      rows: [5, 7],
+      rows: [7, 4, 1],
       // slots holds member IDs in order (row-major)
       slots: [
         "m_akari",
@@ -2765,7 +2765,7 @@ function SinglesPage({ data, setData, admin }) {
   const [editorOpen, setEditorOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [lineupCfg, setLineupCfg] = useState({
-    rowsText: "5,7",
+    rowsText: "7,4,1",
   });
 
   const openEdit = (s) => {
@@ -2798,7 +2798,7 @@ function SinglesPage({ data, setData, admin }) {
         ],
         asideLineup: {
           selectionCount: 12,
-          rows: [5, 7],
+          rows: [7, 4, 1],
           slots: Array(12).fill(null),
         },
         notes: "",
@@ -2815,7 +2815,7 @@ function SinglesPage({ data, setData, admin }) {
 
     setEditing(copy);
     setLineupCfg({
-      rowsText: (copy.asideLineup.rows || [5, 7]).join(","),
+      rowsText: (copy.asideLineup.rows || [7, 4, 1]).join(","),
     });
     setEditorOpen(true);
   };
@@ -3490,7 +3490,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
   }
   members = Array.isArray(members) ? members : [];
   const lineup =
-    singleDraft.asideLineup || { selectionCount: 12, rows: [5, 7], slots: [] };
+    singleDraft.asideLineup || { selectionCount: 12, rows: [7, 4, 1], slots: [] };
   const rows = lineup.rows || [];
   const selectionCount = (rows || []).reduce((a, b) => a + b, 0);
 
