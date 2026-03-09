@@ -174,6 +174,36 @@ const splitSingleTitle = (fullTitle) => {
   return { prefix: parts[0], name: parts.slice(1).join(" · ") };
 };
 
+/**
+ * 根据单曲标题前缀（如 "27th Single"）判断是否属于"新版公式照"语境（第27单起）
+ */
+function isSingleNewContext(single) {
+  const prefix = splitSingleTitle(single?.title ?? "").prefix;
+  const num = parseInt((prefix || "").match(/\d+/)?.[0], 10);
+  return Number.isFinite(num) && num >= 27;
+}
+
+/**
+ * 根据总选届数字符串（如 "第5届"）判断是否属于"新版公式照"语境（第5届起）
+ */
+function isEditionNewContext(editionStr) {
+  const num = parseEditionNum(editionStr);
+  return Number.isFinite(num) && num >= 5;
+}
+
+/**
+ * 根据语境返回应展示的公式照 URL。
+ * - isNewContext=true（27单+/5届+）且 officialPhotos 有 ≥2 张：返回最新版
+ * - 否则：返回第一版
+ * - officialPhotos 为空时回退 avatar
+ */
+function getOfficialPhotoUrl(member, isNewContext) {
+  const photos = Array.isArray(member?.officialPhotos) ? member.officialPhotos : [];
+  if (photos.length === 0) return member?.avatar ?? "";
+  if (isNewContext && photos.length >= 2) return photos[photos.length - 1].url;
+  return photos[0].url;
+}
+
 const buildRowMeta = (rows) => {
   const out = [];
   let start = 0;
