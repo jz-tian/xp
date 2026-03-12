@@ -3038,11 +3038,11 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
                       >
                         {m ? (
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
-                            <div className="overflow-hidden bg-[#F0F0F0]">
+                            <div className="overflow-hidden bg-transparent">
                               <MediaImage
                                 src={getOfficialPhotoUrl(m, useNewPhoto)}
                                 alt={m.name}
-                                className={"h-full w-full object-contain bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
+                                className={"h-full w-full object-contain object-top " + (!m.isActive ? "grayscale" : "")}
                               />
                             </div>
 
