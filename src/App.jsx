@@ -39,7 +39,6 @@ import {
   Minus,
   Users,
   Disc3,
-  Newspaper,
   Settings,
   Sparkles,
   Save,
@@ -54,19 +53,6 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
-
-/**
- * XJP56 Modern Showcase App
- * - 成员展示 + 详情弹窗
- * - 单曲展示 + 封面放大 + 曲目列表 + A面曲选拔站位
- * - Blog 新闻展示 + 编辑器 + 图片上传
- * - 管理员模式：新增/编辑/删除成员、单曲、新闻；上传图片；编辑站位（拖拽排位）
- *
- * 新增：真实音频上传 + 播放
- * - A面曲支持上传音源（audio/*）并在单曲详情中播放
- * - 为了 demo 简化，音频同样以 dataURL 方式保存在 localStorage
- *   注意：音频文件可能较大，localStorage 容量有限（建议后续升级 IndexedDB / 后端存储）。
- */
 
 // ---------- Utils ----------
 const uid = () => Math.random().toString(36).slice(2, 10);
@@ -329,362 +315,22 @@ function generationBadgeStyle(gen = "") {
   return base;
 }
 
-function readFileAsDataURL(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result));
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-function safeParse(json, fallback) {
-  try {
-    const v = JSON.parse(json);
-    return v ?? fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function ensureTrackShape(track, no, isAside) {
-  return {
-    no,
-    title: track?.title ?? "",
-    isAside,
-    audio: typeof track?.audio === "string" ? track.audio : "",
-  };
-}
-
-function migrateData(raw) {
-  const data = safeParse(raw, null);
-  if (!data || !data.members || !data.singles || !data.posts) return null;
-
-  const singles = (data.singles || []).map((s) => {
-    const tracks = Array.isArray(s.tracks) ? s.tracks : [];
-    const t1 = ensureTrackShape(tracks[0], 1, true);
-    const t2 = ensureTrackShape(tracks[1], 2, false);
-    const t3 = ensureTrackShape(tracks[2], 3, false);
-
-    return {
-      ...s,
-      tracks: [t1, t2, t3],
-      asideLineup: {
-        selectionCount: s.asideLineup?.selectionCount ?? 12,
-        rows: Array.isArray(s.asideLineup?.rows) ? s.asideLineup.rows : [7, 4, 1],
-        slots: Array.isArray(s.asideLineup?.slots)
-          ? s.asideLineup.slots
-          : Array((s.asideLineup?.selectionCount ?? 12) || 12).fill(null),
-      },
-    };
-  });
-
-  return {
-    members: data.members,
-    singles,
-    posts: data.posts,
-  };
-}
-
-// ---------- Seed Data ----------
-const seedMembers = [
-  {
-    id: "m_akari",
-    name: "星野 明里",
-    origin: "东京 · 练马",
-    generation: "1期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Akari&font=montserrat",
-    profile: {
-      height: "160cm",
-      birthday: "2004-03-12",
-      blood: "A",
-      hobby: "摄影 / 甜点",
-      skill: "舞蹈",
-      catchphrase: "把光带到舞台上。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（center）",
-      "2nd Single": "A面选拔（1列）",
-    },
-  },
-  {
-    id: "m_yuna",
-    name: "白石 由奈",
-    origin: "大阪 · 吹田",
-    generation: "1期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Yuna&font=montserrat",
-    profile: {
-      height: "158cm",
-      birthday: "2005-10-02",
-      blood: "O",
-      hobby: "钢琴 / 旅行",
-      skill: "高音",
-      catchphrase: "微笑是最强的魔法。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（2列）",
-      "2nd Single": "A面选拔（2列）",
-    },
-  },
-  {
-    id: "m_rin",
-    name: "西园 凛",
-    origin: "名古屋 · 千种",
-    generation: "1期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Rin&font=montserrat",
-    profile: {
-      height: "163cm",
-      birthday: "2003-07-19",
-      blood: "B",
-      hobby: "漫画 / 猫咖",
-      skill: "表情管理",
-      catchphrase: "今天也要帅气可爱。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（1列）",
-      "2nd Single": "未选拔",
-    },
-  },
-  {
-    id: "m_saki",
-    name: "夏目 纱希",
-    origin: "福冈 · 博多",
-    generation: "2期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Saki&font=montserrat",
-    profile: {
-      height: "156cm",
-      birthday: "2006-01-28",
-      blood: "AB",
-      hobby: "料理 / 露营",
-      skill: "MC",
-      catchphrase: "把温柔变成节拍。",
-    },
-    selectionHistory: {
-      "1st Single": "未选拔",
-      "2nd Single": "A面选拔（3列）",
-    },
-  },
-  {
-    id: "m_mika",
-    name: "橘 美香",
-    origin: "札幌 · 中央",
-    generation: "2期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Mika&font=montserrat",
-    profile: {
-      height: "165cm",
-      birthday: "2004-11-11",
-      blood: "A",
-      hobby: "滑雪 / 美妆",
-      skill: "镜头感",
-      catchphrase: "冷空气也挡不住热舞台。",
-    },
-    selectionHistory: {
-      "1st Single": "未选拔",
-      "2nd Single": "A面选拔（2列）",
-    },
-  },
-  {
-    id: "m_mayu",
-    name: "小鸟游 真优",
-    origin: "京都 · 伏见",
-    generation: "2期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Mayu&font=montserrat",
-    profile: {
-      height: "159cm",
-      birthday: "2005-05-09",
-      blood: "O",
-      hobby: "和服 / 茶道",
-      skill: "柔软度",
-      catchphrase: "一步一景，一笑一生。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（3列）",
-      "2nd Single": "A面选拔（3列）",
-    },
-  },
-  {
-    id: "m_nana",
-    name: "藤森 菜奈",
-    origin: "横滨 · 港北",
-    generation: "3期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Nana&font=montserrat",
-    profile: {
-      height: "162cm",
-      birthday: "2006-08-21",
-      blood: "B",
-      hobby: "街拍 / 手账",
-      skill: "Rap",
-      catchphrase: "节拍里也有浪漫。",
-    },
-    selectionHistory: {
-      "1st Single": "未选拔",
-      "2nd Single": "未选拔",
-    },
-  },
-  {
-    id: "m_hina",
-    name: "早川 雏",
-    origin: "广岛 · 中区",
-    generation: "3期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Hina&font=montserrat",
-    profile: {
-      height: "154cm",
-      birthday: "2007-02-14",
-      blood: "A",
-      hobby: "绘画 / 甜品店巡礼",
-      skill: "可爱担当",
-      catchphrase: "把心跳画成星星。",
-    },
-    selectionHistory: {
-      "1st Single": "未选拔",
-      "2nd Single": "A面选拔（3列）",
-    },
-  },
-  {
-    id: "m_reina",
-    name: "月岛 玲奈",
-    origin: "神户 · 灘",
-    generation: "3期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Reina&font=montserrat",
-    profile: {
-      height: "167cm",
-      birthday: "2003-12-03",
-      blood: "AB",
-      hobby: "爵士乐 / 跑步",
-      skill: "气场",
-      catchphrase: "在舞台上，月光也要让路。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（1列）",
-      "2nd Single": "A面选拔（1列）",
-    },
-  },
-  {
-    id: "m_ayame",
-    name: "神崎 菖蒲",
-    origin: "仙台 · 青叶",
-    generation: "3期",
-    isActive: true,
-        avatar: "https://placehold.co/800x800/png?text=Ayame&font=montserrat",
-    profile: {
-      height: "161cm",
-      birthday: "2006-09-30",
-      blood: "O",
-      hobby: "运动 / 电影",
-      skill: "稳定唱功",
-      catchphrase: "认真才是最酷的。",
-    },
-    selectionHistory: {
-      "1st Single": "A面选拔（2列）",
-      "2nd Single": "未选拔",
-    },
-  },
-];
-
-const seedSingles = [
-  {
-    id: "s1",
-    title: "1st Single · Neon Bloom",
-    release: "2025-09-01",
-    cover:
-      "https://placehold.co/1200x1200/png?text=Neon%20Bloom&font=montserrat",
-    tracks: [
-      { no: 1, title: "Neon Bloom (A-side)", isAside: true, audio: "" },
-      { no: 2, title: "City Pulse", isAside: false, audio: "" },
-      { no: 3, title: "Midnight Letter", isAside: false, audio: "" },
-    ],
-    asideLineup: {
-      selectionCount: 12,
-      rows: [7, 4, 1],
-      // slots holds member IDs in order (row-major)
-      slots: [
-        "m_akari",
-        "m_reina",
-        "m_yuna",
-        "m_rin",
-        "m_ayame",
-        "m_mayu",
-        "m_mika",
-        "m_saki",
-        "m_hina",
-        "m_nana",
-        null,
-        null,
-      ],
-    },
-    notes:
-      "XJP56 出道单曲：霓虹与花朵的碰撞，带一点复古合成器的气味。",
-  },
-  {
-    id: "s2",
-    title: "2nd Single · Aurora Steps",
-    release: "2026-01-10",
-    cover:
-      "https://placehold.co/1200x1200/png?text=Aurora%20Steps&font=montserrat",
-    tracks: [
-      { no: 1, title: "Aurora Steps (A-side)", isAside: true, audio: "" },
-      { no: 2, title: "Snowdrift Waltz", isAside: false, audio: "" },
-      { no: 3, title: "Afterglow", isAside: false, audio: "" },
-    ],
-    asideLineup: {
-      selectionCount: 12,
-      rows: [4, 4, 4],
-      slots: [
-        "m_reina",
-        "m_akari",
-        "m_yuna",
-        "m_mika",
-        "m_mayu",
-        "m_rin",
-        "m_ayame",
-        "m_saki",
-        "m_hina",
-        "m_nana",
-        null,
-        null,
-      ],
-    },
-    notes:
-      "第二张单曲更偏大气合唱与层次堆叠；站位采用三排均衡阵型。",
-  },
-];
-
-const seedPosts = [
-  {
-    id: "p1",
-    title: "XJP56 首次公开演出：Neon Bloom Live",
-    date: "2026-01-05",
-    cover: "https://placehold.co/1600x900/png?text=Live&font=montserrat",
-    content:
-      "<p>我们在冬日的灯光里完成了第一次公开演出。感谢每一位到场的你。</p><ul><li>新编曲首次披露</li><li>成员MC环节</li><li>现场限定周边</li></ul><p>下一站见！</p>",
-  },
-  {
-    id: "p2",
-    title: "2nd Single《Aurora Steps》封面&曲目公开",
-    date: "2026-01-09",
-    cover: "https://placehold.co/1600x900/png?text=Aurora&font=montserrat",
-    content:
-      "<p>《Aurora Steps》以<strong>极光</strong>为主题：层层推进的节奏、明亮的和声与冷色系的舞台感。</p><p>曲目收录：Track1~3 全部公开，A面曲舞台即将上线。</p>",
-  },
-];
 
 // ---------- Backend API ----------
 // 不再使用 localStorage：数据与图片都走后端。
 // 约定：
-// - GET  {API_BASE}/data   -> { members, singles, posts }
+// - GET  {API_BASE}/data   -> { members, singles }
 // - POST {API_BASE}/data  -> 覆盖保存
 // - POST {API_BASE}/upload (form-data: image) -> { url }
 // ✅ 使用相对路径，避免 ngrok/手机端访问时写死 localhost
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+
+function normalizeAppDataShape(raw) {
+  return {
+    members: Array.isArray(raw?.members) ? raw.members : [],
+    singles: Array.isArray(raw?.singles) ? raw.singles : [],
+  };
+}
 
 // ✅ 前端渲染媒体资源时：/uploads/... 需要在生产环境拼上后端域名；本地开发同域时保持相对路径
 function resolveMediaUrl(v) {
@@ -699,11 +345,18 @@ function resolveMediaUrl(v) {
   return v;
 }
 
-// ✅ 用于 Blog 富文本：把 <img src="/uploads/..."> 转为指向后端域名
-function resolveHtmlMedia(html) {
-  if (!html || typeof html !== "string") return html;
-  if (!API_BASE) return html;
-  return html.replace(/(src|href)=("|')\/uploads\//g, `$1=$2${API_BASE}/uploads/`);
+function MediaImage({ src, alt, className, eager = false, ...props }) {
+  return (
+    <img
+      src={resolveMediaUrl(src)}
+      alt={alt}
+      className={className}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      fetchPriority={eager ? "high" : "auto"}
+      {...props}
+    />
+  );
 }
 
 // ✅ 把任何绝对 uploads URL 归一成相对路径（/uploads/...），确保可跨终端访问
@@ -748,13 +401,6 @@ function sanitizeDbPayload(db) {
       }
     }
   }
-  if (Array.isArray(out.posts)) {
-    for (const p of out.posts) {
-      if (p && typeof p === "object" && typeof p.cover === "string") {
-        p.cover = toRelativeUploadsUrl(p.cover);
-      }
-    }
-  }
   return out;
 }
 
@@ -791,17 +437,6 @@ async function uploadAudio(file) {
   const json = await res.json();
   return json.url;
 }
-
-function isEmptyRemoteData(remote) {
-  // 当后端是新库/空库时：{members:[], singles:[], posts:[]}
-  // 我们希望自动灌入 seed，避免页面空空如也不好测试。
-  if (!remote || typeof remote !== "object") return true;
-  const m = Array.isArray(remote.members) ? remote.members.length : 0;
-  const s = Array.isArray(remote.singles) ? remote.singles.length : 0;
-  const p = Array.isArray(remote.posts) ? remote.posts.length : 0;
-  return m + s + p === 0;
-}
-
 
 function withRecomputedSelections(data) {
   const singles = Array.isArray(data?.singles) ? data.singles : [];
@@ -997,7 +632,6 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
     { key: "members", cn: "成员", en: "MEMBER" },
     { key: "singles", cn: "单曲", en: "SINGLES" },
     { key: "election", cn: "总选举", en: "ELECTION" },
-    { key: "blog", cn: "部落格", en: "BLOG" },
   ];
   const isActive = (key) => page === key || (page === "member-detail" && key === "members");
 
@@ -1114,7 +748,7 @@ function MemberMarquee({ members }) {
         {items.map((m, i) => (
           <div key={i} className="flex flex-col items-center gap-1.5 w-16 shrink-0">
             <div className={"w-14 h-14 overflow-hidden bg-[#F0F0F0] " + (!m.isActive ? "grayscale opacity-60" : "")}>
-              <img src={resolveMediaUrl(m.avatar)} alt={m.name} className="w-full h-full object-cover object-top" />
+              <MediaImage src={m.avatar} alt={m.name} className="w-full h-full object-cover object-top" />
             </div>
             <span className="text-[9px] text-[#6B6B6B] text-center leading-tight">{m.name}</span>
           </div>
@@ -1158,19 +792,21 @@ function Hero({ singles, members, activeMembersCount, totalMembersCount, singles
             {current?.cover ? (
               <>
                 {/* Base: heavily blurred fill for color tone */}
-                <img
-                  src={resolveMediaUrl(current.cover)}
+                <MediaImage
+                  src={current.cover}
                   alt=""
                   aria-hidden="true"
                   className="absolute inset-0 w-full h-full object-cover scale-125"
+                  eager
                   style={{ filter: "blur(40px) brightness(0.5) saturate(1.8)" }}
                 />
                 {/* Left accent: large cover bleeding in from left, medium blur */}
-                <img
-                  src={resolveMediaUrl(current.cover)}
+                <MediaImage
+                  src={current.cover}
                   alt=""
                   aria-hidden="true"
                   className="absolute w-auto"
+                  eager
                   style={{
                     height: "130%",
                     top: "50%",
@@ -1182,11 +818,12 @@ function Hero({ singles, members, activeMembersCount, totalMembersCount, singles
                   }}
                 />
                 {/* Right accent: mirrored cover bleeding in from right */}
-                <img
-                  src={resolveMediaUrl(current.cover)}
+                <MediaImage
+                  src={current.cover}
                   alt=""
                   aria-hidden="true"
                   className="absolute w-auto"
+                  eager
                   style={{
                     height: "130%",
                     top: "50%",
@@ -1206,10 +843,11 @@ function Hero({ singles, members, activeMembersCount, totalMembersCount, singles
                 />
                 {/* Crisp centered cover at native aspect ratio */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <img
-                    src={resolveMediaUrl(current.cover)}
+                  <MediaImage
+                    src={current.cover}
                     alt={current.title}
                     className="h-full w-auto max-h-full object-contain"
+                    eager
                     style={{ filter: "drop-shadow(0 0 48px rgba(0,0,0,0.7))" }}
                   />
                 </div>
@@ -1448,8 +1086,8 @@ function ElectionPage({ data }) {
                     {/* 头像 */}
                     <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 overflow-hidden bg-[#F0F0F0]">
                       {(member.avatar || member.officialPhotos?.length > 0) ? (
-                        <img
-                          src={resolveMediaUrl(getOfficialPhotoUrl(member, isEditionNewContext(activeEdition)))}
+                        <MediaImage
+                          src={getOfficialPhotoUrl(member, isEditionNewContext(activeEdition))}
                           alt={member.name}
                           className="w-full h-full object-cover object-top"
                         />
@@ -1538,8 +1176,8 @@ function ImageUploader({ label, value, onChange, hint }) {
       <div className="grid gap-2 md:grid-cols-[140px_1fr]">
         <div className="overflow-hidden border border-[#E0E0E0] bg-white">
           {value ? (
-            <img
-              src={resolveMediaUrl(value)}
+            <MediaImage
+              src={value}
               alt="preview"
               className="h-[140px] w-[140px] object-cover bg-[#F0F0F0]"
             />
@@ -1624,8 +1262,8 @@ function OfficialPhotosEditor({ photos, displayAvatar, onChangePhotos, onChangeA
                   }
                   style={{ width: 80, height: 107 }}
                 >
-                  <img
-                    src={resolveMediaUrl(photo.url)}
+                  <MediaImage
+                    src={photo.url}
                     alt={versionLabel}
                     className="h-full w-full object-cover object-top"
                   />
@@ -1701,7 +1339,7 @@ function AudioUploader({ label, value, onChange, hint }) {
           {" "}
           （音频将上传到服务器）
         </div>
-        {value ? <audio className="w-full" controls src={resolveMediaUrl(value)} /> : null}
+        {value ? <audio className="w-full" controls preload="none" src={resolveMediaUrl(value)} /> : null}
       </div>
     </div>
   );
@@ -1745,8 +1383,8 @@ function OfficialPhotosGalleryDialog({ open, onClose, photos, displayAvatar }) {
                   }
                 >
                   <div className="overflow-hidden bg-[#F0F0F0] w-full">
-                    <img
-                      src={resolveMediaUrl(photo.url)}
+                    <MediaImage
+                      src={photo.url}
                       alt={versionLabel}
                       className="aspect-[3/4] w-full object-cover object-top"
                     />
@@ -1820,8 +1458,8 @@ function MemberDetailContent({ member, data }) {
           onClick={() => { if (hasMultiplePhotos) setGalleryOpen(true); }}
           title={hasMultiplePhotos ? "点击查看全部公式照" : undefined}
         >
-          <img
-            src={resolveMediaUrl(member.avatar)}
+          <MediaImage
+            src={member.avatar}
             alt={member.name}
             className="aspect-[3/4] w-full object-cover object-top"
           />
@@ -2282,8 +1920,8 @@ function MembersPage({ data, setData, admin }) {
             <div className="group overflow-hidden">
               <div className="relative">
                 <button className="block w-full" onClick={() => setSelected(m)}>
-                  <img
-                    src={resolveMediaUrl(m.avatar)}
+                  <MediaImage
+                    src={m.avatar}
                     alt={m.name}
                     className={"aspect-[3/4] w-full object-cover object-top bg-[#F0F0F0] transition duration-300 group-hover:scale-[1.02] " + (!m.isActive ? "grayscale opacity-70" : "")}
                   />
@@ -2903,8 +2541,8 @@ function SinglesPage({ data, setData, admin }) {
               onClick={() => setSelectedId(s.id)}
             >
               <div className="relative overflow-hidden bg-[#F0F0F0] aspect-square">
-                <img
-                  src={resolveMediaUrl(s.cover)}
+                <MediaImage
+                  src={s.cover}
                   alt={s.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
@@ -3213,15 +2851,9 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
   });
 
   const tracks = Array.isArray(single.tracks) ? single.tracks : [];
-  const asideTrack = tracks.find((t) => t.isAside) || tracks[0];
   const hasAnyAudio = tracks.some((t) => !!t?.audio);
-  const hasAsideAudio = !!asideTrack?.audio;
-
-  // 切换单曲时，默认选中"有音源的优先轨道"（优先 A 面）
   useEffect(() => {
-    const preferred = (hasAsideAudio ? asideTrack : null) || tracks.find((t) => !!t?.audio) || null;
-    setCurrentTrack(preferred);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCurrentTrack(null);
   }, [single?.id]);
 
   // 当切换到某个音源时，自动播放
@@ -3262,8 +2894,8 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
             onClick={() => setCoverZoom(true)}
             title="点击放大封面"
           >
-            <img
-              src={resolveMediaUrl(single.cover)}
+            <MediaImage
+              src={single.cover}
               alt={single.title}
               className="aspect-square w-full object-cover"
             />
@@ -3307,6 +2939,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
                 ref={audioRef}
                 src={resolveMediaUrl(currentTrack.audio)}
                 controls
+                preload="none"
                 className="w-full"
               />
             </div>
@@ -3406,8 +3039,8 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
                         {m ? (
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
                             <div className="overflow-hidden bg-[#F0F0F0]">
-                              <img
-                                src={resolveMediaUrl(getOfficialPhotoUrl(m, useNewPhoto))}
+                              <MediaImage
+                                src={getOfficialPhotoUrl(m, useNewPhoto)}
                                 alt={m.name}
                                 className={"h-full w-full object-contain bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
                               />
@@ -3471,7 +3104,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame}) {
             </DialogDescription>
           </DialogHeader>
           <div className="overflow-hidden border border-[#E0E0E0] bg-white">
-            <img src={resolveMediaUrl(single.cover)} alt={single.title} className="w-full" />
+            <MediaImage src={single.cover} alt={single.title} className="w-full" />
           </div>
         </ScrollDialogContent>
       </Dialog>
@@ -3685,8 +3318,8 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                       {roleBadge(slotIndex)}
                       {m ? (
                         <>
-                          <img
-                            src={resolveMediaUrl(m.avatar)}
+                          <MediaImage
+                            src={m.avatar}
                             alt={m.name}
                             className={"h-full w-full object-cover bg-[#F0F0F0] " + (!m.isActive ? "grayscale" : "")}
                           />
@@ -3761,8 +3394,8 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
                 className={"overflow-hidden ring-0 hover:ring-2 hover:ring-[#1C1C1C] transition-all flex flex-col " + (used.has(m.id) ? "opacity-40" : "")}
                 title={m.name}
               >
-                <img
-                  src={resolveMediaUrl(m.avatar)}
+                <MediaImage
+                  src={m.avatar}
                   alt={m.name}
                   className={"aspect-[3/4] w-full object-cover object-top " + (!m.isActive ? "grayscale" : "")}
                 />
@@ -3802,254 +3435,6 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
     </div>
   );
 }
-function BlogPage({ data, setData, admin }) {
-  const [selectedId, setSelectedId] = useState(data.posts[0]?.id || null);
-  const selected = data.posts.find((p) => p.id === selectedId) || null;
-
-  const [editorOpen, setEditorOpen] = useState(false);
-  const [editing, setEditing] = useState(null);
-  const editorRef = useRef(null);
-
-  const openEdit = (p) => {
-    setEditing(
-      p ?? {
-        id: `p_${uid()}`,
-        title: "",
-        date: new Date().toISOString().slice(0, 10),
-        cover: "",
-        content: "<p>在这里写新闻内容……</p>",
-      }
-    );
-    setEditorOpen(true);
-  };
-
-  const savePost = () => {
-    const html = editorRef.current?.innerHTML ?? editing.content;
-    const nextEditing = { ...editing, content: html };
-    setData((prev) => {
-      const exists = prev.posts.some((x) => x.id === nextEditing.id);
-      const nextPosts = exists
-        ? prev.posts.map((x) => (x.id === nextEditing.id ? nextEditing : x))
-        : [nextEditing, ...prev.posts];
-      return { ...prev, posts: nextPosts };
-    });
-    setEditorOpen(false);
-    setSelectedId(nextEditing.id);
-  };
-
-  const deletePost = (id) => {
-    setData((prev) => ({ ...prev, posts: prev.posts.filter((p) => p.id !== id) }));
-    if (selectedId === id) {
-      const rest = data.posts.filter((p) => p.id !== id);
-      setSelectedId(rest[0]?.id || null);
-    }
-  };
-
-  const insertImage = async (file) => {
-    const url = await uploadImage(file);
-    if (!editorRef.current) return;
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "uploaded";
-    img.style.maxWidth = "100%";
-    img.style.borderRadius = "16px";
-    img.style.margin = "12px 0";
-
-    const sel = window.getSelection();
-    if (sel && sel.rangeCount > 0) {
-      const range = sel.getRangeAt(0);
-      range.insertNode(img);
-      range.collapse(false);
-    } else {
-      editorRef.current.appendChild(img);
-    }
-  };
-
-  return (
-    <div>
-      <SectionHeader
-        title="Blog / 新闻"
-        subtitle="新闻标题列表 → 点开看详情；管理员可写新闻并上传图片。"
-        right={
-          admin ? (
-            <Button onClick={() => openEdit(null)}>
-              <Plus className="mr-2 h-4 w-4" />
-              新增新闻
-            </Button>
-          ) : null
-        }
-      />
-
-      <div className="grid gap-4 md:grid-cols-[1fr_1.4fr]">
-        <div className="grid gap-4">
-          {data.posts.map((p) => (
-            <div
-              key={p.id}
-              className={
-                "overflow-hidden border bg-white transition-colors cursor-pointer " +
-                (selectedId === p.id ? "border-[#1C1C1C]" : "border-[#E0E0E0] hover:border-[#B0B0B0]")
-              }
-              onClick={() => setSelectedId(p.id)}
-            >
-              <div className="grid md:grid-cols-[140px_1fr]">
-                <img
-                  src={resolveMediaUrl(p.cover)}
-                  alt={p.title}
-                  className="h-[120px] w-full object-cover bg-[#F0F0F0] md:h-[140px] md:w-[140px]"
-                />
-                <div className="flex items-start justify-between gap-3 p-4">
-                  <div>
-                    <div className="text-sm font-medium text-[#1C1C1C] leading-tight">{p.title}</div>
-                    <div className="mt-1 text-xs text-[#6B6B6B] tracking-wider">{p.date}</div>
-                  </div>
-                  {admin ? (
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          className="w-7 h-7 flex items-center justify-center border border-[#E0E0E0] hover:bg-[#F0F0F0] transition-colors"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Settings className="h-3.5 w-3.5 text-[#1C1C1C]" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white border-[#E0E0E0] rounded-none shadow-md">
-                        <DropdownMenuItem onClick={(e) => { e.stopPropagation(); openEdit(p); }}>
-                          <Pencil className="mr-2 h-4 w-4" />
-                          编辑
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-red-500" onClick={(e) => { e.stopPropagation(); deletePost(p.id); }}>
-                          <Trash2 className="mr-2 h-4 w-4" />
-                          删除
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="md:sticky md:top-[96px] md:self-start md:max-h-[calc(100vh-96px)] md:overflow-y-auto md:min-h-0">
-          {selected ? (
-            <div className="border border-[#E0E0E0] bg-white">
-              <div className="px-4 py-3 border-b border-[#E0E0E0]">
-                <div className="text-base font-medium text-[#1C1C1C]">{selected.title}</div>
-                <div className="text-xs text-[#6B6B6B] tracking-wider mt-0.5">{selected.date}</div>
-              </div>
-              <div className="p-4 grid gap-4">
-                <div className="overflow-hidden border border-[#E0E0E0] bg-white">
-                  <img
-                    src={resolveMediaUrl(selected.cover)}
-                    alt={selected.title}
-                    className="w-full object-cover"
-                  />
-                </div>
-                <div
-                  className="prose max-w-none prose-p:text-[#1C1C1C] prose-li:text-[#1C1C1C] prose-strong:text-[#1C1C1C] text-sm leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: resolveHtmlMedia(selected.content) }}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="border border-[#E0E0E0] bg-white p-6">
-              <div className="text-sm font-medium text-[#1C1C1C]">暂无新闻</div>
-              <div className="mt-1 text-xs text-[#6B6B6B]">你可以在管理员模式下新增。</div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <Dialog open={editorOpen} onOpenChange={setEditorOpen}>
-        <ScrollDialogContent className="max-w-5xl">
-          <DialogHeader>
-            <DialogTitle>{editing?.title ? "编辑新闻" : "新增新闻"}</DialogTitle>
-            <DialogDescription className="text-[#6B6B6B]">
-              简易 Blog 编辑器（contenteditable）：支持粘贴文本、加粗、列表；可上传图片插入到光标处。
-            </DialogDescription>
-          </DialogHeader>
-
-          {editing ? (
-            <div className="grid gap-4">
-              <div className="grid gap-3 md:grid-cols-2">
-                <LabeledInput
-                  label="标题"
-                  value={editing.title}
-                  onChange={(v) => setEditing((p) => ({ ...p, title: v }))}
-                  placeholder="例如：..."
-                />
-                <LabeledInput
-                  label="日期"
-                  value={editing.date}
-                  onChange={(v) => setEditing((p) => ({ ...p, date: v }))}
-                  placeholder="YYYY-MM-DD"
-                />
-              </div>
-
-              <ImageUploader
-                label="新闻封面"
-                value={editing.cover}
-                onChange={(url) => setEditing((p) => ({ ...p, cover: url }))}
-                hint="建议 16:9"
-              />
-
-              <div className="flex flex-wrap gap-2">
-                <Button variant="secondary" size="sm" onClick={() => document.execCommand("bold")}>
-                  加粗
-                </Button>
-                <Button variant="secondary" size="sm" onClick={() => document.execCommand("insertUnorderedList")}>
-                  无序列表
-                </Button>
-                <Button variant="secondary" size="sm" onClick={() => document.execCommand("insertOrderedList")}>
-                  有序列表
-                </Button>
-                <div className="flex items-center gap-2 border border-[#E0E0E0] bg-white px-3 py-2">
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={async (e) => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
-                      await insertImage(file);
-                      e.target.value = "";
-                    }}
-                    className="h-9 w-[220px]"
-                  />
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                <div className="text-sm font-medium text-[#1C1C1C]">正文</div>
-                <div
-                  ref={editorRef}
-                  contentEditable
-                  suppressContentEditableWarning
-                  className="min-h-[240px] border border-[#E0E0E0] bg-white p-4 text-[#1C1C1C] outline-none focus:border-[#1C1C1C]"
-                  dangerouslySetInnerHTML={{ __html: editing.content }}
-                />
-                <div className="text-xs text-[#6B6B6B]">
-                  小提示：可以直接复制粘贴外部文本/图片（不同浏览器表现略有差异）。
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-2">
-                <Button variant="secondary" onClick={() => setEditorOpen(false)}>
-                  取消
-                </Button>
-                <Button onClick={savePost}>
-                  <Save className="mr-2 h-4 w-4" />
-                  保存
-                </Button>
-              </div>
-            </div>
-          ) : null}
-        </ScrollDialogContent>
-      </Dialog>
-    </div>
-  );
-}
-
 export default function XJP56App() {
   const [page, setPage] = useState("home");
   const [admin, setAdmin] = useState(false);
@@ -4062,7 +3447,7 @@ export default function XJP56App() {
     apiGetData()
       .then((remote) => {
         if (cancelled) return;
-        const base = remote || { members: [], singles: [], posts: [] };
+        const base = normalizeAppDataShape(remote);
         const migratedMembers = migrateSelectionHistoryKeys(base.members || [], base.singles || []);
         const normalized = withRecomputedSelections({ ...base, members: migratedMembers });
         setData(normalized);
@@ -4071,7 +3456,7 @@ export default function XJP56App() {
       .catch((e) => {
         if (cancelled) return;
         setError(String(e?.message || e || "Failed to load data"));
-        setData(withRecomputedSelections({ members: [], singles: [], posts: [] }));
+        setData(withRecomputedSelections({ members: [], singles: [] }));
         setLoaded(true);
       });
     return () => {
@@ -4089,7 +3474,7 @@ export default function XJP56App() {
   }, [data, loaded]);
 
   const onReset = () => {
-    const empty = withRecomputedSelections({ members: [], singles: [], posts: [] });
+    const empty = withRecomputedSelections({ members: [], singles: [] });
     setData(empty);
     setPage("home");
     apiSaveData(empty).catch(() => {});
@@ -4135,7 +3520,7 @@ export default function XJP56App() {
       {admin ? (
         <div className="mb-6 border border-[#E0E0E0] bg-[#F7F7F7] px-4 py-3 text-sm text-[#1C1C1C]">
           <span className="font-medium">管理员模式已开启：</span>
-          {" "}你可以新增 / 编辑 / 删除成员、单曲和新闻；并在单曲里拖拽编辑站位与上传音源。
+          {" "}你可以新增 / 编辑 / 删除成员和单曲；并在单曲里拖拽编辑站位与上传音源。
         </div>
       ) : null}
 
@@ -4187,18 +3572,6 @@ export default function XJP56App() {
           </motion.div>
         ) : null}
 
-        {page === "blog" ? (
-          <motion.div
-            key="blog"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.25 }}
-          >
-            <BlogPage data={data} setData={setData} admin={admin} />
-          </motion.div>
-        ) : null}
-
         {page === "election" ? (
           <motion.div
             key="election"
@@ -4214,4 +3587,3 @@ export default function XJP56App() {
     </AppShell>
   );
 }
-

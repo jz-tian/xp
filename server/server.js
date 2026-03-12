@@ -10,7 +10,10 @@ const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads", {
+  immutable: true,
+  maxAge: "1y",
+}));
 
 // ✅ 兼容两种目录结构：
 // 1) ./data/db.json
@@ -26,7 +29,7 @@ function getDbPath() {
   if (!fs.existsSync("data")) fs.mkdirSync("data", { recursive: true });
   fs.writeFileSync(
     DB_PATH_PRIMARY,
-    JSON.stringify({ members: [], singles: [], posts: [] }, null, 2)
+    JSON.stringify({ members: [], singles: [] }, null, 2)
   );
   return DB_PATH_PRIMARY;
 }
@@ -55,7 +58,10 @@ function sanitizeDbPayload(db) {
   if (!db || typeof db !== "object") return db;
 
   // 深拷贝避免意外引用
-  const out = JSON.parse(JSON.stringify(db));
+  const out = {
+    members: Array.isArray(db.members) ? JSON.parse(JSON.stringify(db.members)) : [],
+    singles: Array.isArray(db.singles) ? JSON.parse(JSON.stringify(db.singles)) : [],
+  };
 
   if (Array.isArray(out.members)) {
     for (const m of out.members) {
@@ -80,14 +86,6 @@ function sanitizeDbPayload(db) {
     }
   }
 
-  if (Array.isArray(out.posts)) {
-    for (const p of out.posts) {
-      if (p && typeof p === "object" && typeof p.cover === "string") {
-        p.cover = toRelativeUploadsUrl(p.cover);
-      }
-    }
-  }
-
   return out;
 }
 
@@ -105,19 +103,19 @@ app.post("/upload", uploadImageMulter.single("image"), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: "no file" });
 
-    const filename = `${Date.now()}.jpg`;
+    const filename = `${Date.now()}.webp`;
     const filepath = path.join("uploads", filename);
 
     // 确保 uploads 存在
     if (!fs.existsSync("uploads")) fs.mkdirSync("uploads", { recursive: true });
 
     await sharp(req.file.buffer)
-      .resize({ width: 1024 })
-      .jpeg({ quality: 80 })
+      .resize({ width: 960, withoutEnlargement: true })
+      .webp({ quality: 76 })
       .toFile(filepath);
 
     res.json({ url: `/uploads/${filename}` });
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "upload failed" });
   }
 });
@@ -144,7 +142,7 @@ app.post("/upload-audio", uploadAudioMulter.single("audio"), (req, res) => {
     if (!req.file) return res.status(400).json({ error: "no file" });
     const url = `/uploads/audio/${req.file.filename}`;
     res.json({ url });
-  } catch (e) {
+  } catch {
     res.status(500).json({ error: "upload-audio failed" });
   }
 });
