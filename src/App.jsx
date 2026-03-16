@@ -342,6 +342,7 @@ function normalizeAppDataShape(raw) {
   return {
     members: Array.isArray(raw?.members) ? raw.members : [],
     singles: Array.isArray(raw?.singles) ? raw.singles : [],
+    gallery: Array.isArray(raw?.gallery) ? raw.gallery : [],
   };
 }
 
@@ -414,6 +415,13 @@ function sanitizeDbPayload(db) {
       }
     }
   }
+  if (Array.isArray(out.gallery)) {
+    out.gallery = out.gallery.map((p) =>
+      p && typeof p === "object" && typeof p.url === "string"
+        ? { ...p, url: toRelativeUploadsUrl(p.url) }
+        : p
+    );
+  }
   return out;
 }
 
@@ -449,6 +457,44 @@ async function uploadAudio(file) {
   if (!res.ok) throw new Error("Upload audio failed");
   const json = await res.json();
   return json.url;
+}
+
+// Compress image on client before uploading.
+// Strategy: resize to maxSide, then try quality tiers until blob < targetBytes.
+function compressImage(file, maxSide = 1200, targetBytes = 350_000) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      let { width, height } = img;
+      if (Math.max(width, height) > maxSide) {
+        if (width >= height) { height = Math.round(height * maxSide / width); width = maxSide; }
+        else { width = Math.round(width * maxSide / height); height = maxSide; }
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+
+      const qualities = [0.82, 0.72, 0.62, 0.50];
+      let qi = 0;
+      const tryNext = () => {
+        const q = qualities[qi++];
+        canvas.toBlob((blob) => {
+          if (!blob) { reject(new Error("Compression failed")); return; }
+          if (blob.size <= targetBytes || qi >= qualities.length) {
+            resolve(new File([blob], file.name.replace(/\.[^.]+$/, ".jpg"), { type: "image/jpeg" }));
+          } else {
+            tryNext();
+          }
+        }, "image/jpeg", q);
+      };
+      tryNext();
+    };
+    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error("Image load failed")); };
+    img.src = objectUrl;
+  });
 }
 
 function withRecomputedSelections(data) {
@@ -638,6 +684,252 @@ function AppShell({ children }) {
   );
 }
 
+// ---- Gallery Page ----
+function GalleryPage({ data, setData, admin }) {
+  const photos = useMemo(
+    () => [...(data.gallery || [])].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+    [data.gallery]
+  );
+
+  const [lightbox, setLightbox] = useState(null); // photo object or null
+  const [uploadOpen, setUploadOpen] = useState(false);
+  const [pendingFile, setPendingFile] = useState(null);
+  const [pendingPreview, setPendingPreview] = useState(null);
+  const [captionInput, setCaptionInput] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (file) => {
+    if (!file) return;
+    setPendingFile(file);
+    const url = URL.createObjectURL(file);
+    setPendingPreview(url);
+    setUploadError("");
+  };
+
+  const handleConfirmUpload = async () => {
+    if (!pendingFile) return;
+    setUploading(true);
+    setUploadError("");
+    try {
+      const compressed = await compressImage(pendingFile);
+      const url = await uploadImage(compressed);
+      const newPhoto = {
+        id: uid(),
+        url: toRelativeUploadsUrl(url),
+        caption: captionInput.trim(),
+        createdAt: new Date().toISOString(),
+      };
+      setData((prev) => ({ ...prev, gallery: [newPhoto, ...(prev.gallery || [])] }));
+      // Reset
+      setPendingFile(null);
+      if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+      setPendingPreview(null);
+      setCaptionInput("");
+      setUploadOpen(false);
+    } catch (e) {
+      setUploadError(e?.message || "上传失败");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = (id) => {
+    setData((prev) => ({ ...prev, gallery: (prev.gallery || []).filter((p) => p.id !== id) }));
+    if (lightbox?.id === id) setLightbox(null);
+  };
+
+  const handleCloseUpload = () => {
+    if (uploading) return;
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingFile(null);
+    setPendingPreview(null);
+    setCaptionInput("");
+    setUploadError("");
+    setUploadOpen(false);
+  };
+
+  return (
+    <div className="px-4 py-8 mx-auto max-w-7xl">
+      {/* Header */}
+      <div className="flex items-end justify-between mb-8">
+        <div>
+          <div className="text-[10px] tracking-[0.25em] font-medium text-[#AAAAAA] uppercase mb-1">
+            GALLERY
+          </div>
+          <h1 className="text-2xl font-light tracking-tight text-[#1C1C1C]">相册</h1>
+        </div>
+        {admin && (
+          <button
+            onClick={() => setUploadOpen(true)}
+            className="flex items-center gap-2 bg-[#1C1C1C] text-white text-xs tracking-widest px-5 py-2.5 hover:bg-[#333] transition-colors"
+          >
+            <Plus className="h-3.5 w-3.5" />
+            上传照片
+          </button>
+        )}
+      </div>
+
+      {/* Empty state */}
+      {photos.length === 0 && (
+        <div className="py-24 text-center">
+          <div className="text-[#D0D0D0] mb-3">
+            <ImageIcon className="h-10 w-10 mx-auto" strokeWidth={1} />
+          </div>
+          <div className="text-sm text-[#AAAAAA] tracking-wide">暂无照片</div>
+          {admin && (
+            <div className="mt-4 text-xs text-[#C0C0C0]">点击右上角「上传照片」添加第一张</div>
+          )}
+        </div>
+      )}
+
+      {/* Masonry grid — CSS columns */}
+      {photos.length > 0 && (
+        <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 sm:gap-4">
+          <AnimatePresence>
+            {photos.map((photo, idx) => (
+              <motion.div
+                key={photo.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, delay: Math.min(idx * 0.04, 0.4) }}
+                className="break-inside-avoid mb-3 sm:mb-4 group cursor-pointer"
+                onClick={() => setLightbox(photo)}
+              >
+                <div className="relative overflow-hidden bg-[#F7F7F7]">
+                  <MediaImage
+                    src={photo.url}
+                    alt={photo.caption || ""}
+                    className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  {/* Admin delete overlay */}
+                  {admin && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleDelete(photo.id); }}
+                      className="absolute top-2 right-2 w-7 h-7 bg-white/90 border border-[#E0E0E0] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 hover:border-red-200"
+                      title="删除"
+                    >
+                      <Trash2 className="h-3.5 w-3.5 text-[#6B6B6B] hover:text-red-500" />
+                    </button>
+                  )}
+                </div>
+                {photo.caption && (
+                  <div className="pt-1.5 pb-0.5 text-[11px] text-[#6B6B6B] leading-snug tracking-[0.02em]">
+                    {photo.caption}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* Lightbox */}
+      <Dialog open={!!lightbox} onOpenChange={(o) => { if (!o) setLightbox(null); }}>
+        <ScrollDialogContent className="max-w-3xl">
+          {lightbox && (
+            <div className="flex flex-col items-center gap-4">
+              <MediaImage
+                src={lightbox.url}
+                alt={lightbox.caption || ""}
+                className="w-full h-auto max-h-[75vh] object-contain"
+                eager
+              />
+              {lightbox.caption && (
+                <div className="w-full text-center text-sm text-[#6B6B6B] leading-relaxed tracking-[0.02em] px-2">
+                  {lightbox.caption}
+                </div>
+              )}
+              <div className="text-[10px] text-[#AAAAAA] tracking-wider">
+                {lightbox.createdAt ? new Date(lightbox.createdAt).toLocaleDateString("zh-CN") : ""}
+              </div>
+            </div>
+          )}
+        </ScrollDialogContent>
+      </Dialog>
+
+      {/* Upload dialog */}
+      <Dialog open={uploadOpen} onOpenChange={(o) => { if (!o) handleCloseUpload(); }}>
+        <ScrollDialogContent className="max-w-lg">
+          <div className="grid gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-px bg-[#1C1C1C]" />
+              <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">上传照片</div>
+            </div>
+
+            {/* File picker / preview */}
+            {!pendingPreview ? (
+              <label className="flex flex-col items-center justify-center border border-dashed border-[#D0D0D0] py-14 cursor-pointer hover:bg-[#F7F7F7] transition-colors">
+                <ImageIcon className="h-8 w-8 text-[#C0C0C0] mb-3" strokeWidth={1} />
+                <span className="text-xs text-[#6B6B6B] tracking-wide">点击选择照片</span>
+                <span className="text-[10px] text-[#AAAAAA] mt-1">JPG / PNG · 自动压缩</span>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => handleFileSelect(e.target.files?.[0])}
+                />
+              </label>
+            ) : (
+              <div className="relative">
+                <img src={pendingPreview} alt="" className="w-full h-auto max-h-64 object-contain bg-[#F7F7F7]" />
+                <button
+                  onClick={() => {
+                    URL.revokeObjectURL(pendingPreview);
+                    setPendingPreview(null);
+                    setPendingFile(null);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                  }}
+                  className="absolute top-2 right-2 w-7 h-7 bg-white/90 border border-[#E0E0E0] flex items-center justify-center hover:bg-[#F0F0F0]"
+                >
+                  <Minus className="h-3.5 w-3.5 text-[#6B6B6B]" />
+                </button>
+              </div>
+            )}
+
+            {/* Caption */}
+            <div>
+              <div className="text-[10px] tracking-[0.2em] text-[#AAAAAA] uppercase mb-2">Caption</div>
+              <Textarea
+                value={captionInput}
+                onChange={(e) => setCaptionInput(e.target.value)}
+                placeholder="输入照片说明（可选）"
+                className="text-sm rounded-none border-[#E0E0E0] resize-none focus-visible:ring-0 focus-visible:border-[#1C1C1C]"
+                rows={2}
+              />
+            </div>
+
+            {uploadError && (
+              <div className="text-xs text-red-600 border border-red-200 bg-red-50 px-3 py-2">{uploadError}</div>
+            )}
+
+            {/* Actions */}
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={handleCloseUpload}
+                disabled={uploading}
+                className="border border-[#1C1C1C] text-[#1C1C1C] text-xs tracking-widest px-6 py-2.5 hover:bg-[#F0F0F0] transition-colors disabled:opacity-40"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleConfirmUpload}
+                disabled={!pendingFile || uploading}
+                className="bg-[#1C1C1C] text-white text-xs tracking-widest px-6 py-2.5 hover:bg-[#333] transition-colors disabled:opacity-40"
+              >
+                {uploading ? "上传中…" : "确认上传"}
+              </button>
+            </div>
+          </div>
+        </ScrollDialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
 function TopBar({ page, setPage, admin, setAdmin, onReset }) {
   const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
   const tabs = [
@@ -645,6 +937,7 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
     { key: "members", cn: "成员", en: "MEMBER" },
     { key: "singles", cn: "单曲", en: "SINGLES" },
     { key: "election", cn: "总选举", en: "ELECTION" },
+    { key: "gallery", cn: "相册", en: "GALLERY" },
   ];
   const isActive = (key) => page === key || (page === "member-detail" && key === "members");
 
@@ -3528,7 +3821,7 @@ export default function XJP56App() {
   }, [data, loaded]);
 
   const onReset = () => {
-    const empty = withRecomputedSelections({ members: [], singles: [] });
+    const empty = withRecomputedSelections({ members: [], singles: [], gallery: [] });
     setData(empty);
     setPage("home");
     apiSaveData(empty).catch(() => {});
@@ -3574,7 +3867,7 @@ export default function XJP56App() {
       {admin ? (
         <div className="mb-6 border border-[#E0E0E0] bg-[#F7F7F7] px-4 py-3 text-sm text-[#1C1C1C]">
           <span className="font-medium">管理员模式已开启：</span>
-          {" "}你可以新增 / 编辑 / 删除成员和单曲；并在单曲里拖拽编辑站位与上传音源。
+          {" "}你可以新增 / 编辑 / 删除成员和单曲；在单曲里拖拽编辑站位与上传音源；以及在相册上传照片。
         </div>
       ) : null}
 
@@ -3635,6 +3928,18 @@ export default function XJP56App() {
             transition={{ duration: 0.25 }}
           >
             <ElectionPage data={data} />
+          </motion.div>
+        ) : null}
+
+        {page === "gallery" ? (
+          <motion.div
+            key="gallery"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.25 }}
+          >
+            <GalleryPage data={data} setData={setData} admin={admin} />
           </motion.div>
         ) : null}
       </AnimatePresence>
