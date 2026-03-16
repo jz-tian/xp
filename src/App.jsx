@@ -4543,6 +4543,7 @@ export default function XJP56App() {
   const [data, setData] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
+  const initialLoadDone = useRef(false);
 
   // ---- Global audio engine ----
   const audioRef = useRef(null);
@@ -4644,6 +4645,12 @@ export default function XJP56App() {
 
   useEffect(() => {
     if (!loaded || !data) return;
+    // Skip the first trigger (initial load) — prevents wiping the database
+    // when the backend is slow/sleeping and the fetch times out.
+    if (!initialLoadDone.current) {
+      initialLoadDone.current = true;
+      return;
+    }
     const t = setTimeout(() => {
       const next = withRecomputedSelections(data);
       apiSaveData(next).catch(() => {});
