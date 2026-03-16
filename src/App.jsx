@@ -3839,7 +3839,7 @@ export default function XJP56App() {
   const togglePlayPause = () => {
     const el = audioRef.current;
     if (!el) return;
-    if (isPlaying) {
+    if (!el.paused) {
       el.pause();
     } else {
       el.play().catch(() => {});
