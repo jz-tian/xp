@@ -1937,7 +1937,56 @@
       "romaji": "ANRI HIRAKAWA",
       "origin": "神奈川 • 川崎",
       "generation": "6期",
-      "isActive": true,
+      "avatar": "/uploads/1773129002804.jpg",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1771581997163.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773129002804.jpg",
+          "version": 2
+        }
+      ],
+      "isActive": false,
+      "graduationDate": "2026-03-12",
+      "graduationSongTitle": "无",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第19位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "圈外"
+        }
+      ],
+      "admireSenior": [
+        "m_saki",
+        "m_5gen_4_8493"
+      ],
+      "friends": [
+        "m_6gen_1_4821",
+        "m_akari"
+      ],
+      "favoriteSong": "Suki Suki (仓野尤利娅 center)",
+      "favoriteSongs": [
+        "Suki Suki (仓野尤利娅 center)",
+        "Wall of Dreams (A-side)",
+        "NEXT?!（松村珠理奈center）"
+      ],
       "profile": {
         "height": "165cm",
         "birthday": "2008-03-30",
@@ -1975,59 +2024,8 @@
         "s_pw9b7nha": "落选",
         "s_oey99lit": "落选",
         "s_4ofhpcr1": "落选",
-        "s_z8u6w72c": "落选",
-        "s_pbzdfn3u": "落选",
-        "s_15hm6il2": "落选",
-        "s_6k83o27r": "落选"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第3届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第19位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "圈外"
-        }
-      ],
-      "admireSenior": [
-        "m_saki",
-        "m_5gen_4_8493"
-      ],
-      "avatar": "/uploads/1773129002804.jpg",
-      "favoriteSong": "Suki Suki (仓野尤利娅 center)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1771581997163.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773129002804.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Suki Suki (仓野尤利娅 center)",
-        "Wall of Dreams (A-side)",
-        "NEXT?!（松村珠理奈center）"
-      ],
-      "friends": [
-        "m_6gen_1_4821",
-        "m_akari"
-      ]
+        "s_z8u6w72c": "落选"
+      }
     },
     {
       "id": "m_5gen_1_3632",
@@ -3294,7 +3292,53 @@
       "origin": "加拿大 • 多伦多",
       "generation": "2期",
       "avatar": "/uploads/1773083791504.jpg",
-      "isActive": true,
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768593513971.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083791504.jpg",
+          "version": 2
+        }
+      ],
+      "isActive": false,
+      "graduationDate": "2026-03-16",
+      "graduationSongTitle": "无",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "十一位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十一位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十三位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第17位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第14位"
+        }
+      ],
+      "admireSenior": [
+        "m_mika"
+      ],
+      "friends": [
+        "m_c16gtwds"
+      ],
+      "favoriteSong": "GIMME AMI",
+      "favoriteSongs": [
+        "GIMME AMI",
+        "Fly Away (白鸟南娜毕业曲)",
+        "HAVE A NICE DAY (A-side)"
+      ],
       "profile": {
         "height": "170cm",
         "birthday": "2007-02-21",
@@ -3334,54 +3378,8 @@
         "s_4ofhpcr1": "落选",
         "s_z8u6w72c": "落选",
         "s_pbzdfn3u": "落选",
-        "s_15hm6il2": "落选",
-        "s_6k83o27r": "落选"
-      },
-      "selectionCount": 3,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "十一位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十一位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十三位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第17位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第14位"
-        }
-      ],
-      "favoriteSong": "GIMME AMI",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768593513971.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083791504.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "GIMME AMI",
-        "Fly Away (白鸟南娜毕业曲)",
-        "HAVE A NICE DAY (A-side)"
-      ],
-      "admireSenior": [
-        "m_mika"
-      ],
-      "friends": [
-        "m_c16gtwds"
-      ]
+        "s_15hm6il2": "落选"
+      }
     },
     {
       "id": "m_gbojk371",
