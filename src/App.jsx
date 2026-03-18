@@ -4597,84 +4597,242 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
 }
 
 function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, duration, onTogglePlayPause, onSeekToIndex, onStop }) {
-  const [expanded, setExpanded] = useState(false);
+  const [playerMode, setPlayerMode] = useState("collapsed");
   const item = audioQueue[audioIndex] ?? null;
   if (!item) return null;
 
   const progress = duration > 0 ? currentTime / duration : 0;
+  const formatPlayerTime = (secs) => {
+    const total = Number.isFinite(secs) ? Math.max(0, Math.floor(secs)) : 0;
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return `${m}:${String(s).padStart(2, "0")}`;
+  };
   // SVG arc constants
   const R = 22; // radius of progress circle
   const C = 2 * Math.PI * R; // circumference
 
   const canPrev = audioIndex > 0;
   const canNext = audioIndex < audioQueue.length - 1;
+  const upNext = audioQueue.slice(audioIndex + 1);
+  const singleMeta = splitSingleTitle(item.singleTitle || "");
 
   return (
     <div className="fixed bottom-6 right-4 z-50">
       <AnimatePresence mode="wait">
-        {expanded ? (
+        {playerMode === "detail" ? (
           <motion.div
-            key="expanded"
+            key="detail"
             initial={{ opacity: 0, scale: 0.9, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 8 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="bg-white border border-[#E0E0E0] shadow-lg w-[calc(100vw-2rem)] sm:w-72"
+            className="relative overflow-hidden border border-[#E7E7E7] bg-white shadow-[0_28px_90px_rgba(0,0,0,0.18)] w-[calc(100vw-2rem)] sm:w-[420px]"
           >
-            {/* Top row: cover + track info + collapse */}
-            <div className="flex items-start gap-3 p-3 border-b border-[#E0E0E0]">
-              <div className="w-10 h-10 shrink-0 bg-[#F7F7F7] overflow-hidden">
+            <div className="relative">
+              <div className="flex items-center justify-between px-5 pt-5">
+                <div>
+                  <div className="text-[10px] tracking-[0.22em] text-[#9A9A9A] uppercase">Now Playing</div>
+                  <div className="mt-1 text-[10px] tracking-[0.12em] text-[#B0B0B0]">
+                    {audioIndex + 1} / {audioQueue.length}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setPlayerMode("compact")}
+                  className="shrink-0 text-[#A0A0A0] hover:text-[#1C1C1C] transition-colors p-1"
+                >
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="px-5 pt-4 pb-5">
+                <div className="mx-auto aspect-square w-full max-w-[260px] overflow-hidden bg-[#F3F3F3] shadow-[0_18px_45px_rgba(0,0,0,0.16)]">
+                  {item.coverUrl ? (
+                    <img src={item.coverUrl} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                      <Music className="w-10 h-10 text-[#B8B8B8]" />
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-6 text-center">
+                  <div className="text-[28px] leading-tight font-light tracking-tight text-[#1C1C1C] break-words">
+                    {item.title}
+                  </div>
+                  <div className="mt-2 text-[11px] tracking-[0.18em] text-[#8C8C8C] uppercase">
+                    {singleMeta.prefix || item.singleTitle}
+                    {singleMeta.name ? ` · ${singleMeta.name}` : ""}
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <div className="h-[3px] bg-[#E9E9E9] overflow-hidden">
+                    <div
+                      className="h-full bg-[#1C1C1C] transition-none"
+                      style={{ width: `${progress * 100}%` }}
+                    />
+                  </div>
+                  <div className="mt-2 flex items-center justify-between text-[10px] tracking-[0.12em] text-[#A0A0A0]">
+                    <span>{formatPlayerTime(currentTime)}</span>
+                    <span>{formatPlayerTime(duration)}</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex items-center justify-center gap-5">
+                  <button
+                    onClick={() => onSeekToIndex(audioIndex - 1)}
+                    disabled={!canPrev}
+                    className={`flex h-11 w-11 items-center justify-center border transition-colors ${
+                      canPrev
+                        ? "border-[#D9D9D9] text-[#1C1C1C] hover:border-[#1C1C1C] hover:bg-[#F7F7F7]"
+                        : "border-[#EFEFEF] text-[#D0D0D0]"
+                    }`}
+                  >
+                    <SkipBack className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={onTogglePlayPause}
+                    className="flex h-14 w-14 items-center justify-center bg-[#1C1C1C] text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] transition-colors hover:bg-[#333]"
+                  >
+                    {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+                  </button>
+                  <button
+                    onClick={() => onSeekToIndex(audioIndex + 1)}
+                    disabled={!canNext}
+                    className={`flex h-11 w-11 items-center justify-center border transition-colors ${
+                      canNext
+                        ? "border-[#D9D9D9] text-[#1C1C1C] hover:border-[#1C1C1C] hover:bg-[#F7F7F7]"
+                        : "border-[#EFEFEF] text-[#D0D0D0]"
+                    }`}
+                  >
+                    <SkipForward className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-[#ECECEC] bg-white/82 backdrop-blur-sm">
+                <div className="flex items-center justify-between px-5 pt-4 pb-3">
+                  <div className="text-[10px] tracking-[0.22em] text-[#9A9A9A] uppercase">Up Next</div>
+                  <button
+                    onClick={onStop}
+                    className="text-[10px] tracking-[0.15em] text-[#AAAAAA] uppercase hover:text-[#1C1C1C] transition-colors"
+                  >
+                    停止
+                  </button>
+                </div>
+                {upNext.length > 0 ? (
+                  <div className="max-h-52 overflow-y-auto px-3 pb-3">
+                    {upNext.map((queueItem, idx) => {
+                      const actualIndex = audioIndex + idx + 1;
+                      const meta = splitSingleTitle(queueItem.singleTitle || "");
+                      return (
+                        <button
+                          key={`${queueItem.singleId}-${queueItem.trackNo}-${actualIndex}`}
+                          onClick={() => onSeekToIndex(actualIndex)}
+                          className="flex w-full items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-[#F7F7F7]"
+                        >
+                          <div className="w-9 text-[10px] tracking-[0.15em] text-[#B0B0B0] shrink-0">
+                            {String(actualIndex + 1).padStart(2, "0")}
+                          </div>
+                          <div className="h-10 w-10 shrink-0 overflow-hidden bg-[#F2F2F2]">
+                            {queueItem.coverUrl ? (
+                              <img src={queueItem.coverUrl} alt="" className="h-full w-full object-cover" />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center">
+                                <Music className="w-4 h-4 text-[#B8B8B8]" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="truncate text-[13px] tracking-[0.04em] text-[#1C1C1C]">{queueItem.title}</div>
+                            <div className="mt-0.5 truncate text-[10px] tracking-[0.08em] text-[#9A9A9A]">
+                              {meta.prefix || queueItem.singleTitle}
+                            </div>
+                          </div>
+                          <Play className="w-3.5 h-3.5 shrink-0 text-[#C0C0C0]" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="px-5 pb-5 text-[12px] text-[#AAAAAA]">队列里没有下一首了</div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        ) : playerMode === "compact" ? (
+          <motion.div
+            key="compact"
+            initial={{ opacity: 0, scale: 0.94, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 8 }}
+            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            className="bg-white border border-[#E0E0E0] shadow-lg w-[calc(100vw-2rem)] sm:w-[360px]"
+          >
+            <div className="flex items-start gap-3 p-4 border-b border-[#E0E0E0]">
+              <button
+                type="button"
+                onClick={() => setPlayerMode("detail")}
+                className="w-14 h-14 shrink-0 bg-[#F7F7F7] overflow-hidden hover:opacity-90 transition-opacity"
+                title="展开大播放器"
+              >
                 {item.coverUrl ? (
                   <img src={item.coverUrl} alt="" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Music className="w-4 h-4 text-[#AAAAAA]" />
+                    <Music className="w-5 h-5 text-[#AAAAAA]" />
                   </div>
                 )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-[13px] font-medium text-[#1C1C1C] truncate">{item.title}</div>
-                <div className="text-[10px] text-[#6B6B6B] tracking-[0.08em] truncate mt-0.5">{item.singleTitle}</div>
-              </div>
+              </button>
               <button
-                onClick={() => setExpanded(false)}
+                type="button"
+                onClick={() => setPlayerMode("detail")}
+                className="flex-1 min-w-0 text-left"
+                title="展开大播放器"
+              >
+                <div className="text-[22px] leading-tight font-light text-[#1C1C1C] line-clamp-2">{item.title}</div>
+                <div className="text-[11px] text-[#6B6B6B] tracking-[0.16em] truncate mt-2 uppercase">
+                  {singleMeta.prefix || item.singleTitle}
+                  {singleMeta.name ? ` · ${singleMeta.name}` : ""}
+                </div>
+              </button>
+              <button
+                onClick={() => setPlayerMode("collapsed")}
                 className="shrink-0 text-[#AAAAAA] hover:text-[#1C1C1C] transition-colors p-0.5"
               >
                 <ChevronDown className="w-4 h-4" />
               </button>
             </div>
-            {/* Progress bar */}
             <div className="h-[2px] bg-[#E0E0E0]">
               <div
                 className="h-full bg-[#1C1C1C] transition-none"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
-            {/* Controls */}
-            <div className="flex items-center justify-center gap-6 py-3">
+            <div className="flex items-center justify-center gap-8 py-5">
               <button
                 onClick={() => onSeekToIndex(audioIndex - 1)}
                 disabled={!canPrev}
                 className={`transition-opacity ${canPrev ? "text-[#1C1C1C] hover:text-[#444]" : "text-[#CCCCCC]"}`}
               >
-                <SkipBack className="w-5 h-5" />
+                <SkipBack className="w-7 h-7" />
               </button>
               <button
                 onClick={onTogglePlayPause}
-                className="w-9 h-9 border border-[#1C1C1C] flex items-center justify-center hover:bg-[#1C1C1C] hover:text-white transition-colors text-[#1C1C1C]"
+                className="w-14 h-14 border border-[#1C1C1C] flex items-center justify-center hover:bg-[#1C1C1C] hover:text-white transition-colors text-[#1C1C1C]"
               >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-0.5" />}
               </button>
               <button
                 onClick={() => onSeekToIndex(audioIndex + 1)}
                 disabled={!canNext}
                 className={`transition-opacity ${canNext ? "text-[#1C1C1C] hover:text-[#444]" : "text-[#CCCCCC]"}`}
               >
-                <SkipForward className="w-5 h-5" />
+                <SkipForward className="w-7 h-7" />
               </button>
             </div>
-            {/* Bottom row: counter + stop */}
-            <div className="flex items-center justify-between px-3 pb-3">
+            <div className="flex items-center justify-between px-4 pb-4">
               <span className="text-[10px] tracking-[0.15em] text-[#AAAAAA]">
                 {audioIndex + 1} / {audioQueue.length}
               </span>
@@ -4693,7 +4851,7 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            onClick={() => setExpanded(true)}
+            onClick={() => setPlayerMode("compact")}
             className="w-12 h-12 rounded-full bg-white border border-[#E0E0E0] hover:shadow-md transition-shadow flex items-center justify-center relative overflow-visible"
           >
             {/* SVG progress arc */}
