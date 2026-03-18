@@ -320,27 +320,85 @@ function formatElectionRank(raw) {
 }
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
+const GENERATION_THEME = {
+  "1": { backgroundColor: "#E78BA8", color: "#FFFFFF", borderColor: "#E78BA8" },
+  "2": { backgroundColor: "#63EA95", color: "#111111", borderColor: "#63EA95" },
+  "3": { backgroundColor: "#00A8E7", color: "#FFFFFF", borderColor: "#00A8E7" },
+  "4": { backgroundColor: "#F8FD01", color: "#111111", borderColor: "#F8FD01" },
+  "5": { backgroundColor: "#FDA40C", color: "#111111", borderColor: "#FDA40C" },
+  "6": { backgroundColor: "#DCC8E1", color: "#111111", borderColor: "#DCC8E1" },
+  "7": { backgroundColor: "#2F7927", color: "#FFFFFF", borderColor: "#2F7927" },
+  "8": { backgroundColor: "#3098FE", color: "#FFFFFF", borderColor: "#3098FE" },
+};
+
 
 function generationBadgeClass(gen = "") {
   const g = String(gen || "");
-  if (g.startsWith("1")) return "bg-rose-50 text-rose-700";
-  if (g.startsWith("2")) return "bg-emerald-50 text-emerald-700";
-  if (g.startsWith("3")) return ""; // styled via generationBadgeStyle
-  if (g.startsWith("4")) return "bg-amber-50 text-amber-700";
-  if (g.startsWith("5")) return ""; // styled via generationBadgeStyle
-  if (g.startsWith("6")) return ""; // styled via generationBadgeStyle
-  if (g.startsWith("7")) return ""; // styled via generationBadgeStyle
+  if (/^\d/.test(g)) return "";
   return "bg-[#F0F0F0] text-[#6B6B6B]";
 }
 
 function generationBadgeStyle(gen = "") {
   const g = String(gen || "");
-  const base = { padding: '2px 8px', fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em' };
-  if (g.startsWith("3")) return { ...base, backgroundColor: "#EEF2FF", color: "#4338CA" };
-  if (g.startsWith("5")) return { ...base, backgroundColor: "#F0FDFA", color: "#0F766E" };
-  if (g.startsWith("6")) return { ...base, backgroundColor: "#FAF5FF", color: "#7C3AED" };
-  if (g.startsWith("7")) return { ...base, backgroundColor: "#FFF7ED", color: "#C2410C" };
+  const base = {
+    padding: "2px 8px",
+    fontWeight: 600,
+    fontSize: "10px",
+    letterSpacing: "0.04em",
+    borderWidth: "1px",
+    borderStyle: "solid",
+  };
+  const genNo = g.match(/\d+/)?.[0];
+  if (genNo && GENERATION_THEME[genNo]) return { ...base, ...GENERATION_THEME[genNo] };
   return base;
+}
+
+function generationFilterStyle(gen = "", active = false) {
+  const genNo = String(gen || "").match(/\d+/)?.[0];
+  const theme = genNo ? GENERATION_THEME[genNo] : null;
+  if (!theme) {
+    return active
+      ? { backgroundColor: "#1C1C1C", color: "#FFFFFF", borderColor: "#1C1C1C" }
+      : { backgroundColor: "#FFFFFF", color: "#1C1C1C", borderColor: "#E0E0E0" };
+  }
+  return active
+    ? { backgroundColor: theme.backgroundColor, color: theme.color, borderColor: theme.borderColor }
+    : { backgroundColor: "#FFFFFF", color: theme.backgroundColor, borderColor: theme.borderColor };
+}
+
+function normalizeMemberDraft(member) {
+  const profile = member?.profile || {};
+  return {
+    id: member?.id || `m_${uid()}`,
+    name: member?.name || "",
+    romaji: member?.romaji || "",
+    origin: member?.origin || "",
+    generation: member?.generation || "",
+    avatar: member?.avatar || "",
+    officialPhotos: Array.isArray(member?.officialPhotos) ? member.officialPhotos : [],
+    isActive: member?.isActive ?? true,
+    graduationDate: member?.graduationDate || "",
+    graduationSongTitle: member?.graduationSongTitle || "",
+    electionRanks: Array.isArray(member?.electionRanks) ? member.electionRanks : [],
+    admireSenior: Array.isArray(member?.admireSenior) ? member.admireSenior : [],
+    friends: Array.isArray(member?.friends) ? member.friends : [],
+    favoriteSong: member?.favoriteSong || "",
+    favoriteSongs: Array.isArray(member?.favoriteSongs)
+      ? member.favoriteSongs
+      : (member?.favoriteSong ? [member.favoriteSong] : []),
+    profile: {
+      height: profile.height || "",
+      birthday: profile.birthday || "",
+      blood: profile.blood || "",
+      hobby: profile.hobby || "",
+      skill: profile.skill || "",
+      catchphrase: profile.catchphrase || "",
+    },
+    selectionHistory: member?.selectionHistory || {
+      "1st Single": "",
+      "2nd Single": "",
+    },
+  };
 }
 
 
@@ -2367,6 +2425,7 @@ function ScrollDialogContent({ className = "", children, ...props }) {
 function MemberDetailContent({ member, data }) {
   if (!member) return null;
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [showAllPreJoinSingles, setShowAllPreJoinSingles] = useState(false);
   const officialPhotos = Array.isArray(member.officialPhotos) ? member.officialPhotos : [];
   const hasMultiplePhotos = officialPhotos.length > 1;
   const generationNum = parseInt(String(member?.generation || "").match(/\d+/)?.[0], 10);
@@ -2374,6 +2433,9 @@ function MemberDetailContent({ member, data }) {
   const favoriteSongs = Array.isArray(member?.favoriteSongs)
     ? member.favoriteSongs.filter((x) => typeof x === "string" && x.trim())
     : (member?.favoriteSong ? [member.favoriteSong] : []);
+  useEffect(() => {
+    setShowAllPreJoinSingles(false);
+  }, [member?.id]);
   return (
     <div className="grid gap-10">
 
@@ -2385,8 +2447,13 @@ function MemberDetailContent({ member, data }) {
         {member.romaji ? (
           <div className="text-[11px] tracking-[0.2em] text-[#6B6B6B] mt-1">{member.romaji}</div>
         ) : null}
-        <div className="text-xs text-[#6B6B6B] mt-1">
-          {[member.origin, member.generation].filter(Boolean).join(" · ")}
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-2 text-xs text-[#6B6B6B]">
+          {member.origin ? <span>{member.origin}</span> : null}
+          {member.generation ? (
+            <span className={generationBadgeClass(member.generation)} style={generationBadgeStyle(member.generation)}>
+              {member.generation}
+            </span>
+          ) : null}
         </div>
       </div>
 
@@ -2580,6 +2647,15 @@ function MemberDetailContent({ member, data }) {
             return { k, label: k, value: String(v ?? "") };
           });
           if (entries.length === 0) return <div className="text-sm text-[#6B6B6B]">—</div>;
+          let leadingPreJoinCount = 0;
+          while (leadingPreJoinCount < entries.length && String(entries[leadingPreJoinCount]?.value || "").includes("加入前")) {
+            leadingPreJoinCount++;
+          }
+          const shouldCollapsePreJoin = leadingPreJoinCount > 2;
+          const collapsedPreJoinCount = shouldCollapsePreJoin ? leadingPreJoinCount - 2 : 0;
+          const visibleEntries = shouldCollapsePreJoin && !showAllPreJoinSingles
+            ? [...entries.slice(collapsedPreJoinCount, leadingPreJoinCount), ...entries.slice(leadingPreJoinCount)]
+            : entries;
 
           // ---- 动态统计 ----
           let selectionCount = 0;
@@ -2638,7 +2714,23 @@ function MemberDetailContent({ member, data }) {
                   )}
                 </div>
               )}
-              {entries.map(({ k, label, value }, rowIdx) => {
+              {shouldCollapsePreJoin && !showAllPreJoinSingles ? (
+                <button
+                  type="button"
+                  onClick={() => setShowAllPreJoinSingles(true)}
+                  className="w-full border-b border-[#E0E0E0] text-center transition-colors hover:bg-[#FCFCFC]"
+                  title={`展开更早的 ${collapsedPreJoinCount} 首加入前单曲`}
+                >
+                  <div className="flex items-center justify-center py-2 md:py-2.5 pb-4 md:pb-5">
+                    <div className="flex flex-col items-center justify-center leading-none text-[#B8B8B8]">
+                      <span className="text-[11px] leading-none">•</span>
+                      <span className="mt-0.5 text-[11px] leading-none">•</span>
+                      <span className="mt-0.5 text-[11px] leading-none">•</span>
+                    </div>
+                  </div>
+                </button>
+              ) : null}
+              {visibleEntries.map(({ k, label, value }, rowIdx) => {
                 const singleObj = (data?.singles || []).find((s) => s.id === k);
                 let title = (singleObj?.title ?? label ?? "").toString();
                 const parts = title.split("·").map((s) => s.trim()).filter(Boolean);
@@ -2705,6 +2797,15 @@ function MemberDetailContent({ member, data }) {
                   </div>
                 );
               })}
+              {shouldCollapsePreJoin && showAllPreJoinSingles ? (
+                <button
+                  type="button"
+                  onClick={() => setShowAllPreJoinSingles(false)}
+                  className="w-full py-2.5 md:py-3.5 text-center text-[11px] tracking-[0.12em] text-[#8A8A8A] hover:text-[#1C1C1C] hover:bg-[#FAFAFA] transition-colors"
+                >
+                  收起更早的加入前单曲
+                </button>
+              ) : null}
             </div>
           );
         })()}
@@ -2749,33 +2850,7 @@ function MembersPage({ data, setData, admin }) {
   }, [members, statusFilter, genFilter]);
 
   const openEdit = (m) => {
-    setEditing(
-      m ?? {
-        id: `m_${uid()}`,
-        name: "",
-        romaji: "",
-        origin: "",
-        generation: "",
-        avatar: "",
-        officialPhotos: [],
-        isActive: true,
-        graduationDate: "",
-        // 总选举顺位：[{ edition: "第一届", rank: "一位" }, ...]
-        electionRanks: [],
-        profile: {
-          height: "",
-          birthday: "",
-          blood: "",
-          hobby: "",
-          skill: "",
-          catchphrase: "",
-        },
-        selectionHistory: {
-          "1st Single": "",
-          "2nd Single": "",
-        },
-      }
-    );
+    setEditing(normalizeMemberDraft(m));
     setEditorOpen(true);
   };
 
@@ -2797,11 +2872,20 @@ function MembersPage({ data, setData, admin }) {
     }
     setData((prev) => {
       const exists = prev.members.some((x) => x.id === editing.id);
+      const nextDraft = {
+        ...editing,
+        favoriteSongs: Array.isArray(editing.favoriteSongs)
+          ? editing.favoriteSongs.filter((x) => typeof x === "string" && x.trim())
+          : [],
+      };
+      if (!nextDraft.favoriteSong && nextDraft.favoriteSongs.length > 0) {
+        nextDraft.favoriteSong = nextDraft.favoriteSongs[0];
+      }
       const nextMembers = exists
         ? prev.members.map((x) =>
-            x.id === editing.id ? editing : x
+            x.id === editing.id ? nextDraft : x
           )
-        : [...prev.members, editing];
+        : [...prev.members, nextDraft];
 
       return withRecomputedSelections({
         ...prev,
@@ -2875,10 +2959,13 @@ function MembersPage({ data, setData, admin }) {
             onClick={() => setGenFilter(key)}
             className={
               "text-xs tracking-wider px-3 py-1 border transition-colors " +
-              (genFilter === key
-                ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
-                : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+              (key === "all"
+                ? (genFilter === key
+                  ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                  : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                : "")
             }
+            style={key === "all" ? undefined : generationFilterStyle(key, genFilter === key)}
           >
             {label}
           </button>
@@ -3267,6 +3354,39 @@ function MembersPage({ data, setData, admin }) {
                 </div>
               </div>
 
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">成员关联与喜好</div>
+                  <div className="text-xs text-[#6B6B6B] mt-0.5">这些字段会直接显示在成员详情页，八期生也能完整展示。</div>
+                </div>
+                <div className="p-4 grid gap-5">
+                  <MemberReferenceEditor
+                    label="憧憬前辈"
+                    value={editing.admireSenior || []}
+                    options={data.members.filter((m) => m.id !== editing.id)}
+                    onChange={(next) => setEditing((p) => ({ ...p, admireSenior: next }))}
+                  />
+                  <MemberReferenceEditor
+                    label="亲友"
+                    value={editing.friends || []}
+                    options={data.members.filter((m) => m.id !== editing.id)}
+                    onChange={(next) => setEditing((p) => ({ ...p, friends: next }))}
+                  />
+                  <ListTextarea
+                    label="喜欢歌曲"
+                    value={editing.favoriteSongs || []}
+                    placeholder={"每行一首\n例如：SPLASH!!! (A-side)"}
+                    onChange={(next) =>
+                      setEditing((p) => ({
+                        ...p,
+                        favoriteSongs: next,
+                        favoriteSong: next[0] || "",
+                      }))
+                    }
+                  />
+                </div>
+              </div>
+
               <div className="flex items-center justify-end gap-2">
                 <Button variant="secondary" onClick={() => setEditorOpen(false)}>
                   取消
@@ -3297,6 +3417,81 @@ function LabeledInput({ label, value, onChange, placeholder }) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
       />
+    </div>
+  );
+}
+
+function ListTextarea({ label, value, onChange, placeholder }) {
+  return (
+    <div className="grid gap-2">
+      <div className="text-sm font-medium">{label}</div>
+      <Textarea
+        value={Array.isArray(value) ? value.join("\n") : ""}
+        onChange={(e) =>
+          onChange(
+            e.target.value
+              .split("\n")
+              .map((x) => x.trim())
+              .filter(Boolean)
+          )
+        }
+        placeholder={placeholder}
+        className="min-h-[110px]"
+      />
+    </div>
+  );
+}
+
+function MemberReferenceEditor({ label, value, options, onChange }) {
+  const selected = Array.isArray(value) ? value : [];
+  const rows = selected.length ? selected : [""];
+
+  return (
+    <div className="grid gap-3">
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-sm font-medium">{label}</div>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => onChange([...(selected || []), ""])}
+        >
+          <Plus className="mr-2 h-4 w-4" />
+          新增一条
+        </Button>
+      </div>
+      <div className="grid gap-2">
+        {rows.map((id, idx) => (
+          <div key={`${label}-${idx}`} className="grid gap-2 md:grid-cols-[1fr_auto]">
+            <select
+              value={id}
+              onChange={(e) => {
+                const next = [...rows];
+                next[idx] = e.target.value;
+                onChange(next.filter(Boolean));
+              }}
+              className="h-9 border border-[#E0E0E0] bg-white px-3 text-sm text-[#1C1C1C]"
+            >
+              <option value="">请选择成员</option>
+              {options.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.name} · {m.generation || "未设期别"}
+                </option>
+              ))}
+            </select>
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={() => {
+                const next = [...rows];
+                next.splice(idx, 1);
+                onChange(next.filter(Boolean));
+              }}
+            >
+              删除
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
