@@ -4618,7 +4618,16 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
   const singleMeta = splitSingleTitle(item.singleTitle || "");
 
   return (
-    <div className="fixed bottom-6 right-4 z-50">
+    <div className="fixed inset-0 z-50 pointer-events-none">
+      {playerMode !== "collapsed" ? (
+        <button
+          type="button"
+          aria-label="收起播放器"
+          onClick={() => setPlayerMode(playerMode === "detail" ? "compact" : "collapsed")}
+          className="absolute inset-0 pointer-events-auto"
+        />
+      ) : null}
+      <div className="absolute bottom-6 right-4 pointer-events-auto">
       <AnimatePresence mode="wait">
         {playerMode === "detail" ? (
           <motion.div
@@ -4630,20 +4639,22 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
             className="relative overflow-hidden border border-[#E7E7E7] bg-white shadow-[0_28px_90px_rgba(0,0,0,0.18)] w-[calc(100vw-2rem)] sm:w-[420px]"
           >
             <div className="relative">
-              <div className="flex items-center justify-between px-5 pt-5">
+              <button
+                type="button"
+                onClick={() => setPlayerMode("compact")}
+                className="flex w-full items-center justify-between px-5 pt-5 pb-2 text-left hover:bg-[#FCFCFC] transition-colors"
+              >
                 <div>
                   <div className="text-[10px] tracking-[0.22em] text-[#9A9A9A] uppercase">Now Playing</div>
                   <div className="mt-1 text-[10px] tracking-[0.12em] text-[#B0B0B0]">
                     {audioIndex + 1} / {audioQueue.length}
                   </div>
                 </div>
-                <button
-                  onClick={() => setPlayerMode("compact")}
-                  className="shrink-0 text-[#A0A0A0] hover:text-[#1C1C1C] transition-colors p-1"
-                >
+                <span className="inline-flex items-center gap-1.5 shrink-0 text-[#A0A0A0] hover:text-[#1C1C1C] transition-colors min-h-11 px-1">
+                  <span className="text-[10px] tracking-[0.14em] uppercase">收起</span>
                   <ChevronDown className="w-4 h-4" />
-                </button>
-              </div>
+                </span>
+              </button>
 
               <div className="px-5 pt-4 pb-5">
                 <div className="mx-auto aspect-square w-full max-w-[260px] overflow-hidden bg-[#F3F3F3] shadow-[0_18px_45px_rgba(0,0,0,0.16)]">
@@ -4722,7 +4733,10 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
                   </button>
                 </div>
                 {upNext.length > 0 ? (
-                  <div className="max-h-52 overflow-y-auto px-3 pb-3">
+                  <div
+                    className="max-h-52 overflow-y-auto overscroll-contain px-3 pb-3"
+                    style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
+                  >
                     {upNext.map((queueItem, idx) => {
                       const actualIndex = audioIndex + idx + 1;
                       const meta = splitSingleTitle(queueItem.singleTitle || "");
@@ -4886,6 +4900,7 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
           </motion.button>
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 }
