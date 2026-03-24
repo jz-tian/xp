@@ -3702,7 +3702,14 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
       {/* Discography grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
         <AnimatePresence mode="popLayout">
-        {data.singles.filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
+        {[...data.singles].sort((a, b) => {
+            const ta = Date.parse(a.release || "");
+            const tb = Date.parse(b.release || "");
+            if (!isFinite(ta) && !isFinite(tb)) return 0;
+            if (!isFinite(ta)) return 1;
+            if (!isFinite(tb)) return -1;
+            return tb - ta; // 新 → 旧
+          }).filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
           const { prefix, name } = splitSingleTitle(s.title);
           return (
             <motion.div
@@ -4653,11 +4660,11 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
 
   return (
     <div className="fixed inset-0 z-50 pointer-events-none">
-      {playerMode !== "collapsed" ? (
+      {playerMode === "detail" ? (
         <button
           type="button"
           aria-label="收起播放器"
-          onClick={() => setPlayerMode(playerMode === "detail" ? "compact" : "collapsed")}
+          onClick={() => setPlayerMode("compact")}
           className="absolute inset-0 pointer-events-auto"
         />
       ) : null}
