@@ -4091,6 +4091,40 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
           <div className="flex items-center gap-3 mb-4">
             <div className="w-5 h-px bg-[#1C1C1C]" />
             <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Tracklist</div>
+            {hasAnyAudio && (
+              <button
+                type="button"
+                title="播放全部曲目"
+                onClick={() => {
+                  const tracksWithAudio = tracks.filter((t) => !!t.audio);
+                  if (!tracksWithAudio.length) return;
+                  const isAlbumPlaying = audioQueue?.length === tracksWithAudio.length &&
+                    tracksWithAudio.every((t, i) => audioQueue[i]?.singleId === single.id && audioQueue[i]?.trackNo === t.no);
+                  if (isAlbumPlaying) {
+                    togglePlayPause?.();
+                  } else {
+                    playQueue?.(tracksWithAudio.map((t) => ({
+                      singleId: single.id,
+                      trackNo: t.no,
+                      title: t.title,
+                      singleTitle: single.title,
+                      coverUrl: resolveMediaUrl(single.cover),
+                      audioUrl: resolveMediaUrl(t.audio),
+                    })), 0);
+                  }
+                }}
+                className="ml-1 w-6 h-6 rounded-full border border-[#1C1C1C] flex items-center justify-center shrink-0 hover:bg-[#1C1C1C] hover:text-white transition-colors text-[#1C1C1C]"
+              >
+                {(() => {
+                  const tracksWithAudio = tracks.filter((t) => !!t.audio);
+                  const isAlbumActive = audioQueue?.length === tracksWithAudio.length &&
+                    tracksWithAudio.every((t, i) => audioQueue[i]?.singleId === single.id && audioQueue[i]?.trackNo === t.no);
+                  return isAlbumActive && isPlaying
+                    ? <Pause className="w-3 h-3" />
+                    : <Play className="w-3 h-3 ml-0.5" />;
+                })()}
+              </button>
+            )}
           </div>
 
           {/* Track rows */}
@@ -4627,7 +4661,13 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
           className="absolute inset-0 pointer-events-auto"
         />
       ) : null}
-      <div className="absolute bottom-6 right-4 pointer-events-auto max-sm:inset-x-4 max-sm:top-4 max-sm:bottom-4">
+      <div className={`absolute pointer-events-auto${
+        playerMode === "detail"
+          ? " bottom-6 right-4 max-sm:inset-x-4 max-sm:top-4 max-sm:bottom-4"
+          : playerMode === "compact"
+          ? " bottom-6 right-4 max-sm:left-4 max-sm:bottom-4"
+          : " bottom-6 right-4"
+      }`}>
       <AnimatePresence mode="wait">
         {playerMode === "detail" ? (
           <motion.div
