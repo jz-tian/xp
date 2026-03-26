@@ -94,8 +94,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第3排）"
-      }
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第2排）"
+      },
+      "favoritePokemon": 7
     },
     {
       "id": "m_8gen_2_2649",
@@ -191,8 +193,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
-      }
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
+      },
+      "favoritePokemon": 102
     },
     {
       "id": "m_8gen_3_5730",
@@ -288,8 +292,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
-      }
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "A面选拔（第3排）"
+      },
+      "favoritePokemon": 86
     },
     {
       "id": "m_8gen_4_9154",
@@ -385,8 +391,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
-      }
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "A面选拔（第3排）"
+      },
+      "favoritePokemon": 116
     },
     {
       "id": "m_8gen_5_8017",
@@ -482,8 +490,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
-      }
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
+      },
+      "favoritePokemon": 36
     },
     {
       "id": "m_8gen_6_3375",
@@ -579,8 +589,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第2排）"
-      }
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "A面选拔（第1排 护法）"
+      },
+      "favoritePokemon": 89
     },
     {
       "id": "m_8gen_7_5521",
@@ -676,8 +688,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第3排）"
-      }
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第1排 护法）"
+      },
+      "favoritePokemon": 98
     },
     {
       "id": "m_8gen_8_6902",
@@ -773,8 +787,10 @@
         "s_15hm6il2": "加入前",
         "s_6k83o27r": "加入前",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第3排）"
-      }
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第3排）"
+      },
+      "favoritePokemon": 151
     },
     {
       "id": "m_7gen_1_3104",
@@ -825,7 +841,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -874,7 +891,8 @@
       "friends": [
         "m_batr9qfj",
         "m_gbojk371"
-      ]
+      ],
+      "favoritePokemon": 32
     },
     {
       "id": "m_7gen_2_4421",
@@ -925,7 +943,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "A面选拔（第2排）",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "A面选拔（第1排 center）"
+        "s_uftxjn6a": "A面选拔（第1排 center）",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -974,7 +993,8 @@
       "friends": [
         "m_5gen_1_3632",
         "m_mika"
-      ]
+      ],
+      "favoritePokemon": 150
     },
     {
       "id": "m_7gen_3_5910",
@@ -1025,7 +1045,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1073,7 +1094,8 @@
       "friends": [
         "m_7gen_7_9921",
         "m_ayame"
-      ]
+      ],
+      "favoritePokemon": 15
     },
     {
       "id": "m_7gen_4_8843",
@@ -1124,7 +1146,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "A面选拔（第3排）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "A面选拔（第1排 center）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1172,7 +1195,8 @@
       "friends": [
         "m_7j6tcyhr",
         "m_5gen_7_2141"
-      ]
+      ],
+      "favoritePokemon": 65
     },
     {
       "id": "m_7gen_5_1182",
@@ -1223,7 +1247,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1271,7 +1296,8 @@
       ],
       "friends": [
         "m_7gen_7_9921"
-      ]
+      ],
+      "favoritePokemon": 65
     },
     {
       "id": "m_7gen_6_7205",
@@ -1322,7 +1348,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第2排 护法）",
-        "s_uftxjn6a": "A面选拔（第3排）"
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第2排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1371,7 +1398,8 @@
       "friends": [
         "m_7j6tcyhr",
         "m_7gen_5_1182"
-      ]
+      ],
+      "favoritePokemon": 118
     },
     {
       "id": "m_7gen_7_9921",
@@ -1422,7 +1450,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1470,7 +1499,8 @@
       "friends": [
         "m_l4k686go",
         "m_ayame"
-      ]
+      ],
+      "favoritePokemon": 40
     },
     {
       "id": "m_6gen_1_4821",
@@ -1521,7 +1551,8 @@
         "s_15hm6il2": "A面选拔（第2排）",
         "s_6k83o27r": "A面选拔（第2排）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第3排）"
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第3排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1569,7 +1600,8 @@
       ],
       "friends": [
         "m_ff4lppj9"
-      ]
+      ],
+      "favoritePokemon": 118
     },
     {
       "id": "m_6gen_2_9374",
@@ -1620,7 +1652,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1668,7 +1701,8 @@
       ],
       "friends": [
         "m_hina"
-      ]
+      ],
+      "favoritePokemon": 16
     },
     {
       "id": "m_6gen_3_1550",
@@ -1719,7 +1753,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第2排）",
-        "s_uftxjn6a": "A面选拔（第3排）"
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1769,7 +1804,8 @@
       "friends": [
         "m_6gen_2_9374",
         "m_5gen_1_3632"
-      ]
+      ],
+      "favoritePokemon": 44
     },
     {
       "id": "m_6gen_4_6829",
@@ -1820,7 +1856,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "A面选拔（第2排）",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "A面选拔（第3排）"
+        "s_uftxjn6a": "A面选拔（第3排）",
+        "s_arraomx5": "A面选拔（第3排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -1868,7 +1905,8 @@
       ],
       "friends": [
         "m_6gen_5_7713"
-      ]
+      ],
+      "favoritePokemon": 32
     },
     {
       "id": "m_6gen_5_7713",
@@ -1967,7 +2005,8 @@
         "m_7gen_3_5910"
       ],
       "graduationDate": "2026-03-17",
-      "graduationSongTitle": "无"
+      "graduationSongTitle": "无",
+      "favoritePokemon": 25
     },
     {
       "id": "m_6gen_6_5098",
@@ -2063,7 +2102,8 @@
         "s_oey99lit": "落选",
         "s_4ofhpcr1": "落选",
         "s_z8u6w72c": "落选"
-      }
+      },
+      "favoritePokemon": 47
     },
     {
       "id": "m_5gen_1_3632",
@@ -2115,7 +2155,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -2164,7 +2205,8 @@
       "friends": [
         "m_gbojk371",
         "m_6gen_2_9374"
-      ]
+      ],
+      "favoritePokemon": 22
     },
     {
       "id": "m_5gen_2_7259",
@@ -2229,7 +2271,8 @@
       "friends": [
         "m_umbw1ji3",
         "m_hina"
-      ]
+      ],
+      "favoritePokemon": 1
     },
     {
       "id": "m_5gen_3_7488",
@@ -2281,7 +2324,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -2328,7 +2372,8 @@
       ],
       "friends": [
         "m_6gen_2_9374"
-      ]
+      ],
+      "favoritePokemon": 24
     },
     {
       "id": "m_5gen_4_8493",
@@ -2380,7 +2425,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -2427,7 +2473,8 @@
       ],
       "friends": [
         "m_mdv7k6ml"
-      ]
+      ],
+      "favoritePokemon": 130
     },
     {
       "id": "m_5gen_5_6677",
@@ -2479,7 +2526,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -2529,7 +2577,8 @@
       "friends": [
         "m_7gen_7_9921",
         "m_6gen_1_4821"
-      ]
+      ],
+      "favoritePokemon": 19
     },
     {
       "id": "m_5gen_6_2454",
@@ -2592,7 +2641,8 @@
       ],
       "friends": [
         "m_ltlzffea"
-      ]
+      ],
+      "favoritePokemon": 106
     },
     {
       "id": "m_5gen_7_2141",
@@ -2644,7 +2694,8 @@
         "s_15hm6il2": "A面选拔（第2排 护法）",
         "s_6k83o27r": "A面选拔（第1排 center）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "A面选拔（第2排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -2693,7 +2744,8 @@
       "friends": [
         "m_7gen_5_1182",
         "m_rin"
-      ]
+      ],
+      "favoritePokemon": 100
     },
     {
       "id": "m_umbw1ji3",
@@ -2772,7 +2824,8 @@
       "friends": [
         "m_ltlzffea",
         "m_reina"
-      ]
+      ],
+      "favoritePokemon": 81
     },
     {
       "id": "m_pr2yyz25",
@@ -2824,7 +2877,8 @@
         "m_ys0s465i",
         "m_batr9qfj"
       ],
-      "friends": []
+      "friends": [],
+      "favoritePokemon": 81
     },
     {
       "id": "m_rjli97s6",
@@ -2876,7 +2930,8 @@
         "s_15hm6il2": "A面选拔（第2排 护法）",
         "s_6k83o27r": "A面选拔（第1排 护法）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 5,
       "electionRanks": [
@@ -2923,7 +2978,8 @@
       ],
       "friends": [
         "m_batr9qfj"
-      ]
+      ],
+      "favoritePokemon": 145
     },
     {
       "id": "m_batr9qfj",
@@ -2975,7 +3031,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "A面选拔（第3排）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 2,
       "electionRanks": [
@@ -3023,7 +3080,8 @@
       "friends": [
         "m_7gen_6_7205",
         "m_mika"
-      ]
+      ],
+      "favoritePokemon": 132
     },
     {
       "id": "m_mdv7k6ml",
@@ -3088,7 +3146,8 @@
       "friends": [
         "m_jh2ureo3",
         "m_rin"
-      ]
+      ],
+      "favoritePokemon": 44
     },
     {
       "id": "m_t8u0ysq7",
@@ -3142,7 +3201,8 @@
       ],
       "friends": [
         "m_ayame"
-      ]
+      ],
+      "favoritePokemon": 6
     },
     {
       "id": "m_blncyp2k",
@@ -3194,7 +3254,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "A面选拔（第3排）"
       },
       "selectionCount": 5,
       "electionRanks": [
@@ -3241,7 +3302,8 @@
       "friends": [
         "m_mika",
         "m_mdv7k6ml"
-      ]
+      ],
+      "favoritePokemon": 30
     },
     {
       "id": "m_l4k686go",
@@ -3293,7 +3355,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -3339,7 +3402,8 @@
       ],
       "friends": [
         "m_5gen_7_2141"
-      ]
+      ],
+      "favoritePokemon": 53
     },
     {
       "id": "m_ltlzffea",
@@ -3435,7 +3499,8 @@
         "s_z8u6w72c": "落选",
         "s_pbzdfn3u": "落选",
         "s_15hm6il2": "落选"
-      }
+      },
+      "favoritePokemon": 6
     },
     {
       "id": "m_gbojk371",
@@ -3487,7 +3552,8 @@
         "s_15hm6il2": "A面选拔（第1排 center）",
         "s_6k83o27r": "A面选拔（第1排 center）",
         "s_nfyjq9j3": "A面选拔（第2排）",
-        "s_uftxjn6a": "A面选拔（第1排 center）"
+        "s_uftxjn6a": "A面选拔（第1排 center）",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 7,
       "electionRanks": [
@@ -3533,7 +3599,8 @@
       ],
       "friends": [
         "m_7gen_7_9921"
-      ]
+      ],
+      "favoritePokemon": 17
     },
     {
       "id": "m_jh2ureo3",
@@ -3612,7 +3679,8 @@
       ],
       "friends": [
         "m_6gen_1_4821"
-      ]
+      ],
+      "favoritePokemon": 130
     },
     {
       "id": "m_4wmfwcbj",
@@ -3675,7 +3743,8 @@
       ],
       "friends": [
         "m_gbojk371"
-      ]
+      ],
+      "favoritePokemon": 70
     },
     {
       "id": "m_c16gtwds",
@@ -3751,7 +3820,8 @@
       "friends": [
         "m_7gen_3_5910",
         "m_5gen_6_2454"
-      ]
+      ],
+      "favoritePokemon": 17
     },
     {
       "id": "m_bm7qiehk",
@@ -3803,7 +3873,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "A面选拔（第3排）",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "selectionCount": 1,
       "electionRanks": [
@@ -3848,7 +3919,8 @@
       "friends": [
         "m_6gen_2_9374",
         "m_yuna"
-      ]
+      ],
+      "favoritePokemon": 31
     },
     {
       "id": "m_7j6tcyhr",
@@ -3900,7 +3972,8 @@
         "s_15hm6il2": "A面选拔（第3排）",
         "s_6k83o27r": "A面选拔（第3排）",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "A面选拔（第3排）"
       },
       "selectionCount": 4,
       "electionRanks": [
@@ -3945,7 +4018,8 @@
       "friends": [
         "m_t8u0ysq7",
         "m_ltlzffea"
-      ]
+      ],
+      "favoritePokemon": 102
     },
     {
       "id": "m_m8fltj0e",
@@ -3997,7 +4071,8 @@
         "s_15hm6il2": "A面选拔（第2排）",
         "s_6k83o27r": "A面选拔（第1排 护法）",
         "s_nfyjq9j3": "A面选拔（第1排 center）",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "A面选拔（第2排）"
       },
       "selectionCount": 0,
       "electionRanks": [
@@ -4042,7 +4117,8 @@
       "friends": [
         "m_ys0s465i",
         "m_ayame"
-      ]
+      ],
+      "favoritePokemon": 70
     },
     {
       "id": "m_ff4lppj9",
@@ -4111,7 +4187,8 @@
       "friends": [
         "m_6gen_5_7713",
         "m_blncyp2k"
-      ]
+      ],
+      "favoritePokemon": 80
     },
     {
       "id": "m_ys0s465i",
@@ -4172,7 +4249,8 @@
       "friends": [
         "m_reina",
         "m_5gen_4_8493"
-      ]
+      ],
+      "favoritePokemon": 11
     },
     {
       "id": "m_symj32y6",
@@ -4227,7 +4305,8 @@
       "admireSenior": [],
       "friends": [
         "m_5gen_1_3632"
-      ]
+      ],
+      "favoritePokemon": 64
     },
     {
       "id": "m_akari",
@@ -4315,7 +4394,8 @@
       "friends": [
         "m_7gen_6_7205",
         "m_rjli97s6"
-      ]
+      ],
+      "favoritePokemon": 101
     },
     {
       "id": "m_yuna",
@@ -4378,7 +4458,8 @@
       "friends": [
         "m_m8fltj0e",
         "m_c16gtwds"
-      ]
+      ],
+      "favoritePokemon": 138
     },
     {
       "id": "m_rin",
@@ -4443,7 +4524,8 @@
       "friends": [
         "m_rjli97s6",
         "m_ltlzffea"
-      ]
+      ],
+      "favoritePokemon": 127
     },
     {
       "id": "m_saki",
@@ -4512,7 +4594,8 @@
       "friends": [
         "m_5gen_1_3632",
         "m_rjli97s6"
-      ]
+      ],
+      "favoritePokemon": 9
     },
     {
       "id": "m_mika",
@@ -4562,7 +4645,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -4609,7 +4693,8 @@
       "friends": [
         "m_6gen_1_4821",
         "m_6gen_5_7713"
-      ]
+      ],
+      "favoritePokemon": 146
     },
     {
       "id": "m_mayu",
@@ -4684,7 +4769,8 @@
       "admireSenior": [],
       "friends": [
         "m_rjli97s6"
-      ]
+      ],
+      "favoritePokemon": 92
     },
     {
       "id": "m_nana",
@@ -4739,7 +4825,8 @@
       "friends": [
         "m_yuna",
         "m_reina"
-      ]
+      ],
+      "favoritePokemon": 100
     },
     {
       "id": "m_hina",
@@ -4789,7 +4876,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "A面选拔（第2排）",
         "s_nfyjq9j3": "A面选拔（第2排 护法）",
-        "s_uftxjn6a": "A面选拔（第2排）"
+        "s_uftxjn6a": "A面选拔（第2排）",
+        "s_arraomx5": "A面选拔（第2排）"
       },
       "isActive": true,
       "selectionCount": 4,
@@ -4836,7 +4924,8 @@
       "friends": [
         "m_c16gtwds",
         "m_7gen_5_1182"
-      ]
+      ],
+      "favoritePokemon": 103
     },
     {
       "id": "m_reina",
@@ -4897,7 +4986,8 @@
       "friends": [
         "m_bm7qiehk",
         "m_5gen_3_7488"
-      ]
+      ],
+      "favoritePokemon": 22
     },
     {
       "id": "m_ayame",
@@ -4947,7 +5037,8 @@
         "s_15hm6il2": "落选",
         "s_6k83o27r": "落选",
         "s_nfyjq9j3": "落选",
-        "s_uftxjn6a": "落选"
+        "s_uftxjn6a": "落选",
+        "s_arraomx5": "落选"
       },
       "isActive": true,
       "selectionCount": 0,
@@ -4993,7 +5084,8 @@
       "admireSenior": [],
       "friends": [
         "m_7gen_2_4421"
-      ]
+      ],
+      "favoritePokemon": 105
     }
   ],
   "singles": [
@@ -6814,6 +6906,65 @@
         }
       },
       "notes": "又一首常规单曲，七期生首次出任center，八期生首次加入选拔，这就是次世代的xp！咩咩咩"
+    },
+    {
+      "id": "s_arraomx5",
+      "title": "35th Single · Flip It",
+      "release": "2026-03-26",
+      "cover": "/uploads/1774512688622.webp",
+      "tags": [],
+      "singleKind": "企划单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Flip It (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1774512700358-urz8gx.mp4"
+        },
+        {
+          "no": 2,
+          "title": "Love Is A B (UG)",
+          "isAside": false,
+          "audio": "/uploads/audio/1774512750119-ov646c.mp4"
+        },
+        {
+          "no": 3,
+          "title": "another me in the world (冈崎卡莉&海东茉莉奈)",
+          "isAside": false,
+          "audio": "/uploads/audio/1774512891495-fzoxq7.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 15,
+        "rows": [
+          7,
+          5,
+          3
+        ],
+        "slots": [
+          "m_blncyp2k",
+          "m_6gen_4_6829",
+          "m_8gen_4_9154",
+          "m_8gen_8_6902",
+          "m_8gen_3_5730",
+          "m_6gen_1_4821",
+          "m_7j6tcyhr",
+          "m_hina",
+          "m_7gen_6_7205",
+          "m_8gen_1_4186",
+          "m_5gen_7_2141",
+          "m_m8fltj0e",
+          "m_8gen_7_5521",
+          "m_7gen_4_8843",
+          "m_8gen_6_3375"
+        ],
+        "slotRoles": {
+          "12": "guardian",
+          "13": "center",
+          "14": "guardian"
+        }
+      },
+      "notes": "xp纸牌企划单曲！七期生第一个单c被最有钱的詹妮佛入手，这歌跟她人设真的好配啊！八期婊子迅速上位，xp又时代交替了？"
     }
   ],
   "gallery": [

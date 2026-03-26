@@ -73,6 +73,162 @@ const shuffleArray = (arr) => {
 };
 
 
+// ---------- Pokémon ----------
+const POKEMON_LIST = [
+  { zh: "妙蛙种子", en: "Bulbasaur" },
+  { zh: "妙蛙草", en: "Ivysaur" },
+  { zh: "妙蛙花", en: "Venusaur" },
+  { zh: "小火龙", en: "Charmander" },
+  { zh: "火恐龙", en: "Charmeleon" },
+  { zh: "喷火龙", en: "Charizard" },
+  { zh: "杰尼龟", en: "Squirtle" },
+  { zh: "卡咪龟", en: "Wartortle" },
+  { zh: "水箭龟", en: "Blastoise" },
+  { zh: "绿毛虫", en: "Caterpie" },
+  { zh: "铁甲蛹", en: "Metapod" },
+  { zh: "巴大蝶", en: "Butterfree" },
+  { zh: "独角虫", en: "Weedle" },
+  { zh: "铠甲蛹", en: "Kakuna" },
+  { zh: "大针蜂", en: "Beedrill" },
+  { zh: "波波", en: "Pidgey" },
+  { zh: "比比鸟", en: "Pidgeotto" },
+  { zh: "大比鸟", en: "Pidgeot" },
+  { zh: "小拉达", en: "Rattata" },
+  { zh: "拉达", en: "Raticate" },
+  { zh: "烈雀", en: "Spearow" },
+  { zh: "大嘴雀", en: "Fearow" },
+  { zh: "阿柏蛇", en: "Ekans" },
+  { zh: "阿柏怪", en: "Arbok" },
+  { zh: "皮卡丘", en: "Pikachu" },
+  { zh: "雷丘", en: "Raichu" },
+  { zh: "穿山鼠", en: "Sandshrew" },
+  { zh: "穿山王", en: "Sandslash" },
+  { zh: "尼多兰", en: "Nidoran♀" },
+  { zh: "尼多娜", en: "Nidorina" },
+  { zh: "尼多后", en: "Nidoqueen" },
+  { zh: "尼多朗", en: "Nidoran♂" },
+  { zh: "尼多力诺", en: "Nidorino" },
+  { zh: "尼多王", en: "Nidoking" },
+  { zh: "皮皮", en: "Clefairy" },
+  { zh: "皮可西", en: "Clefable" },
+  { zh: "六尾", en: "Vulpix" },
+  { zh: "九尾", en: "Ninetales" },
+  { zh: "胖丁", en: "Jigglypuff" },
+  { zh: "胖可丁", en: "Wigglytuff" },
+  { zh: "超音蝠", en: "Zubat" },
+  { zh: "大嘴蝠", en: "Golbat" },
+  { zh: "走路草", en: "Oddish" },
+  { zh: "草帽蘑", en: "Gloom" },
+  { zh: "臭臭花", en: "Vileplume" },
+  { zh: "派拉斯", en: "Paras" },
+  { zh: "派拉斯特", en: "Parasect" },
+  { zh: "毛球", en: "Venonat" },
+  { zh: "摩鲁蛾", en: "Venomoth" },
+  { zh: "地鼠", en: "Diglett" },
+  { zh: "三地鼠", en: "Dugtrio" },
+  { zh: "喵喵", en: "Meowth" },
+  { zh: "猫老大", en: "Persian" },
+  { zh: "可达鸭", en: "Psyduck" },
+  { zh: "哥达鸭", en: "Golduck" },
+  { zh: "猴怪", en: "Mankey" },
+  { zh: "火爆猴", en: "Primeape" },
+  { zh: "卡蒂狗", en: "Growlithe" },
+  { zh: "风速狗", en: "Arcanine" },
+  { zh: "蚊香蝌蚪", en: "Poliwag" },
+  { zh: "蚊香君", en: "Poliwhirl" },
+  { zh: "蚊香泳士", en: "Poliwrath" },
+  { zh: "凯西", en: "Abra" },
+  { zh: "勇基拉", en: "Kadabra" },
+  { zh: "胡地", en: "Alakazam" },
+  { zh: "腕力", en: "Machop" },
+  { zh: "豪力", en: "Machoke" },
+  { zh: "怪力", en: "Machamp" },
+  { zh: "喇叭芽", en: "Bellsprout" },
+  { zh: "口呆花", en: "Weepinbell" },
+  { zh: "毒刺花", en: "Victreebel" },
+  { zh: "玛瑙水母", en: "Tentacool" },
+  { zh: "毒刺水母", en: "Tentacruel" },
+  { zh: "小拳石", en: "Geodude" },
+  { zh: "隆隆石", en: "Graveler" },
+  { zh: "隆隆岩", en: "Golem" },
+  { zh: "小火马", en: "Ponyta" },
+  { zh: "烈焰马", en: "Rapidash" },
+  { zh: "呆呆兽", en: "Slowpoke" },
+  { zh: "呆壳兽", en: "Slowbro" },
+  { zh: "小磁怪", en: "Magnemite" },
+  { zh: "三合一磁怪", en: "Magneton" },
+  { zh: "大葱鸭", en: "Farfetch'd" },
+  { zh: "嘟嘟", en: "Doduo" },
+  { zh: "嘟嘟利", en: "Dodrio" },
+  { zh: "小海狮", en: "Seel" },
+  { zh: "白海狮", en: "Dewgong" },
+  { zh: "臭泥", en: "Grimer" },
+  { zh: "臭臭泥", en: "Muk" },
+  { zh: "喇叭贝", en: "Shellder" },
+  { zh: "刺甲贝", en: "Cloyster" },
+  { zh: "鬼斯", en: "Gastly" },
+  { zh: "鬼斯通", en: "Haunter" },
+  { zh: "耿鬼", en: "Gengar" },
+  { zh: "大岩蛇", en: "Onix" },
+  { zh: "睡睡糖", en: "Drowzee" },
+  { zh: "催眠貘", en: "Hypno" },
+  { zh: "大钳蟹", en: "Krabby" },
+  { zh: "巨钳蟹", en: "Kingler" },
+  { zh: "霹雳电球", en: "Voltorb" },
+  { zh: "顿电球", en: "Electrode" },
+  { zh: "蛋蛋", en: "Exeggcute" },
+  { zh: "椰蛋树", en: "Exeggutor" },
+  { zh: "卡拉卡拉", en: "Cubone" },
+  { zh: "嘎啦嘎啦", en: "Marowak" },
+  { zh: "飞腿郎", en: "Hitmonlee" },
+  { zh: "快拳郎", en: "Hitmonchan" },
+  { zh: "大舌头", en: "Lickitung" },
+  { zh: "瓦斯弹", en: "Koffing" },
+  { zh: "双弹瓦斯", en: "Weezing" },
+  { zh: "独角犀牛", en: "Rhyhorn" },
+  { zh: "钻角犀兽", en: "Rhydon" },
+  { zh: "吉利蛋", en: "Chansey" },
+  { zh: "蔓藤怪", en: "Tangela" },
+  { zh: "袋兽", en: "Kangaskhan" },
+  { zh: "墨海马", en: "Horsea" },
+  { zh: "刺龙鱼", en: "Seadra" },
+  { zh: "角金鱼", en: "Goldeen" },
+  { zh: "宝金鱼", en: "Seaking" },
+  { zh: "海星星", en: "Staryu" },
+  { zh: "宝石海星", en: "Starmie" },
+  { zh: "魔墙人偶", en: "Mr. Mime" },
+  { zh: "飞天螳螂", en: "Scyther" },
+  { zh: "迷唇姐", en: "Jynx" },
+  { zh: "电击兽", en: "Electabuzz" },
+  { zh: "鸭嘴火兽", en: "Magmar" },
+  { zh: "凯罗斯", en: "Pinsir" },
+  { zh: "肯泰罗", en: "Tauros" },
+  { zh: "鲤鱼王", en: "Magikarp" },
+  { zh: "暴鲤龙", en: "Gyarados" },
+  { zh: "拉普拉斯", en: "Lapras" },
+  { zh: "百变怪", en: "Ditto" },
+  { zh: "伊布", en: "Eevee" },
+  { zh: "水伊布", en: "Vaporeon" },
+  { zh: "雷伊布", en: "Jolteon" },
+  { zh: "火伊布", en: "Flareon" },
+  { zh: "多边兽", en: "Porygon" },
+  { zh: "菊石兽", en: "Omanyte" },
+  { zh: "多刺菊石兽", en: "Omastar" },
+  { zh: "化石盔", en: "Kabuto" },
+  { zh: "镰刀盔", en: "Kabutops" },
+  { zh: "化石翼龙", en: "Aerodactyl" },
+  { zh: "卡比兽", en: "Snorlax" },
+  { zh: "急冻鸟", en: "Articuno" },
+  { zh: "闪电鸟", en: "Zapdos" },
+  { zh: "火焰鸟", en: "Moltres" },
+  { zh: "迷你龙", en: "Dratini" },
+  { zh: "哈克龙", en: "Dragonair" },
+  { zh: "快龙", en: "Dragonite" },
+  { zh: "超梦", en: "Mewtwo" },
+  { zh: "梦幻", en: "Mew" },
+];
+const getPokemon = (num) => POKEMON_LIST[(num ?? 1) - 1] ?? POKEMON_LIST[0];
+
 // --- 总选举顺位展示：把"十四位/14位/14/圈外/加入前"等统一格式化 ---
 const _cnDigit = { "零":0,"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9 };
 function chineseToInt(s) {
@@ -386,6 +542,7 @@ function normalizeMemberDraft(member) {
     favoriteSongs: Array.isArray(member?.favoriteSongs)
       ? member.favoriteSongs
       : (member?.favoriteSong ? [member.favoriteSong] : []),
+    favoritePokemon: member?.favoritePokemon || undefined,
     profile: {
       height: profile.height || "",
       birthday: profile.birthday || "",
@@ -2555,7 +2712,7 @@ function MemberDetailContent({ member, data }) {
       ) : null}
 
       {/* FAVORITES */}
-      {(shouldShowAdmireSenior && Array.isArray(member.admireSenior) && member.admireSenior.length) || (Array.isArray(member.friends) && member.friends.length) || favoriteSongs.length ? (
+      {(shouldShowAdmireSenior && Array.isArray(member.admireSenior) && member.admireSenior.length) || (Array.isArray(member.friends) && member.friends.length) || favoriteSongs.length || member.favoritePokemon ? (
         <div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-5 h-px bg-[#1C1C1C]" />
@@ -2626,6 +2783,26 @@ function MemberDetailContent({ member, data }) {
                 </div>
               </div>
             ) : null}
+
+            {member.favoritePokemon ? (() => {
+              const pk = getPokemon(member.favoritePokemon);
+              return (
+                <div className="flex items-center gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
+                  <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">宝可梦</span>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${member.favoritePokemon}.png`}
+                      alt={pk.en}
+                      className="w-8 h-8 object-contain"
+                      style={{ imageRendering: "pixelated" }}
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                    <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{pk.zh}</span>
+                    <span className="text-[11px] text-[#6B6B6B] tracking-[0.04em]">{pk.en}</span>
+                  </div>
+                </div>
+              );
+            })() : null}
           </div>
         </div>
       ) : null}
@@ -5060,6 +5237,7 @@ export default function XJP56App() {
       cancelled = true;
     };
   }, []);
+
 
   useEffect(() => {
     if (!loaded || !data) return;
