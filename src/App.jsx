@@ -347,30 +347,36 @@ function ensureTrackShape(track, no, isAside) {
 /**
  * 根据单曲标题前缀（如 "27th Single"）判断是否属于"新版公式照"语境（第27单起）
  */
-function isSingleNewContext(single) {
+// 返回单曲对应的公式照版本档位：0=第1版，1=第2版（27-36单），2=最新版（37单+）
+function getSinglePhotoTier(single) {
   const prefix = splitSingleTitle(single?.title ?? "").prefix;
   const num = parseInt((prefix || "").match(/\d+/)?.[0], 10);
-  return Number.isFinite(num) && num >= 27;
+  if (!Number.isFinite(num)) return 0;
+  if (num >= 37) return 2;
+  if (num >= 27) return 1;
+  return 0;
 }
 
-/**
- * 根据总选届数字符串（如 "第5届"）判断是否属于"新版公式照"语境（第5届起）
- */
-function isEditionNewContext(editionStr) {
+// 返回总选届对应的公式照版本档位：0=第1版，1=第2版（第5届），2=最新版（第6届+）
+function getEditionPhotoTier(editionStr) {
   const num = parseEditionNum(editionStr);
-  return Number.isFinite(num) && num >= 5;
+  if (!Number.isFinite(num)) return 0;
+  if (num >= 6) return 2;
+  if (num >= 5) return 1;
+  return 0;
 }
 
 /**
- * 根据语境返回应展示的公式照 URL。
- * - isNewContext=true（27单+/5届+）且 officialPhotos 有 ≥2 张：返回最新版
- * - 否则：返回第一版
- * - officialPhotos 为空时回退 avatar
+ * 根据语境档位返回应展示的公式照 URL。
+ * photoTier: 0=第1版, 1=第2版, 2=最新版
+ * 版本不足时自动降级（如只有1张则始终返回第1版）
+ * officialPhotos 为空时回退 avatar
  */
-function getOfficialPhotoUrl(member, isNewContext) {
+function getOfficialPhotoUrl(member, photoTier) {
   const photos = Array.isArray(member?.officialPhotos) ? member.officialPhotos : [];
   if (photos.length === 0) return member?.avatar ?? "";
-  if (isNewContext && photos.length >= 2) return photos[photos.length - 1].url;
+  if (photoTier >= 2 && photos.length >= 2) return photos[photos.length - 1].url;
+  if (photoTier >= 1 && photos.length >= 2) return photos[1].url;
   return photos[0].url;
 }
 
@@ -2242,7 +2248,7 @@ function ElectionPage({ data }) {
                     <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 overflow-hidden bg-[#F0F0F0]">
                       {(member.avatar || member.officialPhotos?.length > 0) ? (
                         <MediaImage
-                          src={getOfficialPhotoUrl(member, isEditionNewContext(activeEdition))}
+                          src={getOfficialPhotoUrl(member, getEditionPhotoTier(activeEdition))}
                           alt={member.name}
                           className="w-full h-full object-cover object-top"
                         />
@@ -4190,7 +4196,7 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
 
 function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, playQueue, audioQueue, audioIndex, isPlaying, togglePlayPause}) {
   const [coverZoom, setCoverZoom] = useState(false);
-  const useNewPhoto = isSingleNewContext(single);
+  const photoTier = getSinglePhotoTier(single);
 
   const rows = single.asideLineup?.rows || [];
   const slots = single.asideLineup?.slots || [];
@@ -4419,7 +4425,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
                             <div className="overflow-hidden bg-transparent">
                               <MediaImage
-                                src={getOfficialPhotoUrl(m, useNewPhoto)}
+                                src={getOfficialPhotoUrl(m, photoTier)}
                                 alt={m.name}
                                 className={"h-full w-full object-contain object-top " + (!m.isActive ? "grayscale" : "")}
                               />
