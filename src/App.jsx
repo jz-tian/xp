@@ -478,13 +478,14 @@ const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
 const GENERATION_THEME = {
   "1": { backgroundColor: "#E78BA8", color: "#FFFFFF", borderColor: "#E78BA8" },
-  "2": { backgroundColor: "#63EA95", color: "#111111", borderColor: "#63EA95" },
+  "2": { backgroundColor: "#63EA95", color: "#FFFFFF", borderColor: "#63EA95" },
   "3": { backgroundColor: "#00A8E7", color: "#FFFFFF", borderColor: "#00A8E7" },
-  "4": { backgroundColor: "#F8FD01", color: "#111111", borderColor: "#F8FD01" },
-  "5": { backgroundColor: "#FDA40C", color: "#111111", borderColor: "#FDA40C" },
-  "6": { backgroundColor: "#DCC8E1", color: "#111111", borderColor: "#DCC8E1" },
+  "4": { backgroundColor: "#F8FD01", color: "#FFFFFF", borderColor: "#F8FD01" },
+  "5": { backgroundColor: "#FDA40C", color: "#FFFFFF", borderColor: "#FDA40C" },
+  "6": { backgroundColor: "#DCC8E1", color: "#FFFFFF", borderColor: "#DCC8E1" },
   "7": { backgroundColor: "#2F7927", color: "#FFFFFF", borderColor: "#2F7927" },
   "8": { backgroundColor: "#3098FE", color: "#FFFFFF", borderColor: "#3098FE" },
+  "9": { backgroundColor: "#3CC2B1", color: "#FFFFFF", borderColor: "#3CC2B1" },
 };
 
 
