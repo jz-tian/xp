@@ -6,8 +6,13 @@
       "romaji": "NAMIDA HISHIRO",
       "origin": "北海道・函馆",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805311690.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805311690.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -46,6 +51,7 @@
         "Last Angel",
         "Spicy Kiss Baby (A-side)"
       ],
+      "favoritePokemon": 197,
       "profile": {
         "height": "157cm",
         "birthday": "2010-04-19",
@@ -91,17 +97,21 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 197
+      }
     },
     {
       "id": "m_9gen_2",
       "name": "空港 树绘华",
-      "romaji": "KIEHANA KUKO",
+      "romaji": "KIEKA KUKO",
       "origin": "冲绳・那霸",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805287773.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805287773.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -141,6 +151,7 @@
         "Khalifa (A-side)",
         "Do Not Disturb (近藤结衣 center)"
       ],
+      "favoritePokemon": 277,
       "profile": {
         "height": "163cm",
         "birthday": "2010-07-24",
@@ -186,8 +197,7 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 277
+      }
     },
     {
       "id": "m_9gen_3",
@@ -195,8 +205,13 @@
       "romaji": "KITSUKI YAMAMOTO",
       "origin": "京都・西京区",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805271072.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805271072.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -235,6 +250,7 @@
         "Wonder Wonder Wonder 2期生（宫岛阿弥 center）",
         "Phobia (A-side)"
       ],
+      "favoritePokemon": 196,
       "profile": {
         "height": "162cm",
         "birthday": "2010-01-08",
@@ -280,8 +296,7 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 196
+      }
     },
     {
       "id": "m_9gen_4",
@@ -289,8 +304,13 @@
       "romaji": "MOMOKA KANZAKI",
       "origin": "大阪・难波",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805252904.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805252904.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -330,6 +350,7 @@
         "Wall of Dreams (A-side)",
         "Love Is A B (UG)"
       ],
+      "favoritePokemon": 235,
       "profile": {
         "height": "156cm",
         "birthday": "2010-09-03",
@@ -375,8 +396,7 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 235
+      }
     },
     {
       "id": "m_9gen_5",
@@ -384,8 +404,13 @@
       "romaji": "RIO SAIONJI",
       "origin": "东京・港区",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805240618.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805240618.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -424,6 +449,7 @@
         "Missile (A-side)",
         "FIX IT"
       ],
+      "favoritePokemon": 350,
       "profile": {
         "height": "165cm",
         "birthday": "2009-12-30",
@@ -469,8 +495,7 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 350
+      }
     },
     {
       "id": "m_9gen_6",
@@ -478,8 +503,13 @@
       "romaji": "MEI MOGAMI",
       "origin": "山形・米泽",
       "generation": "9期",
-      "avatar": "",
-      "officialPhotos": [],
+      "avatar": "/uploads/1774805164815.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1774805164815.webp",
+          "version": 1
+        }
+      ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
@@ -519,6 +549,7 @@
         "I Think... (秦美美树 center)",
         "Star with Moon（竹内星月 with 宫月）"
       ],
+      "favoritePokemon": 470,
       "profile": {
         "height": "160cm",
         "birthday": "2010-03-07",
@@ -564,8 +595,7 @@
         "s_uftxjn6a": "加入前",
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前"
-      },
-      "favoritePokemon": 470
+      }
     },
     {
       "id": "m_8gen_1_4186",
@@ -573,11 +603,15 @@
       "romaji": "SAYA NISHINO",
       "origin": "青森 • 弘前",
       "generation": "8期",
-      "avatar": "/uploads/1773833560504.webp",
+      "avatar": "/uploads/1774805129008.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1773833560504.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1774805129008.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -619,6 +653,7 @@
         "Love Again（松村珠理奈）",
         "Dreaming Buds（饭锅利佳center）"
       ],
+      "favoritePokemon": 7,
       "profile": {
         "height": "160cm",
         "birthday": "2009-10-12",
@@ -664,8 +699,7 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "favoritePokemon": 7
+      }
     },
     {
       "id": "m_8gen_2_2649",
@@ -1173,11 +1207,15 @@
       "romaji": "REIREINA NAKANO",
       "origin": "新潟 • 长冈",
       "generation": "8期",
-      "avatar": "/uploads/1773833756708.webp",
+      "avatar": "/uploads/1774805117351.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1773833756708.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1774805117351.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -1219,6 +1257,7 @@
         "4（伊织花with本玉春水）",
         "RUBY"
       ],
+      "favoritePokemon": 98,
       "profile": {
         "height": "164cm",
         "birthday": "2009-02-01",
@@ -1264,8 +1303,7 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第1排 护法）",
         "s_phyou9mt": "A面选拔（第1排）"
-      },
-      "favoritePokemon": 98
+      }
     },
     {
       "id": "m_8gen_8_6902",
@@ -1273,11 +1311,15 @@
       "romaji": "RIO SUGATA",
       "origin": "冲绳 • 那霸",
       "generation": "8期",
-      "avatar": "/uploads/1773833774067.webp",
+      "avatar": "/uploads/1774805107018.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1773833774067.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1774805107018.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -1319,6 +1361,7 @@
         "Cash Wave（7期生 井上詹妮弗center）",
         "SETER (A-side)"
       ],
+      "favoritePokemon": 151,
       "profile": {
         "height": "155cm",
         "birthday": "2009-08-16",
@@ -1364,8 +1407,7 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "落选"
-      },
-      "favoritePokemon": 151
+      }
     },
     {
       "id": "m_7gen_1_3104",
@@ -1477,7 +1519,61 @@
       "romaji": "NATSUKI TOKUTAMI",
       "origin": "大阪 • 堺",
       "generation": "7期",
+      "avatar": "/uploads/1774805089822.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772796225837.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128747920.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774805089822.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第7位"
+        }
+      ],
+      "admireSenior": [
+        "m_jh2ureo3",
+        "m_ff4lppj9"
+      ],
+      "friends": [
+        "m_5gen_1_3632",
+        "m_mika"
+      ],
+      "favoriteSong": "SPLASH!!! (A-side)",
+      "favoriteSongs": [
+        "SPLASH!!! (A-side)",
+        "The Fate of Yuria (A-side)",
+        "already decided?! (A-side)"
+      ],
+      "favoritePokemon": 150,
       "profile": {
         "height": "167cm",
         "birthday": "2008-08-03",
@@ -1523,8 +1619,32 @@
         "s_uftxjn6a": "A面选拔（第1排 center）",
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第1排 center）"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_7gen_3_5910",
+      "name": "近藤 结衣",
+      "romaji": "YUI KONDO",
+      "origin": "京都 • 右京区",
+      "generation": "7期",
+      "avatar": "/uploads/1774805070662.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772796238553.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128759532.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774805070662.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1544,43 +1664,23 @@
         },
         {
           "edition": "第5届",
-          "rank": "第7位"
+          "rank": "第16位"
         }
       ],
       "admireSenior": [
-        "m_jh2ureo3",
-        "m_ff4lppj9"
-      ],
-      "favoriteSong": "SPLASH!!! (A-side)",
-      "avatar": "/uploads/1773128747920.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772796225837.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128747920.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "SPLASH!!! (A-side)",
-        "The Fate of Yuria (A-side)",
-        "already decided?! (A-side)"
+        "m_5gen_3_7488"
       ],
       "friends": [
-        "m_5gen_1_3632",
-        "m_mika"
+        "m_7gen_7_9921",
+        "m_ayame"
       ],
-      "favoritePokemon": 150
-    },
-    {
-      "id": "m_7gen_3_5910",
-      "name": "近藤 结衣",
-      "romaji": "YUI KONDO",
-      "origin": "京都 • 右京区",
-      "generation": "7期",
-      "isActive": true,
+      "favoriteSong": "Love Again（松村珠理奈）",
+      "favoriteSongs": [
+        "Love Again（松村珠理奈）",
+        "Dreaming Buds（饭锅利佳center）",
+        "SETER (A-side)"
+      ],
+      "favoritePokemon": 15,
       "profile": {
         "height": "154cm",
         "birthday": "2009-11-21",
@@ -1626,8 +1726,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_7gen_4_8843",
+      "name": "井上 詹妮弗",
+      "romaji": "JENNIFER INOUE",
+      "origin": "美国 • 西雅图",
+      "generation": "7期",
+      "avatar": "/uploads/1774805052172.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772817945659.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128770543.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774805052172.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1647,42 +1771,23 @@
         },
         {
           "edition": "第5届",
-          "rank": "第16位"
+          "rank": "第15位"
         }
       ],
       "admireSenior": [
-        "m_5gen_3_7488"
-      ],
-      "favoriteSong": "Love Again（松村珠理奈）",
-      "avatar": "/uploads/1773128759532.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772796238553.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128759532.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Love Again（松村珠理奈）",
-        "Dreaming Buds（饭锅利佳center）",
-        "SETER (A-side)"
+        "m_5gen_1_3632"
       ],
       "friends": [
-        "m_7gen_7_9921",
-        "m_ayame"
+        "m_7j6tcyhr",
+        "m_5gen_7_2141"
       ],
-      "favoritePokemon": 15
-    },
-    {
-      "id": "m_7gen_4_8843",
-      "name": "井上 詹妮弗",
-      "romaji": "JENNIFER INOUE",
-      "origin": "美国 • 西雅图",
-      "generation": "7期",
-      "isActive": true,
+      "favoriteSong": "(not) Good Enough ",
+      "favoriteSongs": [
+        "(not) Good Enough ",
+        "Red Star Love (A-side)",
+        "Do Not Disturb (近藤结衣 center)"
+      ],
+      "favoritePokemon": 65,
       "profile": {
         "height": "171cm",
         "birthday": "2008-05-30",
@@ -1728,8 +1833,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "A面选拔（第1排 center）",
         "s_phyou9mt": "A面选拔（第1排 护法）"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_7gen_5_1182",
+      "name": "石川 美南",
+      "romaji": "MINAMI ISHIKAWA",
+      "origin": "静冈 • 富士",
+      "generation": "7期",
+      "avatar": "/uploads/1774804995630.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772796257738.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128840653.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804995630.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1749,42 +1878,23 @@
         },
         {
           "edition": "第5届",
-          "rank": "第15位"
+          "rank": "第20位"
         }
       ],
       "admireSenior": [
-        "m_5gen_1_3632"
-      ],
-      "favoriteSong": "(not) Good Enough ",
-      "avatar": "/uploads/1773128770543.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772817945659.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128770543.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "(not) Good Enough ",
-        "Red Star Love (A-side)",
-        "Do Not Disturb (近藤结衣 center)"
+        "m_ff4lppj9",
+        "m_reina"
       ],
       "friends": [
-        "m_7j6tcyhr",
-        "m_5gen_7_2141"
+        "m_7gen_7_9921"
       ],
-      "favoritePokemon": 65
-    },
-    {
-      "id": "m_7gen_5_1182",
-      "name": "石川 美南",
-      "romaji": "MINAMI ISHIKAWA",
-      "origin": "静冈 • 富士",
-      "generation": "7期",
-      "isActive": true,
+      "favoriteSong": "Cash Wave（7期生 井上詹妮弗center）",
+      "favoriteSongs": [
+        "Cash Wave（7期生 井上詹妮弗center）",
+        "SPLASH!!! (A-side)",
+        "Now We Hug (桥本美咲毕业曲)"
+      ],
+      "favoritePokemon": 65,
       "profile": {
         "height": "162cm",
         "birthday": "2008-01-09",
@@ -1830,8 +1940,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_7gen_6_7205",
+      "name": "土木生 杏",
+      "romaji": "AN TSUCHIKIBU",
+      "origin": "北海道 • 带广",
+      "generation": "7期",
+      "avatar": "/uploads/1774804951603.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772796268149.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128857813.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804951603.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1851,42 +1985,24 @@
         },
         {
           "edition": "第5届",
-          "rank": "第20位"
+          "rank": "第19位"
         }
       ],
       "admireSenior": [
-        "m_ff4lppj9",
-        "m_reina"
-      ],
-      "favoriteSong": "Cash Wave（7期生 井上詹妮弗center）",
-      "avatar": "/uploads/1773128840653.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772796257738.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128840653.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Cash Wave（7期生 井上詹妮弗center）",
-        "SPLASH!!! (A-side)",
-        "Now We Hug (桥本美咲毕业曲)"
+        "m_blncyp2k",
+        "m_symj32y6"
       ],
       "friends": [
-        "m_7gen_7_9921"
+        "m_7j6tcyhr",
+        "m_7gen_5_1182"
       ],
-      "favoritePokemon": 65
-    },
-    {
-      "id": "m_7gen_6_7205",
-      "name": "土木生 杏",
-      "romaji": "AN TSUCHIKIBU",
-      "origin": "北海道 • 带广",
-      "generation": "7期",
-      "isActive": true,
+      "favoriteSong": "Last Angel",
+      "favoriteSongs": [
+        "Last Angel",
+        "Red Star Love (A-side)",
+        "FIX IT"
+      ],
+      "favoritePokemon": 118,
       "profile": {
         "height": "165cm",
         "birthday": "2009-03-17",
@@ -1932,8 +2048,32 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第1排 护法）"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_7gen_7_9921",
+      "name": "新井 心扉菜",
+      "romaji": "KOHINA ARAI",
+      "origin": "东京 • 杉并",
+      "generation": "7期",
+      "avatar": "/uploads/1774804937947.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1772796277862.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128877795.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804937947.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1953,43 +2093,23 @@
         },
         {
           "edition": "第5届",
-          "rank": "第19位"
+          "rank": "第12位"
         }
       ],
       "admireSenior": [
-        "m_blncyp2k",
-        "m_symj32y6"
-      ],
-      "favoriteSong": "Last Angel",
-      "avatar": "/uploads/1773128857813.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772796268149.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128857813.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Last Angel",
-        "Red Star Love (A-side)",
-        "FIX IT"
+        "m_6gen_3_1550"
       ],
       "friends": [
-        "m_7j6tcyhr",
-        "m_7gen_5_1182"
+        "m_l4k686go",
+        "m_ayame"
       ],
-      "favoritePokemon": 118
-    },
-    {
-      "id": "m_7gen_7_9921",
-      "name": "新井 心扉菜",
-      "romaji": "KOHINA ARAI",
-      "origin": "东京 • 杉并",
-      "generation": "7期",
-      "isActive": true,
+      "favoriteSong": "Despise (橘明日香 center)",
+      "favoriteSongs": [
+        "Despise (橘明日香 center)",
+        "FIX IT",
+        "Star with Moon（竹内星月 with 宫月）"
+      ],
+      "favoritePokemon": 40,
       "profile": {
         "height": "152cm",
         "birthday": "2009-12-05",
@@ -2035,8 +2155,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_6gen_1_4821",
+      "name": "冈崎 卡莉",
+      "romaji": "KARIN OKAZAKI",
+      "origin": "东京 • 世田谷",
+      "generation": "6期",
+      "avatar": "/uploads/1774804858103.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1771581945609.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128896968.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804858103.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2052,46 +2196,27 @@
         },
         {
           "edition": "第4届",
-          "rank": "加入前"
+          "rank": "第9位"
         },
         {
           "edition": "第5届",
-          "rank": "第12位"
+          "rank": "第5位"
         }
       ],
       "admireSenior": [
-        "m_6gen_3_1550"
-      ],
-      "favoriteSong": "Despise (橘明日香 center)",
-      "avatar": "/uploads/1773128877795.jpg",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1772796277862.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128877795.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Despise (橘明日香 center)",
-        "FIX IT",
-        "Star with Moon（竹内星月 with 宫月）"
+        "m_5gen_2_7259",
+        "m_5gen_1_3632"
       ],
       "friends": [
-        "m_l4k686go",
-        "m_ayame"
+        "m_ff4lppj9"
       ],
-      "favoritePokemon": 40
-    },
-    {
-      "id": "m_6gen_1_4821",
-      "name": "冈崎 卡莉",
-      "romaji": "KARIN OKAZAKI",
-      "origin": "东京 • 世田谷",
-      "generation": "6期",
-      "isActive": true,
+      "favoriteSong": "Fly Away (白鸟南娜毕业曲)",
+      "favoriteSongs": [
+        "Fly Away (白鸟南娜毕业曲)",
+        "RUBY",
+        "Star with Moon（竹内星月 with 宫月）"
+      ],
+      "favoritePokemon": 118,
       "profile": {
         "height": "168cm",
         "birthday": "2008-09-17",
@@ -2137,8 +2262,32 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_6gen_2_9374",
+      "name": "小笠原 诗",
+      "romaji": "UTA OGASAWARA",
+      "origin": "京都 • 左京区",
+      "generation": "6期",
+      "avatar": "/uploads/1774804843837.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1771581955632.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773128908405.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804843837.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2154,46 +2303,27 @@
         },
         {
           "edition": "第4届",
-          "rank": "第9位"
+          "rank": "第20位"
         },
         {
           "edition": "第5届",
-          "rank": "第5位"
+          "rank": "圈外"
         }
       ],
       "admireSenior": [
-        "m_5gen_2_7259",
-        "m_5gen_1_3632"
-      ],
-      "avatar": "/uploads/1773128896968.jpg",
-      "favoriteSong": "Fly Away (白鸟南娜毕业曲)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1771581945609.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128896968.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Fly Away (白鸟南娜毕业曲)",
-        "RUBY",
-        "Star with Moon（竹内星月 with 宫月）"
+        "m_umbw1ji3",
+        "m_c16gtwds"
       ],
       "friends": [
-        "m_ff4lppj9"
+        "m_hina"
       ],
-      "favoritePokemon": 118
-    },
-    {
-      "id": "m_6gen_2_9374",
-      "name": "小笠原 诗",
-      "romaji": "UTA OGASAWARA",
-      "origin": "京都 • 左京区",
-      "generation": "6期",
-      "isActive": true,
+      "favoriteSong": "Dreaming Buds（饭锅利佳center）",
+      "favoriteSongs": [
+        "Dreaming Buds（饭锅利佳center）",
+        "Robot Girlfriend?! (A-side)",
+        "SAY MY NAME"
+      ],
+      "favoritePokemon": 16,
       "profile": {
         "height": "156cm",
         "birthday": "2009-04-02",
@@ -2239,8 +2369,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_6gen_3_1550",
+      "name": "森 美穗",
+      "romaji": "MIHO MORI",
+      "origin": "北海道 • 函馆",
+      "generation": "6期",
+      "avatar": "/uploads/1774804827418.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1771581965239.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773129047779.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804827418.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2256,46 +2410,29 @@
         },
         {
           "edition": "第4届",
-          "rank": "第20位"
+          "rank": "第18位"
         },
         {
           "edition": "第5届",
-          "rank": "圈外"
+          "rank": "第10位"
         }
       ],
       "admireSenior": [
-        "m_umbw1ji3",
-        "m_c16gtwds"
-      ],
-      "avatar": "/uploads/1773128908405.jpg",
-      "favoriteSong": "Dreaming Buds（饭锅利佳center）",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1771581955632.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773128908405.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Dreaming Buds（饭锅利佳center）",
-        "Robot Girlfriend?! (A-side)",
-        "SAY MY NAME"
+        "m_batr9qfj",
+        "m_t8u0ysq7",
+        "m_5gen_3_7488"
       ],
       "friends": [
-        "m_hina"
+        "m_6gen_2_9374",
+        "m_5gen_1_3632"
       ],
-      "favoritePokemon": 16
-    },
-    {
-      "id": "m_6gen_3_1550",
-      "name": "森 美穗",
-      "romaji": "MIHO MORI",
-      "origin": "北海道 • 函馆",
-      "generation": "6期",
-      "isActive": true,
+      "favoriteSong": "Break the Rules (5期生)",
+      "favoriteSongs": [
+        "Break the Rules (5期生)",
+        "OUR VOWS (A-side)",
+        "BLACK MOON (A-side)"
+      ],
+      "favoritePokemon": 44,
       "profile": {
         "height": "162cm",
         "birthday": "2007-12-01",
@@ -2341,8 +2478,32 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_6gen_4_6829",
+      "name": "海东 茉莉奈",
+      "romaji": "MARINA KAITO",
+      "origin": "冲绳 • 浦添",
+      "generation": "6期",
+      "avatar": "/uploads/1774804793455.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1771581977266.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773312542693.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804793455.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2358,48 +2519,27 @@
         },
         {
           "edition": "第4届",
-          "rank": "第18位"
+          "rank": "第8位"
         },
         {
           "edition": "第5届",
-          "rank": "第10位"
+          "rank": "第6位"
         }
       ],
       "admireSenior": [
-        "m_batr9qfj",
-        "m_t8u0ysq7",
-        "m_5gen_3_7488"
-      ],
-      "avatar": "/uploads/1773129047779.jpg",
-      "favoriteSong": "Break the Rules (5期生)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1771581965239.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773129047779.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Break the Rules (5期生)",
-        "OUR VOWS (A-side)",
-        "BLACK MOON (A-side)"
+        "m_nana",
+        "m_5gen_5_6677"
       ],
       "friends": [
-        "m_6gen_2_9374",
-        "m_5gen_1_3632"
+        "m_6gen_5_7713"
       ],
-      "favoritePokemon": 44
-    },
-    {
-      "id": "m_6gen_4_6829",
-      "name": "海东 茉莉奈",
-      "romaji": "MARINA KAITO",
-      "origin": "冲绳 • 浦添",
-      "generation": "6期",
-      "isActive": true,
+      "favoriteSong": "Next to Me 3期生（小林凛凛花 center）",
+      "favoriteSongs": [
+        "Next to Me 3期生（小林凛凛花 center）",
+        "BiTE mY UnDERweAR (A-side)",
+        "J ONE (A-side)"
+      ],
+      "favoritePokemon": 32,
       "profile": {
         "height": "170cm",
         "birthday": "2008-06-28",
@@ -2445,55 +2585,7 @@
         "s_uftxjn6a": "A面选拔（第3排）",
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第3届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第8位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第6位"
-        }
-      ],
-      "admireSenior": [
-        "m_nana",
-        "m_5gen_5_6677"
-      ],
-      "avatar": "/uploads/1773312542693.jpg",
-      "favoriteSong": "Next to Me 3期生（小林凛凛花 center）",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1771581977266.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773312542693.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Next to Me 3期生（小林凛凛花 center）",
-        "BiTE mY UnDERweAR (A-side)",
-        "J ONE (A-side)"
-      ],
-      "friends": [
-        "m_6gen_5_7713"
-      ],
-      "favoritePokemon": 32
+      }
     },
     {
       "id": "m_6gen_5_7713",
@@ -2698,8 +2790,61 @@
       "romaji": "KAZU OHARA",
       "origin": "福冈 • 福冈市",
       "generation": "5期",
-      "avatar": "/uploads/1773083470514.jpg",
+      "avatar": "/uploads/1774804661257.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768985594388.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083470514.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804661257.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十六位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
+        },
+        {
+          "edition": "第5届",
+          "rank": "圈外"
+        }
+      ],
+      "admireSenior": [
+        "m_ys0s465i",
+        "m_7j6tcyhr"
+      ],
+      "friends": [
+        "m_gbojk371",
+        "m_6gen_2_9374"
+      ],
+      "favoriteSong": "Despise (橘明日香 center)",
+      "favoriteSongs": [
+        "Despise (橘明日香 center)",
+        "Waiting (加藤 友乃良 center)",
+        "BiTE mY UnDERweAR (A-side)"
+      ],
+      "favoritePokemon": 22,
       "profile": {
         "height": "164cm",
         "birthday": "2007-10-13",
@@ -2745,56 +2890,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十六位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "圈外"
-        },
-        {
-          "edition": "第5届",
-          "rank": "圈外"
-        }
-      ],
-      "admireSenior": [
-        "m_ys0s465i",
-        "m_7j6tcyhr"
-      ],
-      "graduationSongTitle": "",
-      "favoriteSong": "Despise (橘明日香 center)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768985594388.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083470514.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Despise (橘明日香 center)",
-        "Waiting (加藤 友乃良 center)",
-        "BiTE mY UnDERweAR (A-side)"
-      ],
-      "friends": [
-        "m_gbojk371",
-        "m_6gen_2_9374"
-      ],
-      "favoritePokemon": 22
+      }
     },
     {
       "id": "m_5gen_2_7259",
@@ -2868,8 +2964,59 @@
       "romaji": "NAOKI FUJIMATSU",
       "origin": "山形 • 山形市",
       "generation": "5期",
-      "avatar": "/uploads/1773083515844.jpg",
+      "avatar": "/uploads/1774804649344.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768985619382.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083515844.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804649344.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "二十一位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
+        },
+        {
+          "edition": "第5届",
+          "rank": "圈外"
+        }
+      ],
+      "admireSenior": [
+        "m_c16gtwds"
+      ],
+      "friends": [
+        "m_6gen_2_9374"
+      ],
+      "favoriteSong": "Fly Away (白鸟南娜毕业曲)",
+      "favoriteSongs": [
+        "Fly Away (白鸟南娜毕业曲)",
+        "Time to Say Goodbye (橘明日香 center)",
+        "Despise (橘明日香 center)"
+      ],
+      "favoritePokemon": 24,
       "profile": {
         "height": "156cm",
         "birthday": "2010-08-28",
@@ -2915,8 +3062,32 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
+      }
+    },
+    {
+      "id": "m_5gen_4_8493",
+      "name": "来生 菜菜",
+      "romaji": "NANA KISUI",
+      "origin": "福冈 • 福冈市",
+      "generation": "5期",
+      "avatar": "/uploads/1774804637754.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768985628805.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083574214.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804637754.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2928,11 +3099,11 @@
         },
         {
           "edition": "第3届",
-          "rank": "二十一位"
+          "rank": "二十三位"
         },
         {
           "edition": "第4届",
-          "rank": "圈外"
+          "rank": "第15位"
         },
         {
           "edition": "第5届",
@@ -2940,38 +3111,18 @@
         }
       ],
       "admireSenior": [
-        "m_c16gtwds"
-      ],
-      "graduationSongTitle": "",
-      "favoriteSong": "Fly Away (白鸟南娜毕业曲)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768985619382.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083515844.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Fly Away (白鸟南娜毕业曲)",
-        "Time to Say Goodbye (橘明日香 center)",
-        "Despise (橘明日香 center)"
+        "m_umbw1ji3"
       ],
       "friends": [
-        "m_6gen_2_9374"
+        "m_mdv7k6ml"
       ],
-      "favoritePokemon": 24
-    },
-    {
-      "id": "m_5gen_4_8493",
-      "name": "来生 菜菜",
-      "romaji": "NANA KISUI",
-      "origin": "福冈 • 福冈市",
-      "generation": "5期",
-      "avatar": "/uploads/1773083574214.jpg",
-      "isActive": true,
+      "favoriteSong": "Break the Rules (5期生)",
+      "favoriteSongs": [
+        "Break the Rules (5期生)",
+        "Fly Away (白鸟南娜毕业曲)",
+        "glimmer (A-side)"
+      ],
+      "favoritePokemon": 130,
       "profile": {
         "height": "163cm",
         "birthday": "2007-04-23",
@@ -3017,54 +3168,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第3届",
-          "rank": "二十三位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第15位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "圈外"
-        }
-      ],
-      "admireSenior": [
-        "m_umbw1ji3"
-      ],
-      "graduationSongTitle": "",
-      "favoriteSong": "Break the Rules (5期生)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768985628805.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083574214.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Break the Rules (5期生)",
-        "Fly Away (白鸟南娜毕业曲)",
-        "glimmer (A-side)"
-      ],
-      "friends": [
-        "m_mdv7k6ml"
-      ],
-      "favoritePokemon": 130
+      }
     },
     {
       "id": "m_5gen_5_6677",
@@ -3241,8 +3345,61 @@
       "romaji": "YULIA KURANO",
       "origin": "爱知 • 名古屋",
       "generation": "5期",
-      "avatar": "/uploads/1773218117500.jpg",
+      "avatar": "/uploads/1774804496839.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768985659260.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773218117500.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804496839.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十二位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第1位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第2位"
+        }
+      ],
+      "admireSenior": [
+        "m_nana",
+        "m_blncyp2k"
+      ],
+      "friends": [
+        "m_7gen_5_1182",
+        "m_rin"
+      ],
+      "favoriteSong": "BLACKOUT (A-side)",
+      "favoriteSongs": [
+        "BLACKOUT (A-side)",
+        "Am I a Bad Girl? (A-side)",
+        "Time to Say Goodbye (橘明日香 center)"
+      ],
+      "favoritePokemon": 100,
       "profile": {
         "height": "158cm",
         "birthday": "2007-04-26",
@@ -3288,56 +3445,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十二位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第1位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第2位"
-        }
-      ],
-      "admireSenior": [
-        "m_nana",
-        "m_blncyp2k"
-      ],
-      "graduationSongTitle": "",
-      "favoriteSong": "BLACKOUT (A-side)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768985659260.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773218117500.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "BLACKOUT (A-side)",
-        "Am I a Bad Girl? (A-side)",
-        "Time to Say Goodbye (橘明日香 center)"
-      ],
-      "friends": [
-        "m_7gen_5_1182",
-        "m_rin"
-      ],
-      "favoritePokemon": 100
+      }
     },
     {
       "id": "m_umbw1ji3",
@@ -3478,8 +3586,60 @@
       "romaji": "RIRIKA KOBAYASHI",
       "origin": "滋贺 • 大津",
       "generation": "3期",
-      "avatar": "/uploads/1773083555565.jpg",
+      "avatar": "/uploads/1774804459918.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768593904736.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083555565.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804459918.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "五位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第3位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第3位"
+        }
+      ],
+      "admireSenior": [
+        "m_4wmfwcbj",
+        "m_yuna"
+      ],
+      "friends": [
+        "m_batr9qfj"
+      ],
+      "favoriteSong": "Star with Moon（竹内星月 with 宫月）",
+      "favoriteSongs": [
+        "Star with Moon（竹内星月 with 宫月）",
+        "Poison（6期生 冈崎卡莉、海东茉莉奈w center）",
+        "SAY MY NAME"
+      ],
+      "favoritePokemon": 145,
       "profile": {
         "height": "152cm",
         "birthday": "2005-03-22",
@@ -3525,54 +3685,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第2排）"
-      },
-      "selectionCount": 5,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "五位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第3位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第3位"
-        }
-      ],
-      "favoriteSong": "Star with Moon（竹内星月 with 宫月）",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768593904736.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083555565.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Star with Moon（竹内星月 with 宫月）",
-        "Poison（6期生 冈崎卡莉、海东茉莉奈w center）",
-        "SAY MY NAME"
-      ],
-      "admireSenior": [
-        "m_4wmfwcbj",
-        "m_yuna"
-      ],
-      "friends": [
-        "m_batr9qfj"
-      ],
-      "favoritePokemon": 145
+      }
     },
     {
       "id": "m_batr9qfj",
@@ -3580,8 +3693,61 @@
       "romaji": "NANA TAKIZAWA",
       "origin": "北海道 • 旭川",
       "generation": "3期",
-      "avatar": "/uploads/1773083890207.jpg",
+      "avatar": "/uploads/1774804447782.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768593846264.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083890207.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804447782.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十八位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十五位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第7位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第9位"
+        }
+      ],
+      "admireSenior": [
+        "m_hina",
+        "m_ys0s465i"
+      ],
+      "friends": [
+        "m_7gen_6_7205",
+        "m_mika"
+      ],
+      "favoriteSong": "SAY MY NAME",
+      "favoriteSongs": [
+        "SAY MY NAME",
+        "Wall of Dreams (A-side)",
+        "Robot Girlfriend?! (A-side)"
+      ],
+      "favoritePokemon": 132,
       "profile": {
         "height": "166cm",
         "birthday": "2007-07-07",
@@ -3627,55 +3793,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "selectionCount": 2,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "加入前"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十八位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十五位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第7位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第9位"
-        }
-      ],
-      "favoriteSong": "SAY MY NAME",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768593846264.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083890207.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "SAY MY NAME",
-        "Wall of Dreams (A-side)",
-        "Robot Girlfriend?! (A-side)"
-      ],
-      "admireSenior": [
-        "m_hina",
-        "m_ys0s465i"
-      ],
-      "friends": [
-        "m_7gen_6_7205",
-        "m_mika"
-      ],
-      "favoritePokemon": 132
+      }
     },
     {
       "id": "m_mdv7k6ml",
@@ -3804,8 +3922,60 @@
       "romaji": "YUME YAMAGAMI",
       "origin": "福岛 • 郡山",
       "generation": "2期",
-      "avatar": "/uploads/1773083646998.jpg",
+      "avatar": "/uploads/1774804432041.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768593641741.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083646998.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804432041.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "十二位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "八位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "九位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第11位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第11位"
+        }
+      ],
+      "admireSenior": [
+        "m_bm7qiehk"
+      ],
+      "friends": [
+        "m_mika",
+        "m_mdv7k6ml"
+      ],
+      "favoriteSong": "Knock Knock(今日优center)",
+      "favoriteSongs": [
+        "Knock Knock(今日优center)",
+        "RESET (A-side)",
+        "Version7.0（7期生 德保夏希center）"
+      ],
+      "favoritePokemon": 30,
       "profile": {
         "height": "151cm",
         "birthday": "2006-08-22",
@@ -3851,54 +4021,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 5,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "十二位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "八位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "九位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第11位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第11位"
-        }
-      ],
-      "favoriteSong": "Knock Knock(今日优center)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768593641741.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083646998.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Knock Knock(今日优center)",
-        "RESET (A-side)",
-        "Version7.0（7期生 德保夏希center）"
-      ],
-      "admireSenior": [
-        "m_bm7qiehk"
-      ],
-      "friends": [
-        "m_mika",
-        "m_mdv7k6ml"
-      ],
-      "favoritePokemon": 30
+      }
     },
     {
       "id": "m_l4k686go",
@@ -4105,8 +4228,59 @@
       "romaji": "AMI MIYAJIMA",
       "origin": "冲绳 • 那霸",
       "generation": "2期",
-      "avatar": "/uploads/1773083808555.jpg",
+      "avatar": "/uploads/1774804417303.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768593433559.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083808555.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804417303.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "六位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "四位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "三位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第2位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第1位"
+        }
+      ],
+      "admireSenior": [
+        "m_reina"
+      ],
+      "friends": [
+        "m_7gen_7_9921"
+      ],
+      "favoriteSong": "SETER (A-side)",
+      "favoriteSongs": [
+        "SETER (A-side)",
+        "glimmer (A-side)",
+        "Unexpected Rush（森美穗center）"
+      ],
+      "favoritePokemon": 17,
       "profile": {
         "height": "168cm",
         "birthday": "2003-08-14",
@@ -4152,53 +4326,7 @@
         "s_uftxjn6a": "A面选拔（第1排 center）",
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第2排）"
-      },
-      "selectionCount": 7,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "六位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "四位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "三位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第2位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第1位"
-        }
-      ],
-      "favoriteSong": "SETER (A-side)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768593433559.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083808555.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "SETER (A-side)",
-        "glimmer (A-side)",
-        "Unexpected Rush（森美穗center）"
-      ],
-      "admireSenior": [
-        "m_reina"
-      ],
-      "friends": [
-        "m_7gen_7_9921"
-      ],
-      "favoritePokemon": 17
+      }
     },
     {
       "id": "m_jh2ureo3",
@@ -4427,8 +4555,58 @@
       "romaji": "MIHARU SAEKI",
       "origin": "广岛 • 广岛市",
       "generation": "1期",
-      "avatar": "/uploads/1773083909895.jpg",
+      "avatar": "/uploads/1774804403769.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768591628116.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083909895.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804403769.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "二十位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十六位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十七位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第12位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第18位"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_6gen_2_9374",
+        "m_yuna"
+      ],
+      "favoriteSong": "Saku no Michi -樱道- (中村樱 卒业曲)",
+      "favoriteSongs": [
+        "Saku no Michi -樱道- (中村樱 卒业曲)",
+        "The Meaning of Unforgetable Things (A-side)",
+        "fantasy! (A-side)"
+      ],
+      "favoritePokemon": 31,
       "profile": {
         "height": "150cm",
         "birthday": "2006-02-25",
@@ -4474,52 +4652,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "selectionCount": 1,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "二十位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十六位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十七位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第12位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第18位"
-        }
-      ],
-      "favoriteSong": "Saku no Michi -樱道- (中村樱 卒业曲)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768591628116.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083909895.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Saku no Michi -樱道- (中村樱 卒业曲)",
-        "The Meaning of Unforgetable Things (A-side)",
-        "fantasy! (A-side)"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_6gen_2_9374",
-        "m_yuna"
-      ],
-      "favoritePokemon": 31
+      }
     },
     {
       "id": "m_7j6tcyhr",
@@ -4527,8 +4660,58 @@
       "romaji": "SEITSUKI TAKEUCHI",
       "origin": "韩国首尔 • 江南",
       "generation": "1期",
-      "avatar": "/uploads/1773083714129.jpg",
+      "avatar": "/uploads/1774804393238.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768591547894.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083714129.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804393238.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "十位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十二位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第14位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第8位"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_t8u0ysq7",
+        "m_ltlzffea"
+      ],
+      "favoriteSong": "Big Mistake?! (A-side)",
+      "favoriteSongs": [
+        "Big Mistake?! (A-side)",
+        "Wonder Wonder Wonder 2期生（宫岛阿弥 center）",
+        "Knock Knock(今日优center)"
+      ],
+      "favoritePokemon": 102,
       "profile": {
         "height": "169cm",
         "birthday": "2007-02-08",
@@ -4574,52 +4757,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）"
-      },
-      "selectionCount": 4,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "十位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十二位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第14位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第8位"
-        }
-      ],
-      "favoriteSong": "Big Mistake?! (A-side)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768591547894.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083714129.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Big Mistake?! (A-side)",
-        "Wonder Wonder Wonder 2期生（宫岛阿弥 center）",
-        "Knock Knock(今日优center)"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_t8u0ysq7",
-        "m_ltlzffea"
-      ],
-      "favoritePokemon": 102
+      }
     },
     {
       "id": "m_m8fltj0e",
@@ -4627,8 +4765,58 @@
       "romaji": "JURINA MATSUMURA",
       "origin": "静冈 • 静冈市",
       "generation": "1期",
-      "avatar": "/uploads/1773083624599.jpg",
+      "avatar": "/uploads/1774804380384.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768591398834.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083624599.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804380384.webp",
+          "version": 3
+        }
+      ],
       "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "十三位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十三位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十一位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第6位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第4位"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_ys0s465i",
+        "m_ayame"
+      ],
+      "favoriteSong": "Robot Girlfriend?! (A-side)",
+      "favoriteSongs": [
+        "Robot Girlfriend?! (A-side)",
+        "Sunshine Together -阳聚- (坂口阳菜 毕业曲)",
+        "WooHoo!! Sakura and Hawk (A-side)"
+      ],
+      "favoritePokemon": 70,
       "profile": {
         "height": "163cm",
         "birthday": "2004-03-14",
@@ -4674,52 +4862,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）"
-      },
-      "selectionCount": 0,
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "十三位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十三位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十一位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第6位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第4位"
-        }
-      ],
-      "favoriteSong": "Robot Girlfriend?! (A-side)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768591398834.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083624599.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Robot Girlfriend?! (A-side)",
-        "Sunshine Together -阳聚- (坂口阳菜 毕业曲)",
-        "WooHoo!! Sakura and Hawk (A-side)"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_ys0s465i",
-        "m_ayame"
-      ],
-      "favoritePokemon": 70
+      }
     },
     {
       "id": "m_ff4lppj9",
@@ -5201,9 +5344,61 @@
     {
       "id": "m_mika",
       "name": "橘 明日香",
+      "romaji": "ASUKA TACHIBANA",
       "origin": "札幌 · 中央",
       "generation": "1期",
-      "avatar": "/uploads/1773085497754.jpg",
+      "avatar": "/uploads/1774804356608.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768590044858.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773085497754.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804356608.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "九位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "十五位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "十八位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
+        },
+        {
+          "edition": "第5届",
+          "rank": "第13位"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_6gen_1_4821",
+        "m_6gen_5_7713"
+      ],
+      "favoriteSong": "Waiting (加藤 友乃良 center)",
+      "favoriteSongs": [
+        "Waiting (加藤 友乃良 center)",
+        "Fly Away (白鸟南娜毕业曲)",
+        "Star with Moon（竹内星月 with 宫月）"
+      ],
+      "favoritePokemon": 146,
       "profile": {
         "height": "165cm",
         "birthday": "2004-11-11",
@@ -5249,54 +5444,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "isActive": true,
-      "selectionCount": 4,
-      "romaji": "ASUKA TACHIBANA",
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "九位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "十五位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "十八位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "圈外"
-        },
-        {
-          "edition": "第5届",
-          "rank": "第13位"
-        }
-      ],
-      "favoriteSong": "Waiting (加藤 友乃良 center)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768590044858.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773085497754.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Waiting (加藤 友乃良 center)",
-        "Fly Away (白鸟南娜毕业曲)",
-        "Star with Moon（竹内星月 with 宫月）"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_6gen_1_4821",
-        "m_6gen_5_7713"
-      ],
-      "favoritePokemon": 146
+      }
     },
     {
       "id": "m_mayu",
@@ -5433,9 +5581,61 @@
     {
       "id": "m_hina",
       "name": "加藤 友良乃",
+      "romaji": "YURINO KATO",
       "origin": "广岛 · 中区",
       "generation": "1期",
-      "avatar": "/uploads/1773083535807.jpg",
+      "avatar": "/uploads/1774804342814.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768590846634.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083535807.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804342814.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "五位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "五位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "四位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "第4位"
+        },
+        {
+          "edition": "第5届",
+          "rank": "未参选"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_c16gtwds",
+        "m_7gen_5_1182"
+      ],
+      "favoriteSong": "glimmer (A-side)",
+      "favoriteSongs": [
+        "glimmer (A-side)",
+        "BE US (A-side)",
+        "in vain"
+      ],
+      "favoritePokemon": 103,
       "profile": {
         "height": "154cm",
         "birthday": "2007-02-14",
@@ -5481,54 +5681,7 @@
         "s_uftxjn6a": "A面选拔（第2排）",
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）"
-      },
-      "isActive": true,
-      "selectionCount": 4,
-      "romaji": "YURINO KATO",
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "五位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "五位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "四位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "第4位"
-        },
-        {
-          "edition": "第5届",
-          "rank": "未参选"
-        }
-      ],
-      "favoriteSong": "glimmer (A-side)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768590846634.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083535807.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "glimmer (A-side)",
-        "BE US (A-side)",
-        "in vain"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_c16gtwds",
-        "m_7gen_5_1182"
-      ],
-      "favoritePokemon": 103
+      }
     },
     {
       "id": "m_reina",
@@ -5595,9 +5748,60 @@
     {
       "id": "m_ayame",
       "name": "平井 葵",
+      "romaji": "AOI HIRAI",
       "origin": "仙台 · 青叶",
       "generation": "1期",
-      "avatar": "/uploads/1773083775909.jpg",
+      "avatar": "/uploads/1774804307411.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1768591074779.jpg",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1773083775909.jpg",
+          "version": 2
+        },
+        {
+          "url": "/uploads/1774804307411.webp",
+          "version": 3
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "二十三位"
+        },
+        {
+          "edition": "第2届",
+          "rank": "二十三位"
+        },
+        {
+          "edition": "第3届",
+          "rank": "二十位"
+        },
+        {
+          "edition": "第4届",
+          "rank": "圈外"
+        },
+        {
+          "edition": "第5届",
+          "rank": "圈外"
+        }
+      ],
+      "admireSenior": [],
+      "friends": [
+        "m_7gen_2_4421"
+      ],
+      "favoriteSong": "Everybody Move! (大原和 center)",
+      "favoriteSongs": [
+        "Everybody Move! (大原和 center)",
+        "Unexpected Rush（森美穗center）",
+        "Mrs. Candy（今日优center）"
+      ],
+      "favoritePokemon": 105,
       "profile": {
         "height": "161cm",
         "birthday": "2006-09-30",
@@ -5643,53 +5847,7 @@
         "s_uftxjn6a": "落选",
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
-      },
-      "isActive": true,
-      "selectionCount": 0,
-      "romaji": "AOI HIRAI",
-      "electionRanks": [
-        {
-          "edition": "第1届",
-          "rank": "二十三位"
-        },
-        {
-          "edition": "第2届",
-          "rank": "二十三位"
-        },
-        {
-          "edition": "第3届",
-          "rank": "二十位"
-        },
-        {
-          "edition": "第4届",
-          "rank": "圈外"
-        },
-        {
-          "edition": "第5届",
-          "rank": "圈外"
-        }
-      ],
-      "favoriteSong": "Everybody Move! (大原和 center)",
-      "officialPhotos": [
-        {
-          "url": "/uploads/1768591074779.jpg",
-          "version": 1
-        },
-        {
-          "url": "/uploads/1773083775909.jpg",
-          "version": 2
-        }
-      ],
-      "favoriteSongs": [
-        "Everybody Move! (大原和 center)",
-        "Unexpected Rush（森美穗center）",
-        "Mrs. Candy（今日优center）"
-      ],
-      "admireSenior": [],
-      "friends": [
-        "m_7gen_2_4421"
-      ],
-      "favoritePokemon": 105
+      }
     }
   ],
   "singles": [
