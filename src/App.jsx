@@ -348,12 +348,17 @@ function ensureTrackShape(track, no, isAside) {
  * 根据单曲标题前缀（如 "27th Single"）判断是否属于"新版公式照"语境（第27单起）
  */
 // 返回单曲对应的公式照版本档位：0=第1版，1=第2版（27-36单），2=最新版（37单+）
-function getSinglePhotoTier(single) {
+// member 可选；27-36单的tier-1仅对1-7期生有效，8期及以上仍用v1
+function getSinglePhotoTier(single, member) {
   const prefix = splitSingleTitle(single?.title ?? "").prefix;
   const num = parseInt((prefix || "").match(/\d+/)?.[0], 10);
   if (!Number.isFinite(num)) return 0;
   if (num >= 37) return 2;
-  if (num >= 27) return 1;
+  if (num >= 27) {
+    const genNum = parseInt(String(member?.generation ?? "").match(/\d+/)?.[0], 10);
+    if (Number.isFinite(genNum) && genNum >= 8) return 0;
+    return 1;
+  }
   return 0;
 }
 
@@ -4196,7 +4201,6 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
 
 function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, playQueue, audioQueue, audioIndex, isPlaying, togglePlayPause}) {
   const [coverZoom, setCoverZoom] = useState(false);
-  const photoTier = getSinglePhotoTier(single);
 
   const rows = single.asideLineup?.rows || [];
   const slots = single.asideLineup?.slots || [];
@@ -4425,7 +4429,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
                             <div className="overflow-hidden bg-transparent">
                               <MediaImage
-                                src={getOfficialPhotoUrl(m, photoTier)}
+                                src={getOfficialPhotoUrl(m, getSinglePhotoTier(single, m))}
                                 alt={m.name}
                                 className={"h-full w-full object-contain object-top " + (!m.isActive ? "grayscale" : "")}
                               />
