@@ -98,11 +98,15 @@ Current section labels: TRACKLIST, INTRODUCTION, FORMATION, PROFILE, ELECTION, F
 ### Generation Badge Colors
 | Generation | Background | Text |
 |---|---|---|
-| 3期 | `#EEF2FF` | `#4338CA` |
-| 5期 | `#F0FDFA` | `#0F766E` |
-| 6期 | `#FAF5FF` | `#7C3AED` |
-| 7期 | `#FFF7ED` | `#C2410C` |
-| others | `#F0F0F0` | `#1C1C1C` |
+| 1期 | `#E78BA8` | `#FFFFFF` |
+| 2期 | `#63EA95` | `#FFFFFF` |
+| 3期 | `#00A8E7` | `#FFFFFF` |
+| 4期 | `#F8FD01` | `#FFFFFF` |
+| 5期 | `#FDA40C` | `#FFFFFF` |
+| 6期 | `#DCC8E1` | `#FFFFFF` |
+| 7期 | `#2F7927` | `#FFFFFF` |
+| 8期 | `#3098FE` | `#FFFFFF` |
+| 9期 | `#3CC2B1` | `#FFFFFF` |
 All badges: `padding: '2px 8px', fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em'`
 
 ### Dialog / Modal
