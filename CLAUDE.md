@@ -184,6 +184,19 @@ Member detail modal: `max-w-4xl`
 - `resolveMediaUrl(url)` — resolves relative media paths
 - `isoDate(str)` — normalizes date strings
 
+## Adding New Members — Rules
+
+When adding a new generation or new members to `server/data/db.json`:
+
+1. **Position**: New members go at the **front** of the `members` array (newest generation first).
+2. **selectionHistory**: All existing single IDs must be present. Value = `"加入前"` for every single released before the member joined (i.e. all singles at time of creation for brand-new members).
+3. **electionRanks**: All existing election editions must be present, each with `rank: "加入前"`.
+4. **favoriteSongs**: Pick **3 real track titles** from `db.singles[].tracks[].title`. Do NOT invent song names. Use `db.singles` to get the actual list.
+5. **favoriteSong**: Set to `favoriteSongs[0]` (the first of the three).
+6. **admireSenior**: Pick **1–3** member IDs randomly from earlier generations. Do not over-assign.
+7. **friends**: Pick **1–3** member IDs randomly from any existing members. Do not over-assign.
+8. **avatar / officialPhotos**: Leave as `""` / `[]` until photos are uploaded.
+
 ## Data Shape (do not change structure)
 
 ```js
