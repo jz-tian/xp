@@ -333,6 +333,36 @@ const splitSingleTitle = (fullTitle) => {
   return { prefix: parts[0], name: parts.slice(1).join(" · ") };
 };
 
+function parseSingleNumber(single) {
+  const prefix = splitSingleTitle(single?.title ?? "").prefix;
+  const m = prefix.match(/\d+/);
+  return m ? Number(m[0]) : Infinity;
+}
+
+function compareSinglesByRelease(a, b, direction = "asc") {
+  const ta = Date.parse(a?.release || a?.releaseDate || "");
+  const tb = Date.parse(b?.release || b?.releaseDate || "");
+  const aHasDate = Number.isFinite(ta);
+  const bHasDate = Number.isFinite(tb);
+
+  if (!aHasDate && !bHasDate) {
+    return parseSingleNumber(a) - parseSingleNumber(b);
+  }
+  if (!aHasDate) return 1;
+  if (!bHasDate) return -1;
+
+  if (ta !== tb) {
+    return direction === "desc" ? tb - ta : ta - tb;
+  }
+
+  const numDiff = direction === "desc"
+    ? parseSingleNumber(b) - parseSingleNumber(a)
+    : parseSingleNumber(a) - parseSingleNumber(b);
+  if (numDiff !== 0) return numDiff;
+
+  return String(a?.title || "").localeCompare(String(b?.title || ""));
+}
+
 
 function ensureTrackShape(track, no, isAside) {
   const t = track && typeof track === "object" ? track : {};
@@ -445,11 +475,11 @@ const computeMemberLineupHistory = (memberId, singles) => {
     });
   }
 
-  // 最新在后，历史在前：按 releaseDate 升序
+  // 最新在后，历史在前：按发行日升序；同日按单曲编号升序
   return list.sort((a, b) => {
-    const da = (singles.find((x) => x.id === a.singleId)?.releaseDate ?? "").toString();
-    const db = (singles.find((x) => x.id === b.singleId)?.releaseDate ?? "").toString();
-    return da.localeCompare(db);
+    const sa = singles.find((x) => x.id === a.singleId) || null;
+    const sb = singles.find((x) => x.id === b.singleId) || null;
+    return compareSinglesByRelease(sa, sb, "asc");
   });
 };
 
@@ -980,11 +1010,7 @@ function PlaylistBuilder({ singles, initialPlaylist, onSave, onClose }) {
   // All tracks with audio, sorted by single release desc then track no
   const allAudioTracks = useMemo(() => {
     const result = [];
-    const sorted = [...(singles || [])].sort((a, b) => {
-      const ta = Date.parse(a.release || "");
-      const tb = Date.parse(b.release || "");
-      return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
-    });
+    const sorted = [...(singles || [])].sort((a, b) => compareSinglesByRelease(a, b, "desc"));
     for (const single of sorted) {
       for (const track of (single.tracks || [])) {
         if (track.audio) {
@@ -3728,22 +3754,15 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
   const cumulativeCounts = useMemo(() => {
     if (!selectedId) return new Map();
 
-    // 1) 先按 release 升序排（如果 release 解析失败，就按原数组顺序兜底）
+    // 1) 先按 release 升序排；同日按单曲编号升序
     const withIndex = (data.singles || []).map((s, i) => ({ s, i }));
-    const parsed = (v) => {
-      const t = Date.parse(v || "");
-      return Number.isFinite(t) ? t : null;
-    };
-    const hasAnyDate = withIndex.some((x) => parsed(x.s.release) !== null);
+    const hasAnyDate = withIndex.some((x) => Number.isFinite(Date.parse(x.s.release || x.s.releaseDate || "")));
 
     const ordered = hasAnyDate
       ? [...withIndex].sort((a, b) => {
-          const ta = parsed(a.s.release);
-          const tb = parsed(b.s.release);
-          if (ta === null && tb === null) return a.i - b.i;
-          if (ta === null) return 1;
-          if (tb === null) return -1;
-          return ta - tb; // 升序：旧 -> 新
+          const diff = compareSinglesByRelease(a.s, b.s, "asc");
+          if (diff !== 0) return diff;
+          return a.i - b.i;
         })
       : withIndex;
 
@@ -3891,14 +3910,8 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
       {/* Discography grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
         <AnimatePresence mode="popLayout">
-        {[...data.singles].sort((a, b) => {
-            const ta = Date.parse(a.release || "");
-            const tb = Date.parse(b.release || "");
-            if (!isFinite(ta) && !isFinite(tb)) return 0;
-            if (!isFinite(ta)) return 1;
-            if (!isFinite(tb)) return -1;
-            return tb - ta; // 新 → 旧
-          }).filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
+        {[...data.singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))
+          .filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
           const { prefix, name } = splitSingleTitle(s.title);
           return (
             <motion.div
@@ -5326,11 +5339,7 @@ export default function XJP56App() {
             transition={{ duration: 0.25 }}
           >
             <Hero
-              singles={[...data.singles].sort((a, b) => {
-                const ta = Date.parse(a.release || "");
-                const tb = Date.parse(b.release || "");
-                return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
-              })}
+              singles={[...data.singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))}
               members={data.members}
               activeMembersCount={data.members.filter((m) => m.isActive).length}
               totalMembersCount={data.members.length}
