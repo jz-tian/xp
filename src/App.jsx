@@ -310,6 +310,7 @@ const ELECTION_SUBTITLES = {
   "第3届": "搅动风云",
   "第4届": "百家争鸣之战",
   "第5届": "Make XP Great Again!",
+  "第6届": "The Power of Dreams",
 };
 
 const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲", "纪念单曲"];
