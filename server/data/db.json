@@ -102,7 +102,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -208,7 +209,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -313,7 +315,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "A面选拔（第1排 center）",
-        "s_yjn7shxt": "A面选拔（第1排）"
+        "s_yjn7shxt": "A面选拔（第1排）",
+        "s_abydc9kz": "A面选拔（第3排）"
       }
     },
     {
@@ -419,7 +422,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "A面选拔（第1排 护法）",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -524,7 +528,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "A面选拔（第1排 护法）",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -630,7 +635,8 @@
         "s_arraomx5": "加入前",
         "s_phyou9mt": "加入前",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -740,7 +746,8 @@
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第3排）",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -1350,7 +1357,8 @@
         "s_arraomx5": "A面选拔（第1排 护法）",
         "s_phyou9mt": "A面选拔（第1排）",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "A面选拔（第3排）"
       }
     },
     {
@@ -1370,9 +1378,9 @@
           "version": 2
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
+      "isActive": false,
+      "graduationDate": "2026-04-11",
+      "graduationSongTitle": "无",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1460,7 +1468,8 @@
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -1678,7 +1687,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第1排 center）",
         "s_5n7jsbhe": "A面选拔（第2排）",
-        "s_yjn7shxt": "A面选拔（第1排）"
+        "s_yjn7shxt": "A面选拔（第1排）",
+        "s_abydc9kz": "A面选拔（第2排）"
       }
     },
     {
@@ -1791,7 +1801,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -1904,7 +1915,8 @@
         "s_arraomx5": "A面选拔（第1排 center）",
         "s_phyou9mt": "A面选拔（第1排 护法）",
         "s_5n7jsbhe": "A面选拔（第2排）",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -2017,7 +2029,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -2131,7 +2144,8 @@
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第1排 护法）",
         "s_5n7jsbhe": "A面选拔（第2排）",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "A面选拔（第3排）"
       }
     },
     {
@@ -2244,7 +2258,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第3排）",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -2357,7 +2372,8 @@
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）",
         "s_5n7jsbhe": "A面选拔（第2排）",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第2排）"
       }
     },
     {
@@ -2470,7 +2486,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -2585,7 +2602,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -2698,7 +2716,8 @@
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）",
         "s_5n7jsbhe": "A面选拔（第2排）",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第3排）"
       }
     },
     {
@@ -3017,7 +3036,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -3199,7 +3219,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -3311,7 +3332,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -3594,7 +3616,8 @@
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）",
         "s_5n7jsbhe": "A面选拔（第3排）",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "A面选拔（第1排 center）"
       }
     },
     {
@@ -3840,7 +3863,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第2排）",
         "s_5n7jsbhe": "A面选拔（第3排）",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第1排 护法）"
       }
     },
     {
@@ -4188,7 +4212,8 @@
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第3排）"
       }
     },
     {
@@ -4499,7 +4524,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第2排）",
         "s_5n7jsbhe": "A面选拔（第3排）",
-        "s_yjn7shxt": "A面选拔（第2排）"
+        "s_yjn7shxt": "A面选拔（第2排）",
+        "s_abydc9kz": "A面选拔（第1排 护法）"
       }
     },
     {
@@ -4843,7 +4869,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -4954,7 +4981,8 @@
         "s_arraomx5": "A面选拔（第3排）",
         "s_phyou9mt": "A面选拔（第3排）",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "落选"
       }
     },
     {
@@ -5065,7 +5093,8 @@
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）",
         "s_5n7jsbhe": "A面选拔（第3排）",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第2排）"
       }
     },
     {
@@ -5896,7 +5925,8 @@
         "s_arraomx5": "A面选拔（第2排）",
         "s_phyou9mt": "A面选拔（第2排）",
         "s_5n7jsbhe": "A面选拔（第3排）",
-        "s_yjn7shxt": "A面选拔（第3排）"
+        "s_yjn7shxt": "A面选拔（第3排）",
+        "s_abydc9kz": "A面选拔（第2排）"
       }
     },
     {
@@ -5982,9 +6012,9 @@
           "version": 3
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
+      "isActive": false,
+      "graduationDate": "2026-04-11",
+      "graduationSongTitle": "无",
       "electionRanks": [
         {
           "edition": "第1届",
@@ -6068,7 +6098,8 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选",
         "s_5n7jsbhe": "落选",
-        "s_yjn7shxt": "落选"
+        "s_yjn7shxt": "落选",
+        "s_abydc9kz": "落选"
       }
     }
   ],
@@ -8131,6 +8162,62 @@
         "slotRoles": {}
       },
       "notes": "XP 10周年第二弹，致敬宫脇奈经典new wave！这就是xp的实力吧，老人全去后排照样厉害，总选会怎么样呢？！"
+    },
+    {
+      "id": "s_abydc9kz",
+      "title": "39th Single · 1234 Pardon?!",
+      "release": "2026-04-10",
+      "cover": "/uploads/1776249444173.webp",
+      "tags": [],
+      "singleKind": "总选单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "1234 Pardon?! (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1776249460304-xwooj0.mp4"
+        },
+        {
+          "no": 2,
+          "title": "In the Car / UG (竹内星月 center)",
+          "isAside": false,
+          "audio": "/uploads/audio/1776249481905-9lg6xt.mp4"
+        },
+        {
+          "no": 3,
+          "title": "1234 Pardon?!  - remix",
+          "isAside": false,
+          "audio": "/uploads/audio/1776249492550-ao5obz.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          5,
+          4,
+          3
+        ],
+        "slots": [
+          "m_blncyp2k",
+          "m_7gen_6_7205",
+          "m_9gen_3",
+          "m_6gen_4_6829",
+          "m_8gen_7_5521",
+          "m_hina",
+          "m_m8fltj0e",
+          "m_7gen_2_4421",
+          "m_6gen_1_4821",
+          "m_gbojk371",
+          "m_5gen_7_2141",
+          "m_rjli97s6"
+        ],
+        "slotRoles": {
+          "9": "guardian",
+          "10": "center",
+          "11": "guardian"
+        }
+      },
+      "notes": "第六届总选举的歌曲，尤莉娅第二次登顶成为与坂口阳菜肩并肩的女人！新人来势汹汹，6期危险了吧"
     }
   ],
   "gallery": [
