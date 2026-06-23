@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Card,
@@ -28,11 +28,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
   Plus,
@@ -60,6 +60,8 @@ import {
   GripVertical,
   Shuffle,
 } from "lucide-react";
+import { formatSingleCenterSummary } from "./lib/centerStats.js";
+import { getAdminActivityDate, pickLatestMemberForNews, stampAdminEntity } from "./lib/homeFeed.js";
 
 // ---------- Utils ----------
 const uid = () => Math.random().toString(36).slice(2, 10);
@@ -364,6 +366,77 @@ function compareSinglesByRelease(a, b, direction = "asc") {
   return String(a?.title || "").localeCompare(String(b?.title || ""));
 }
 
+function formatDateDots(v) {
+  return v ? String(v).slice(0, 10).replace(/-/g, ".") : "DATE TBA";
+}
+
+function getLatestSingle(singles = []) {
+  return [...singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))[0] || null;
+}
+
+function getGenerationNumber(generation) {
+  const num = parseInt(String(generation ?? "").match(/\d+/)?.[0], 10);
+  return Number.isFinite(num) ? num : -Infinity;
+}
+
+function formatGenerationSubtitle(generation) {
+  const num = getGenerationNumber(generation);
+  if (!Number.isFinite(num)) {
+    const fallback = String(generation || "NEW").trim().toUpperCase();
+    return `-THE ${fallback} GENERATION-`;
+  }
+  const mod100 = num % 100;
+  const mod10 = num % 10;
+  const suffix = mod100 >= 11 && mod100 <= 13
+    ? "TH"
+    : mod10 === 1
+      ? "ST"
+      : mod10 === 2
+        ? "ND"
+        : mod10 === 3
+          ? "RD"
+          : "TH";
+  return `-THE ${num}${suffix} GENERATION-`;
+}
+
+function getLatestGenerationMembers(members = []) {
+  const active = members.filter((m) => m?.isActive);
+  const maxGeneration = active.reduce(
+    (max, member) => Math.max(max, getGenerationNumber(member.generation)),
+    -Infinity
+  );
+  if (maxGeneration === -Infinity) return active;
+  return active.filter((member) => getGenerationNumber(member.generation) === maxGeneration);
+}
+
+function PageIntro({ title, eyebrow }) {
+  return (
+    <section className="xp-page-band mb-4">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-4">
+        <div>
+          <div className="xp-letter-title text-xl text-[#19160f] md:text-2xl">{title}</div>
+          <div className="mt-5 h-px w-6 bg-[#19160f]" />
+          {eyebrow ? (
+            <div className="mt-4 text-[10px] uppercase tracking-[0.28em] text-[#9b8d69]">{eyebrow}</div>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomeSectionTitle({ title, subtitle, align = "left" }) {
+  return (
+    <div className={`mb-10 ${align === "center" ? "text-center" : ""}`}>
+      <div className="xp-letter-title text-sm text-[#19160f] md:text-base">{title}</div>
+      <div className={`mt-5 h-px w-5 bg-[#19160f] ${align === "center" ? "mx-auto" : ""}`} />
+      {subtitle ? (
+        <div className="mt-4 text-[11px] uppercase tracking-[0.24em] text-[#9b8d69]">{subtitle}</div>
+      ) : null}
+    </div>
+  );
+}
+
 
 function ensureTrackShape(track, no, isAside) {
   const t = track && typeof track === "object" ? track : {};
@@ -642,7 +715,7 @@ function MediaImage({ src, alt, className, eager = false, ...props }) {
       className={className}
       loading={eager ? "eager" : "lazy"}
       decoding="async"
-      fetchPriority={eager ? "high" : "auto"}
+      fetchPriority={eager ? "high" : "low"}
       {...props}
     />
   );
@@ -948,20 +1021,20 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-function AppShell({ children }) {
+function AppShell({ children, adminDock = null }) {
   return (
-    <div className="min-h-screen bg-white text-[#1C1C1C]">
+    <div className="xp-site-shell xp-diagonal-paper">
       {children}
-      <footer className="border-t border-[#E0E0E0] py-10 mt-16">
-        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between">
-          <div className="text-xs text-[#6B6B6B]">
-            <span className="font-semibold tracking-widest">XP</span>
-            <span className="mx-2">·</span>
-            <span>Official Website</span>
+      <footer className="mt-20 px-4 pb-12 pt-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="text-sm font-semibold tracking-[0.24em] text-[#19160f]">XP</div>
+          <div className="mt-4 text-[10px] uppercase tracking-[0.26em] text-[#9b8d69]">
+            XP Produced by Gong & Yue
           </div>
-          <div className="text-[10px] text-[#B0B0B0] tracking-wider">DATA SAVED VIA API</div>
+          <div className="mt-6 text-[10px] tracking-[0.18em] text-[#b3a47c]">© 2026 XP Official Website</div>
         </div>
       </footer>
+      {adminDock}
     </div>
   );
 }
@@ -1817,8 +1890,8 @@ function GalleryPage({ data, setData, admin }) {
   );
 }
 
-function TopBar({ page, setPage, admin, setAdmin, onReset }) {
-  const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+function TopBar({ page, setPage, admin }) {
+  const [navOpen, setNavOpen] = useState(false);
   const tabs = [
     { key: "home", cn: "主页", en: "HOME" },
     { key: "members", cn: "成员", en: "MEMBER" },
@@ -1830,315 +1903,251 @@ function TopBar({ page, setPage, admin, setAdmin, onReset }) {
   const isActive = (key) => page === key || (page === "member-detail" && key === "members");
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#E0E0E0]">
-      <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <button onClick={() => setPage("home")} className="flex items-center gap-3 shrink-0">
-          <div className="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 2L19.5 12L30 16L19.5 20L16 30L12.5 20L2 16L12.5 12Z" fill="#1C1C1C"/>
-            </svg>
-            <span className="text-[15px] font-bold tracking-[0.12em] text-[#1C1C1C] leading-none">XP</span>
-          </div>
+    <>
+    <header className="sticky top-0 z-40 bg-[#fffdf8]/94">
+      <div className="relative mx-auto flex h-20 max-w-[1800px] items-center px-5 md:h-24 md:px-12">
+        <button onClick={() => setPage("home")} className="group flex items-center gap-3 shrink-0">
+          <span className="xp-logo-text text-[#19160f]">XP</span>
+          <span className="hidden h-px w-10 bg-[#b99438] transition-all group-hover:w-16 sm:block" />
+          <span className="hidden text-[10px] uppercase tracking-[0.24em] text-[#9b8d69] sm:block">
+            Produced by Gong & Yue
+          </span>
           {admin && (
-            <span className="text-[9px] tracking-widest bg-[#1C1C1C] text-white px-2 py-0.5">ADMIN</span>
+            <span className="text-[9px] tracking-widest bg-[#19160f] text-white px-2 py-0.5">ADMIN</span>
           )}
         </button>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setPage(t.key)}
-              className={
-                "flex flex-col items-center pb-1 border-b-2 transition-all duration-200 " +
-                (isActive(t.key)
-                  ? "border-[#1C1C1C]"
-                  : "border-transparent hover:border-[#D0D0D0]")
-              }
-            >
-              <span className={"text-sm font-medium leading-tight " + (isActive(t.key) ? "text-[#1C1C1C]" : "text-[#6B6B6B]")}>
-                {t.cn}
-              </span>
-              <span className="text-[9px] tracking-[0.15em] text-[#B0B0B0] leading-tight">{t.en}</span>
-            </button>
-          ))}
-        </nav>
+        <button
+          aria-label="打开导航"
+          className="ml-auto grid h-11 w-11 place-items-center text-[#19160f] transition-colors hover:text-[#b99438]"
+          onClick={() => setNavOpen(true)}
+          title="打开导航"
+        >
+          <span className="text-3xl font-extralight leading-none" aria-hidden="true">☰</span>
+        </button>
 
-        {/* Right controls */}
-        <div className="flex items-center gap-2">
-          {isLocalhost && <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1.5 text-xs border border-[#E0E0E0] px-3 py-1.5 hover:bg-[#F0F0F0] transition-colors">
-                <Settings className="h-3.5 w-3.5 text-[#6B6B6B]" />
-                <span className="hidden sm:block text-[#6B6B6B]">{admin ? "管理员" : "设置"}</span>
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-44 bg-white border border-[#E0E0E0] shadow-lg rounded-none p-0">
-              <DropdownMenuLabel className="text-[10px] tracking-wider text-[#A0A0A0] px-3 py-2">控制台</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-[#E0E0E0] my-0" />
-              <DropdownMenuItem
-                onSelect={(e) => { e.preventDefault(); setAdmin((v) => !v); }}
-                className="text-xs px-3 py-2 cursor-pointer hover:bg-[#F0F0F0] focus:bg-[#F0F0F0] rounded-none"
-              >
-                {admin ? "退出管理员" : "进入管理员"}
-              </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-[#E0E0E0] my-0" />
-              <DropdownMenuItem
-                className="text-xs text-red-600 px-3 py-2 cursor-pointer hover:bg-red-50 focus:bg-red-50 rounded-none"
-                onSelect={(e) => { e.preventDefault(); onReset(); }}
-              >
-                重置为示例数据
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>}
-
-          {/* Mobile hamburger */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <button className="md:hidden flex items-center justify-center border border-[#E0E0E0] w-9 h-9 hover:bg-[#F0F0F0] transition-colors">
-                <LayoutGrid className="h-4 w-4 text-[#6B6B6B]" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-64 bg-white border-l border-[#E0E0E0] rounded-none p-0">
-              <SheetHeader className="px-6 py-5 border-b border-[#E0E0E0]">
-                <SheetTitle className="text-sm font-medium text-[#1C1C1C]">导航</SheetTitle>
-                <SheetDescription className="text-[10px] tracking-widest text-[#B0B0B0]">NAVIGATION</SheetDescription>
-              </SheetHeader>
-              <nav className="py-4">
-                {tabs.map((t) => (
-                  <button
-                    key={t.key}
-                    onClick={() => setPage(t.key)}
-                    className={
-                      "w-full flex items-center justify-between px-6 py-3 text-sm transition-colors " +
-                      (isActive(t.key)
-                        ? "bg-[#1C1C1C] text-white"
-                        : "hover:bg-[#F0F0F0] text-[#1C1C1C]")
-                    }
-                  >
-                    <span className="font-medium">{t.cn}</span>
-                    <span className={"text-[9px] tracking-widest " + (isActive(t.key) ? "text-white/50" : "text-[#B0B0B0]")}>{t.en}</span>
-                  </button>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+        <Sheet open={navOpen} onOpenChange={setNavOpen}>
+          <SheetContent side="right" className="xp-menu-panel w-[86vw] border-0 p-8 sm:w-[420px] [&>button]:right-7 [&>button]:top-7 [&>button]:text-white [&>button]:opacity-90">
+            <SheetHeader className="mt-12 text-left">
+              <SheetTitle className="text-3xl font-light tracking-[-0.04em] text-white">XP</SheetTitle>
+              <SheetDescription className="text-[10px] uppercase tracking-[0.32em] text-white/70">
+                Produced by Gong & Yue
+              </SheetDescription>
+            </SheetHeader>
+            <nav className="mt-16 grid gap-4">
+              {tabs.map((t) => (
+                <SheetClose asChild key={t.key}>
+                <button
+                  key={t.key}
+                  onClick={() => setPage(t.key)}
+                  className={
+                    "group flex w-full items-center justify-between text-left text-white transition-transform hover:translate-x-2 " +
+                    (isActive(t.key)
+                      ? "opacity-100"
+                      : "opacity-78 hover:opacity-100")
+                  }
+                >
+                  <span className="text-2xl font-light tracking-[0.28em]">{t.en}</span>
+                  <span className="text-xs tracking-[0.12em] text-white/70">{t.cn}</span>
+                </button>
+                </SheetClose>
+              ))}
+            </nav>
+            <div className="mt-12 border border-white/35 bg-white/18 px-5 py-4 text-[10px] uppercase tracking-[0.2em] text-white/82 backdrop-blur-md">
+              Official idol archive
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
+    </>
   );
 }
 
-// ---- 无限横向滚动成员条 ----
-function MemberMarquee({ members }) {
+function AdminDock({ admin, setAdmin, onReset }) {
+  const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  if (!isLocalhost) return null;
 
-  if (!members.length) return null;
-  const items = [...members, ...members];
   return (
-    <div className="overflow-hidden border-b border-[#E0E0E0] bg-white">
-      <div className="xp-marquee-track flex w-max py-5 gap-8 px-4">
-        {items.map((m, i) => (
-          <div key={i} className="flex flex-col items-center gap-1.5 w-16 shrink-0">
-            <div className={"w-14 h-14 overflow-hidden bg-[#F0F0F0] " + (!m.isActive ? "grayscale opacity-60" : "")}>
-              <MediaImage src={m.avatar} alt={m.name} className="w-full h-full object-cover object-top" />
-            </div>
-            <span className="text-[9px] text-[#6B6B6B] text-center leading-tight">{m.name}</span>
-          </div>
-        ))}
-      </div>
+    <div className="hidden px-3 pb-3 sm:block">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="xp-glass flex h-10 w-10 items-center justify-center text-[#6d5317] opacity-35 transition hover:opacity-100" title={admin ? "管理员" : "设置"}>
+            <Settings className="h-4 w-4" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start" side="top" className="w-44 bg-white border border-[#e9dfc5] shadow-lg rounded-none p-0">
+          <DropdownMenuLabel className="text-[10px] tracking-wider text-[#A0A0A0] px-3 py-2">控制台</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-[#e9dfc5] my-0" />
+          <DropdownMenuItem
+            onSelect={(e) => { e.preventDefault(); setAdmin((v) => !v); }}
+            className="text-xs px-3 py-2 cursor-pointer hover:bg-[#F0F0F0] focus:bg-[#F0F0F0] rounded-none"
+          >
+            {admin ? "退出管理员" : "进入管理员"}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator className="bg-[#e9dfc5] my-0" />
+          <DropdownMenuItem
+            className="text-xs text-red-600 px-3 py-2 cursor-pointer hover:bg-red-50 focus:bg-red-50 rounded-none"
+            onSelect={(e) => { e.preventDefault(); onReset(); }}
+          >
+            重置为示例数据
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }
 
 // ---- Hero 区域 ----
-function Hero({ singles, members, activeMembersCount, totalMembersCount, singlesCount, onGo }) {
-  // Build carousel: latest first + 4 random others, chosen once per mount
-  const slides = useMemo(() => {
-    if (!singles.length) return [];
-    const [latest, ...rest] = singles;
-    const shuffled = [...rest].sort(() => Math.random() - 0.5).slice(0, 4);
-    return [latest, ...shuffled];
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const [idx, setIdx] = useState(0);
-  const current = slides[idx] || null;
-  const { prefix, name } = current ? splitSingleTitle(current.title) : { prefix: "", name: "" };
-
-  const prev = () => setIdx((i) => (i - 1 + slides.length) % slides.length);
-  const next = () => setIdx((i) => (i + 1) % slides.length);
+function Hero({ singles, members, gallery = [], playlists = [], onGo }) {
+  const orderedSingles = useMemo(
+    () => [...(singles || [])].sort((a, b) => compareSinglesByRelease(a, b, "desc")),
+    [singles]
+  );
+  const latest = useMemo(() => getLatestSingle(singles), [singles]);
+  const { prefix, name } = latest ? splitSingleTitle(latest.title) : { prefix: "", name: "XP" };
+  const latestMemberForNews = useMemo(() => pickLatestMemberForNews(members || []), [members]);
+  const featuredMembers = useMemo(() => getLatestGenerationMembers(members || []), [members]);
+  const featuredGenerationSubtitle = featuredMembers[0]?.generation
+    ? formatGenerationSubtitle(featuredMembers[0].generation)
+    : "";
+  const recentSingles = orderedSingles.slice(0, 6);
+  const galleryShots = [...(gallery || [])].slice(0, 4);
+  const newsItems = [
+    latest ? { type: "RELEASE", date: latest.release, text: `${latest.title} 发布`, page: "singles" } : null,
+    latestMemberForNews ? { type: "PROFILE", date: getAdminActivityDate(latestMemberForNews), text: `${latestMemberForNews.generation || ""} ${latestMemberForNews.name} 资料更新`, page: "members" } : null,
+    galleryShots[0] ? { type: "PHOTO", date: galleryShots[0].createdAt, text: galleryShots[0].caption || "Gallery photo update", page: "gallery" } : null,
+    playlists[0] ? { type: "PLAYLIST", date: playlists[0].createdAt, text: `${playlists[0].title} 歌单开放`, page: "playlist" } : null,
+  ].filter(Boolean);
 
   return (
     <div>
-      {/* Full-bleed hero image */}
-      <div className="relative overflow-hidden" style={{ height: "72vh", minHeight: 360 }}>
-        {/* Background slides */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="absolute inset-0"
-          >
-            {current?.cover ? (
-              <>
-                {/* Base: heavily blurred fill for color tone */}
-                <MediaImage
-                  src={current.cover}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover scale-125"
-                  eager
-                  style={{ filter: "blur(40px) brightness(0.5) saturate(1.8)" }}
-                />
-                {/* Left accent: large cover bleeding in from left, medium blur */}
-                <MediaImage
-                  src={current.cover}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute w-auto"
-                  eager
-                  style={{
-                    height: "130%",
-                    top: "50%",
-                    left: "-8%",
-                    transform: "translateY(-50%)",
-                    filter: "blur(12px) brightness(0.8) saturate(1.4)",
-                    opacity: 0.85,
-                    mixBlendMode: "screen",
-                  }}
-                />
-                {/* Right accent: mirrored cover bleeding in from right */}
-                <MediaImage
-                  src={current.cover}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute w-auto"
-                  eager
-                  style={{
-                    height: "130%",
-                    top: "50%",
-                    right: "-8%",
-                    transform: "translateY(-50%) scaleX(-1)",
-                    filter: "blur(12px) brightness(0.8) saturate(1.4)",
-                    opacity: 0.85,
-                    mixBlendMode: "screen",
-                  }}
-                />
-                {/* Center vignette: fade side accents into center cleanly */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "radial-gradient(ellipse 55% 100% at 50% 50%, transparent 30%, rgba(0,0,0,0.35) 100%)",
-                  }}
-                />
-                {/* Crisp centered cover at native aspect ratio */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <MediaImage
-                    src={current.cover}
-                    alt={current.title}
-                    className="h-full w-auto max-h-full object-contain"
-                    eager
-                    style={{ filter: "drop-shadow(0 0 48px rgba(0,0,0,0.7))" }}
-                  />
-                </div>
-              </>
-            ) : (
-              <div className="absolute inset-0 bg-[#1C1C1C]" />
-            )}
-          </motion.div>
-        </AnimatePresence>
+      <section className="overflow-hidden px-4 pb-10 md:px-10">
+        <div className="relative mx-auto max-w-[1800px] overflow-hidden border border-[#e9dfc5] bg-[#f8f4e8] md:min-h-[calc(100svh-8rem)]">
+          <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(255,253,248,.98)_0%,rgba(255,253,248,.90)_48%,rgba(185,148,56,.14)_48.2%,rgba(255,255,255,.70)_72%,rgba(255,253,248,.96)_72.2%)]" />
+          <div className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(117deg,rgba(25,22,15,.11)_0_1px,transparent_1px_7px)]" />
 
-        {/* gradient overlay */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%)" }}
-        />
-
-        {/* text content */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 max-w-3xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="text-[10px] tracking-[0.25em] text-white/50 mb-3">
-                {idx === 0 ? "XP · LATEST SINGLE" : "XP · SINGLE"}
+          <div className="relative z-10 grid items-center gap-10 px-6 py-10 md:min-h-[calc(100svh-8rem)] md:grid-cols-[minmax(0,1.02fr)_minmax(320px,.72fr)] md:px-16 md:py-14 lg:px-24">
+            <div className="max-w-4xl">
+              <div className="mb-7 text-[10px] font-medium uppercase tracking-[0.34em] text-[#82631f]">
+                XP PRODUCED BY GONG & YUE
               </div>
-              {prefix && <div className="text-sm text-white/60 mb-1">{prefix}</div>}
-              <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-none">{name || "XP"}</h1>
-              {current?.release && (
-                <div className="mt-3 text-sm text-white/50 tracking-wider">{current.release.replace(/-/g, ".")}</div>
-              )}
-              <div className="mt-6 flex gap-3">
+              <div className="mb-5 flex items-center gap-4 text-[11px] uppercase tracking-[0.24em] text-[#9b8d69]">
+                <span>{prefix || "LATEST SINGLE"}</span>
+                <span className="h-px w-12 bg-[#b99438]" />
+                <span>{formatDateDots(latest?.release)}</span>
+              </div>
+              <h1 className="xp-hero-title max-w-5xl text-[#19160f]">
+                {name || "XP"}
+              </h1>
+              <div className="mt-9 flex flex-wrap gap-3">
                 <button
                   onClick={() => onGo("singles")}
-                  className="text-xs tracking-widest bg-white text-[#1C1C1C] px-6 py-2.5 hover:bg-[#F0F0F0] transition-colors"
+                  className="bg-[#19160f] px-7 py-3 text-xs uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#3a301d]"
                 >
-                  查看详情
+                  Discography
                 </button>
                 <button
                   onClick={() => onGo("members")}
-                  className="text-xs tracking-widest border border-white/40 text-white px-6 py-2.5 hover:bg-white/10 transition-colors"
+                  className="border border-[#b99438] bg-white/78 px-7 py-3 text-xs uppercase tracking-[0.2em] text-[#6d5317] transition-colors hover:bg-white"
                 >
-                  成员
+                  Profile
                 </button>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+
+            <div className="relative order-first mx-auto w-full max-w-[290px] md:order-none md:max-w-[520px]">
+              <div className="xp-hero-cover-backdrop absolute -inset-4 rotate-2" />
+              <div className="xp-cover-shadow relative aspect-square overflow-hidden bg-white">
+                {latest?.cover ? (
+                  <MediaImage src={latest.cover} alt={latest.title} className="h-full w-full object-cover" eager />
+                ) : (
+                  <div className="grid h-full w-full place-items-center text-5xl font-light tracking-[-0.04em] text-[#b99438]">XP</div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Arrow navigation */}
-        {slides.length > 1 && (
-          <>
-            <button
-              onClick={prev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button
-              onClick={next}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </>
-        )}
-
-        {/* Dot indicators */}
-        {slides.length > 1 && (
-          <div className="absolute bottom-8 right-8 flex gap-2 items-center">
-            {slides.map((_, i) => (
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-20 lg:grid-cols-[1fr_.86fr]">
+        <div>
+          <HomeSectionTitle title="NEWS" subtitle="Latest from XP" />
+          <div className="grid gap-4">
+            {newsItems.map((item, idx) => (
               <button
-                key={i}
-                onClick={() => setIdx(i)}
-                className={"transition-all duration-300 rounded-full " + (i === idx ? "w-4 h-[3px] bg-white rounded-none" : "w-[3px] h-[3px] bg-white/40 hover:bg-white/70")}
-              />
+                key={`${item.type}-${idx}`}
+                onClick={() => onGo(item.page)}
+                className="group grid gap-3 border-b border-[#e9dfc5] py-4 text-left transition-colors hover:bg-white/45 sm:grid-cols-[92px_120px_1fr_auto] sm:items-center"
+              >
+                <div className="text-[10px] uppercase tracking-[0.22em] text-[#b99438]">{item.type}</div>
+                <div className="text-[11px] tracking-[0.14em] text-[#9b8d69]">{formatDateDots(item.date)}</div>
+                <div className="min-w-0 text-sm tracking-[0.04em] text-[#19160f]">{item.text}</div>
+                <span className="hidden text-[10px] uppercase tracking-[0.18em] text-[#b99438] transition-transform group-hover:translate-x-1 sm:block">View</span>
+              </button>
             ))}
           </div>
-        )}
-      </div>
-
-      {/* Member scroll strip */}
-      <MemberMarquee members={members.filter((m) => m.isActive)} />
-
-      {/* Stats bar */}
-      <div className="border-b border-[#E0E0E0] py-4">
-        <div className="mx-auto max-w-7xl px-4 flex items-center justify-center gap-6 text-xs text-[#6B6B6B] tracking-wider">
-          <span><span className="text-[#1C1C1C] font-medium">{activeMembersCount}</span> 位在籍成员</span>
-          <span className="text-[#D0D0D0]">·</span>
-          <span><span className="text-[#1C1C1C] font-medium">{totalMembersCount}</span> 位历代成员</span>
-          <span className="text-[#D0D0D0]">·</span>
-          <span><span className="text-[#1C1C1C] font-medium">{singlesCount}</span> 张单曲</span>
         </div>
-      </div>
+
+        <div className="xp-home-panel p-6 md:p-8">
+          <HomeSectionTitle title="SCHEDULE" subtitle="Release timeline" />
+          <div className="grid gap-5">
+            {recentSingles.slice(0, 5).map((single) => {
+              const meta = splitSingleTitle(single.title);
+              return (
+                <button key={single.id} onClick={() => onGo("singles")} className="grid grid-cols-[72px_1fr] gap-4 text-left">
+                  <div>
+                    <div className="text-2xl font-light leading-none text-[#19160f]">{formatDateDots(single.release).slice(5, 10)}</div>
+                    <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-[#9b8d69]">{meta.prefix}</div>
+                  </div>
+                  <div className="border-l border-[#e1d2a9] pl-4">
+                    <div className="text-[10px] uppercase tracking-[0.18em] text-[#b99438]">{single.singleKind || "Single"}</div>
+                    <div className="mt-1 text-sm tracking-[0.04em] text-[#19160f]">{meta.name || single.title}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-10">
+        <HomeSectionTitle title="NEW GENERATION" subtitle={featuredGenerationSubtitle} align="center" />
+        <div className="flex flex-wrap justify-center gap-4">
+          {featuredMembers.map((member) => (
+            <button key={member.id} onClick={() => onGo("members")} className="group w-[calc(50%-0.5rem)] max-w-[176px] sm:w-[156px] lg:w-[168px]">
+              <div className="xp-member-image aspect-[3/4] overflow-hidden border border-[#e9dfc5]">
+                <MediaImage src={member.avatar} alt={member.name} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
+              </div>
+              <div className="mt-3 text-center">
+                <div className="text-sm tracking-[0.06em] text-[#19160f]">{member.name}</div>
+                <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-[#9b8d69]">{member.romaji}</div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20">
+        <HomeSectionTitle title="MOVIE" subtitle="Visual archive" />
+        <div className="grid gap-5 md:grid-cols-4">
+          {(galleryShots.length ? galleryShots : recentSingles.slice(0, 4)).map((item, idx) => {
+            const isPhoto = !!item.url;
+            const image = isPhoto ? item.url : item.cover;
+            const title = isPhoto ? (item.caption || `XP Photo ${idx + 1}`) : splitSingleTitle(item.title).name;
+            return (
+              <button key={item.id || item.title} onClick={() => onGo(isPhoto ? "gallery" : "singles")} className="group relative aspect-video overflow-hidden bg-[#f8f4e8]">
+                <MediaImage src={image} alt={title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#19160f]/68 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-left">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-white/72">{isPhoto ? "Gallery" : "Single"}</div>
+                  <div className="mt-1 line-clamp-2 text-sm text-white">{title}</div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
@@ -2610,10 +2619,10 @@ function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
     "left-1/2 top-[3vh] -translate-x-1/2 translate-y-0 " +
     "w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
-    "rounded-none border border-[#E0E0E0] bg-white text-[#1C1C1C] shadow-lg";
+    "rounded-none border border-[#e9dfc5] bg-[#fffdf8] text-[#19160f] shadow-[0_32px_120px_rgba(83,63,18,.22)]";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
-      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-6 w-full box-border">{children}</div>
+      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-5 w-full box-border bg-[linear-gradient(118deg,transparent_0_62%,rgba(248,244,232,.72)_62.2%_76%,transparent_76.2%)]">{children}</div>
     </DialogContent>
   );
 }
@@ -2630,60 +2639,87 @@ function MemberDetailContent({ member, data }) {
   const favoriteSongs = Array.isArray(member?.favoriteSongs)
     ? member.favoriteSongs.filter((x) => typeof x === "string" && x.trim())
     : (member?.favoriteSong ? [member.favoriteSong] : []);
+  const primaryProfileRows = [
+    ["血型", member.profile?.blood],
+    ["星座", member.profile?.zodiac],
+    ["身長", member.profile?.height],
+    ["生年月日", member.profile?.birthday],
+    ["出身地", member.origin],
+    ["趣味", member.profile?.hobby],
+    ["特技", member.profile?.skill],
+  ].filter(([, v]) => v);
+  const secondaryProfileRows = [
+    ...(!member.isActive && member.graduationDate
+      ? [["毕业", isoDate(member.graduationDate) + ((member.graduationSongTitle || "").trim() && (member.graduationSongTitle || "").trim() !== "无" ? " · " + member.graduationSongTitle : "")]]
+      : []),
+    ["口号", member.profile?.catchphrase],
+  ].filter(([, v]) => v);
   useEffect(() => {
     setShowAllPreJoinSingles(false);
   }, [member?.id]);
   return (
-    <div className="grid gap-10">
+    <div className="grid gap-8">
 
-      {/* Name + romaji — centered */}
-      <div className="text-center">
-        <div className="text-2xl font-light text-[#1C1C1C] tracking-tight">
-          {member.name}{!member.isActive ? " - 卒业" : ""}
-        </div>
-        {member.romaji ? (
-          <div className="text-[11px] tracking-[0.2em] text-[#6B6B6B] mt-1">{member.romaji}</div>
-        ) : null}
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-2 text-xs text-[#6B6B6B]">
-          {member.origin ? <span>{member.origin}</span> : null}
-          {member.generation ? (
-            <span className={generationBadgeClass(member.generation)} style={generationBadgeStyle(member.generation)}>
-              {member.generation}
-            </span>
-          ) : null}
-        </div>
-      </div>
-
-      {/* Centered portrait photo */}
-      <div className="flex flex-col items-center gap-2">
-        <button
-          type="button"
-          className={
-            "overflow-hidden bg-[#F0F0F0] w-full max-w-[200px] sm:max-w-[240px] " +
-            (hasMultiplePhotos ? "cursor-pointer hover:opacity-90 transition-opacity" : "cursor-default") +
-            (!member.isActive ? " grayscale opacity-80" : "")
-          }
-          onClick={() => { if (hasMultiplePhotos) setGalleryOpen(true); }}
-          title={hasMultiplePhotos ? "点击查看全部公式照" : undefined}
-        >
-          <MediaImage
-            src={member.avatar}
-            alt={member.name}
-            className="aspect-[3/4] w-full object-cover object-top"
-          />
-        </button>
-        {hasMultiplePhotos && (
+      <div className="grid items-center gap-8 md:grid-cols-[minmax(280px,520px)_minmax(0,1fr)] lg:gap-12">
+        <div>
           <button
             type="button"
-            onClick={() => setGalleryOpen(true)}
-            className="text-[10px] tracking-[0.2em] text-[#AAAAAA] hover:text-[#1C1C1C] transition-colors uppercase"
+            className={
+              "xp-detail-image block w-full overflow-hidden " +
+              (hasMultiplePhotos ? "cursor-pointer hover:opacity-95 transition-opacity" : "cursor-default") +
+              (!member.isActive ? " grayscale opacity-85" : "")
+            }
+            onClick={() => { if (hasMultiplePhotos) setGalleryOpen(true); }}
+            title={hasMultiplePhotos ? "点击查看全部公式照" : undefined}
           >
-            查看全部公式照 ({officialPhotos.length})
+            <MediaImage
+              src={member.avatar}
+              alt={member.name}
+              className="aspect-[3/4] w-full object-cover object-top"
+              eager
+            />
           </button>
-        )}
-        {officialPhotos.length === 1 && (
-          <div className="text-[10px] tracking-[0.15em] text-[#AAAAAA]">第1版</div>
-        )}
+          <div className="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-[#9b8d69]">
+            <span>{officialPhotos.length ? `Photo Ver.${officialPhotos.length}` : "Official Photo"}</span>
+            {hasMultiplePhotos && (
+              <button
+                type="button"
+                onClick={() => setGalleryOpen(true)}
+                className="hover:text-[#19160f] transition-colors"
+              >
+                Gallery
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="xp-detail-panel p-6 md:p-10">
+          <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">PROFILE</div>
+          <div className="mt-5 h-px w-6 bg-[#19160f]" />
+          <div className="mt-8 text-3xl font-light tracking-[-0.04em] text-[#19160f] md:text-5xl">
+            {member.name}{!member.isActive ? " - 卒业" : ""}
+          </div>
+          {member.romaji ? (
+            <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-[#7c7464]">{member.romaji}</div>
+          ) : null}
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            {member.generation ? (
+              <span className={generationBadgeClass(member.generation)} style={generationBadgeStyle(member.generation)}>
+                {member.generation}
+              </span>
+            ) : null}
+            <span className="xp-tag px-2.5 py-1 text-[10px]">{member.isActive ? "ACTIVE" : "OG"}</span>
+            {member.origin ? <span className="xp-tag px-2.5 py-1 text-[10px]">{member.origin}</span> : null}
+          </div>
+          <div className="mt-8 grid gap-3">
+            {primaryProfileRows.map(([label, value]) => (
+              <div key={label} className="xp-detail-row grid grid-cols-[84px_1fr] gap-4 pb-3 text-sm">
+                <span className="text-[11px] tracking-[0.12em] text-[#9b8d69]">{label}</span>
+                <span className="min-w-0 break-words tracking-[0.04em] text-[#19160f]">{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <OfficialPhotosGalleryDialog
@@ -2693,44 +2729,30 @@ function MemberDetailContent({ member, data }) {
         displayAvatar={member.avatar}
       />
 
+      <div className="mx-auto grid w-full max-w-[820px] gap-7 py-2 md:gap-8 md:py-3">
       {/* PROFILE */}
-      <div>
-        <div className="flex items-center gap-3 mb-4">
+      {secondaryProfileRows.length ? <div>
+        <div className="flex items-center gap-3 mb-2.5">
           <div className="w-5 h-px bg-[#1C1C1C]" />
-          <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Profile</div>
+          <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Details</div>
         </div>
         <div>
-          {[
-            ["身高", member.profile?.height],
-            ["生日", member.profile?.birthday],
-            ["血型", member.profile?.blood],
-            ["爱好", member.profile?.hobby],
-            ["特长", member.profile?.skill],
-            ...(!member.isActive && member.graduationDate
-              ? [["毕业", isoDate(member.graduationDate) + ((member.graduationSongTitle || "").trim() && (member.graduationSongTitle || "").trim() !== "无" ? " · " + member.graduationSongTitle : "")]]
-              : []),
-          ].filter(([, v]) => v).map(([label, value], i) => (
+          {secondaryProfileRows.map(([label, value]) => (
             <div
               key={label}
-              className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
+              className="flex items-baseline gap-5 py-2.5 border-b border-[#E0E0E0] last:border-b-0"
             >
               <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">{label}</span>
               <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em]">{value}</span>
             </div>
           ))}
-          {member.profile?.catchphrase ? (
-            <div className="flex items-baseline gap-6 py-2.5">
-              <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-10 shrink-0">口号</span>
-              <span className="text-[13px] text-[#1C1C1C] tracking-[0.04em] leading-relaxed">{member.profile.catchphrase}</span>
-            </div>
-          ) : null}
         </div>
-      </div>
+      </div> : null}
 
       {/* ELECTION */}
       {(member.electionRanks || []).length ? (
         <div>
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-2.5">
             <div className="w-5 h-px bg-[#1C1C1C]" />
             <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Election</div>
           </div>
@@ -2754,13 +2776,13 @@ function MemberDetailContent({ member, data }) {
       {/* FAVORITES */}
       {(shouldShowAdmireSenior && Array.isArray(member.admireSenior) && member.admireSenior.length) || (Array.isArray(member.friends) && member.friends.length) || favoriteSongs.length || member.favoritePokemon ? (
         <div>
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-2.5">
             <div className="w-5 h-px bg-[#1C1C1C]" />
             <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Favorites</div>
           </div>
           <div>
             {shouldShowAdmireSenior && Array.isArray(member.admireSenior) && member.admireSenior.length ? (
-              <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
+              <div className="flex items-baseline gap-5 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                 <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">前辈</span>
                 <div className="flex flex-wrap gap-x-3 gap-y-1">
                   {member.admireSenior.map((id) => {
@@ -2772,7 +2794,7 @@ function MemberDetailContent({ member, data }) {
             ) : null}
             
             {Array.isArray(member.friends) && member.friends.length ? (
-              <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
+              <div className="flex items-baseline gap-5 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                 <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">亲友</span>
                 <div className="flex flex-wrap gap-x-3 gap-y-1">
                   {member.friends.map((id) => {
@@ -2786,9 +2808,9 @@ function MemberDetailContent({ member, data }) {
             ) : null}
 
             {favoriteSongs.length ? (
-              <div className="flex items-baseline gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
+              <div className="flex items-baseline gap-5 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                 <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">歌曲</span>
-                <div className="min-w-0 flex-1 grid gap-2">
+                <div className="min-w-0 flex-1 grid gap-3">
                   {favoriteSongs.slice(0, 3).map((song, idx) => {
                     const single = (data.singles || []).find((sg) =>
                       (sg.tracks || []).some((t) => (typeof t === "string" ? t : t?.title) === song)
@@ -2805,7 +2827,7 @@ function MemberDetailContent({ member, data }) {
                             <Music className="h-3.5 w-3.5" />
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words leading-6">
+                            <div className="text-[13px] text-[#1C1C1C] tracking-[0.04em] break-words leading-5">
                               {song}
                             </div>
                             {singleName ? (
@@ -2827,7 +2849,7 @@ function MemberDetailContent({ member, data }) {
             {member.favoritePokemon ? (() => {
               const pk = getPokemon(member.favoritePokemon);
               return (
-                <div className="flex items-center gap-6 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
+                <div className="flex items-center gap-5 py-2.5 border-b border-[#E0E0E0] last:border-b-0">
                   <span className="text-[10px] tracking-[0.12em] text-[#6B6B6B] uppercase w-14 shrink-0">宝可梦</span>
                   <div className="flex items-center gap-2">
                     <img
@@ -2849,7 +2871,7 @@ function MemberDetailContent({ member, data }) {
 
       {/* DISCOGRAPHY */}
       <div>
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-2.5">
           <div className="w-5 h-px bg-[#1C1C1C]" />
           <div className="text-[10px] tracking-[0.25em] font-medium text-[#1C1C1C] uppercase">Discography</div>
         </div>
@@ -2905,7 +2927,7 @@ function MemberDetailContent({ member, data }) {
             <div>
               {/* 统计摘要 */}
               {(
-                <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 py-3 mb-2">
+                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1.5 py-2 mb-1">
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-[10px] tracking-[0.15em] text-[#AAAAAA] uppercase">选拔</span>
                     <span className="text-base font-light text-[#1C1C1C] tabular-nums leading-none">{selectionCount}</span>
@@ -2938,7 +2960,7 @@ function MemberDetailContent({ member, data }) {
                   className="w-full border-b border-[#E0E0E0] text-center transition-colors hover:bg-[#FCFCFC]"
                   title={`展开更早的 ${collapsedPreJoinCount} 首加入前单曲`}
                 >
-                  <div className="flex items-center justify-center py-2 md:py-2.5 pb-4 md:pb-5">
+                  <div className="flex items-center justify-center py-1.5 md:py-2 pb-2.5 md:pb-3">
                     <div className="flex flex-col items-center justify-center leading-none text-[#B8B8B8]">
                       <span className="text-[11px] leading-none">•</span>
                       <span className="mt-0.5 text-[11px] leading-none">•</span>
@@ -2998,7 +3020,7 @@ function MemberDetailContent({ member, data }) {
                   ) : null}
                 </>;
                 return (
-                  <div key={k} className="py-2.5 md:py-3.5 border-b border-[#E0E0E0] last:border-b-0">
+                  <div key={k} className="py-2.5 md:py-3 border-b border-[#E0E0E0] last:border-b-0">
                     {/* 手机：两行布局 */}
                     <div className="flex md:hidden items-baseline gap-1.5 mb-1">
                       <span className="text-[10px] tracking-wider text-[#6B6B6B]">{prefix || ""}</span>
@@ -3018,7 +3040,7 @@ function MemberDetailContent({ member, data }) {
                 <button
                   type="button"
                   onClick={() => setShowAllPreJoinSingles(false)}
-                  className="w-full py-2.5 md:py-3.5 text-center text-[11px] tracking-[0.12em] text-[#8A8A8A] hover:text-[#1C1C1C] hover:bg-[#FAFAFA] transition-colors"
+                  className="w-full py-1.5 md:py-2 text-center text-[11px] tracking-[0.12em] text-[#8A8A8A] hover:text-[#1C1C1C] hover:bg-[#FAFAFA] transition-colors"
                 >
                   收起更早的加入前单曲
                 </button>
@@ -3026,6 +3048,7 @@ function MemberDetailContent({ member, data }) {
             </div>
           );
         })()}
+      </div>
       </div>
 
     </div>
@@ -3040,6 +3063,14 @@ function MembersPage({ data, setData, admin }) {
   const [genFilter, setGenFilter] = useState("all"); // all | "1期" | "2期" ...
 
   const members = data.members;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("member") || params.get("memberId");
+    if (!requested) return;
+    const match = members.find((m) => m.id === requested || m.name === requested || m.romaji === requested);
+    if (match) setSelected(match);
+  }, [members]);
 
   const generations = useMemo(() => {
     const set = new Set();
@@ -3089,12 +3120,12 @@ function MembersPage({ data, setData, admin }) {
     }
     setData((prev) => {
       const exists = prev.members.some((x) => x.id === editing.id);
-      const nextDraft = {
+      const nextDraft = stampAdminEntity({
         ...editing,
         favoriteSongs: Array.isArray(editing.favoriteSongs)
           ? editing.favoriteSongs.filter((x) => typeof x === "string" && x.trim())
           : [],
-      };
+      }, exists);
       if (!nextDraft.favoriteSong && nextDraft.favoriteSongs.length > 0) {
         nextDraft.favoriteSong = nextDraft.favoriteSongs[0];
       }
@@ -3136,19 +3167,19 @@ function MembersPage({ data, setData, admin }) {
   };
 
   return (
-    <div className="px-4 py-8 mx-auto max-w-7xl">
-      <SectionHeader
-        right={
-          admin ? (
-            <Button onClick={() => openEdit(null)}>
+    <div>
+      <PageIntro title="PROFILE" eyebrow="XP member archive" />
+      <div className="mx-auto max-w-5xl px-4 pb-12">
+        {admin ? (
+          <div className="mb-6 flex items-center justify-end">
+            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#19160f] text-white hover:bg-[#3a301d]">
               <Plus className="mr-2 h-4 w-4" />
               新增成员
             </Button>
-          ) : null
-        }
-      />
+          </div>
+        ) : null}
 
-      <div className="mt-6 flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {[
           { key: "all", label: "全部" },
           { key: "active", label: "在籍" },
@@ -3158,10 +3189,10 @@ function MembersPage({ data, setData, admin }) {
             key={key}
             onClick={() => setStatusFilter(key)}
             className={
-              "text-xs tracking-wider px-3 py-1 border transition-colors " +
+              "text-xs tracking-[0.14em] px-4 py-1.5 border transition-colors " +
               (statusFilter === key
-                ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
-                : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                ? "bg-[#19160f] text-white border-[#19160f]"
+                : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
             }
           >
             {label}
@@ -3178,8 +3209,8 @@ function MembersPage({ data, setData, admin }) {
               "text-xs tracking-wider px-3 py-1 border transition-colors " +
               (key === "all"
                 ? (genFilter === key
-                  ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
-                  : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                  ? "bg-[#19160f] text-white border-[#19160f]"
+                  : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
                 : "")
             }
             style={key === "all" ? undefined : generationFilterStyle(key, genFilter === key)}
@@ -3188,26 +3219,24 @@ function MembersPage({ data, setData, admin }) {
           </button>
         ))}
 
-        <div className="ml-auto text-xs text-[#6B6B6B]">
+        <div className="ml-auto text-xs tracking-[0.12em] text-[#9b8d69]">
           共 {filteredMembers.length} 人
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-9 md:grid-cols-3">
         {filteredMembers.map((m) => (
-          <motion.div
+          <div
             key={m.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25 }}
+            className="xp-list-card"
           >
-            <div className="group overflow-hidden">
+            <div className="xp-member-card xp-card-lift group overflow-hidden p-2.5">
               <div className="relative">
                 <button className="block w-full" onClick={() => setSelected(m)}>
                   <MediaImage
                     src={m.avatar}
                     alt={m.name}
-                    className={"aspect-[3/4] w-full object-cover object-top bg-[#F0F0F0] transition duration-300 group-hover:scale-[1.02] " + (!m.isActive ? "grayscale opacity-70" : "")}
+                    className={"aspect-square w-full object-cover object-top xp-member-image transition duration-500 group-hover:scale-[1.035] " + (!m.isActive ? "grayscale opacity-70" : "")}
                   />
                 </button>
                 <div className="absolute left-2 top-2 flex gap-1">
@@ -3238,12 +3267,17 @@ function MembersPage({ data, setData, admin }) {
                   </div>
                 ) : null}
               </div>
-              <div className="p-3">
-                <div className="text-sm font-medium text-[#1C1C1C] leading-tight">{m.name}{!m.isActive ? " - 卒业" : ""}</div>
-                <div className="mt-0.5 text-[10px] text-[#6B6B6B] tracking-wide">{m.romaji || ""}</div>
+              <div className="px-1 pb-1 pt-4">
+                <div className="flex items-start justify-between gap-3 border-t border-[#e9dfc5] pt-3">
+                  <div className="min-w-0">
+                    <div className="text-base font-medium leading-tight tracking-[0.04em] text-[#19160f]">{m.name}{!m.isActive ? " - 卒业" : ""}</div>
+                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#7c7464]">{m.romaji || ""}</div>
+                  </div>
+                  <span className="xp-tag shrink-0 px-2 py-1 text-[9px]">{m.isActive ? "ACTIVE" : "OG"}</span>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -3251,7 +3285,7 @@ function MembersPage({ data, setData, admin }) {
         open={!!selected}
         onOpenChange={(v) => (!v ? setSelected(null) : null)}
       >
-        <ScrollDialogContent className="max-w-4xl">
+        <ScrollDialogContent className="max-w-6xl">
           <MemberDetailContent member={selected} data={data} />
         </ScrollDialogContent>
       </Dialog>
@@ -3621,6 +3655,7 @@ function MembersPage({ data, setData, admin }) {
           )}
         </ScrollDialogContent>
       </Dialog>
+      </div>
     </div>
   );
 }
@@ -3732,6 +3767,29 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
   const [selectedId, setSelectedId] = useState(null);
   const selected = data.singles.find((s) => s.id === selectedId) || null;
   const [kindFilter, setKindFilter] = useState("全部");
+  const usedSingleKinds = useMemo(
+    () => [...new Set(data.singles.map((s) => s.singleKind || "常规单曲"))],
+    [data.singles]
+  );
+  const kindOptions = useMemo(
+    () => ["全部", ...SINGLE_KIND_OPTIONS.filter((k) => usedSingleKinds.includes(k))],
+    [usedSingleKinds]
+  );
+  const filteredSingles = useMemo(
+    () =>
+      [...data.singles]
+        .sort((a, b) => compareSinglesByRelease(a, b, "desc"))
+        .filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter),
+    [data.singles, kindFilter]
+  );
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("single") || params.get("singleId");
+    if (!requested) return;
+    const match = data.singles.find((s) => s.id === requested || s.title === requested);
+    if (match) setSelectedId(match.id);
+  }, [data.singles]);
 
   // ✅ 手机端：点击单曲后自动滚动到详情区域（不影响电脑版）
   const detailAnchorRef = useRef(null);
@@ -3845,8 +3903,8 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
 
   const saveSingle = () => {
     setData((prev) => {
-      const nextEditing = editing;
       const exists = prev.singles.some((x) => x.id === editing.id);
+      const nextEditing = stampAdminEntity(editing, exists);
       const nextSingles = exists
         ? prev.singles.map((x) =>
             x.id === nextEditing.id ? nextEditing : x
@@ -3872,34 +3930,32 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
   };
 
   return (
-    <div className="px-4 py-8 mx-auto max-w-7xl">
-      <SectionHeader
-        right={
-          admin ? (
-            <Button onClick={() => openEdit(null)}>
+    <div>
+      <PageIntro title="DISCOGRAPHY" eyebrow="XP music archive" />
+      <div className="mx-auto max-w-5xl px-4 pb-12">
+        {admin ? (
+          <div className="mb-6 flex items-center justify-end">
+            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#19160f] text-white hover:bg-[#3a301d]">
               <Plus className="mr-2 h-4 w-4" />
               新增单曲
             </Button>
-          ) : null
-        }
-      />
+          </div>
+        ) : null}
 
       {/* Kind filter */}
       {(() => {
-        const usedKinds = [...new Set(data.singles.map((s) => s.singleKind || "常规单曲"))];
-        const options = ["全部", ...SINGLE_KIND_OPTIONS.filter((k) => usedKinds.includes(k))];
-        if (options.length <= 2) return null;
+        if (kindOptions.length <= 2) return null;
         return (
-          <div className="flex flex-wrap gap-2 mb-8">
-            {options.map((opt) => (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {kindOptions.map((opt) => (
               <button
                 key={opt}
                 onClick={() => setKindFilter(opt)}
                 className={
-                  "text-[11px] tracking-wider px-3 py-1 border transition-colors " +
+                  "text-[11px] tracking-[0.14em] px-4 py-1.5 border transition-colors " +
                   (kindFilter === opt
-                    ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
-                    : "border-[#E0E0E0] text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                    ? "bg-[#19160f] text-white border-[#19160f]"
+                    : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
                 }
               >
                 {opt}
@@ -3910,26 +3966,22 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
       })()}
 
       {/* Discography grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-5 gap-y-8">
-        <AnimatePresence mode="popLayout">
-        {[...data.singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))
-          .filter((s) => kindFilter === "全部" || (s.singleKind || "常规单曲") === kindFilter).map((s, idx) => {
+      <div className="grid grid-cols-2 gap-x-4 gap-y-9 md:grid-cols-3">
+        {filteredSingles.map((s, idx) => {
           const { prefix, name } = splitSingleTitle(s.title);
           return (
-            <motion.div
+            <div
               key={s.id}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ duration: 0.28, delay: idx * 0.035, ease: [0.25, 0.1, 0.25, 1] }}
-              className="cursor-pointer group"
+              className="xp-list-card xp-disc-card xp-card-lift cursor-pointer group p-2.5"
               onClick={() => setSelectedId(s.id)}
             >
-              <div className="relative overflow-hidden bg-[#F0F0F0] aspect-square">
+              <div
+                className="xp-disc-image relative overflow-hidden bg-[#F0F0F0] aspect-square"
+              >
                 <MediaImage
                   src={s.cover}
                   alt={s.title}
+                  eager={idx < 3}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
                 {admin ? (
@@ -3955,26 +4007,31 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
                   </div>
                 ) : null}
               </div>
-              <div className="mt-3">
-                <div className="text-[10px] tracking-[0.15em] text-[#6B6B6B] uppercase">{prefix}</div>
-                <div className="text-sm font-medium text-[#1C1C1C] leading-snug mt-0.5">{name || s.title}</div>
-                <div className="text-xs text-[#6B6B6B] mt-1 tracking-wider">
-                  {s.release ? s.release.replace(/-/g, ".") : "—"}
+              <div className="px-1 pb-1 pt-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="xp-tag px-2 py-0.5 text-[9px]">{s.singleKind || "SINGLE"}</span>
+                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">Release {formatDateDots(s.release)}</span>
+                </div>
+                <div className="mt-3 text-[10px] uppercase tracking-[0.18em] text-[#7c7464]">{prefix}</div>
+                <div className="mt-1 text-base font-medium leading-snug tracking-[0.02em] text-[#19160f]">{name || s.title}</div>
+                <div className="mt-3 h-px w-10 bg-[#b99438]" />
+                <div className="mt-3 text-[11px] tracking-[0.1em] text-[#9b8d69]">
+                  {(s.tracks || []).length} tracks
                 </div>
               </div>
-            </motion.div>
+            </div>
           );
         })}
-        </AnimatePresence>
       </div>
 
       {/* Single detail modal */}
       <Dialog open={!!selectedId} onOpenChange={(open) => { if (!open) setSelectedId(null); }}>
-        <ScrollDialogContent className="max-w-5xl">
+        <ScrollDialogContent className="max-w-6xl">
           {selected ? (
             <ErrorBoundary>
               <SingleDetail
                 single={selected}
+                singles={data.singles || []}
                 membersById={membersById}
                 admin={admin}
                 cumulativeCounts={cumulativeCounts}
@@ -4210,11 +4267,12 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
           ) : null}
         </ScrollDialogContent>
       </Dialog>
+      </div>
     </div>
   );
 }
 
-function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, playQueue, audioQueue, audioIndex, isPlaying, togglePlayPause}) {
+function SingleDetail({single, singles = [], membersById, admin, cumulativeCounts, noFrame, playQueue, audioQueue, audioIndex, isPlaying, togglePlayPause}) {
   const [coverZoom, setCoverZoom] = useState(false);
 
   const rows = single.asideLineup?.rows || [];
@@ -4246,30 +4304,23 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
 
   const tracks = Array.isArray(single.tracks) ? single.tracks : [];
   const hasAnyAudio = tracks.some((t) => !!t?.audio);
+  const titleMeta = splitSingleTitle(single.title);
+  const kindBadge = singleKindBadge(single.singleKind);
+  const centerSummary = formatSingleCenterSummary(single, singles, membersById);
+  const singleMetaRows = [
+    ["RELEASE", formatDateDots(single.release)],
+    ["TYPE", single.singleKind || "SINGLE"],
+    ["SELECTION", `${single.asideLineup?.selectionCount || 0} 人`],
+    ["TRACKS", `${tracks.length} 曲`],
+    ["CENTER", centerSummary],
+  ];
 
   return (
-    <div className={noFrame ? "" : "border border-[#E0E0E0] bg-white"}>
-      {!noFrame && (
-        <div className="px-4 py-3 border-b border-[#E0E0E0]">
-          <div className="text-base font-medium text-[#1C1C1C]">{single.title}</div>
-          <div className="text-xs text-[#6B6B6B] tracking-wider mt-0.5">
-            {single.release ? single.release.replace(/-/g, ".") : "—"}
-          </div>
-        </div>
-      )}
-      {noFrame && (
-        <div className="mb-4 text-center">
-          <div className="text-lg font-medium text-[#1C1C1C]">{single.title}</div>
-          <div className="text-xs text-[#6B6B6B] tracking-wider mt-1">
-            {single.release ? single.release.replace(/-/g, ".") : "—"}
-          </div>
-        </div>
-      )}
-      <div className={`${noFrame ? "pt-0" : "p-4"} grid gap-10`}>
-        {/* Centered large cover + badges */}
-        <div className="flex flex-col items-center gap-4">
+    <div className={noFrame ? "" : "border border-[#e9dfc5] bg-white/75"}>
+      <div className={`${noFrame ? "pt-0" : "p-4"} grid gap-12`}>
+        <div className="grid items-center gap-10 md:grid-cols-[minmax(280px,520px)_minmax(0,1fr)] lg:gap-16">
           <button
-            className="overflow-hidden bg-[#F0F0F0] w-full max-w-[260px] sm:max-w-[320px]"
+            className="xp-detail-image overflow-hidden"
             onClick={() => setCoverZoom(true)}
             title="点击放大封面"
           >
@@ -4277,20 +4328,36 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
               src={single.cover}
               alt={single.title}
               className="aspect-square w-full object-cover"
+              eager
             />
           </button>
-          <div className="flex flex-wrap justify-center gap-2">
-            {(() => { const kb = singleKindBadge(single.singleKind); return kb ? (
-              <span className={"text-[10px] tracking-wider border px-2 py-0.5 " + kb.className}>{kb.text}</span>
-            ) : null; })()}
-            <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
-              选拔 {single.asideLineup?.selectionCount || 0}人
-            </span>
-            <span className="text-[10px] tracking-wider border border-[#E0E0E0] bg-[#F0F0F0] text-[#6B6B6B] px-2 py-0.5">
-              {single.asideLineup?.rows?.length || 0} 排
-            </span>
-            {hasAnyAudio ? (
-              <span className="text-[10px] tracking-wider border border-emerald-200 bg-emerald-50 text-emerald-800 px-2 py-0.5">♪ 音源</span>
+
+          <div className="xp-detail-panel p-6 md:p-10">
+            <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">DISCOGRAPHY</div>
+            <div className="mt-5 h-px w-6 bg-[#19160f]" />
+            <div className="mt-8 text-[11px] uppercase tracking-[0.24em] text-[#7c7464]">{titleMeta.prefix || "Single"}</div>
+            <h2 className="mt-4 text-3xl font-light leading-tight tracking-[-0.04em] text-[#19160f] md:text-5xl">
+              {titleMeta.name || single.title}
+            </h2>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {kindBadge ? (
+                <span className={"text-[10px] tracking-[0.14em] border px-2.5 py-1 " + kindBadge.className}>{kindBadge.text}</span>
+              ) : (
+                <span className="xp-tag px-2.5 py-1 text-[10px]">SINGLE</span>
+              )}
+              <span className="xp-tag px-2.5 py-1 text-[10px]">选拔 {single.asideLineup?.selectionCount || 0}人</span>
+              {hasAnyAudio ? <span className="xp-tag px-2.5 py-1 text-[10px]">Audio</span> : null}
+            </div>
+            <div className="mt-8 grid gap-3">
+              {singleMetaRows.map(([label, value]) => (
+                <div key={label} className="xp-detail-row grid grid-cols-[96px_1fr] gap-4 pb-3 text-sm">
+                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">{label}</span>
+                  <span className="min-w-0 break-words tracking-[0.04em] text-[#19160f]">{value || "—"}</span>
+                </div>
+              ))}
+            </div>
+            {single.notes ? (
+              <p className="mt-7 text-sm leading-7 tracking-[0.04em] text-[#6f6654]">{single.notes}</p>
             ) : null}
           </div>
         </div>
@@ -4388,7 +4455,7 @@ function SingleDetail({single, membersById, admin, cumulativeCounts, noFrame, pl
           </div>
         </div>
 
-        {single.notes ? (
+        {single.notes && !noFrame ? (
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-5 h-px bg-[#1C1C1C]" />
@@ -5158,8 +5225,21 @@ function FloatingPlayer({ audioQueue, audioIndex, isPlaying, currentTime, durati
   );
 }
 
+const INITIAL_PAGES = new Set(["home", "members", "singles", "election", "gallery", "playlist"]);
+
+function getInitialPageFromUrl() {
+  if (typeof window === "undefined") return "home";
+  const requestedPage = new URLSearchParams(window.location.search).get("page");
+  return INITIAL_PAGES.has(requestedPage) ? requestedPage : "home";
+}
+
+const MemoTopBar = React.memo(TopBar);
+const MemoHero = React.memo(Hero);
+const MemoMembersPage = React.memo(MembersPage);
+const MemoSinglesPage = React.memo(SinglesPage);
+
 export default function XJP56App() {
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState(getInitialPageFromUrl);
   const [admin, setAdmin] = useState(false);
   const [data, setData] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -5173,19 +5253,21 @@ export default function XJP56App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const lastTimeUpdateRef = useRef(0);
 
   // Play an array of QueueItems (already resolved) starting at startIndex
-  const playQueue = (items, startIndex = 0) => {
+  const playQueue = useCallback((items, startIndex = 0) => {
     const valid = items.filter(Boolean);
     if (!valid.length) return;
     setAudioQueue(valid);
     setAudioIndex(startIndex);
+    lastTimeUpdateRef.current = 0;
     setCurrentTime(0);
     setDuration(0);
     // Trigger load+play via effect that watches audioIndex+audioQueue
-  };
+  }, []);
 
-  const stopAudio = () => {
+  const stopAudio = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
@@ -5193,11 +5275,12 @@ export default function XJP56App() {
     setAudioQueue([]);
     setAudioIndex(0);
     setIsPlaying(false);
+    lastTimeUpdateRef.current = 0;
     setCurrentTime(0);
     setDuration(0);
-  };
+  }, []);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = useCallback(() => {
     const el = audioRef.current;
     if (!el) return;
     if (!el.paused) {
@@ -5205,31 +5288,39 @@ export default function XJP56App() {
     } else {
       el.play().catch(() => {});
     }
-  };
+  }, []);
 
-  const seekToIndex = (idx) => {
+  const seekToIndex = useCallback((idx) => {
     if (idx < 0 || idx >= audioQueue.length) return;
     setAudioIndex(idx);
+    lastTimeUpdateRef.current = 0;
     setCurrentTime(0);
-  };
+  }, [audioQueue.length]);
 
-  const handleTrackEnd = () => {
+  const handleAudioTimeUpdate = useCallback(() => {
+    const next = audioRef.current?.currentTime ?? 0;
+    if (Math.abs(next - lastTimeUpdateRef.current) < 0.25) return;
+    lastTimeUpdateRef.current = next;
+    setCurrentTime(next);
+  }, []);
+
+  const handleTrackEnd = useCallback(() => {
     if (audioIndex < audioQueue.length - 1) {
       seekToIndex(audioIndex + 1);
     } else {
       // Last track ended — stay in queue but pause
       setIsPlaying(false);
     }
-  };
+  }, [audioIndex, audioQueue.length, seekToIndex]);
 
-  const handleTrackError = () => {
+  const handleTrackError = useCallback(() => {
     // Skip broken track silently
     if (audioIndex < audioQueue.length - 1) {
       seekToIndex(audioIndex + 1);
     } else {
       setIsPlaying(false);
     }
-  };
+  }, [audioIndex, audioQueue.length, seekToIndex]);
 
   // When audioIndex or audioQueue changes, update audio src and play
   useEffect(() => {
@@ -5280,12 +5371,20 @@ export default function XJP56App() {
     return () => clearTimeout(t);
   }, [data, loaded]);
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     const empty = withRecomputedSelections({ members: [], singles: [], gallery: [], playlists: [] });
     setData(empty);
     setPage("home");
     apiSaveData(empty).catch(() => {});
-  };
+  }, []);
+
+  const dataSummary = useMemo(() => {
+    if (!data) return { totalMembersCount: 0, singlesCount: 0 };
+    return {
+      totalMembersCount: data.members.length,
+      singlesCount: data.singles.length,
+    };
+  }, [data]);
 
   if (!loaded) {
     return (
@@ -5321,8 +5420,8 @@ export default function XJP56App() {
   }
 
   return (
-    <AppShell>
-      <TopBar page={page} setPage={setPage} admin={admin} setAdmin={setAdmin} onReset={onReset} />
+    <AppShell adminDock={<AdminDock admin={admin} setAdmin={setAdmin} onReset={onReset} />}>
+      <MemoTopBar page={page} setPage={setPage} admin={admin} />
 
       {admin ? (
         <div className="mb-6 border border-[#E0E0E0] bg-[#F7F7F7] px-4 py-3 text-sm text-[#1C1C1C]">
@@ -5333,45 +5432,26 @@ export default function XJP56App() {
 
       <AnimatePresence mode="wait">
         {page === "home" ? (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.25 }}
-          >
-            <Hero
-              singles={[...data.singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))}
+          <div key="home">
+            <MemoHero
+              singles={data.singles}
               members={data.members}
-              activeMembersCount={data.members.filter((m) => m.isActive).length}
-              totalMembersCount={data.members.length}
-              singlesCount={data.singles.length}
+              gallery={data.gallery}
+              playlists={data.playlists}
               onGo={setPage}
             />
-          </motion.div>
+          </div>
         ) : null}
 
         {page === "members" ? (
-          <motion.div
-            key="members"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.25 }}
-          >
-            <MembersPage data={data} setData={setData} admin={admin} />
-          </motion.div>
+          <div key="members">
+            <MemoMembersPage data={data} setData={setData} admin={admin} />
+          </div>
         ) : null}
 
         {page === "singles" ? (
-          <motion.div
-            key="singles"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.25 }}
-          >
-            <SinglesPage
+          <div key="singles">
+            <MemoSinglesPage
               data={data}
               setData={setData}
               admin={admin}
@@ -5381,7 +5461,7 @@ export default function XJP56App() {
               isPlaying={isPlaying}
               togglePlayPause={togglePlayPause}
             />
-          </motion.div>
+          </div>
         ) : null}
 
         {page === "election" ? (
@@ -5433,7 +5513,7 @@ export default function XJP56App() {
         ref={audioRef}
         onEnded={handleTrackEnd}
         onError={handleTrackError}
-        onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime ?? 0)}
+        onTimeUpdate={handleAudioTimeUpdate}
         onDurationChange={() => setDuration(audioRef.current?.duration ?? 0)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
