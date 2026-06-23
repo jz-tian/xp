@@ -528,6 +528,7 @@ const GENERATION_THEME = {
   "7": { backgroundColor: "#2F7927", color: "#FFFFFF", borderColor: "#2F7927" },
   "8": { backgroundColor: "#3098FE", color: "#FFFFFF", borderColor: "#3098FE" },
   "9": { backgroundColor: "#3CC2B1", color: "#FFFFFF", borderColor: "#3CC2B1" },
+  "10": { backgroundColor: "#FFFFFF", color: "#FF1493", borderColor: "#FF1493", filterColor: "#FF1493" },
 };
 
 
@@ -562,7 +563,7 @@ function generationFilterStyle(gen = "", active = false) {
   }
   return active
     ? { backgroundColor: theme.backgroundColor, color: theme.color, borderColor: theme.borderColor }
-    : { backgroundColor: "#FFFFFF", color: theme.backgroundColor, borderColor: theme.borderColor };
+    : { backgroundColor: "#FFFFFF", color: theme.filterColor || theme.backgroundColor, borderColor: theme.borderColor };
 }
 
 function normalizeMemberDraft(member) {
