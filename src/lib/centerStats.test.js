@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  buildMemberCenterWeightBreakdown,
   formatSingleCenterSummary,
 } from "./centerStats.js";
 
@@ -50,4 +51,47 @@ test("counts one center credit per member per single", () => {
   ];
 
   assert.equal(formatSingleCenterSummary(singles[0], singles, membersById), "李红(初)、赵美(初)");
+});
+
+test("builds member center weights by center share and count", () => {
+  const singles = [
+    {
+      id: "solo",
+      release: "2026-01-01",
+      asideLineup: {
+        slots: ["li", "zhao", "wang"],
+        slotRoles: { 0: "center" },
+      },
+    },
+    {
+      id: "double-a",
+      release: "2026-02-01",
+      asideLineup: {
+        slots: ["li", "zhao", "wang"],
+        slotRoles: { 0: "center", 1: "center" },
+      },
+    },
+    {
+      id: "quad",
+      release: "2026-03-01",
+      asideLineup: {
+        slots: ["li", "zhao", "wang", "mei"],
+        slotRoles: { 0: "center", 1: "center", 2: "center", 3: "center" },
+      },
+    },
+    {
+      id: "double-b",
+      release: "2026-04-01",
+      asideLineup: {
+        slots: ["li", "wang", "zhao"],
+        slotRoles: { 0: "center", 1: "center" },
+      },
+    },
+  ];
+
+  assert.deepEqual(buildMemberCenterWeightBreakdown("li", singles), [
+    { weight: 1, count: 1, centerSize: 1 },
+    { weight: 0.5, count: 2, centerSize: 2 },
+    { weight: 0.25, count: 1, centerSize: 4 },
+  ]);
 });

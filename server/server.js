@@ -5,6 +5,9 @@ import path from "path";
 import multer from "multer";
 import sharp from "sharp";
 
+import { detectNewsletterEvents } from "./lib/newsletter-events.js";
+import { sendNewsletterEvents } from "./scripts/send-newsletter-previews.js";
+
 const app = express();
 const PORT = 3001;
 
@@ -174,8 +177,27 @@ app.get("/data", (req, res) => {
 });
 
 app.post("/data", (req, res) => {
-  writeDB(req.body);
-  res.json({ ok: true });
+  try {
+    const previousDb = sanitizeDbPayload(readDB());
+    const nextDb = sanitizeDbPayload(req.body);
+    const newsletterEvents = detectNewsletterEvents(previousDb, nextDb);
+
+    writeDB(nextDb);
+    res.json({ ok: true, newsletterEvents });
+
+    if (newsletterEvents.length) {
+      sendNewsletterEvents(newsletterEvents, nextDb)
+        .then(({ sent }) => {
+          console.log(`Newsletter sent: ${sent.map((item) => item.subject).join(" | ")}`);
+        })
+        .catch((error) => {
+          console.error("Newsletter send failed:", error?.message || error);
+        });
+    }
+  } catch (error) {
+    console.error("data save failed:", error?.message || error);
+    res.status(500).json({ error: "save failed" });
+  }
 });
 
 /* ✅ 最后再 listen */

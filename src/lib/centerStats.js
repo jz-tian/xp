@@ -64,6 +64,29 @@ export function buildCumulativeCenterCountsBySingle(singles = []) {
   return bySingleId;
 }
 
+export function buildMemberCenterWeightBreakdown(memberId, singles = []) {
+  const targetId = String(memberId || "").trim();
+  if (!targetId) return [];
+
+  const byCenterSize = new Map();
+
+  for (const single of Array.isArray(singles) ? singles : []) {
+    const centerIds = getSingleCenterMemberIds(single);
+    const centerSize = centerIds.length;
+    if (!centerSize || !centerIds.includes(targetId)) continue;
+
+    const current = byCenterSize.get(centerSize) || {
+      weight: 1 / centerSize,
+      count: 0,
+      centerSize,
+    };
+    current.count += 1;
+    byCenterSize.set(centerSize, current);
+  }
+
+  return [...byCenterSize.values()].sort((a, b) => b.weight - a.weight);
+}
+
 const getMemberName = (membersById, memberId) => {
   if (membersById instanceof Map) return membersById.get(memberId)?.name || memberId;
   return membersById?.[memberId]?.name || memberId;
