@@ -59,9 +59,12 @@ import {
   ListMusic,
   GripVertical,
   Shuffle,
+  Crown,
 } from "lucide-react";
 import { buildMemberCenterWeightBreakdown, formatSingleCenterSummary } from "./lib/centerStats.js";
 import { getAdminActivityDate, pickLatestMemberForNews, stampAdminEntity } from "./lib/homeFeed.js";
+import { getElectionPhotoUrl } from "./lib/electionPhotos.js";
+import { getLegendarySeven } from "./lib/legendarySeven.js";
 import NewsletterPreviewPage from "./components/NewsletterPreview.jsx";
 
 // ---------- Utils ----------
@@ -314,6 +317,7 @@ const ELECTION_SUBTITLES = {
   "第4届": "百家争鸣之战",
   "第5届": "Make XP Great Again!",
   "第6届": "The Power of Dreams",
+  "第7届": "一途なる想い",
 };
 
 const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲", "纪念单曲"];
@@ -373,41 +377,6 @@ function formatDateDots(v) {
 
 function getLatestSingle(singles = []) {
   return [...singles].sort((a, b) => compareSinglesByRelease(a, b, "desc"))[0] || null;
-}
-
-function getGenerationNumber(generation) {
-  const num = parseInt(String(generation ?? "").match(/\d+/)?.[0], 10);
-  return Number.isFinite(num) ? num : -Infinity;
-}
-
-function formatGenerationSubtitle(generation) {
-  const num = getGenerationNumber(generation);
-  if (!Number.isFinite(num)) {
-    const fallback = String(generation || "NEW").trim().toUpperCase();
-    return `-THE ${fallback} GENERATION-`;
-  }
-  const mod100 = num % 100;
-  const mod10 = num % 10;
-  const suffix = mod100 >= 11 && mod100 <= 13
-    ? "TH"
-    : mod10 === 1
-      ? "ST"
-      : mod10 === 2
-        ? "ND"
-        : mod10 === 3
-          ? "RD"
-          : "TH";
-  return `-THE ${num}${suffix} GENERATION-`;
-}
-
-function getLatestGenerationMembers(members = []) {
-  const active = members.filter((m) => m?.isActive);
-  const maxGeneration = active.reduce(
-    (max, member) => Math.max(max, getGenerationNumber(member.generation)),
-    -Infinity
-  );
-  if (maxGeneration === -Infinity) return active;
-  return active.filter((member) => getGenerationNumber(member.generation) === maxGeneration);
 }
 
 function PageIntro({ title, eyebrow }) {
@@ -2000,7 +1969,8 @@ function AdminDock({ admin, setAdmin, onReset }) {
 }
 
 // ---- Hero 区域 ----
-function Hero({ singles, members, gallery = [], playlists = [], onGo }) {
+function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
+  const [selectedLegendaryMember, setSelectedLegendaryMember] = useState(null);
   const orderedSingles = useMemo(
     () => [...(singles || [])].sort((a, b) => compareSinglesByRelease(a, b, "desc")),
     [singles]
@@ -2008,10 +1978,7 @@ function Hero({ singles, members, gallery = [], playlists = [], onGo }) {
   const latest = useMemo(() => getLatestSingle(singles), [singles]);
   const { prefix, name } = latest ? splitSingleTitle(latest.title) : { prefix: "", name: "XP" };
   const latestMemberForNews = useMemo(() => pickLatestMemberForNews(members || []), [members]);
-  const featuredMembers = useMemo(() => getLatestGenerationMembers(members || []), [members]);
-  const featuredGenerationSubtitle = featuredMembers[0]?.generation
-    ? formatGenerationSubtitle(featuredMembers[0].generation)
-    : "";
+  const legendarySeven = useMemo(() => getLegendarySeven(members || []), [members]);
   const recentSingles = orderedSingles.slice(0, 6);
   const galleryShots = [...(gallery || [])].slice(0, 4);
   const newsItems = [
@@ -2112,22 +2079,54 @@ function Hero({ singles, members, gallery = [], playlists = [], onGo }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10">
-        <HomeSectionTitle title="NEW GENERATION" subtitle={featuredGenerationSubtitle} align="center" />
-        <div className="flex flex-wrap justify-center gap-4">
-          {featuredMembers.map((member) => (
-            <button key={member.id} onClick={() => onGo("members")} className="group w-[calc(50%-0.5rem)] max-w-[176px] sm:w-[156px] lg:w-[168px]">
-              <div className="xp-member-image aspect-[3/4] overflow-hidden border border-[#e9dfc5]">
-                <MediaImage src={member.avatar} alt={member.name} className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]" />
-              </div>
-              <div className="mt-3 text-center">
-                <div className="text-sm tracking-[0.06em] text-[#19160f]">{member.name}</div>
-                <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-[#9b8d69]">{member.romaji}</div>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
+      {legendarySeven.members.length ? (
+        <section className="mx-auto max-w-7xl overflow-hidden px-3 py-14 sm:px-5 md:py-24">
+          <HomeSectionTitle
+            title="LEGENDARY SEVEN"
+            subtitle={`${legendarySeven.edition} General Election`}
+            align="center"
+          />
+          <div className="xp-legendary-seven">
+            {legendarySeven.members.map(({ member, rank, photoUrl }) => (
+              <button
+                key={member.id}
+                type="button"
+                onClick={() => setSelectedLegendaryMember(member)}
+                className={`xp-legendary-card xp-legendary-rank-${rank}`}
+              >
+                <div className="xp-legendary-frame">
+                  {rank === 1 ? (
+                    <div className="xp-legendary-crown" aria-label="Election winner">
+                      <Crown aria-hidden="true" />
+                    </div>
+                  ) : null}
+                  <div className="xp-legendary-photo">
+                    <MediaImage
+                      src={photoUrl}
+                      alt={member.name}
+                      className="h-full w-full object-cover object-top transition-transform duration-700"
+                    />
+                  </div>
+                  <span className="xp-legendary-number">NO.{rank}</span>
+                </div>
+                <div className="xp-legendary-identity">
+                  <div className="xp-legendary-name">{member.name}</div>
+                  <div className="xp-legendary-romaji">{member.romaji}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <Dialog
+        open={!!selectedLegendaryMember}
+        onOpenChange={(open) => { if (!open) setSelectedLegendaryMember(null); }}
+      >
+        <ScrollDialogContent className="max-w-6xl">
+          <MemberDetailContent member={selectedLegendaryMember} data={data} />
+        </ScrollDialogContent>
+      </Dialog>
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <HomeSectionTitle title="MOVIE" subtitle="Visual archive" />
@@ -2186,7 +2185,7 @@ function ElectionPage({ data }) {
       if (!entry) return;
       const rankNum = parseRankNum(entry.rank);
       if (rankNum === Infinity || rankNum >= threshold) return; // 加入前、圈外 — 不显示
-      result.push({ member: m, rank: entry.rank, rankNum });
+      result.push({ member: m, entry, rank: entry.rank, rankNum });
     });
     result.sort((a, b) => a.rankNum - b.rankNum);
     return result;
@@ -2269,7 +2268,7 @@ function ElectionPage({ data }) {
             <div className="text-sm text-[#AAAAAA] text-center py-16">暂无数据</div>
           ) : (
             <div>
-              {rows.map(({ member, rankNum }, i) => {
+              {rows.map(({ member, entry, rankNum }, i) => {
                 const delta = getDelta(member, rankNum);
                 return (
                   <motion.div
@@ -2291,7 +2290,7 @@ function ElectionPage({ data }) {
                     <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0 overflow-hidden bg-[#F0F0F0]">
                       {(member.avatar || member.officialPhotos?.length > 0) ? (
                         <MediaImage
-                          src={getOfficialPhotoUrl(member, getEditionPhotoTier(activeEdition))}
+                          src={getElectionPhotoUrl(member, entry, getEditionPhotoTier(activeEdition))}
                           alt={member.name}
                           className="w-full h-full object-cover object-top"
                         />
@@ -2350,7 +2349,7 @@ function ElectionPage({ data }) {
 
       {/* Member detail modal */}
       <Dialog open={!!selectedMember} onOpenChange={(v) => { if (!v) setSelectedMember(null); }}>
-        <ScrollDialogContent className="max-w-4xl">
+        <ScrollDialogContent className="max-w-6xl">
           <MemberDetailContent member={selectedMember} data={data} />
         </ScrollDialogContent>
       </Dialog>
@@ -5429,6 +5428,7 @@ export default function XJP56App() {
         {page === "home" ? (
           <div key="home">
             <MemoHero
+              data={data}
               singles={data.singles}
               members={data.members}
               gallery={data.gallery}
