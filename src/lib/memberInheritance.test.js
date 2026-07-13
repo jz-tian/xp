@@ -105,6 +105,47 @@ test("computes eligibility only from results available at the requested date", (
   });
 });
 
+test("one top-three result qualifies only from its mapped election date", () => {
+  const topThreeMember = {
+    electionRanks: [{ edition: "第1届", rank: "第三位" }],
+  };
+
+  assert.deepEqual(getEligibilityAt(topThreeMember, singles, "2026-01-09"), {
+    eligible: false,
+    topThreeCount: 0,
+    topSevenCount: 0,
+    topTwelveCount: 0,
+  });
+  assert.deepEqual(getEligibilityAt(topThreeMember, singles, "2026-01-10"), {
+    eligible: true,
+    topThreeCount: 1,
+    topSevenCount: 1,
+    topTwelveCount: 1,
+  });
+});
+
+test("two top-seven results qualify only from the second mapped election date", () => {
+  const topSevenMember = {
+    electionRanks: [
+      { edition: "第1届", rank: "第七位" },
+      { edition: "第2届", rank: "第六位" },
+    ],
+  };
+
+  assert.deepEqual(getEligibilityAt(topSevenMember, singles, "2026-02-09"), {
+    eligible: false,
+    topThreeCount: 0,
+    topSevenCount: 1,
+    topTwelveCount: 1,
+  });
+  assert.deepEqual(getEligibilityAt(topSevenMember, singles, "2026-02-10"), {
+    eligible: true,
+    topThreeCount: 0,
+    topSevenCount: 2,
+    topTwelveCount: 2,
+  });
+});
+
 test("ordinary A-side selections do not qualify for inheritance", () => {
   const eligibilitySingles = [
     { id: "ge1", release: "2026-01-10", singleKind: "总选单曲" },
@@ -130,19 +171,27 @@ test("ordinary A-side selections do not qualify for inheritance", () => {
 });
 
 test("prioritizes candidates who were not independently eligible on graduation day", () => {
+  const prioritySingles = [
+    ...singles,
+    { id: "ge3", release: "2026-03-10", singleKind: "总选单曲" },
+  ];
   const source = member("source", "1期", {
     isActive: false,
-    graduationDate: "2026-02-15",
+    graduationDate: "2026-03-15",
   });
   const alreadyEligible = member("eligible", "2期", {
-    electionRanks: [{ edition: "第1届", rank: "第一位" }],
+    electionRanks: [
+      { edition: "第1届", rank: "第十二位" },
+      { edition: "第2届", rank: "第八位" },
+      { edition: "第3届", rank: "第十一位" },
+    ],
   });
   const notYetEligible = member("preferred", "3期");
 
   const pools = getSuccessorPools(
     source,
     [source, alreadyEligible, notYetEligible],
-    singles,
+    prioritySingles,
     source.graduationDate,
   );
 
