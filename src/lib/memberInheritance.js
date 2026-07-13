@@ -260,3 +260,132 @@ export function applyGraduationInheritance({
 
   return { members: nextMembers, successor };
 }
+
+const hashSeed = (seed) => {
+  let hash = 2166136261;
+  for (const character of String(seed)) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+export function createSeededRandom(seed) {
+  let state = hashSeed(seed);
+  return () => {
+    state = (state + 0x6D2B79F5) >>> 0;
+    let value = state;
+    value = Math.imul(value ^ (value >>> 15), value | 1);
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+    return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const seededCandidateOrder = (candidates, seed, sourceId) =>
+  [...candidates].sort((left, right) => {
+    const leftHash = hashSeed(`${seed}:${sourceId}:${left.id}`);
+    const rightHash = hashSeed(`${seed}:${sourceId}:${right.id}`);
+    return leftHash - rightHash || left.id.localeCompare(right.id);
+  });
+
+const requiresInheritance = (member, members, singles) =>
+  getEligibilityAt(member, singles, member.graduationDate).eligible
+  || Boolean(findInheritancePredecessor(member.id, members));
+
+const assignEdge = (members, sourceId, successorId, pending = false) =>
+  members.map((member) => {
+    if (member.id !== sourceId) return member;
+    const updated = {
+      ...member,
+      inheritanceSuccessorId: successorId,
+    };
+    if (pending) updated.inheritancePending = true;
+    else delete updated.inheritancePending;
+    return updated;
+  });
+
+export function backfillInheritance(
+  members = [],
+  singles = [],
+  { seed = "xp-legacy-2026-07-13" } = {},
+) {
+  const initial = members.map((member) => {
+    const copy = {
+      ...member,
+      inheritanceSuccessorId: member?.inheritanceSuccessorId || "",
+    };
+    if (copy.inheritancePending !== true) delete copy.inheritancePending;
+    return copy;
+  });
+  const graduates = initial
+    .filter((member) => !member.isActive && member.graduationDate)
+    .sort((left, right) =>
+      left.graduationDate.localeCompare(right.graduationDate)
+      || left.id.localeCompare(right.id),
+    );
+  const failedStates = new Set();
+
+  const stateKey = (graduateIndex, state) => {
+    const usedSuccessors = state
+      .map((member) => member.inheritanceSuccessorId)
+      .filter(Boolean)
+      .sort()
+      .join(",");
+    return `${graduateIndex}|${usedSuccessors}`;
+  };
+
+  const futureStillPossible = (graduateIndex, state) => {
+    for (let index = graduateIndex; index < graduates.length; index += 1) {
+      const future = state.find((member) => member.id === graduates[index].id);
+      if (!requiresInheritance(future, state, singles) || future.inheritanceSuccessorId) continue;
+      const pools = getSuccessorPools(future, state, singles, future.graduationDate);
+      if (!pools.preferred.length && !pools.fallback.length) return false;
+    }
+    return true;
+  };
+
+  const search = (graduateIndex, state) => {
+    if (graduateIndex >= graduates.length) return state;
+    const key = stateKey(graduateIndex, state);
+    if (failedStates.has(key)) return null;
+
+    const sourceId = graduates[graduateIndex].id;
+    const source = state.find((member) => member.id === sourceId);
+    if (!requiresInheritance(source, state, singles) || source.inheritanceSuccessorId) {
+      const result = search(graduateIndex + 1, state);
+      if (!result) failedStates.add(key);
+      return result;
+    }
+
+    const pools = getSuccessorPools(source, state, singles, source.graduationDate);
+    const activePool = pools.preferred.length ? pools.preferred : pools.fallback;
+    const candidates = seededCandidateOrder(activePool, seed, source.id);
+    if (!candidates.length) return null;
+
+    for (const candidate of candidates) {
+      const nextState = assignEdge(state, source.id, candidate.id);
+      if (!futureStillPossible(graduateIndex + 1, nextState)) continue;
+      const result = search(
+        graduateIndex + 1,
+        nextState,
+      );
+      if (result) return result;
+    }
+    failedStates.add(key);
+    return null;
+  };
+
+  const complete = search(0, initial);
+  if (complete) return complete;
+
+  return graduates.reduce((state, graduate) => {
+    const source = state.find((member) => member.id === graduate.id);
+    if (!requiresInheritance(source, state, singles) || source.inheritanceSuccessorId) {
+      return state;
+    }
+    const pools = getSuccessorPools(source, state, singles, source.graduationDate);
+    const activePool = pools.preferred.length ? pools.preferred : pools.fallback;
+    const [successor] = seededCandidateOrder(activePool, seed, source.id);
+    return assignEdge(state, source.id, successor?.id || "", !successor);
+  }, initial);
+}

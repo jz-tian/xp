@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 
 import {
   applyGraduationInheritance,
+  backfillInheritance,
   buildInheritanceChain,
+  createSeededRandom,
   findInheritancePredecessor,
   getElectionDates,
   getEligibilityAt,
@@ -208,4 +210,42 @@ test("manual validation rejects duplicate incoming links and invalid generations
 
   assert.match(validateInheritanceLink("source", "older", members, singles), /期数/);
   assert.match(validateInheritanceLink("source", "target", members, singles), /已经继承/);
+});
+
+test("seeded backfill is stable and extends through inherited graduates", () => {
+  const historySingles = [
+    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+    { id: "h4", release: "2026-03-15", singleKind: "常规单曲" },
+  ];
+  const historyMembers = [
+    member("root", "1期", {
+      isActive: false,
+      graduationDate: "2026-03-02",
+      selectionHistory: {
+        h1: "A面选拔（第3排）",
+        h2: "A面选拔（第3排）",
+        h3: "A面选拔（第3排）",
+        h4: "落选",
+      },
+    }),
+    member("middle", "2期", {
+      isActive: false,
+      graduationDate: "2026-04-01",
+      selectionHistory: { h1: "落选", h2: "落选", h3: "落选", h4: "落选" },
+    }),
+    member("tail", "3期", {
+      selectionHistory: { h1: "加入前", h2: "加入前", h3: "加入前", h4: "落选" },
+    }),
+  ];
+
+  const first = backfillInheritance(historyMembers, historySingles, { seed: "test-seed" });
+  const second = backfillInheritance(historyMembers, historySingles, { seed: "test-seed" });
+
+  assert.deepEqual(first, second);
+  assert.equal(first.find((candidate) => candidate.id === "root").inheritanceSuccessorId, "middle");
+  assert.equal(first.find((candidate) => candidate.id === "middle").inheritanceSuccessorId, "tail");
+  const random = createSeededRandom("test-seed");
+  assert.equal(typeof random(), "number");
 });
