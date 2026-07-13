@@ -66,33 +66,60 @@ test("maps the nth general-election single to the nth edition", () => {
 });
 
 test("computes eligibility only from results available at the requested date", () => {
-  const member = {
+  const eligibilitySingles = [
+    { id: "ge1", release: "2026-01-10", singleKind: "总选单曲" },
+    { id: "ge2", release: "2026-02-10", singleKind: "总选单曲" },
+    { id: "ge3", release: "2026-03-10", singleKind: "总选单曲" },
+    { id: "regular1", release: "2026-01-01", singleKind: "常规单曲" },
+    { id: "regular2", release: "2026-02-01", singleKind: "常规单曲" },
+    { id: "regular3", release: "2026-03-01", singleKind: "常规单曲" },
+  ];
+  const rankedMember = {
     electionRanks: [
-      { edition: "第1届", rank: "三位" },
-      { edition: "第2届", rank: "第六位" },
+      { edition: "第1届", rank: "第十二位" },
+      { edition: "第2届", rank: "第八位" },
+      { edition: "第3届", rank: "第十一位" },
     ],
     selectionHistory: {
-      s1: "A面选拔（第3排）",
-      s2: "A面选拔（第3排）",
-      s3: "A面选拔（第3排）",
+      regular1: "落选",
+      regular2: "落选",
+      regular3: "落选",
     },
   };
 
-  assert.deepEqual(getEligibilityAt(member, singles, "2026-01-05"), {
-    eligible: false,
+  assert.equal(
+    getEligibilityAt(rankedMember, eligibilitySingles, "2026-03-09").eligible,
+    false,
+  );
+  assert.deepEqual(getEligibilityAt(rankedMember, eligibilitySingles, "2026-03-10"), {
+    eligible: true,
     topThreeCount: 0,
     topSevenCount: 0,
-    selectionCount: 1,
+    topTwelveCount: 3,
   });
-  assert.deepEqual(getEligibilityAt(member, singles, "2026-01-10"), {
-    eligible: true,
-    topThreeCount: 1,
-    topSevenCount: 1,
-    selectionCount: 1,
-  });
+});
+
+test("ordinary A-side selections do not qualify for inheritance", () => {
+  const eligibilitySingles = [
+    { id: "ge1", release: "2026-01-10", singleKind: "总选单曲" },
+    { id: "ge2", release: "2026-02-10", singleKind: "总选单曲" },
+    { id: "ge3", release: "2026-03-10", singleKind: "总选单曲" },
+    { id: "regular1", release: "2026-01-01", singleKind: "常规单曲" },
+    { id: "regular2", release: "2026-02-01", singleKind: "常规单曲" },
+    { id: "regular3", release: "2026-03-01", singleKind: "常规单曲" },
+  ];
+  const ordinaryAsideMember = {
+    electionRanks: [],
+    selectionHistory: {
+      regular1: "A面选拔（第3排）",
+      regular2: "A面选拔（第3排）",
+      regular3: "A面选拔（第3排）",
+    },
+  };
+
   assert.equal(
-    getEligibilityAt({ ...member, electionRanks: [] }, singles, "2026-03-01").eligible,
-    true,
+    getEligibilityAt(ordinaryAsideMember, eligibilitySingles, "2026-03-10").eligible,
+    false,
   );
 });
 

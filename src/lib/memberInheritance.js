@@ -84,24 +84,15 @@ export function getEligibilityAt(member, singles = [], atDate = "") {
     })
     .map((entry) => parseRankNumber(entry?.rank));
 
-  const singlesById = new Map(singles.map((single) => [single.id, single]));
-  const selectionCount = Object.entries(member?.selectionHistory ?? {})
-    .filter(([singleId, value]) => {
-      const singleDate = getSingleDate(singlesById.get(singleId));
-      return singleDate
-        && singleDate <= atDate
-        && selectionValue(value).includes("A面选拔");
-    })
-    .length;
-
   const topThreeCount = ranks.filter((rank) => rank <= 3).length;
   const topSevenCount = ranks.filter((rank) => rank <= 7).length;
+  const topTwelveCount = ranks.filter((rank) => rank <= 12).length;
 
   return {
-    eligible: topThreeCount >= 1 || topSevenCount >= 2 || selectionCount >= 3,
+    eligible: topThreeCount >= 1 || topSevenCount >= 2 || topTwelveCount >= 3,
     topThreeCount,
     topSevenCount,
-    selectionCount,
+    topTwelveCount,
   };
 }
 
