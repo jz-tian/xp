@@ -5,6 +5,9 @@ server/node_modules/
 # build output
 dist/
 
+# isolated feature workspaces
+.worktrees/
+
 # env
 .env
 .env.*
