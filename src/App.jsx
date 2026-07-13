@@ -66,8 +66,10 @@ import { getAdminActivityDate, pickLatestMemberForNews, stampAdminEntity } from 
 import { getElectionPhotoUrl } from "./lib/electionPhotos.js";
 import { getLegendarySeven } from "./lib/legendarySeven.js";
 import {
+  applyGraduationInheritance,
   buildInheritanceChain,
   findInheritancePredecessor,
+  validateInheritanceLink,
 } from "./lib/memberInheritance.js";
 import NewsletterPreviewPage from "./components/NewsletterPreview.jsx";
 
@@ -626,6 +628,8 @@ function normalizeMemberDraft(member) {
     isActive: member?.isActive ?? true,
     graduationDate: member?.graduationDate || "",
     graduationSongTitle: member?.graduationSongTitle || "",
+    inheritanceSuccessorId: member?.inheritanceSuccessorId || "",
+    inheritancePending: member?.inheritancePending === true,
     electionRanks: Array.isArray(member?.electionRanks) ? member.electionRanks : [],
     admireSenior: Array.isArray(member?.admireSenior) ? member.admireSenior : [],
     friends: Array.isArray(member?.friends) ? member.friends : [],
@@ -3225,6 +3229,24 @@ function MembersPage({ data, setData, admin }) {
         return;
       }
     }
+
+    const prospectiveMembers = data.members.some((member) => member.id === editing.id)
+      ? data.members.map((member) => member.id === editing.id ? { ...editing } : member)
+      : [...data.members, { ...editing }];
+    const inheritanceError = editing.inheritanceSuccessorId
+      ? validateInheritanceLink(
+          editing.id,
+          editing.inheritanceSuccessorId,
+          prospectiveMembers,
+          data.singles,
+        )
+      : null;
+    if (inheritanceError) {
+      // eslint-disable-next-line no-alert
+      alert(inheritanceError);
+      return;
+    }
+
     setData((prev) => {
       const exists = prev.members.some((x) => x.id === editing.id);
       const nextDraft = stampAdminEntity({
@@ -3236,15 +3258,17 @@ function MembersPage({ data, setData, admin }) {
       if (!nextDraft.favoriteSong && nextDraft.favoriteSongs.length > 0) {
         nextDraft.favoriteSong = nextDraft.favoriteSongs[0];
       }
-      const nextMembers = exists
-        ? prev.members.map((x) =>
-            x.id === editing.id ? nextDraft : x
-          )
-        : [...prev.members, nextDraft];
+      const previousMember = prev.members.find((member) => member.id === nextDraft.id) || null;
+      const assigned = applyGraduationInheritance({
+        members: prev.members,
+        singles: prev.singles,
+        previousMember,
+        nextMember: nextDraft,
+      });
 
       return withRecomputedSelections({
         ...prev,
-        members: nextMembers,
+        members: assigned.members,
       });
     });
     setEditorOpen(false);
@@ -3709,6 +3733,47 @@ function MembersPage({ data, setData, admin }) {
                     <Plus className="mr-2 h-4 w-4" />
                     新增一条
                   </Button>
+                </div>
+              </div>
+
+              <div className="border border-[#E0E0E0] bg-white">
+                <div className="px-4 py-3 border-b border-[#E0E0E0]">
+                  <div className="text-sm font-medium text-[#1C1C1C]">成员传承</div>
+                  <div className="text-xs text-[#6B6B6B] mt-0.5">毕业抽签只执行一次；传承自根据现有路线自动推导。</div>
+                </div>
+                <div className="grid gap-4 p-4 md:grid-cols-2">
+                  <div className="grid gap-2">
+                    <div className="text-sm font-medium">传承自（只读）</div>
+                    <div className="flex h-9 items-center border border-[#E0E0E0] bg-[#F7F7F7] px-3 text-sm text-[#6B6B6B]">
+                      {findInheritancePredecessor(editing.id, data.members)?.name || "—"}
+                    </div>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="text-sm font-medium">传承至</div>
+                    <select
+                      value={editing.inheritanceSuccessorId || ""}
+                      onChange={(event) => setEditing((previous) => ({
+                        ...previous,
+                        inheritanceSuccessorId: event.target.value,
+                        inheritancePending: false,
+                      }))}
+                      className="h-9 border border-[#E0E0E0] bg-white px-3 text-sm text-[#1C1C1C]"
+                    >
+                      <option value="">无 / 毕业时自动抽取</option>
+                      {data.members
+                        .filter((member) => member.id !== editing.id)
+                        .map((member) => (
+                          <option key={member.id} value={member.id}>
+                            {member.name} · {member.generation || "未设期别"}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  {editing.inheritancePending ? (
+                    <div className="border-l-2 border-amber-400 bg-amber-50 px-3 py-2 text-xs text-amber-900 md:col-span-2">
+                      传承待定：毕业当日没有符合条件的晚期在籍成员。
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
