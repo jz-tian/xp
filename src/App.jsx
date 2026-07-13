@@ -65,6 +65,10 @@ import { buildMemberCenterWeightBreakdown, formatSingleCenterSummary } from "./l
 import { getAdminActivityDate, pickLatestMemberForNews, stampAdminEntity } from "./lib/homeFeed.js";
 import { getElectionPhotoUrl } from "./lib/electionPhotos.js";
 import { getLegendarySeven } from "./lib/legendarySeven.js";
+import {
+  buildInheritanceChain,
+  findInheritancePredecessor,
+} from "./lib/memberInheritance.js";
 import NewsletterPreviewPage from "./components/NewsletterPreview.jsx";
 
 // ---------- Utils ----------
@@ -2627,11 +2631,77 @@ function ScrollDialogContent({ className = "", children, ...props }) {
   );
 }
 
+function LegacyLineageDialog({ open, onOpenChange, chain, currentMemberId }) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <ScrollDialogContent className="max-w-3xl">
+        <div className="px-1 py-2 sm:px-3 sm:py-4">
+          <DialogHeader className="text-left">
+            <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">Legacy</div>
+            <DialogTitle className="mt-3 text-2xl font-light tracking-[-0.03em] text-[#19160f] sm:text-3xl">
+              传承谱系
+            </DialogTitle>
+            <DialogDescription className="mt-2 text-xs leading-5 text-[#7c7464]">
+              从最初的传承者，到这条路线目前抵达的成员。
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-8 flex flex-col items-stretch md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-y-5">
+            {chain.map((lineageMember, index) => {
+              const isCurrent = lineageMember.id === currentMemberId;
+              return (
+                <React.Fragment key={lineageMember.id}>
+                  <div
+                    className={
+                      "relative min-w-0 border px-4 py-4 text-left transition-colors md:w-[168px] " +
+                      (isCurrent
+                        ? "border-[#b99438] bg-[#fbf5e5] text-[#19160f]"
+                        : "border-[#e9dfc5] bg-white/70 text-[#4c4537]")
+                    }
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-[9px] tabular-nums tracking-[0.2em] text-[#b99438]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {isCurrent ? (
+                        <span className="text-[9px] uppercase tracking-[0.16em] text-[#8a681d]">Viewing</span>
+                      ) : null}
+                    </div>
+                    <div className="mt-4 break-words text-[15px] font-medium tracking-[0.06em]">
+                      {lineageMember.name}
+                    </div>
+                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">
+                      {lineageMember.generation || "—"}
+                    </div>
+                  </div>
+
+                  {index < chain.length - 1 ? (
+                    <div className="flex h-8 items-center justify-center text-[#b99438] md:h-auto md:w-10" aria-hidden="true">
+                      <ChevronDown className="h-4 w-4 md:hidden" />
+                      <ChevronRight className="hidden h-4 w-4 md:block" />
+                    </div>
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+      </ScrollDialogContent>
+    </Dialog>
+  );
+}
+
 // ---- 成员详情内容（MembersPage 和 ElectionPage 共用）----
 function MemberDetailContent({ member, data }) {
   if (!member) return null;
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [lineageOpen, setLineageOpen] = useState(false);
   const [showAllPreJoinSingles, setShowAllPreJoinSingles] = useState(false);
+  const inheritancePredecessor = findInheritancePredecessor(member.id, data?.members || []);
+  const inheritanceSuccessor = (data?.members || []).find(
+    (candidate) => candidate.id === member.inheritanceSuccessorId,
+  ) || null;
+  const inheritanceChain = buildInheritanceChain(member.id, data?.members || []);
   const officialPhotos = Array.isArray(member.officialPhotos) ? member.officialPhotos : [];
   const hasMultiplePhotos = officialPhotos.length > 1;
   const generationNum = parseInt(String(member?.generation || "").match(/\d+/)?.[0], 10);
@@ -2729,6 +2799,13 @@ function MemberDetailContent({ member, data }) {
         displayAvatar={member.avatar}
       />
 
+      <LegacyLineageDialog
+        open={lineageOpen}
+        onOpenChange={setLineageOpen}
+        chain={inheritanceChain}
+        currentMemberId={member.id}
+      />
+
       <div className="mx-auto grid w-full max-w-[820px] gap-7 py-2 md:gap-8 md:py-3">
       {/* PROFILE */}
       {secondaryProfileRows.length ? <div>
@@ -2748,6 +2825,42 @@ function MemberDetailContent({ member, data }) {
           ))}
         </div>
       </div> : null}
+
+      {/* LEGACY */}
+      {inheritancePredecessor || inheritanceSuccessor ? (
+        <div>
+          <div className="mb-2.5 flex items-center gap-3">
+            <div className="h-px w-5 bg-[#1C1C1C]" />
+            <div className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#1C1C1C]">Legacy / 传承</div>
+          </div>
+          <div>
+            {inheritancePredecessor ? (
+              <div className="flex items-baseline gap-5 border-b border-[#E0E0E0] py-2.5 last:border-b-0">
+                <span className="w-14 shrink-0 text-[10px] uppercase tracking-[0.12em] text-[#6B6B6B]">传承自</span>
+                <button
+                  type="button"
+                  onClick={() => setLineageOpen(true)}
+                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#19160f] underline decoration-[#c9ab62] underline-offset-4 transition-colors hover:text-[#8a681d]"
+                >
+                  {inheritancePredecessor.name}
+                </button>
+              </div>
+            ) : null}
+            {inheritanceSuccessor ? (
+              <div className="flex items-baseline gap-5 border-b border-[#E0E0E0] py-2.5 last:border-b-0">
+                <span className="w-14 shrink-0 text-[10px] uppercase tracking-[0.12em] text-[#6B6B6B]">传承至</span>
+                <button
+                  type="button"
+                  onClick={() => setLineageOpen(true)}
+                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#19160f] underline decoration-[#c9ab62] underline-offset-4 transition-colors hover:text-[#8a681d]"
+                >
+                  {inheritanceSuccessor.name}
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
 
       {/* ELECTION */}
       {(member.electionRanks || []).length ? (
