@@ -69,7 +69,8 @@ import {
   applyGraduationInheritance,
   buildInheritanceChain,
   findInheritancePredecessor,
-  validateInheritanceLink,
+  getInheritanceDeletionError,
+  validateInheritanceState,
 } from "./lib/memberInheritance.js";
 import NewsletterPreviewPage from "./components/NewsletterPreview.jsx";
 
@@ -2638,7 +2639,7 @@ function ScrollDialogContent({ className = "", children, ...props }) {
 function LegacyLineageDialog({ open, onOpenChange, chain, currentMemberId }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <ScrollDialogContent className="max-w-3xl">
+      <ScrollDialogContent className="max-w-5xl">
         <div className="px-1 py-2 sm:px-3 sm:py-4">
           <DialogHeader className="text-left">
             <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">Legacy</div>
@@ -3230,22 +3231,23 @@ function MembersPage({ data, setData, admin }) {
       }
     }
 
+    const previousMemberForValidation = data.members.find((member) => member.id === editing.id) || null;
     const prospectiveMembers = data.members.some((member) => member.id === editing.id)
       ? data.members.map((member) => member.id === editing.id ? { ...editing } : member)
       : [...data.members, { ...editing }];
-    const inheritanceError = editing.inheritanceSuccessorId
-      ? validateInheritanceLink(
-          editing.id,
-          editing.inheritanceSuccessorId,
-          prospectiveMembers,
-          data.singles,
-        )
-      : null;
+    const inheritanceError = validateInheritanceState(
+      previousMemberForValidation,
+      editing,
+      prospectiveMembers,
+      data.singles,
+    );
     if (inheritanceError) {
-      // eslint-disable-next-line no-alert
       alert(inheritanceError);
       return;
     }
+    const inheritanceDraw = previousMemberForValidation?.isActive === true && editing.isActive === false
+      ? Math.random()
+      : null;
 
     setData((prev) => {
       const exists = prev.members.some((x) => x.id === editing.id);
@@ -3264,6 +3266,7 @@ function MembersPage({ data, setData, admin }) {
         singles: prev.singles,
         previousMember,
         nextMember: nextDraft,
+        rng: inheritanceDraw === null ? Math.random : () => inheritanceDraw,
       });
 
       return withRecomputedSelections({
@@ -3276,6 +3279,11 @@ function MembersPage({ data, setData, admin }) {
 
 
   const deleteMember = (id) => {
+    const inheritanceError = getInheritanceDeletionError(id, data.members);
+    if (inheritanceError) {
+      alert(inheritanceError);
+      return;
+    }
     setData((prev) => {
       const nextMembers = prev.members.filter((m) => m.id !== id);
       // 同时把单曲站位里引用的成员清掉

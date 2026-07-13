@@ -37,10 +37,16 @@ test("member drafts preserve inheritance state for admin editing", () => {
 });
 
 test("member save validates manual links and assigns once on graduation", () => {
-  assert.match(source, /validateInheritanceLink\s*\(/);
+  assert.match(source, /validateInheritanceState\s*\(/);
   assert.match(source, /applyGraduationInheritance\s*\(\s*\{/);
   assert.match(source, /previousMember/);
   assert.match(source, /nextMember:\s*nextDraft/);
+  assert.match(source, /inheritanceDraw/);
+  assert.match(source, /rng:\s*inheritanceDraw/);
+});
+
+test("member deletion blocks dangling inheritance references", () => {
+  assert.match(source, /getInheritanceDeletionError\s*\(id,\s*data\.members\)/);
 });
 
 test("the admin editor exposes predecessor, successor, and pending state", () => {

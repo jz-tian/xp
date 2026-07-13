@@ -9,11 +9,13 @@ import {
   findInheritancePredecessor,
   getElectionDates,
   getEligibilityAt,
+  getInheritanceDeletionError,
   getJoinDate,
   getSuccessorPools,
   parseGeneration,
   parseRankNumber,
   validateInheritanceLink,
+  validateInheritanceState,
 } from "./memberInheritance.js";
 
 const singles = [
@@ -212,6 +214,58 @@ test("manual validation rejects duplicate incoming links and invalid generations
   assert.match(validateInheritanceLink("source", "target", members, singles), /已经继承/);
 });
 
+test("manual validation rejects duplicate incoming links regardless of member order", () => {
+  const source = member("source", "2期", {
+    isActive: false,
+    graduationDate: "2026-02-15",
+    inheritanceSuccessorId: "target",
+  });
+  const target = member("target", "3期");
+  const existingPredecessor = member("existing", "1期", {
+    isActive: false,
+    graduationDate: "2026-02-01",
+    inheritanceSuccessorId: "target",
+  });
+
+  assert.match(
+    validateInheritanceLink("source", "target", [source, target, existingPredecessor], singles),
+    /已经继承/,
+  );
+});
+
+test("manual state validation preserves required historical edges and pending states", () => {
+  const previous = member("source", "1期", {
+    isActive: false,
+    graduationDate: "2026-03-01",
+    electionRanks: [{ edition: "第1届", rank: "第一位" }],
+    inheritanceSuccessorId: "target",
+  });
+  const target = member("target", "2期");
+  const cleared = { ...previous, inheritanceSuccessorId: "", inheritancePending: false };
+
+  assert.match(
+    validateInheritanceState(previous, cleared, [cleared, target], singles),
+    /不能清空/,
+  );
+
+  const pending = member("pending", "9期", {
+    isActive: false,
+    graduationDate: "2026-03-01",
+    electionRanks: [{ edition: "第1届", rank: "第一位" }],
+    inheritancePending: true,
+  });
+  assert.equal(validateInheritanceState(pending, pending, [pending], singles), null);
+});
+
+test("member deletion is blocked while either side participates in a lineage", () => {
+  const source = member("source", "1期", { inheritanceSuccessorId: "target" });
+  const target = member("target", "2期");
+
+  assert.match(getInheritanceDeletionError("source", [source, target]), /传承路线/);
+  assert.match(getInheritanceDeletionError("target", [source, target]), /传承路线/);
+  assert.equal(getInheritanceDeletionError("other", [...[source, target], member("other", "3期")]), null);
+});
+
 test("seeded backfill is stable and extends through inherited graduates", () => {
   const historySingles = [
     { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
@@ -248,4 +302,44 @@ test("seeded backfill is stable and extends through inherited graduates", () => 
   assert.equal(first.find((candidate) => candidate.id === "middle").inheritanceSuccessorId, "tail");
   const random = createSeededRandom("test-seed");
   assert.equal(typeof random(), "number");
+});
+
+test("an unavoidable pending member does not disable backtracking for other lineages", () => {
+  const historySingles = [
+    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+  ];
+  const eligibleHistory = {
+    h1: "A面选拔（第3排）",
+    h2: "A面选拔（第3排）",
+    h3: "A面选拔（第3排）",
+  };
+  const historyMembers = [
+    member("existing-root", "1期", { inheritanceSuccessorId: "middle" }),
+    member("forced-root", "1期", { inheritanceSuccessorId: "forced-pending" }),
+    member("source", "1期", {
+      isActive: false,
+      graduationDate: "2026-04-01",
+      selectionHistory: eligibleHistory,
+    }),
+    member("middle", "2期", {
+      isActive: false,
+      graduationDate: "2026-04-02",
+      selectionHistory: { h1: "落选" },
+    }),
+    member("alternate", "2期", { selectionHistory: { h1: "落选" } }),
+    member("tail", "3期", { selectionHistory: { h1: "落选" } }),
+    member("forced-pending", "4期", {
+      isActive: false,
+      graduationDate: "2026-04-03",
+      selectionHistory: { h1: "落选" },
+    }),
+  ];
+
+  const result = backfillInheritance(historyMembers, historySingles, { seed: "backtrack-with-pending" });
+
+  assert.equal(result.find((candidate) => candidate.id === "source").inheritanceSuccessorId, "alternate");
+  assert.equal(result.find((candidate) => candidate.id === "middle").inheritanceSuccessorId, "tail");
+  assert.equal(result.find((candidate) => candidate.id === "forced-pending").inheritancePending, true);
 });

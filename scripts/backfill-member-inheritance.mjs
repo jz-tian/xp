@@ -38,6 +38,7 @@ const matchesCurrent = JSON.stringify(projection(db.members)) === JSON.stringify
 
 if (shouldCheck) {
   console.log(matchesCurrent ? "Inheritance data is current." : "Inheritance data needs backfill.");
+  if (!matchesCurrent) process.exitCode = 1;
 }
 
 if (shouldWrite) {
