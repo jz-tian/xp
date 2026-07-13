@@ -2090,8 +2090,7 @@
         "s_arraomx5": "A面选拔（第1排 护法）",
         "s_phyou9mt": "A面选拔（第1排）"
       },
-      "inheritanceSuccessorId": "",
-      "inheritancePending": true
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_8gen_7_5521",
@@ -2213,7 +2212,7 @@
       },
       "createdAt": "2026-07-10T09:18:41.067Z",
       "updatedAt": "2026-07-10T09:18:41.067Z",
-      "inheritanceSuccessorId": "m_10gen_3"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_8gen_8_6902",
@@ -2325,7 +2324,7 @@
         "s_yjn7shxt": "落选",
         "s_abydc9kz": "落选"
       },
-      "inheritanceSuccessorId": "m_9gen_1"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_7gen_1_3104",
@@ -2937,7 +2936,7 @@
         "s_yxynwkos": "落选",
         "s_9l4bc6jf": "落选"
       },
-      "inheritanceSuccessorId": "m_8gen_7_5521"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_7gen_6_7205",
@@ -3710,7 +3709,7 @@
       },
       "createdAt": "2026-07-02T09:11:40.900Z",
       "updatedAt": "2026-07-02T09:11:40.900Z",
-      "inheritanceSuccessorId": "m_10gen_1"
+      "inheritanceSuccessorId": "m_9gen_2"
     },
     {
       "id": "m_6gen_5_7713",
@@ -4043,7 +4042,7 @@
       },
       "createdAt": "2026-07-10T09:17:36.607Z",
       "updatedAt": "2026-07-10T09:17:36.607Z",
-      "inheritanceSuccessorId": "m_10gen_5"
+      "inheritanceSuccessorId": "m_9gen_3"
     },
     {
       "id": "m_5gen_2_7259",
@@ -4476,7 +4475,7 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "落选"
       },
-      "inheritanceSuccessorId": "m_8gen_8_6902"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_5gen_6_2454",
@@ -4752,7 +4751,7 @@
         "m_reina"
       ],
       "favoritePokemon": 81,
-      "inheritanceSuccessorId": "m_7gen_3_5910"
+      "inheritanceSuccessorId": "m_6gen_3_1550"
     },
     {
       "id": "m_pr2yyz25",
@@ -5048,7 +5047,7 @@
         "s_5n7jsbhe": "A面选拔（第3排）",
         "s_yjn7shxt": "落选"
       },
-      "inheritanceSuccessorId": "m_9gen_6"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_mdv7k6ml",
@@ -5407,7 +5406,7 @@
         "s_arraomx5": "落选",
         "s_phyou9mt": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": "m_7gen_5_1182"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_ltlzffea",
@@ -5505,7 +5504,7 @@
         "s_15hm6il2": "落选"
       },
       "favoritePokemon": 6,
-      "inheritanceSuccessorId": "m_6gen_2_9374"
+      "inheritanceSuccessorId": "m_7gen_1_3104"
     },
     {
       "id": "m_gbojk371",
@@ -5858,7 +5857,7 @@
         "m_5gen_6_2454"
       ],
       "favoritePokemon": 17,
-      "inheritanceSuccessorId": "m_7gen_2_4421"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_bm7qiehk",
@@ -6232,7 +6231,7 @@
       },
       "createdAt": "2026-06-25T09:04:22.767Z",
       "updatedAt": "2026-06-25T09:04:22.767Z",
-      "inheritanceSuccessorId": "m_9gen_3"
+      "inheritanceSuccessorId": "m_9gen_1"
     },
     {
       "id": "m_ff4lppj9",
@@ -6303,7 +6302,7 @@
         "m_blncyp2k"
       ],
       "favoritePokemon": 80,
-      "inheritanceSuccessorId": "m_6gen_3_1550"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_ys0s465i",
@@ -6423,7 +6422,7 @@
         "m_5gen_1_3632"
       ],
       "favoritePokemon": 64,
-      "inheritanceSuccessorId": "m_5gen_7_2141"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_akari",
@@ -6580,7 +6579,7 @@
         "m_c16gtwds"
       ],
       "favoritePokemon": 138,
-      "inheritanceSuccessorId": "m_5gen_4_8493"
+      "inheritanceSuccessorId": "m_umbw1ji3"
     },
     {
       "id": "m_rin",
@@ -6648,7 +6647,7 @@
         "m_ltlzffea"
       ],
       "favoritePokemon": 127,
-      "inheritanceSuccessorId": "m_5gen_3_7488"
+      "inheritanceSuccessorId": "m_ltlzffea"
     },
     {
       "id": "m_saki",
@@ -6720,7 +6719,7 @@
         "m_rjli97s6"
       ],
       "favoritePokemon": 9,
-      "inheritanceSuccessorId": "m_5gen_1_3632"
+      "inheritanceSuccessorId": "m_5gen_4_8493"
     },
     {
       "id": "m_mika",
@@ -6828,7 +6827,7 @@
         "s_5n7jsbhe": "A面选拔（第3排）",
         "s_yjn7shxt": "落选"
       },
-      "inheritanceSuccessorId": "m_9gen_5"
+      "inheritanceSuccessorId": ""
     },
     {
       "id": "m_mayu",
@@ -6906,7 +6905,7 @@
         "m_rjli97s6"
       ],
       "favoritePokemon": 92,
-      "inheritanceSuccessorId": "m_7gen_1_3104"
+      "inheritanceSuccessorId": "m_5gen_1_3632"
     },
     {
       "id": "m_nana",
@@ -7269,7 +7268,7 @@
         "s_yjn7shxt": "落选",
         "s_abydc9kz": "落选"
       },
-      "inheritanceSuccessorId": "m_9gen_2"
+      "inheritanceSuccessorId": ""
     }
   ],
   "singles": [
