@@ -391,81 +391,44 @@ export function backfillInheritance(
       })
       .map((graduate) => graduate.id),
   );
-  const failedStates = new Set();
-
-  const stateKey = (graduateIndex, state) => {
-    const usedSuccessors = state
-      .map((member) => member.inheritanceSuccessorId)
-      .filter(Boolean)
-      .sort()
-      .join(",");
-    return `${graduateIndex}|${usedSuccessors}`;
-  };
-
-  const futureStillPossible = (graduateIndex, state) => {
-    for (let index = graduateIndex; index < graduates.length; index += 1) {
-      const future = state.find((member) => member.id === graduates[index].id);
-      if (!requiresInheritance(future, state, singles) || future.inheritanceSuccessorId) continue;
-      const pools = getSuccessorPools(future, state, singles, future.graduationDate);
-      if (
-        !pools.preferred.length
-        && !pools.fallback.length
-        && !unavoidablePendingIds.has(future.id)
-      ) return false;
-    }
-    return true;
-  };
+  const minimumPendingIds = new Set([
+    ...unavoidablePendingIds,
+    ...initial.filter((member) => member.inheritancePending).map((member) => member.id),
+  ]);
+  const minimumPendingCount = minimumPendingIds.size;
+  const countPending = (state) => state.filter((member) => member.inheritancePending).length;
 
   const search = (graduateIndex, state) => {
-    if (graduateIndex >= graduates.length) return state;
-    const key = stateKey(graduateIndex, state);
-    if (failedStates.has(key)) return null;
+    if (graduateIndex >= graduates.length) {
+      return { state, pendingCount: countPending(state) };
+    }
 
     const sourceId = graduates[graduateIndex].id;
     const source = state.find((member) => member.id === sourceId);
     if (!requiresInheritance(source, state, singles) || source.inheritanceSuccessorId) {
-      const result = search(graduateIndex + 1, state);
-      if (!result) failedStates.add(key);
-      return result;
+      return search(graduateIndex + 1, state);
     }
 
     const pools = getSuccessorPools(source, state, singles, source.graduationDate);
     const activePool = pools.preferred.length ? pools.preferred : pools.fallback;
     const candidates = seededCandidateOrder(activePool, seed, source.id);
     if (!candidates.length) {
-      if (!unavoidablePendingIds.has(source.id)) return null;
-      const result = search(
+      return search(
         graduateIndex + 1,
         assignEdge(state, source.id, "", true),
       );
-      if (!result) failedStates.add(key);
-      return result;
     }
 
+    let best = null;
     for (const candidate of candidates) {
       const nextState = assignEdge(state, source.id, candidate.id);
-      if (!futureStillPossible(graduateIndex + 1, nextState)) continue;
-      const result = search(
-        graduateIndex + 1,
-        nextState,
-      );
-      if (result) return result;
+      const result = search(graduateIndex + 1, nextState);
+      if (!best || result.pendingCount < best.pendingCount) best = result;
+      if (best.pendingCount === minimumPendingCount) break;
     }
-    failedStates.add(key);
-    return null;
+    return best;
   };
 
   const complete = search(0, initial);
-  if (complete) return complete;
-
-  return graduates.reduce((state, graduate) => {
-    const source = state.find((member) => member.id === graduate.id);
-    if (!requiresInheritance(source, state, singles) || source.inheritanceSuccessorId) {
-      return state;
-    }
-    const pools = getSuccessorPools(source, state, singles, source.graduationDate);
-    const activePool = pools.preferred.length ? pools.preferred : pools.fallback;
-    const [successor] = seededCandidateOrder(activePool, seed, source.id);
-    return assignEdge(state, source.id, successor?.id || "", !successor);
-  }, initial);
+  return complete?.state ?? initial;
 }

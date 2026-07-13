@@ -343,3 +343,91 @@ test("an unavoidable pending member does not disable backtracking for other line
   assert.equal(result.find((candidate) => candidate.id === "middle").inheritanceSuccessorId, "tail");
   assert.equal(result.find((candidate) => candidate.id === "forced-pending").inheritancePending, true);
 });
+
+test("backfill avoids dynamically creating a terminal inherited member when a complete chain exists", () => {
+  const historySingles = [
+    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+    { id: "h4", release: "2026-04-03", singleKind: "常规单曲" },
+  ];
+  const result = backfillInheritance([
+    member("source", "1期", {
+      isActive: false,
+      graduationDate: "2026-04-01",
+      selectionHistory: {
+        h1: "A面选拔（第3排）",
+        h2: "A面选拔（第3排）",
+        h3: "A面选拔（第3排）",
+        h4: "落选",
+      },
+    }),
+    member("dead-end", "2期", {
+      isActive: false,
+      graduationDate: "2026-04-02",
+      selectionHistory: { h1: "落选", h2: "落选", h3: "落选", h4: "加入前" },
+    }),
+    member("safe", "2期", {
+      isActive: false,
+      graduationDate: "2026-04-04",
+      selectionHistory: { h1: "落选", h2: "落选", h3: "落选", h4: "落选" },
+    }),
+    member("tail", "3期", {
+      selectionHistory: { h1: "加入前", h2: "加入前", h3: "加入前", h4: "落选" },
+    }),
+  ], historySingles, { seed: "dynamic-terminal" });
+
+  assert.equal(result.find((candidate) => candidate.id === "source").inheritanceSuccessorId, "safe");
+  assert.equal(result.find((candidate) => candidate.id === "safe").inheritanceSuccessorId, "tail");
+  assert.equal(result.some((candidate) => candidate.inheritancePending), false);
+});
+
+test("backfill minimizes pending lines when one dynamically terminal line is unavoidable", () => {
+  const historySingles = [
+    { id: "h1", release: "2026-01-01" },
+    { id: "h2", release: "2026-01-02" },
+    { id: "h3", release: "2026-01-03" },
+    { id: "h4", release: "2026-02-15" },
+  ];
+  const eligibleHistory = {
+    h1: "A面选拔",
+    h2: "A面选拔",
+    h3: "A面选拔",
+  };
+  const historyMembers = [
+    member("dynamic-root", "4期", {
+      isActive: false,
+      graduationDate: "2026-01-10",
+      selectionHistory: eligibleHistory,
+    }),
+    member("dynamic-terminal", "5期", {
+      isActive: false,
+      graduationDate: "2026-01-20",
+      selectionHistory: { h1: "落选" },
+    }),
+    member("source", "1期", {
+      isActive: false,
+      graduationDate: "2026-02-01",
+      selectionHistory: eligibleHistory,
+    }),
+    member("future", "2期", {
+      isActive: false,
+      graduationDate: "2026-03-01",
+      selectionHistory: {
+        h1: "A面选拔",
+        h2: "A面选拔",
+        h3: "落选",
+        h4: "A面选拔",
+      },
+    }),
+    member("alternate", "3期", { selectionHistory: { h1: "落选" } }),
+  ];
+
+  const result = backfillInheritance(historyMembers, historySingles, { seed: "test" });
+
+  assert.equal(result.find((candidate) => candidate.id === "dynamic-root").inheritanceSuccessorId, "dynamic-terminal");
+  assert.equal(result.find((candidate) => candidate.id === "dynamic-terminal").inheritancePending, true);
+  assert.equal(result.find((candidate) => candidate.id === "source").inheritanceSuccessorId, "future");
+  assert.equal(result.find((candidate) => candidate.id === "future").inheritanceSuccessorId, "alternate");
+  assert.equal(result.filter((candidate) => candidate.inheritancePending).length, 1);
+});
