@@ -49,3 +49,12 @@ test("the admin editor exposes predecessor, successor, and pending state", () =>
   assert.match(source, /传承至/);
   assert.match(source, /传承待定/);
 });
+
+test("member detail hooks run before the null-member return", () => {
+  const start = source.indexOf("function MemberDetailContent");
+  const end = source.indexOf("function MembersPage", start);
+  const component = source.slice(start, end);
+
+  assert.ok(component.indexOf("useState") < component.indexOf("if (!member) return null"));
+  assert.ok(component.indexOf("useEffect") < component.indexOf("if (!member) return null"));
+});

@@ -2697,10 +2697,13 @@ function LegacyLineageDialog({ open, onOpenChange, chain, currentMemberId }) {
 
 // ---- 成员详情内容（MembersPage 和 ElectionPage 共用）----
 function MemberDetailContent({ member, data }) {
-  if (!member) return null;
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [lineageOpen, setLineageOpen] = useState(false);
   const [showAllPreJoinSingles, setShowAllPreJoinSingles] = useState(false);
+  useEffect(() => {
+    setShowAllPreJoinSingles(false);
+  }, [member?.id]);
+  if (!member) return null;
   const inheritancePredecessor = findInheritancePredecessor(member.id, data?.members || []);
   const inheritanceSuccessor = (data?.members || []).find(
     (candidate) => candidate.id === member.inheritanceSuccessorId,
@@ -2728,9 +2731,6 @@ function MemberDetailContent({ member, data }) {
       : []),
     ["口号", member.profile?.catchphrase],
   ].filter(([, v]) => v);
-  useEffect(() => {
-    setShowAllPreJoinSingles(false);
-  }, [member?.id]);
   return (
     <div className="grid gap-8">
 
