@@ -38,6 +38,12 @@ const member = (id, generation, overrides = {}) => ({
   ...overrides,
 });
 
+const threeTopTwelveRanks = [
+  { edition: "第1届", rank: "第十二位" },
+  { edition: "第2届", rank: "第十一位" },
+  { edition: "第3届", rank: "第十位" },
+];
+
 test("parses generations and Chinese or Arabic election ranks", () => {
   assert.equal(parseGeneration({ generation: "10期" }), 10);
   assert.equal(parseGeneration({ generation: "未设" }), Infinity);
@@ -295,19 +301,20 @@ test("member deletion is blocked while either side participates in a lineage", (
 
 test("seeded backfill is stable and extends through inherited graduates", () => {
   const historySingles = [
-    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
-    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
-    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+    { id: "h1", release: "2026-01-01", singleKind: "总选单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "总选单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "总选单曲" },
     { id: "h4", release: "2026-03-15", singleKind: "常规单曲" },
   ];
   const historyMembers = [
     member("root", "1期", {
       isActive: false,
       graduationDate: "2026-03-02",
+      electionRanks: threeTopTwelveRanks,
       selectionHistory: {
-        h1: "A面选拔（第3排）",
-        h2: "A面选拔（第3排）",
-        h3: "A面选拔（第3排）",
+        h1: "落选",
+        h2: "落选",
+        h3: "落选",
         h4: "落选",
       },
     }),
@@ -333,14 +340,14 @@ test("seeded backfill is stable and extends through inherited graduates", () => 
 
 test("an unavoidable pending member does not disable backtracking for other lineages", () => {
   const historySingles = [
-    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
-    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
-    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+    { id: "h1", release: "2026-01-01", singleKind: "总选单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "总选单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "总选单曲" },
   ];
-  const eligibleHistory = {
-    h1: "A面选拔（第3排）",
-    h2: "A面选拔（第3排）",
-    h3: "A面选拔（第3排）",
+  const joinedHistory = {
+    h1: "落选",
+    h2: "落选",
+    h3: "落选",
   };
   const historyMembers = [
     member("existing-root", "1期", { inheritanceSuccessorId: "middle" }),
@@ -348,7 +355,8 @@ test("an unavoidable pending member does not disable backtracking for other line
     member("source", "1期", {
       isActive: false,
       graduationDate: "2026-04-01",
-      selectionHistory: eligibleHistory,
+      electionRanks: threeTopTwelveRanks,
+      selectionHistory: joinedHistory,
     }),
     member("middle", "2期", {
       isActive: false,
@@ -373,19 +381,20 @@ test("an unavoidable pending member does not disable backtracking for other line
 
 test("backfill avoids dynamically creating a terminal inherited member when a complete chain exists", () => {
   const historySingles = [
-    { id: "h1", release: "2026-01-01", singleKind: "常规单曲" },
-    { id: "h2", release: "2026-02-01", singleKind: "常规单曲" },
-    { id: "h3", release: "2026-03-01", singleKind: "常规单曲" },
+    { id: "h1", release: "2026-01-01", singleKind: "总选单曲" },
+    { id: "h2", release: "2026-02-01", singleKind: "总选单曲" },
+    { id: "h3", release: "2026-03-01", singleKind: "总选单曲" },
     { id: "h4", release: "2026-04-03", singleKind: "常规单曲" },
   ];
   const result = backfillInheritance([
     member("source", "1期", {
       isActive: false,
       graduationDate: "2026-04-01",
+      electionRanks: threeTopTwelveRanks,
       selectionHistory: {
-        h1: "A面选拔（第3排）",
-        h2: "A面选拔（第3排）",
-        h3: "A面选拔（第3排）",
+        h1: "落选",
+        h2: "落选",
+        h3: "落选",
         h4: "落选",
       },
     }),
@@ -411,21 +420,22 @@ test("backfill avoids dynamically creating a terminal inherited member when a co
 
 test("backfill minimizes pending lines when one dynamically terminal line is unavoidable", () => {
   const historySingles = [
-    { id: "h1", release: "2026-01-01" },
-    { id: "h2", release: "2026-01-02" },
-    { id: "h3", release: "2026-01-03" },
-    { id: "h4", release: "2026-02-15" },
+    { id: "h1", release: "2026-01-01", singleKind: "总选单曲" },
+    { id: "h2", release: "2026-01-02", singleKind: "总选单曲" },
+    { id: "h3", release: "2026-01-03", singleKind: "总选单曲" },
+    { id: "h4", release: "2026-02-15", singleKind: "总选单曲" },
   ];
-  const eligibleHistory = {
-    h1: "A面选拔",
-    h2: "A面选拔",
-    h3: "A面选拔",
+  const joinedHistory = {
+    h1: "落选",
+    h2: "落选",
+    h3: "落选",
   };
   const historyMembers = [
     member("dynamic-root", "4期", {
       isActive: false,
       graduationDate: "2026-01-10",
-      selectionHistory: eligibleHistory,
+      electionRanks: threeTopTwelveRanks,
+      selectionHistory: joinedHistory,
     }),
     member("dynamic-terminal", "5期", {
       isActive: false,
@@ -435,16 +445,22 @@ test("backfill minimizes pending lines when one dynamically terminal line is una
     member("source", "1期", {
       isActive: false,
       graduationDate: "2026-02-01",
-      selectionHistory: eligibleHistory,
+      electionRanks: threeTopTwelveRanks,
+      selectionHistory: joinedHistory,
     }),
     member("future", "2期", {
       isActive: false,
       graduationDate: "2026-03-01",
+      electionRanks: [
+        { edition: "第1届", rank: "第十二位" },
+        { edition: "第2届", rank: "第十一位" },
+        { edition: "第4届", rank: "第十位" },
+      ],
       selectionHistory: {
-        h1: "A面选拔",
-        h2: "A面选拔",
+        h1: "落选",
+        h2: "落选",
         h3: "落选",
-        h4: "A面选拔",
+        h4: "落选",
       },
     }),
     member("alternate", "3期", { selectionHistory: { h1: "落选" } }),
