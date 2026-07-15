@@ -37,13 +37,13 @@ function PreviewIntro() {
     <section className="mx-auto max-w-6xl px-4 pb-7 pt-9 md:px-8">
       <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.38em] text-[#b99438]">XP mail design preview</div>
-          <h1 className="mt-3 text-4xl font-light tracking-normal text-[#19160f] md:text-6xl">
+          <div className="text-[10px] uppercase tracking-[0.38em] text-[#39aeea]">XP mail design preview</div>
+          <h1 className="mt-3 text-4xl font-light tracking-normal text-[#142235] md:text-6xl">
             XP NEWSLETTER
           </h1>
-          <div className="mt-5 h-px w-24 bg-[#19160f]" />
+          <div className="mt-5 h-px w-24 bg-[#142235]" />
         </div>
-        <div className="max-w-sm border-l border-[#d8c692] pl-5 text-xs leading-6 tracking-[0.08em] text-[#7c7464]">
+        <div className="max-w-sm border-l border-[#c7e6f8] pl-5 text-xs leading-6 tracking-[0.08em] text-[#687d91]">
           Desktop and mobile preview for the release mail and graduation mail.
         </div>
       </div>
@@ -83,7 +83,7 @@ function EmailShell({ subject, marker, children }) {
 }
 
 function StatPill({ icon, label, value }) {
-  const iconNode = React.createElement(icon, { className: "h-4 w-4 text-[#b99438]" });
+  const iconNode = React.createElement(icon, { className: "h-4 w-4 text-[#39aeea]" });
 
   return (
     <div className="newsletter-stat">

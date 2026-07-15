@@ -391,10 +391,10 @@ function PageIntro({ title, eyebrow }) {
     <section className="xp-page-band mb-4">
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4">
         <div>
-          <div className="xp-letter-title text-xl text-[#19160f] md:text-2xl">{title}</div>
-          <div className="mt-5 h-px w-6 bg-[#19160f]" />
+          <div className="xp-letter-title text-xl text-[#142235] md:text-2xl">{title}</div>
+          <div className="mt-5 h-px w-6 bg-[#142235]" />
           {eyebrow ? (
-            <div className="mt-4 text-[10px] uppercase tracking-[0.28em] text-[#9b8d69]">{eyebrow}</div>
+            <div className="mt-4 text-[10px] uppercase tracking-[0.28em] text-[#687d91]">{eyebrow}</div>
           ) : null}
         </div>
       </div>
@@ -405,10 +405,10 @@ function PageIntro({ title, eyebrow }) {
 function HomeSectionTitle({ title, subtitle, align = "left" }) {
   return (
     <div className={`mb-10 ${align === "center" ? "text-center" : ""}`}>
-      <div className="xp-letter-title text-sm text-[#19160f] md:text-base">{title}</div>
-      <div className={`mt-5 h-px w-5 bg-[#19160f] ${align === "center" ? "mx-auto" : ""}`} />
+      <div className="xp-letter-title text-sm text-[#142235] md:text-base">{title}</div>
+      <div className={`mt-5 h-px w-5 bg-[#142235] ${align === "center" ? "mx-auto" : ""}`} />
       {subtitle ? (
-        <div className="mt-4 text-[11px] uppercase tracking-[0.24em] text-[#9b8d69]">{subtitle}</div>
+        <div className="mt-4 text-[11px] uppercase tracking-[0.24em] text-[#687d91]">{subtitle}</div>
       ) : null}
     </div>
   );
@@ -1006,11 +1006,11 @@ function AppShell({ children, adminDock = null }) {
       {children}
       <footer className="mt-20 px-4 pb-12 pt-20">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="text-sm font-semibold tracking-[0.24em] text-[#19160f]">XP</div>
-          <div className="mt-4 text-[10px] uppercase tracking-[0.26em] text-[#9b8d69]">
+          <div className="text-sm font-semibold tracking-[0.24em] text-[#142235]">XP</div>
+          <div className="mt-4 text-[10px] uppercase tracking-[0.26em] text-[#687d91]">
             XP Produced by Gong & Yue
           </div>
-          <div className="mt-6 text-[10px] tracking-[0.18em] text-[#b3a47c]">© 2026 XP Official Website</div>
+          <div className="mt-6 text-[10px] tracking-[0.18em] text-[#8ca4b9]">© 2026 XP Official Website</div>
         </div>
       </footer>
       {adminDock}
@@ -1883,22 +1883,22 @@ function TopBar({ page, setPage, admin }) {
 
   return (
     <>
-    <header className="sticky top-0 z-40 bg-[#fffdf8]/94">
+    <header className="sticky top-0 z-40 bg-[#fbfdff]/94">
       <div className="relative mx-auto flex h-20 max-w-[1800px] items-center px-5 md:h-24 md:px-12">
         <button onClick={() => setPage("home")} className="group flex items-center gap-3 shrink-0">
-          <span className="xp-logo-text text-[#19160f]">XP</span>
-          <span className="hidden h-px w-10 bg-[#b99438] transition-all group-hover:w-16 sm:block" />
-          <span className="hidden text-[10px] uppercase tracking-[0.24em] text-[#9b8d69] sm:block">
+          <span className="xp-logo-text text-[#142235]">XP</span>
+          <span className="hidden h-px w-10 bg-[#39aeea] transition-all group-hover:w-16 sm:block" />
+          <span className="hidden text-[10px] uppercase tracking-[0.24em] text-[#687d91] sm:block">
             Produced by Gong & Yue
           </span>
           {admin && (
-            <span className="text-[9px] tracking-widest bg-[#19160f] text-white px-2 py-0.5">ADMIN</span>
+            <span className="text-[9px] tracking-widest bg-[#142235] text-white px-2 py-0.5">ADMIN</span>
           )}
         </button>
 
         <button
           aria-label="打开导航"
-          className="ml-auto grid h-11 w-11 place-items-center text-[#19160f] transition-colors hover:text-[#b99438]"
+          className="ml-auto grid h-11 w-11 place-items-center text-[#142235] transition-colors hover:text-[#39aeea]"
           onClick={() => setNavOpen(true)}
           title="打开导航"
         >
@@ -1951,20 +1951,20 @@ function AdminDock({ admin, setAdmin, onReset }) {
     <div className="hidden px-3 pb-3 sm:block">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="xp-glass flex h-10 w-10 items-center justify-center text-[#6d5317] opacity-35 transition hover:opacity-100" title={admin ? "管理员" : "设置"}>
+          <button className="xp-glass flex h-10 w-10 items-center justify-center text-[#087daf] opacity-35 transition hover:opacity-100" title={admin ? "管理员" : "设置"}>
             <Settings className="h-4 w-4" />
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" side="top" className="w-44 bg-white border border-[#e9dfc5] shadow-lg rounded-none p-0">
+        <DropdownMenuContent align="start" side="top" className="w-44 bg-white border border-[#d8eafa] shadow-lg rounded-none p-0">
           <DropdownMenuLabel className="text-[10px] tracking-wider text-[#A0A0A0] px-3 py-2">控制台</DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-[#e9dfc5] my-0" />
+          <DropdownMenuSeparator className="bg-[#d8eafa] my-0" />
           <DropdownMenuItem
             onSelect={(e) => { e.preventDefault(); setAdmin((v) => !v); }}
             className="text-xs px-3 py-2 cursor-pointer hover:bg-[#F0F0F0] focus:bg-[#F0F0F0] rounded-none"
           >
             {admin ? "退出管理员" : "进入管理员"}
           </DropdownMenuItem>
-          <DropdownMenuSeparator className="bg-[#e9dfc5] my-0" />
+          <DropdownMenuSeparator className="bg-[#d8eafa] my-0" />
           <DropdownMenuItem
             className="text-xs text-red-600 px-3 py-2 cursor-pointer hover:bg-red-50 focus:bg-red-50 rounded-none"
             onSelect={(e) => { e.preventDefault(); onReset(); }}
@@ -2000,33 +2000,33 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
   return (
     <div>
       <section className="overflow-hidden px-4 pb-10 md:px-10">
-        <div className="relative mx-auto max-w-[1800px] overflow-hidden border border-[#e9dfc5] bg-[#f8f4e8] md:min-h-[calc(100svh-8rem)]">
-          <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(255,253,248,.98)_0%,rgba(255,253,248,.90)_48%,rgba(185,148,56,.14)_48.2%,rgba(255,255,255,.70)_72%,rgba(255,253,248,.96)_72.2%)]" />
-          <div className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(117deg,rgba(25,22,15,.11)_0_1px,transparent_1px_7px)]" />
+        <div className="relative mx-auto max-w-[1800px] overflow-hidden border border-[#d8eafa] bg-[#f1f8fe] md:min-h-[calc(100svh-8rem)]">
+          <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(251,253,255,.98)_0%,rgba(251,253,255,.90)_48%,rgba(57,174,234,.14)_48.2%,rgba(255,255,255,.70)_72%,rgba(251,253,255,.96)_72.2%)]" />
+          <div className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(117deg,rgba(20,34,53,.08)_0_1px,transparent_1px_7px)]" />
 
           <div className="relative z-10 grid items-center gap-10 px-6 py-10 md:min-h-[calc(100svh-8rem)] md:grid-cols-[minmax(0,1.02fr)_minmax(320px,.72fr)] md:px-16 md:py-14 lg:px-24">
             <div className="max-w-4xl">
-              <div className="mb-7 text-[10px] font-medium uppercase tracking-[0.34em] text-[#82631f]">
+              <div className="mb-7 text-[10px] font-medium uppercase tracking-[0.34em] text-[#087daf]">
                 XP PRODUCED BY GONG & YUE
               </div>
-              <div className="mb-5 flex items-center gap-4 text-[11px] uppercase tracking-[0.24em] text-[#9b8d69]">
+              <div className="mb-5 flex items-center gap-4 text-[11px] uppercase tracking-[0.24em] text-[#687d91]">
                 <span>{prefix || "LATEST SINGLE"}</span>
-                <span className="h-px w-12 bg-[#b99438]" />
+                <span className="h-px w-12 bg-[#39aeea]" />
                 <span>{formatDateDots(latest?.release)}</span>
               </div>
-              <h1 className="xp-hero-title max-w-5xl text-[#19160f]">
+              <h1 className="xp-hero-title max-w-5xl text-[#142235]">
                 {name || "XP"}
               </h1>
               <div className="mt-9 flex flex-wrap gap-3">
                 <button
                   onClick={() => onGo("singles")}
-                  className="bg-[#19160f] px-7 py-3 text-xs uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#3a301d]"
+                  className="bg-[#142235] px-7 py-3 text-xs uppercase tracking-[0.2em] text-white transition-colors hover:bg-[#1f8fc4]"
                 >
                   Discography
                 </button>
                 <button
                   onClick={() => onGo("members")}
-                  className="border border-[#b99438] bg-white/78 px-7 py-3 text-xs uppercase tracking-[0.2em] text-[#6d5317] transition-colors hover:bg-white"
+                  className="border border-[#39aeea] bg-white/78 px-7 py-3 text-xs uppercase tracking-[0.2em] text-[#087daf] transition-colors hover:bg-white"
                 >
                   Profile
                 </button>
@@ -2039,7 +2039,7 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
                 {latest?.cover ? (
                   <MediaImage src={latest.cover} alt={latest.title} className="h-full w-full object-cover" eager />
                 ) : (
-                  <div className="grid h-full w-full place-items-center text-5xl font-light tracking-[-0.04em] text-[#b99438]">XP</div>
+                  <div className="grid h-full w-full place-items-center text-5xl font-light tracking-[-0.04em] text-[#39aeea]">XP</div>
                 )}
               </div>
             </div>
@@ -2055,12 +2055,12 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
               <button
                 key={`${item.type}-${idx}`}
                 onClick={() => onGo(item.page)}
-                className="group grid gap-3 border-b border-[#e9dfc5] py-4 text-left transition-colors hover:bg-white/45 sm:grid-cols-[92px_120px_1fr_auto] sm:items-center"
+                className="group grid gap-3 border-b border-[#d8eafa] py-4 text-left transition-colors hover:bg-white/45 sm:grid-cols-[92px_120px_1fr_auto] sm:items-center"
               >
-                <div className="text-[10px] uppercase tracking-[0.22em] text-[#b99438]">{item.type}</div>
-                <div className="text-[11px] tracking-[0.14em] text-[#9b8d69]">{formatDateDots(item.date)}</div>
-                <div className="min-w-0 text-sm tracking-[0.04em] text-[#19160f]">{item.text}</div>
-                <span className="hidden text-[10px] uppercase tracking-[0.18em] text-[#b99438] transition-transform group-hover:translate-x-1 sm:block">View</span>
+                <div className="text-[10px] uppercase tracking-[0.22em] text-[#39aeea]">{item.type}</div>
+                <div className="text-[11px] tracking-[0.14em] text-[#687d91]">{formatDateDots(item.date)}</div>
+                <div className="min-w-0 text-sm tracking-[0.04em] text-[#142235]">{item.text}</div>
+                <span className="hidden text-[10px] uppercase tracking-[0.18em] text-[#39aeea] transition-transform group-hover:translate-x-1 sm:block">View</span>
               </button>
             ))}
           </div>
@@ -2074,12 +2074,12 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
               return (
                 <button key={single.id} onClick={() => onGo("singles")} className="grid grid-cols-[72px_1fr] gap-4 text-left">
                   <div>
-                    <div className="text-2xl font-light leading-none text-[#19160f]">{formatDateDots(single.release).slice(5, 10)}</div>
-                    <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-[#9b8d69]">{meta.prefix}</div>
+                    <div className="text-2xl font-light leading-none text-[#142235]">{formatDateDots(single.release).slice(5, 10)}</div>
+                    <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-[#687d91]">{meta.prefix}</div>
                   </div>
-                  <div className="border-l border-[#e1d2a9] pl-4">
-                    <div className="text-[10px] uppercase tracking-[0.18em] text-[#b99438]">{single.singleKind || "Single"}</div>
-                    <div className="mt-1 text-sm tracking-[0.04em] text-[#19160f]">{meta.name || single.title}</div>
+                  <div className="border-l border-[#d8eafa] pl-4">
+                    <div className="text-[10px] uppercase tracking-[0.18em] text-[#39aeea]">{single.singleKind || "Single"}</div>
+                    <div className="mt-1 text-sm tracking-[0.04em] text-[#142235]">{meta.name || single.title}</div>
                   </div>
                 </button>
               );
@@ -2145,9 +2145,9 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
             const image = isPhoto ? item.url : item.cover;
             const title = isPhoto ? (item.caption || `XP Photo ${idx + 1}`) : splitSingleTitle(item.title).name;
             return (
-              <button key={item.id || item.title} onClick={() => onGo(isPhoto ? "gallery" : "singles")} className="group relative aspect-video overflow-hidden bg-[#f8f4e8]">
+              <button key={item.id || item.title} onClick={() => onGo(isPhoto ? "gallery" : "singles")} className="group relative aspect-video overflow-hidden bg-[#f1f8fe]">
                 <MediaImage src={image} alt={title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#19160f]/68 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#142235]/68 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-left">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-white/72">{isPhoto ? "Gallery" : "Single"}</div>
                   <div className="mt-1 line-clamp-2 text-sm text-white">{title}</div>
@@ -2628,10 +2628,10 @@ function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
     "left-1/2 top-[3vh] -translate-x-1/2 translate-y-0 " +
     "w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
-    "rounded-none border border-[#e9dfc5] bg-[#fffdf8] text-[#19160f] shadow-[0_32px_120px_rgba(83,63,18,.22)]";
+    "rounded-none border border-[#d8eafa] bg-[#fbfdff] text-[#142235] shadow-[0_32px_120px_rgba(43,121,169,.22)]";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
-      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-5 w-full box-border bg-[linear-gradient(118deg,transparent_0_62%,rgba(248,244,232,.72)_62.2%_76%,transparent_76.2%)]">{children}</div>
+      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-5 w-full box-border bg-[linear-gradient(118deg,transparent_0_62%,rgba(241,248,254,.72)_62.2%_76%,transparent_76.2%)]">{children}</div>
     </DialogContent>
   );
 }
@@ -2642,11 +2642,11 @@ function LegacyLineageDialog({ open, onOpenChange, chain, currentMemberId }) {
       <ScrollDialogContent className="max-w-5xl">
         <div className="px-1 py-2 sm:px-3 sm:py-4">
           <DialogHeader className="text-left">
-            <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">Legacy</div>
-            <DialogTitle className="mt-3 text-2xl font-light tracking-[-0.03em] text-[#19160f] sm:text-3xl">
+            <div className="text-[10px] uppercase tracking-[0.42em] text-[#39aeea]">Legacy</div>
+            <DialogTitle className="mt-3 text-2xl font-light tracking-[-0.03em] text-[#142235] sm:text-3xl">
               传承谱系
             </DialogTitle>
-            <DialogDescription className="mt-2 text-xs leading-5 text-[#7c7464]">
+            <DialogDescription className="mt-2 text-xs leading-5 text-[#687d91]">
               从最初的传承者，到这条路线目前抵达的成员。
             </DialogDescription>
           </DialogHeader>
@@ -2660,28 +2660,28 @@ function LegacyLineageDialog({ open, onOpenChange, chain, currentMemberId }) {
                     className={
                       "relative min-w-0 border px-4 py-4 text-left transition-colors md:w-[168px] " +
                       (isCurrent
-                        ? "border-[#b99438] bg-[#fbf5e5] text-[#19160f]"
-                        : "border-[#e9dfc5] bg-white/70 text-[#4c4537]")
+                        ? "border-[#39aeea] bg-[#e9f7ff] text-[#142235]"
+                        : "border-[#d8eafa] bg-white/70 text-[#42566c]")
                     }
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-[9px] tabular-nums tracking-[0.2em] text-[#b99438]">
+                      <span className="text-[9px] tabular-nums tracking-[0.2em] text-[#39aeea]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       {isCurrent ? (
-                        <span className="text-[9px] uppercase tracking-[0.16em] text-[#8a681d]">Viewing</span>
+                        <span className="text-[9px] uppercase tracking-[0.16em] text-[#087daf]">Viewing</span>
                       ) : null}
                     </div>
                     <div className="mt-4 break-words text-[15px] font-medium tracking-[0.06em]">
                       {lineageMember.name}
                     </div>
-                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">
+                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#687d91]">
                       {lineageMember.generation || "—"}
                     </div>
                   </div>
 
                   {index < chain.length - 1 ? (
-                    <div className="flex h-8 items-center justify-center text-[#b99438] md:h-auto md:w-10" aria-hidden="true">
+                    <div className="flex h-8 items-center justify-center text-[#39aeea] md:h-auto md:w-10" aria-hidden="true">
                       <ChevronDown className="h-4 w-4 md:hidden" />
                       <ChevronRight className="hidden h-4 w-4 md:block" />
                     </div>
@@ -2754,13 +2754,13 @@ function MemberDetailContent({ member, data }) {
               eager
             />
           </button>
-          <div className="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-[#9b8d69]">
+          <div className="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.2em] text-[#687d91]">
             <span>{officialPhotos.length ? `Photo Ver.${officialPhotos.length}` : "Official Photo"}</span>
             {hasMultiplePhotos && (
               <button
                 type="button"
                 onClick={() => setGalleryOpen(true)}
-                className="hover:text-[#19160f] transition-colors"
+                className="hover:text-[#142235] transition-colors"
               >
                 Gallery
               </button>
@@ -2769,13 +2769,13 @@ function MemberDetailContent({ member, data }) {
         </div>
 
         <div className="xp-detail-panel p-6 md:p-10">
-          <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">PROFILE</div>
-          <div className="mt-5 h-px w-6 bg-[#19160f]" />
-          <div className="mt-8 text-3xl font-light tracking-[-0.04em] text-[#19160f] md:text-5xl">
+          <div className="text-[10px] uppercase tracking-[0.42em] text-[#39aeea]">PROFILE</div>
+          <div className="mt-5 h-px w-6 bg-[#142235]" />
+          <div className="mt-8 text-3xl font-light tracking-[-0.04em] text-[#142235] md:text-5xl">
             {member.name}{!member.isActive ? " - 卒业" : ""}
           </div>
           {member.romaji ? (
-            <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-[#7c7464]">{member.romaji}</div>
+            <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-[#687d91]">{member.romaji}</div>
           ) : null}
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {member.generation ? (
@@ -2789,8 +2789,8 @@ function MemberDetailContent({ member, data }) {
           <div className="mt-8 grid gap-3">
             {primaryProfileRows.map(([label, value]) => (
               <div key={label} className="xp-detail-row grid grid-cols-[84px_1fr] gap-4 pb-3 text-sm">
-                <span className="text-[11px] tracking-[0.12em] text-[#9b8d69]">{label}</span>
-                <span className="min-w-0 break-words tracking-[0.04em] text-[#19160f]">{value}</span>
+                <span className="text-[11px] tracking-[0.12em] text-[#687d91]">{label}</span>
+                <span className="min-w-0 break-words tracking-[0.04em] text-[#142235]">{value}</span>
               </div>
             ))}
           </div>
@@ -2845,7 +2845,7 @@ function MemberDetailContent({ member, data }) {
                 <button
                   type="button"
                   onClick={() => setLineageOpen(true)}
-                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#19160f] underline decoration-[#c9ab62] underline-offset-4 transition-colors hover:text-[#8a681d]"
+                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#142235] underline decoration-[#69bfea] underline-offset-4 transition-colors hover:text-[#087daf]"
                 >
                   {inheritancePredecessor.name}
                 </button>
@@ -2857,7 +2857,7 @@ function MemberDetailContent({ member, data }) {
                 <button
                   type="button"
                   onClick={() => setLineageOpen(true)}
-                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#19160f] underline decoration-[#c9ab62] underline-offset-4 transition-colors hover:text-[#8a681d]"
+                  className="min-w-0 break-words text-left text-[13px] tracking-[0.04em] text-[#142235] underline decoration-[#69bfea] underline-offset-4 transition-colors hover:text-[#087daf]"
                 >
                   {inheritanceSuccessor.name}
                 </button>
@@ -3311,7 +3311,7 @@ function MembersPage({ data, setData, admin }) {
       <div className="mx-auto max-w-5xl px-4 pb-12">
         {admin ? (
           <div className="mb-6 flex items-center justify-end">
-            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#19160f] text-white hover:bg-[#3a301d]">
+            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#142235] text-white hover:bg-[#1f8fc4]">
               <Plus className="mr-2 h-4 w-4" />
               新增成员
             </Button>
@@ -3330,8 +3330,8 @@ function MembersPage({ data, setData, admin }) {
             className={
               "text-xs tracking-[0.14em] px-4 py-1.5 border transition-colors " +
               (statusFilter === key
-                ? "bg-[#19160f] text-white border-[#19160f]"
-                : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
+                ? "bg-[#142235] text-white border-[#142235]"
+                : "border-[#c7e6f8] bg-white/55 text-[#087daf] hover:bg-white")
             }
           >
             {label}
@@ -3348,8 +3348,8 @@ function MembersPage({ data, setData, admin }) {
               "text-xs tracking-wider px-3 py-1 border transition-colors " +
               (key === "all"
                 ? (genFilter === key
-                  ? "bg-[#19160f] text-white border-[#19160f]"
-                  : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
+                  ? "bg-[#142235] text-white border-[#142235]"
+                  : "border-[#c7e6f8] bg-white/55 text-[#087daf] hover:bg-white")
                 : "")
             }
             style={key === "all" ? undefined : generationFilterStyle(key, genFilter === key)}
@@ -3358,7 +3358,7 @@ function MembersPage({ data, setData, admin }) {
           </button>
         ))}
 
-        <div className="ml-auto text-xs tracking-[0.12em] text-[#9b8d69]">
+        <div className="ml-auto text-xs tracking-[0.12em] text-[#687d91]">
           共 {filteredMembers.length} 人
         </div>
       </div>
@@ -3407,10 +3407,10 @@ function MembersPage({ data, setData, admin }) {
                 ) : null}
               </div>
               <div className="px-1 pb-1 pt-4">
-                <div className="flex items-start justify-between gap-3 border-t border-[#e9dfc5] pt-3">
+                <div className="flex items-start justify-between gap-3 border-t border-[#d8eafa] pt-3">
                   <div className="min-w-0">
-                    <div className="text-base font-medium leading-tight tracking-[0.04em] text-[#19160f]">{m.name}{!m.isActive ? " - 卒业" : ""}</div>
-                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#7c7464]">{m.romaji || ""}</div>
+                    <div className="text-base font-medium leading-tight tracking-[0.04em] text-[#142235]">{m.name}{!m.isActive ? " - 卒业" : ""}</div>
+                    <div className="mt-1 text-[10px] uppercase tracking-[0.16em] text-[#687d91]">{m.romaji || ""}</div>
                   </div>
                   <span className="xp-tag shrink-0 px-2 py-1 text-[9px]">{m.isActive ? "ACTIVE" : "OG"}</span>
                 </div>
@@ -4115,7 +4115,7 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
       <div className="mx-auto max-w-5xl px-4 pb-12">
         {admin ? (
           <div className="mb-6 flex items-center justify-end">
-            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#19160f] text-white hover:bg-[#3a301d]">
+            <Button onClick={() => openEdit(null)} className="rounded-none bg-[#142235] text-white hover:bg-[#1f8fc4]">
               <Plus className="mr-2 h-4 w-4" />
               新增单曲
             </Button>
@@ -4134,8 +4134,8 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
                 className={
                   "text-[11px] tracking-[0.14em] px-4 py-1.5 border transition-colors " +
                   (kindFilter === opt
-                    ? "bg-[#19160f] text-white border-[#19160f]"
-                    : "border-[#d8c692] bg-white/55 text-[#6d5317] hover:bg-white")
+                    ? "bg-[#142235] text-white border-[#142235]"
+                    : "border-[#c7e6f8] bg-white/55 text-[#087daf] hover:bg-white")
                 }
               >
                 {opt}
@@ -4190,12 +4190,12 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
               <div className="px-1 pb-1 pt-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="xp-tag px-2 py-0.5 text-[9px]">{s.singleKind || "SINGLE"}</span>
-                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">Release {formatDateDots(s.release)}</span>
+                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#687d91]">Release {formatDateDots(s.release)}</span>
                 </div>
-                <div className="mt-3 text-[10px] uppercase tracking-[0.18em] text-[#7c7464]">{prefix}</div>
-                <div className="mt-1 text-base font-medium leading-snug tracking-[0.02em] text-[#19160f]">{name || s.title}</div>
-                <div className="mt-3 h-px w-10 bg-[#b99438]" />
-                <div className="mt-3 text-[11px] tracking-[0.1em] text-[#9b8d69]">
+                <div className="mt-3 text-[10px] uppercase tracking-[0.18em] text-[#687d91]">{prefix}</div>
+                <div className="mt-1 text-base font-medium leading-snug tracking-[0.02em] text-[#142235]">{name || s.title}</div>
+                <div className="mt-3 h-px w-10 bg-[#39aeea]" />
+                <div className="mt-3 text-[11px] tracking-[0.1em] text-[#687d91]">
                   {(s.tracks || []).length} tracks
                 </div>
               </div>
@@ -4496,7 +4496,7 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
   ];
 
   return (
-    <div className={noFrame ? "" : "border border-[#e9dfc5] bg-white/75"}>
+    <div className={noFrame ? "" : "border border-[#d8eafa] bg-white/75"}>
       <div className={`${noFrame ? "pt-0" : "p-4"} grid gap-12`}>
         <div className="grid items-center gap-10 md:grid-cols-[minmax(280px,520px)_minmax(0,1fr)] lg:gap-16">
           <button
@@ -4513,10 +4513,10 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
           </button>
 
           <div className="xp-detail-panel p-6 md:p-10">
-            <div className="text-[10px] uppercase tracking-[0.42em] text-[#b99438]">DISCOGRAPHY</div>
-            <div className="mt-5 h-px w-6 bg-[#19160f]" />
-            <div className="mt-8 text-[11px] uppercase tracking-[0.24em] text-[#7c7464]">{titleMeta.prefix || "Single"}</div>
-            <h2 className="mt-4 text-3xl font-light leading-tight tracking-[-0.04em] text-[#19160f] md:text-5xl">
+            <div className="text-[10px] uppercase tracking-[0.42em] text-[#39aeea]">DISCOGRAPHY</div>
+            <div className="mt-5 h-px w-6 bg-[#142235]" />
+            <div className="mt-8 text-[11px] uppercase tracking-[0.24em] text-[#687d91]">{titleMeta.prefix || "Single"}</div>
+            <h2 className="mt-4 text-3xl font-light leading-tight tracking-[-0.04em] text-[#142235] md:text-5xl">
               {titleMeta.name || single.title}
             </h2>
             <div className="mt-7 flex flex-wrap gap-2">
@@ -4531,8 +4531,8 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
             <div className="mt-8 grid gap-3">
               {singleMetaRows.map(([label, value]) => (
                 <div key={label} className="xp-detail-row grid grid-cols-[96px_1fr] gap-4 pb-3 text-sm">
-                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#9b8d69]">{label}</span>
-                  <span className="min-w-0 break-words tracking-[0.04em] text-[#19160f]">{value || "—"}</span>
+                  <span className="text-[10px] uppercase tracking-[0.16em] text-[#687d91]">{label}</span>
+                  <span className="min-w-0 break-words tracking-[0.04em] text-[#142235]">{value || "—"}</span>
                 </div>
               ))}
             </div>

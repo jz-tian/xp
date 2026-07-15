@@ -6,16 +6,22 @@
       "romaji": "TSUMUGI NADOYAMA",
       "origin": "冲绳・石垣",
       "generation": "10期",
-      "avatar": "/uploads/1782212897984.webp",
+      "avatar": "/uploads/1784120849004.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212897984.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120849004.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -121,7 +127,8 @@
         "s_9l2u3ftn": "A面选拔（第1排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:07:32.060Z",
+      "updatedAt": "2026-07-15T13:07:32.060Z"
     },
     {
       "id": "m_10gen_2",
@@ -129,16 +136,22 @@
       "romaji": "RARA MIKAMI",
       "origin": "福冈・博多",
       "generation": "10期",
-      "avatar": "/uploads/1782212935303.webp",
+      "avatar": "/uploads/1784120864455.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212935303.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120864455.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -244,7 +257,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:07:46.820Z",
+      "updatedAt": "2026-07-15T13:07:46.820Z"
     },
     {
       "id": "m_10gen_3",
@@ -252,16 +266,22 @@
       "romaji": "RURI MINASE",
       "origin": "神奈川・镰仓",
       "generation": "10期",
-      "avatar": "/uploads/1782212957160.webp",
+      "avatar": "/uploads/1784120882795.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212957160.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120882795.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -366,7 +386,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:08:05.446Z",
+      "updatedAt": "2026-07-15T13:08:05.446Z"
     },
     {
       "id": "m_10gen_4",
@@ -374,16 +395,22 @@
       "romaji": "RINGO MIKAGE",
       "origin": "青森・弘前",
       "generation": "10期",
-      "avatar": "/uploads/1782212968720.webp",
+      "avatar": "/uploads/1784120896455.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212968720.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120896455.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -489,7 +516,8 @@
         "s_9l2u3ftn": "A面选拔（第1排 护法）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:08:18.892Z",
+      "updatedAt": "2026-07-15T13:08:18.892Z"
     },
     {
       "id": "m_10gen_5",
@@ -497,16 +525,22 @@
       "romaji": "RINNE TSUKISHIRO",
       "origin": "奈良・生驹",
       "generation": "10期",
-      "avatar": "/uploads/1782212982529.webp",
+      "avatar": "/uploads/1784120911448.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212982529.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120911448.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -611,7 +645,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:08:34.334Z",
+      "updatedAt": "2026-07-15T13:08:34.334Z"
     },
     {
       "id": "m_10gen_6",
@@ -619,16 +654,22 @@
       "romaji": "CHIHO NAKAYAMA",
       "origin": "长野・松本",
       "generation": "10期",
-      "avatar": "/uploads/1782212994878.webp",
+      "avatar": "/uploads/1784120932750.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212994878.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120932750.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -734,7 +775,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:08:56.022Z",
+      "updatedAt": "2026-07-15T13:08:56.022Z"
     },
     {
       "id": "m_9gen_1",
@@ -742,16 +784,22 @@
       "romaji": "NAMIDA HISHIRO",
       "origin": "北海道・函馆",
       "generation": "9期",
-      "avatar": "/uploads/1774805311690.webp",
+      "avatar": "/uploads/1784120974076.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805311690.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120974076.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -856,7 +904,8 @@
         "s_9l2u3ftn": "A面选拔（第1排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:09:36.565Z",
+      "updatedAt": "2026-07-15T13:09:36.565Z"
     },
     {
       "id": "m_9gen_2",
@@ -864,16 +913,22 @@
       "romaji": "KIEKA KUKO",
       "origin": "冲绳・那霸",
       "generation": "9期",
-      "avatar": "/uploads/1774805287773.webp",
+      "avatar": "/uploads/1784120986408.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805287773.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784120986408.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -979,7 +1034,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:09:48.878Z",
+      "updatedAt": "2026-07-15T13:09:48.878Z"
     },
     {
       "id": "m_9gen_3",
@@ -987,16 +1043,22 @@
       "romaji": "KITSUKI YAMAMOTO",
       "origin": "京都・西京区",
       "generation": "9期",
-      "avatar": "/uploads/1774805271072.webp",
+      "avatar": "/uploads/1784121299231.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805271072.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784121299231.webp",
+          "version": 3
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1101,7 +1163,8 @@
         "s_9l2u3ftn": "A面选拔（第1排 护法）",
         "s_kv6ne2gm": "A面选拔（第2排 护法）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:15:05.271Z",
+      "updatedAt": "2026-07-15T13:15:05.271Z"
     },
     {
       "id": "m_9gen_4",
@@ -1109,16 +1172,22 @@
       "romaji": "MOMOKA KANZAKI",
       "origin": "大阪・难波",
       "generation": "9期",
-      "avatar": "/uploads/1774805252904.webp",
+      "avatar": "/uploads/1784121037480.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805252904.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784121037480.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1224,7 +1293,8 @@
         "s_9l2u3ftn": "A面选拔（第1排）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:10:39.771Z",
+      "updatedAt": "2026-07-15T13:10:39.771Z"
     },
     {
       "id": "m_9gen_5",
@@ -1232,16 +1302,22 @@
       "romaji": "RIO SAIONJI",
       "origin": "东京・港区",
       "generation": "9期",
-      "avatar": "/uploads/1774805240618.webp",
+      "avatar": "/uploads/1784121283382.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805240618.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784121283382.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1346,7 +1422,8 @@
         "s_9l2u3ftn": "A面选拔（第1排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:14:45.813Z",
+      "updatedAt": "2026-07-15T13:14:45.813Z"
     },
     {
       "id": "m_9gen_6",
@@ -1354,16 +1431,22 @@
       "romaji": "MEI MOGAMI",
       "origin": "山形・米泽",
       "generation": "9期",
-      "avatar": "/uploads/1774805164815.webp",
+      "avatar": "/uploads/1784121053754.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805164815.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1784121053754.webp",
+          "version": 2
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1469,7 +1552,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:10:55.963Z",
+      "updatedAt": "2026-07-15T13:10:55.963Z"
     },
     {
       "id": "m_8gen_1_4186",
@@ -1477,7 +1561,7 @@
       "romaji": "SAYA NISHINO",
       "origin": "青森 • 弘前",
       "generation": "8期",
-      "avatar": "/uploads/1782468849176.webp",
+      "avatar": "/uploads/1784121068332.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1773833560504.webp",
@@ -1486,11 +1570,17 @@
         {
           "url": "/uploads/1782468849176.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1784121068332.webp",
+          "version": 3
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -1596,9 +1686,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "落选"
       },
-      "createdAt": "2026-06-26T10:14:15.816Z",
-      "updatedAt": "2026-06-26T10:14:15.816Z",
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:11:10.597Z",
+      "updatedAt": "2026-07-15T13:11:10.597Z"
     },
     {
       "id": "m_8gen_2_2649",
@@ -2450,7 +2539,7 @@
       "romaji": "NATSUKI TOKUTAMI",
       "origin": "大阪 • 堺",
       "generation": "7期",
-      "avatar": "/uploads/1774805089822.webp",
+      "avatar": "/uploads/1784121081548.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796225837.jpg",
@@ -2463,11 +2552,17 @@
         {
           "url": "/uploads/1774805089822.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121081548.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2573,7 +2668,8 @@
         "s_9l2u3ftn": "A面选拔（第1排 center）",
         "s_kv6ne2gm": "A面选拔（第1排 center）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:11:23.896Z",
+      "updatedAt": "2026-07-15T13:11:23.896Z"
     },
     {
       "id": "m_7gen_3_5910",
@@ -2581,7 +2677,7 @@
       "romaji": "YUI KONDO",
       "origin": "京都 • 右京区",
       "generation": "7期",
-      "avatar": "/uploads/1782468876611.webp",
+      "avatar": "/uploads/1784121094927.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796238553.jpg",
@@ -2594,11 +2690,17 @@
         {
           "url": "/uploads/1782468876611.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121094927.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2703,9 +2805,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-10T09:17:48.216Z",
-      "updatedAt": "2026-07-10T09:17:48.216Z",
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:11:37.860Z",
+      "updatedAt": "2026-07-15T13:11:37.860Z"
     },
     {
       "id": "m_7gen_4_8843",
@@ -2713,7 +2814,7 @@
       "romaji": "JENNIFER INOUE",
       "origin": "美国 • 西雅图",
       "generation": "7期",
-      "avatar": "/uploads/1774805052172.webp",
+      "avatar": "/uploads/1784121139342.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772817945659.jpg",
@@ -2726,11 +2827,17 @@
         {
           "url": "/uploads/1774805052172.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121139342.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -2835,7 +2942,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:12:22.306Z",
+      "updatedAt": "2026-07-15T13:12:22.306Z"
     },
     {
       "id": "m_7gen_5_1182",
@@ -2960,7 +3068,7 @@
       "romaji": "AN TSUCHIKIBU",
       "origin": "北海道 • 带广",
       "generation": "7期",
-      "avatar": "/uploads/1774804951603.webp",
+      "avatar": "/uploads/1784121152003.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796268149.jpg",
@@ -2973,11 +3081,17 @@
         {
           "url": "/uploads/1774804951603.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121152003.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -3083,7 +3197,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:12:34.595Z",
+      "updatedAt": "2026-07-15T13:12:34.595Z"
     },
     {
       "id": "m_7gen_7_9921",
@@ -3091,7 +3206,7 @@
       "romaji": "KOHINA ARAI",
       "origin": "东京 • 杉并",
       "generation": "7期",
-      "avatar": "/uploads/1783774770270.webp",
+      "avatar": "/uploads/1784121167717.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796277862.jpg",
@@ -3104,11 +3219,17 @@
         {
           "url": "/uploads/1783774770270.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121167717.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -3213,9 +3334,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "落选"
       },
-      "createdAt": "2026-07-11T12:59:33.443Z",
-      "updatedAt": "2026-07-11T12:59:33.443Z",
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:12:50.202Z",
+      "updatedAt": "2026-07-15T13:12:50.202Z"
     },
     {
       "id": "m_6gen_1_4821",
@@ -3223,7 +3343,7 @@
       "romaji": "KARIN OKAZAKI",
       "origin": "东京 • 世田谷",
       "generation": "6期",
-      "avatar": "/uploads/1774804858103.webp",
+      "avatar": "/uploads/1784121182005.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1771581945609.jpg",
@@ -3236,11 +3356,17 @@
         {
           "url": "/uploads/1774804858103.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121182005.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -3345,7 +3471,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:13:04.427Z",
+      "updatedAt": "2026-07-15T13:13:04.427Z"
     },
     {
       "id": "m_6gen_2_9374",
@@ -3353,7 +3480,7 @@
       "romaji": "UTA OGASAWARA",
       "origin": "京都 • 左京区",
       "generation": "6期",
-      "avatar": "/uploads/1774804843837.webp",
+      "avatar": "/uploads/1784121204112.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1771581955632.jpg",
@@ -3366,11 +3493,17 @@
         {
           "url": "/uploads/1774804843837.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121204112.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -3475,7 +3608,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:13:26.222Z",
+      "updatedAt": "2026-07-15T13:13:26.222Z"
     },
     {
       "id": "m_6gen_3_1550",
@@ -3483,7 +3617,7 @@
       "romaji": "MIHO MORI",
       "origin": "北海道 • 函馆",
       "generation": "6期",
-      "avatar": "/uploads/1774804827418.webp",
+      "avatar": "/uploads/1784121267698.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1771581965239.jpg",
@@ -3496,11 +3630,17 @@
         {
           "url": "/uploads/1774804827418.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121267698.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -3607,7 +3747,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:14:30.888Z",
+      "updatedAt": "2026-07-15T13:14:30.888Z"
     },
     {
       "id": "m_6gen_4_6829",
@@ -4142,7 +4283,7 @@
       "romaji": "NAOKI FUJIMATSU",
       "origin": "山形 • 山形市",
       "generation": "5期",
-      "avatar": "/uploads/1774804649344.webp",
+      "avatar": "/uploads/1784121324266.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768985619382.jpg",
@@ -4155,11 +4296,17 @@
         {
           "url": "/uploads/1774804649344.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121324266.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -4263,7 +4410,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:15:26.458Z",
+      "updatedAt": "2026-07-15T13:15:26.458Z"
     },
     {
       "id": "m_5gen_4_8493",
@@ -4271,7 +4419,7 @@
       "romaji": "NANA KISUI",
       "origin": "福冈 • 福冈市",
       "generation": "5期",
-      "avatar": "/uploads/1774804637754.webp",
+      "avatar": "/uploads/1784121340008.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768985628805.jpg",
@@ -4284,11 +4432,17 @@
         {
           "url": "/uploads/1774804637754.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121340008.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -4392,7 +4546,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:15:42.431Z",
+      "updatedAt": "2026-07-15T13:15:42.431Z"
     },
     {
       "id": "m_5gen_5_6677",
@@ -4571,7 +4726,7 @@
       "romaji": "YULIA KURANO",
       "origin": "爱知 • 名古屋",
       "generation": "5期",
-      "avatar": "/uploads/1774804496839.webp",
+      "avatar": "/uploads/1784121349646.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768985659260.jpg",
@@ -4584,11 +4739,17 @@
         {
           "url": "/uploads/1774804496839.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121349646.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -4694,7 +4855,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "A面选拔（第2排 护法）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:15:52.216Z",
+      "updatedAt": "2026-07-15T13:15:52.216Z"
     },
     {
       "id": "m_umbw1ji3",
@@ -4837,7 +4999,7 @@
       "romaji": "RIRIKA KOBAYASHI",
       "origin": "滋贺 • 大津",
       "generation": "3期",
-      "avatar": "/uploads/1783776534233.webp",
+      "avatar": "/uploads/1784121367092.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768593904736.jpg",
@@ -4850,11 +5012,17 @@
         {
           "url": "/uploads/1783776534233.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121367092.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -4959,9 +5127,8 @@
         "s_9l2u3ftn": "A面选拔（第2排）",
         "s_kv6ne2gm": "A面选拔（第2排）"
       },
-      "createdAt": "2026-07-11T13:28:57.230Z",
-      "updatedAt": "2026-07-11T13:28:57.230Z",
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:16:09.640Z",
+      "updatedAt": "2026-07-15T13:16:09.640Z"
     },
     {
       "id": "m_batr9qfj",
@@ -5207,7 +5374,7 @@
       "romaji": "YUME YAMAGAMI",
       "origin": "福岛 • 郡山",
       "generation": "2期",
-      "avatar": "/uploads/1774804432041.webp",
+      "avatar": "/uploads/1784121377825.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768593641741.jpg",
@@ -5220,11 +5387,17 @@
         {
           "url": "/uploads/1774804432041.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121377825.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -5329,7 +5502,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:16:20.067Z",
+      "updatedAt": "2026-07-15T13:16:20.067Z"
     },
     {
       "id": "m_l4k686go",
@@ -5891,7 +6065,7 @@
       "romaji": "MIHARU SAEKI",
       "origin": "广岛 • 广岛市",
       "generation": "1期",
-      "avatar": "/uploads/1774804403769.webp",
+      "avatar": "/uploads/1784121387123.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768591628116.jpg",
@@ -5904,11 +6078,17 @@
         {
           "url": "/uploads/1774804403769.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121387123.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -6011,7 +6191,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "落选"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:16:29.411Z",
+      "updatedAt": "2026-07-15T13:16:29.411Z"
     },
     {
       "id": "m_7j6tcyhr",
@@ -6019,7 +6200,7 @@
       "romaji": "SEITSUKI TAKEUCHI",
       "origin": "韩国首尔 • 江南",
       "generation": "1期",
-      "avatar": "/uploads/1774804393238.webp",
+      "avatar": "/uploads/1784121399617.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768591547894.jpg",
@@ -6032,11 +6213,17 @@
         {
           "url": "/uploads/1774804393238.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121399617.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -6139,7 +6326,8 @@
         "s_9l2u3ftn": "落选",
         "s_kv6ne2gm": "A面选拔（第3排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:16:41.830Z",
+      "updatedAt": "2026-07-15T13:16:41.830Z"
     },
     {
       "id": "m_m8fltj0e",
@@ -7002,7 +7190,7 @@
       "romaji": "YURINO KATO",
       "origin": "广岛 · 中区",
       "generation": "1期",
-      "avatar": "/uploads/1774804342814.webp",
+      "avatar": "/uploads/1784121416181.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768590846634.jpg",
@@ -7015,11 +7203,17 @@
         {
           "url": "/uploads/1774804342814.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1784121416181.webp",
+          "version": 4
         }
       ],
       "isActive": true,
       "graduationDate": "",
       "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
       "electionRanks": [
         {
           "edition": "第1届",
@@ -7122,7 +7316,8 @@
         "s_9l2u3ftn": "A面选拔（第3排）",
         "s_kv6ne2gm": "A面选拔（第2排）"
       },
-      "inheritanceSuccessorId": ""
+      "createdAt": "2026-07-15T13:16:58.421Z",
+      "updatedAt": "2026-07-15T13:16:58.421Z"
     },
     {
       "id": "m_reina",
