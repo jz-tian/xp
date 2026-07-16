@@ -65,6 +65,7 @@ import { buildMemberCenterWeightBreakdown, formatSingleCenterSummary } from "./l
 import { getAdminActivityDate, pickLatestMemberForNews, stampAdminEntity } from "./lib/homeFeed.js";
 import { getElectionPhotoUrl } from "./lib/electionPhotos.js";
 import { getLegendarySeven } from "./lib/legendarySeven.js";
+import { getSingleOfficialPhotoUrl } from "./lib/singlePhotos.js";
 import {
   applyGraduationInheritance,
   buildInheritanceChain,
@@ -425,24 +426,6 @@ function ensureTrackShape(track, no, isAside) {
   };
 }
 
-/**
- * 根据单曲标题前缀（如 "27th Single"）判断是否属于"新版公式照"语境（第27单起）
- */
-// 返回单曲对应的公式照版本档位：0=第1版，1=第2版（27-36单），2=最新版（37单+）
-// member 可选；27-36单的tier-1仅对1-7期生有效，8期及以上仍用v1
-function getSinglePhotoTier(single, member) {
-  const prefix = splitSingleTitle(single?.title ?? "").prefix;
-  const num = parseInt((prefix || "").match(/\d+/)?.[0], 10);
-  if (!Number.isFinite(num)) return 0;
-  if (num >= 37) return 2;
-  if (num >= 27) {
-    const genNum = parseInt(String(member?.generation ?? "").match(/\d+/)?.[0], 10);
-    if (Number.isFinite(genNum) && genNum >= 8) return 0;
-    return 1;
-  }
-  return 0;
-}
-
 // 返回总选届对应的公式照版本档位：0=第1版，1=第2版（第5届），2=最新版（第6届+）
 function getEditionPhotoTier(editionStr) {
   const num = parseEditionNum(editionStr);
@@ -450,20 +433,6 @@ function getEditionPhotoTier(editionStr) {
   if (num >= 6) return 2;
   if (num >= 5) return 1;
   return 0;
-}
-
-/**
- * 根据语境档位返回应展示的公式照 URL。
- * photoTier: 0=第1版, 1=第2版, 2=最新版
- * 版本不足时自动降级（如只有1张则始终返回第1版）
- * officialPhotos 为空时回退 avatar
- */
-function getOfficialPhotoUrl(member, photoTier) {
-  const photos = Array.isArray(member?.officialPhotos) ? member.officialPhotos : [];
-  if (photos.length === 0) return member?.avatar ?? "";
-  if (photoTier >= 2 && photos.length >= 2) return photos[photos.length - 1].url;
-  if (photoTier >= 1 && photos.length >= 2) return photos[1].url;
-  return photos[0].url;
 }
 
 const buildRowMeta = (rows) => {
@@ -4691,7 +4660,7 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
                           <div className="grid h-full w-full" style={{ gridTemplateRows: `${imgH}px auto` }}>
                             <div className="overflow-hidden bg-transparent">
                               <MediaImage
-                                src={getOfficialPhotoUrl(m, getSinglePhotoTier(single, m))}
+                                src={getSingleOfficialPhotoUrl(m, single)}
                                 alt={m.name}
                                 className={"h-full w-full object-contain object-top " + (!m.isActive ? "grayscale" : "")}
                               />
