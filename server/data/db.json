@@ -1,6 +1,515 @@
 {
   "members": [
     {
+      "id": "m_11gen_1",
+      "name": "大堀 日奈子",
+      "romaji": "HINAKO OHORI",
+      "origin": "東京都・大田区",
+      "generation": "11期",
+      "avatar": "/uploads/1785756873300.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1785756873300.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_blncyp2k",
+        "m_10gen_3"
+      ],
+      "friends": [
+        "m_11gen_4",
+        "m_10gen_5"
+      ],
+      "favoriteSong": "The Fame Subway (A-side)",
+      "favoriteSongs": [
+        "The Fame Subway (A-side)",
+        "a walk in the JI / UG",
+        "Journey /松村珠理奈 毕业曲"
+      ],
+      "favoritePokemon": 137,
+      "profile": {
+        "height": "157cm",
+        "birthday": "2004-01-17",
+        "blood": "A",
+        "hobby": "把车站发车旋律记成五线谱，并给每天的通勤路线画迷你地图",
+        "skill": "看一眼时刻表就能排出最少换乘路线，连备用方案都会一起写好",
+        "catchphrase": "下一站是日奈子，请不要错过开门的瞬间。"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "落选"
+      },
+      "createdAt": "2026-08-03T11:34:42.728Z",
+      "updatedAt": "2026-08-03T11:34:42.728Z"
+    },
+    {
+      "id": "m_11gen_2",
+      "name": "水野 絵里奈",
+      "romaji": "ERINA MIZUNO",
+      "origin": "石川県・金沢市",
+      "generation": "11期",
+      "avatar": "/uploads/1785756893533.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1785756893533.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_rjli97s6",
+        "m_9gen_5"
+      ],
+      "friends": [
+        "m_11gen_1",
+        "m_9gen_3",
+        "m_8gen_1_4186"
+      ],
+      "favoriteSong": "Emerald (A-side)",
+      "favoriteSongs": [
+        "Emerald (A-side)",
+        "Sapphire Blue",
+        "Blue & White / All"
+      ],
+      "favoritePokemon": 121,
+      "profile": {
+        "height": "164cm",
+        "birthday": "2004-06-29",
+        "blood": "AB",
+        "hobby": "收集雨天的蓝色样本，把天空、玻璃和糖浆分成不同色号",
+        "skill": "用三笔水彩画出成员的轮廓，最后一笔一定会变成漂亮的高光",
+        "catchphrase": "今天的絵里奈，是哪一种蓝色呢？"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "落选"
+      },
+      "createdAt": "2026-08-03T11:34:56.983Z",
+      "updatedAt": "2026-08-03T11:34:56.983Z"
+    },
+    {
+      "id": "m_11gen_3",
+      "name": "新槙 未来",
+      "romaji": "MIKU SHINMAKI",
+      "origin": "広島県・尾道市",
+      "generation": "11期",
+      "avatar": "/uploads/1785756903665.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1785756903665.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_7gen_7_9921",
+        "m_6gen_2_9374",
+        "m_10gen_4"
+      ],
+      "friends": [
+        "m_10gen_4",
+        "m_11gen_2"
+      ],
+      "favoriteSong": "Open, Bang! (新井心扉菜 center)",
+      "favoriteSongs": [
+        "Open, Bang! (新井心扉菜 center)",
+        "No.1  / UG （小笠原诗center）",
+        "Flip It (A-side)"
+      ],
+      "favoritePokemon": 4,
+      "profile": {
+        "height": "152cm",
+        "birthday": "2006-09-02",
+        "blood": "O",
+        "hobby": "拆旧闹钟和玩具车，改造成会发光的应援小道具",
+        "skill": "十分钟编出整段 call and response，还能把全员名字塞进同一个节奏",
+        "catchphrase": "未来不是等来的，是我现在就按下启动键！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "落选"
+      },
+      "createdAt": "2026-08-03T11:35:06.327Z",
+      "updatedAt": "2026-08-03T11:35:06.327Z"
+    },
+    {
+      "id": "m_11gen_4",
+      "name": "宇治 聖",
+      "romaji": "MIZUKI UJI",
+      "origin": "京都府・宇治市",
+      "generation": "11期",
+      "avatar": "/uploads/1785756915254.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1785756915254.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_7gen_6_7205",
+        "m_ltlzffea"
+      ],
+      "friends": [
+        "m_11gen_1"
+      ],
+      "favoriteSong": "Pray 4 U / 土木生杏 center",
+      "favoriteSongs": [
+        "Pray 4 U / 土木生杏 center",
+        "Kimi、Kimi、Kimi (A-side)",
+        "The Meaning of Unforgetable Things (A-side)"
+      ],
+      "favoritePokemon": 148,
+      "profile": {
+        "height": "168cm",
+        "birthday": "2006-12-24",
+        "blood": "B",
+        "hobby": "清晨点茶并记录寺院钟声，按回响长短给一天定主题",
+        "skill": "不看计时器也能泡出正好六十秒的茶，舞台站位也从不偏一格",
+        "catchphrase": "静かな一礼から、聖の時間が始まります。"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "落选"
+      },
+      "createdAt": "2026-08-03T11:35:28.881Z",
+      "updatedAt": "2026-08-03T11:35:28.881Z"
+    },
+    {
       "id": "m_10gen_1",
       "name": "名渡山 紬",
       "romaji": "TSUMUGI NADOYAMA",
@@ -70,7 +579,7 @@
       "favoritePokemon": 120,
       "profile": {
         "height": "159cm",
-        "birthday": "2011-05-12",
+        "birthday": "2003-05-12",
         "blood": "A",
         "hobby": "收集海玻璃和旧布边，把当天的心情织成一小段颜色样本",
         "skill": "闭着眼摸布料就能说出纤维比例，还能把三线调到刚好像海风",
@@ -125,7 +634,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "A面选拔（第1排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:07:32.060Z",
       "updatedAt": "2026-07-15T13:07:32.060Z"
@@ -200,7 +711,7 @@
       "favoritePokemon": 39,
       "profile": {
         "height": "154cm",
-        "birthday": "2011-08-08",
+        "birthday": "2003-08-08",
         "blood": "B",
         "hobby": "给便利店软糖写弹力评分，贴纸本已经按酸度分成七册",
         "skill": "能把任意一句话唱成广告曲副歌，并在最后精准眨左眼",
@@ -255,7 +766,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:07:46.820Z",
       "updatedAt": "2026-07-15T13:07:46.820Z"
@@ -329,7 +842,7 @@
       "favoritePokemon": 134,
       "profile": {
         "height": "166cm",
-        "birthday": "2010-11-21",
+        "birthday": "2003-11-21",
         "blood": "AB",
         "hobby": "闭馆前去水族馆记鱼群路线，再把它们画成蓝色乐谱",
         "skill": "听一次和声就能指出最低音偏了几分音，表情几乎不变",
@@ -384,7 +897,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:08:05.446Z",
       "updatedAt": "2026-07-15T13:08:05.446Z"
@@ -459,7 +974,7 @@
       "favoritePokemon": 58,
       "profile": {
         "height": "158cm",
-        "birthday": "2011-10-31",
+        "birthday": "2005-10-31",
         "blood": "O",
         "hobby": "用一次性胶片机拍霓虹下的苹果糖，照片背面只写辛辣短评",
         "skill": "苹果皮能削成不断的一整条，还能顺手吐槽全场站姿",
@@ -514,7 +1029,9 @@
         "s_utvdcu2u": "A面选拔（第1排 center）",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "A面选拔（第1排 护法）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第2排）",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:08:18.892Z",
       "updatedAt": "2026-07-15T13:08:18.892Z"
@@ -588,7 +1105,7 @@
       "favoritePokemon": 35,
       "profile": {
         "height": "161cm",
-        "birthday": "2010-12-15",
+        "birthday": "2005-12-15",
         "blood": "A",
         "hobby": "收集旧音乐盒，给每个发条声起一个月相名字",
         "skill": "绝对音感和芭蕾转圈，转完还能报出刚才音乐的调号",
@@ -643,7 +1160,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:08:34.334Z",
       "updatedAt": "2026-07-15T13:08:34.334Z"
@@ -718,7 +1237,7 @@
       "favoritePokemon": 78,
       "profile": {
         "height": "164cm",
-        "birthday": "2011-02-04",
+        "birthday": "2005-02-04",
         "blood": "O",
         "hobby": "把登山路线和电车时刻表写成短歌，迟到一次会自罚多走一站",
         "skill": "看地图十秒就能规划最省体力的路线，顺便记住沿途自动贩卖机",
@@ -773,7 +1292,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "A面选拔（第2排）",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:08:56.022Z",
       "updatedAt": "2026-07-15T13:08:56.022Z"
@@ -847,7 +1368,7 @@
       "favoritePokemon": 22,
       "profile": {
         "height": "157cm",
-        "birthday": "2010-04-19",
+        "birthday": "2002-04-19",
         "blood": "B",
         "hobby": "深夜独自去废弃建筑拍照，专拍锈迹与蜘蛛网",
         "skill": "能在五秒内把笑容切换成令人窒息的忧郁眼神",
@@ -902,7 +1423,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第1排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:09:36.565Z",
       "updatedAt": "2026-07-15T13:09:36.565Z"
@@ -977,7 +1500,7 @@
       "favoritePokemon": 72,
       "profile": {
         "height": "163cm",
-        "birthday": "2010-07-24",
+        "birthday": "2002-07-24",
         "blood": "O",
         "hobby": "冲浪，并把每次乘浪的秒数换算成可以飞多远的航程",
         "skill": "一边滑行一边背出当天航班时刻表不出差错",
@@ -1032,7 +1555,9 @@
         "s_utvdcu2u": "A面选拔（第3排）",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:09:48.878Z",
       "updatedAt": "2026-07-15T13:09:48.878Z"
@@ -1106,7 +1631,7 @@
       "favoritePokemon": 139,
       "profile": {
         "height": "162cm",
-        "birthday": "2010-01-08",
+        "birthday": "2002-01-08",
         "blood": "A",
         "hobby": "把读过的书按心情颜色重新排列书架，每周更换一次配色",
         "skill": "用《源氏物语》原文即兴点评当天天气，三年无重复句",
@@ -1161,7 +1686,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "A面选拔（第1排 护法）",
-        "s_kv6ne2gm": "A面选拔（第2排 护法）"
+        "s_kv6ne2gm": "A面选拔（第2排 护法）",
+        "s_iuvai044": "A面选拔（第1排 center）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:15:05.271Z",
       "updatedAt": "2026-07-15T13:15:05.271Z"
@@ -1236,7 +1763,7 @@
       "favoritePokemon": 117,
       "profile": {
         "height": "156cm",
-        "birthday": "2010-09-03",
+        "birthday": "2004-09-03",
         "blood": "O",
         "hobby": "每天用一句话记录当天遇到的最离谱的事，已积累三年",
         "skill": "三秒内模仿出任何人说话的口癖与节奏",
@@ -1291,7 +1818,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "A面选拔（第1排）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第2排）",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:10:39.771Z",
       "updatedAt": "2026-07-15T13:10:39.771Z"
@@ -1365,7 +1894,7 @@
       "favoritePokemon": 143,
       "profile": {
         "height": "165cm",
-        "birthday": "2009-12-30",
+        "birthday": "2004-12-30",
         "blood": "AB",
         "hobby": "学习古典钢琴，且只在深夜一个人弹，从不录音",
         "skill": "进任何房间十秒内，全场气氛会自动安静下来",
@@ -1420,7 +1949,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第1排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:14:45.813Z",
       "updatedAt": "2026-07-15T13:14:45.813Z"
@@ -1495,7 +2026,7 @@
       "favoritePokemon": 99,
       "profile": {
         "height": "160cm",
-        "birthday": "2010-03-07",
+        "birthday": "2004-03-07",
         "blood": "A",
         "hobby": "在草地上画地图然后把遇到的虫子当居民，给它们取名字",
         "skill": "一分钟内叫出任何品种猫咪的正式学名，含亚种",
@@ -1550,7 +2081,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:10:55.963Z",
       "updatedAt": "2026-07-15T13:10:55.963Z"
@@ -1629,7 +2162,7 @@
       "favoritePokemon": 7,
       "profile": {
         "height": "160cm",
-        "birthday": "2009-10-12",
+        "birthday": "2001-10-12",
         "blood": "A",
         "hobby": "收集老相机上的日期戳并给每一天配旁白",
         "skill": "镜头一推近就自动切成故事女主氛围",
@@ -1684,7 +2217,9 @@
         "s_utvdcu2u": "A面选拔（第3排）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:11:10.597Z",
       "updatedAt": "2026-07-15T13:11:10.597Z"
@@ -1750,7 +2285,7 @@
       "favoritePokemon": 102,
       "profile": {
         "height": "163cm",
-        "birthday": "2008-07-28",
+        "birthday": "2001-07-28",
         "blood": "O",
         "hobby": "给每次公演后台便当写认真到离谱的食评",
         "skill": "MC时把冷场救成爆笑场",
@@ -1858,7 +2393,7 @@
       "favoritePokemon": 86,
       "profile": {
         "height": "151cm",
-        "birthday": "2010-01-23",
+        "birthday": "2001-01-23",
         "blood": "B",
         "hobby": "一边吃草莓牛奶糖一边给成员起秘密昵称",
         "skill": "一秒切换元气和无辜两种表情温度",
@@ -1966,7 +2501,7 @@
       "favoritePokemon": 116,
       "profile": {
         "height": "169cm",
-        "birthday": "2008-04-09",
+        "birthday": "2001-04-09",
         "blood": "AB",
         "hobby": "在旅馆窗边默写见过的每一种云层形状",
         "skill": "冷感系定点注视和长手脚舞线",
@@ -2074,7 +2609,7 @@
       "favoritePokemon": 36,
       "profile": {
         "height": "157cm",
-        "birthday": "2009-06-03",
+        "birthday": "2003-06-03",
         "blood": "O",
         "hobby": "把练习室空气中的紧张感写成观察日记",
         "skill": "说话温柔但吐槽命中率百分百",
@@ -2182,7 +2717,7 @@
       "favoritePokemon": 89,
       "profile": {
         "height": "166cm",
-        "birthday": "2008-12-19",
+        "birthday": "2003-12-19",
         "blood": "B",
         "hobby": "把夜里路过的霓虹灯颜色记成情绪色卡",
         "skill": "副歌前那种像要失控又稳住了的表情管理",
@@ -2298,7 +2833,7 @@
       "favoritePokemon": 98,
       "profile": {
         "height": "164cm",
-        "birthday": "2009-02-01",
+        "birthday": "2003-02-01",
         "blood": "A",
         "hobby": "研究雨声节拍并试着拿来给舞步分拍",
         "skill": "主歌低声线像耳语一样贴近镜头",
@@ -2425,7 +2960,7 @@
       "favoritePokemon": 151,
       "profile": {
         "height": "155cm",
-        "birthday": "2009-08-16",
+        "birthday": "2003-08-16",
         "blood": "AB",
         "hobby": "把机场广播和海浪声混在一起做奇怪demo",
         "skill": "开场三秒就把气氛抬成夏天",
@@ -2540,7 +3075,7 @@
       "favoritePokemon": 32,
       "profile": {
         "height": "159cm",
-        "birthday": "2009-02-14",
+        "birthday": "2000-02-14",
         "blood": "O",
         "hobby": "给海浪起名字然后假装它们认识我",
         "skill": "副歌前0.5秒抢拍制造恋爱错觉",
@@ -2665,7 +3200,7 @@
       "favoritePokemon": 150,
       "profile": {
         "height": "167cm",
-        "birthday": "2008-08-03",
+        "birthday": "2000-08-03",
         "blood": "B",
         "hobby": "统计MC冷场次数然后自己补笑声",
         "skill": "舞台低音稳定器",
@@ -2720,7 +3255,9 @@
         "s_utvdcu2u": "A面选拔（第1排 护法）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第1排 center）",
-        "s_kv6ne2gm": "A面选拔（第1排 center）"
+        "s_kv6ne2gm": "A面选拔（第1排 center）",
+        "s_iuvai044": "A面选拔（第1排 护法）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:11:23.896Z",
       "updatedAt": "2026-07-15T13:11:23.896Z"
@@ -2802,7 +3339,7 @@
       "favoritePokemon": 15,
       "profile": {
         "height": "174cm",
-        "birthday": "2009-11-21",
+        "birthday": "2000-11-21",
         "blood": "A",
         "hobby": "在后台偷偷给成员写设定集",
         "skill": "安静型副歌爆发",
@@ -2857,7 +3394,9 @@
         "s_utvdcu2u": "A面选拔（第2排）",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:11:37.860Z",
       "updatedAt": "2026-07-15T13:11:37.860Z"
@@ -2939,7 +3478,7 @@
       "favoritePokemon": 65,
       "profile": {
         "height": "171cm",
-        "birthday": "2008-05-30",
+        "birthday": "2001-05-30",
         "blood": "AB",
         "hobby": "把中文歌词翻译成英文rap再翻译回来",
         "skill": "英文副歌穿透力",
@@ -2994,7 +3533,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:12:22.306Z",
       "updatedAt": "2026-07-15T13:12:22.306Z"
@@ -3071,7 +3612,7 @@
       "favoritePokemon": 65,
       "profile": {
         "height": "162cm",
-        "birthday": "2008-01-09",
+        "birthday": "2002-01-09",
         "blood": "O",
         "hobby": "凌晨给云拍遗照",
         "skill": "高音清透穿云",
@@ -3201,7 +3742,7 @@
       "favoritePokemon": 118,
       "profile": {
         "height": "165cm",
-        "birthday": "2009-03-17",
+        "birthday": "2002-03-17",
         "blood": "B",
         "hobby": "给舞台灯光做结构分析",
         "skill": "机械感精准卡点",
@@ -3256,7 +3797,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第1排 护法）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:12:34.595Z",
       "updatedAt": "2026-07-15T13:12:34.595Z"
@@ -3338,7 +3881,7 @@
       "favoritePokemon": 40,
       "profile": {
         "height": "152cm",
-        "birthday": "2009-12-05",
+        "birthday": "2002-12-05",
         "blood": "A",
         "hobby": "把成员的黑历史做成时间轴",
         "skill": "表情瞬间切换",
@@ -3393,7 +3936,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "落选"
       },
       "createdAt": "2026-07-15T13:12:50.202Z",
       "updatedAt": "2026-07-15T13:12:50.202Z"
@@ -3475,7 +4020,7 @@
       "favoritePokemon": 118,
       "profile": {
         "height": "168cm",
-        "birthday": "2008-09-17",
+        "birthday": "1999-09-17",
         "blood": "O",
         "hobby": "研究都市传说并给它们写续集",
         "skill": "低音Rap切入主歌",
@@ -3530,7 +4075,9 @@
         "s_utvdcu2u": "A面选拔（第2排）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第2排）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:13:04.427Z",
       "updatedAt": "2026-07-15T13:13:04.427Z"
@@ -3612,7 +4159,7 @@
       "favoritePokemon": 16,
       "profile": {
         "height": "156cm",
-        "birthday": "2009-04-02",
+        "birthday": "1999-04-02",
         "blood": "A",
         "hobby": "给陌生人的背影写五行诗",
         "skill": "空气感假声",
@@ -3667,7 +4214,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:13:26.222Z",
       "updatedAt": "2026-07-15T13:13:26.222Z"
@@ -3751,7 +4300,7 @@
       "favoritePokemon": 44,
       "profile": {
         "height": "162cm",
-        "birthday": "2007-12-01",
+        "birthday": "1999-12-01",
         "blood": "B",
         "hobby": "凌晨看海边监控直播",
         "skill": "稳定主唱线",
@@ -3806,7 +4355,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:14:30.888Z",
       "updatedAt": "2026-07-15T13:14:30.888Z"
@@ -3883,7 +4434,7 @@
       "favoritePokemon": 32,
       "profile": {
         "height": "170cm",
-        "birthday": "2008-06-28",
+        "birthday": "2001-06-28",
         "blood": "AB",
         "hobby": "冲浪失败集锦剪辑",
         "skill": "舞台大幅度走位",
@@ -4007,7 +4558,7 @@
       "favoritePokemon": 25,
       "profile": {
         "height": "151cm",
-        "birthday": "2009-01-11",
+        "birthday": "2001-01-11",
         "blood": "A",
         "hobby": "给云朵打分",
         "skill": "甜系高音",
@@ -4119,7 +4670,7 @@
       "favoritePokemon": 47,
       "profile": {
         "height": "165cm",
-        "birthday": "2008-03-30",
+        "birthday": "2001-03-30",
         "blood": "B",
         "hobby": "拆解旧CD盒研究封面设计",
         "skill": "舞蹈卡点爆发",
@@ -4232,7 +4783,7 @@
       "favoritePokemon": 22,
       "profile": {
         "height": "164cm",
-        "birthday": "2007-10-13",
+        "birthday": "1998-10-13",
         "blood": "AB",
         "hobby": "在便利店比较同款饭团的米粒数量、给路边的猫起名字并写设定集",
         "skill": "能在完全跑调的情况下把整首歌唱得很有气势",
@@ -4348,7 +4899,7 @@
       "favoritePokemon": 1,
       "profile": {
         "height": "155cm",
-        "birthday": "2010-11-25",
+        "birthday": "1998-11-25",
         "blood": "A",
         "hobby": "半夜拆解电子闹钟研究为什么它总是比我起得早",
         "skill": "即兴把任何日常对话改编成舞台MC",
@@ -4449,7 +5000,7 @@
       "favoritePokemon": 24,
       "profile": {
         "height": "156cm",
-        "birthday": "2010-08-28",
+        "birthday": "1998-08-28",
         "blood": "B",
         "hobby": "记录每天遇到的奇怪路人并给他们编背景故事",
         "skill": "在完全没有节拍器的情况下精准卡点进歌",
@@ -4504,7 +5055,9 @@
         "s_utvdcu2u": "A面选拔（第3排）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:15:26.458Z",
       "updatedAt": "2026-07-15T13:15:26.458Z"
@@ -4585,7 +5138,7 @@
       "favoritePokemon": 130,
       "profile": {
         "height": "163cm",
-        "birthday": "2007-04-23",
+        "birthday": "1999-04-23",
         "blood": "B",
         "hobby": "给食物拍遗照、研究为什么最后一口最好吃",
         "skill": "一句话把现场气氛从安静变成爆笑",
@@ -4640,7 +5193,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "落选",
+        "s_ufq2hy3z": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:15:42.431Z",
       "updatedAt": "2026-07-15T13:15:42.431Z"
@@ -4711,7 +5266,7 @@
       "favoritePokemon": 19,
       "profile": {
         "height": "155cm",
-        "birthday": "2007-01-19",
+        "birthday": "2000-01-19",
         "blood": "B",
         "hobby": "把少女漫画里的台词读成恐怖片旁白",
         "skill": "无表情状态下完成高甜营业",
@@ -4810,7 +5365,7 @@
       "favoritePokemon": 106,
       "profile": {
         "height": "152cm",
-        "birthday": "2010-06-10",
+        "birthday": "2000-06-10",
         "blood": "AB",
         "hobby": "模仿不同成员的说话方式并偷偷录音复盘",
         "skill": "一秒切换五种情绪表情",
@@ -4913,7 +5468,7 @@
       "favoritePokemon": 100,
       "profile": {
         "height": "158cm",
-        "birthday": "2007-04-26",
+        "birthday": "2000-04-26",
         "blood": "B",
         "hobby": "把外来词翻译成只有自己懂的中文版本",
         "skill": "在混乱现场中精准找到镜头并抢C位",
@@ -4968,7 +5523,9 @@
         "s_utvdcu2u": "A面选拔（第1排 护法）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "A面选拔（第2排 护法）"
+        "s_kv6ne2gm": "A面选拔（第2排 护法）",
+        "s_iuvai044": "A面选拔（第1排）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:15:52.216Z",
       "updatedAt": "2026-07-15T13:15:52.216Z"
@@ -5030,7 +5587,7 @@
       "favoritePokemon": 81,
       "profile": {
         "height": "153cm",
-        "birthday": "2005-02-05",
+        "birthday": "1997-02-05",
         "blood": "AB",
         "hobby": "收集坏掉的耳机",
         "skill": "延迟反应制造笑点",
@@ -5112,7 +5669,7 @@
       "favoritePokemon": 81,
       "profile": {
         "height": "164cm",
-        "birthday": "2005-07-07",
+        "birthday": "1999-07-07",
         "blood": "B",
         "hobby": "整理歌词碎片",
         "skill": "眼神压制",
@@ -5210,7 +5767,7 @@
       "favoritePokemon": 145,
       "profile": {
         "height": "152cm",
-        "birthday": "2005-03-22",
+        "birthday": "1996-03-22",
         "blood": "A",
         "hobby": "看完一半就关书",
         "skill": "意外高音",
@@ -5265,7 +5822,9 @@
         "s_utvdcu2u": "A面选拔（第2排）",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第2排）",
-        "s_kv6ne2gm": "A面选拔（第2排）"
+        "s_kv6ne2gm": "A面选拔（第2排）",
+        "s_iuvai044": "A面选拔（第1排）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:16:09.640Z",
       "updatedAt": "2026-07-15T13:16:09.640Z"
@@ -5339,7 +5898,7 @@
       "favoritePokemon": 132,
       "profile": {
         "height": "166cm",
-        "birthday": "2007-07-07",
+        "birthday": "1997-07-07",
         "blood": "A",
         "hobby": "深夜洗杯子",
         "skill": "段落推进",
@@ -5442,7 +6001,7 @@
       "favoritePokemon": 44,
       "profile": {
         "height": "159cm",
-        "birthday": "2008-11-11",
+        "birthday": "1998-11-11",
         "blood": "AB",
         "hobby": "收集车票",
         "skill": "低音呢喃",
@@ -5520,7 +6079,7 @@
       "favoritePokemon": 6,
       "profile": {
         "height": "167cm",
-        "birthday": "2003-03-08",
+        "birthday": "1995-03-08",
         "blood": "A",
         "hobby": "给植物起名字",
         "skill": "静态存在感",
@@ -5617,7 +6176,7 @@
       "favoritePokemon": 30,
       "profile": {
         "height": "151cm",
-        "birthday": "2006-08-22",
+        "birthday": "1995-08-22",
         "blood": "A",
         "hobby": "城市边缘散步",
         "skill": "舞台定点爆发",
@@ -5672,7 +6231,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "落选",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:16:20.067Z",
       "updatedAt": "2026-07-15T13:16:20.067Z"
@@ -5740,7 +6301,7 @@
       "favoritePokemon": 53,
       "profile": {
         "height": "155cm",
-        "birthday": "2003-08-14",
+        "birthday": "1995-08-14",
         "blood": "A",
         "hobby": "拍模糊照片",
         "skill": "镜头瞬间锁定",
@@ -5850,7 +6411,7 @@
       "favoritePokemon": 6,
       "profile": {
         "height": "170cm",
-        "birthday": "2007-02-21",
+        "birthday": "1996-02-21",
         "blood": "O",
         "hobby": "在地图上乱画",
         "skill": "MC转向",
@@ -5963,7 +6524,7 @@
       "favoritePokemon": 17,
       "profile": {
         "height": "168cm",
-        "birthday": "2003-08-14",
+        "birthday": "1997-08-14",
         "blood": "B",
         "hobby": "看说明书当小说",
         "skill": "混乱中稳定",
@@ -6077,7 +6638,7 @@
       "favoritePokemon": 130,
       "profile": {
         "height": "165cm",
-        "birthday": "2003-12-05",
+        "birthday": "1997-12-05",
         "blood": "A",
         "hobby": "假装会乐器",
         "skill": "停顿制造感",
@@ -6169,7 +6730,7 @@
       "favoritePokemon": 70,
       "profile": {
         "height": "157cm",
-        "birthday": "2005-02-02",
+        "birthday": "1997-02-02",
         "blood": "AB",
         "hobby": "整理不存在的清单",
         "skill": "碎拍处理",
@@ -6252,7 +6813,7 @@
       "favoritePokemon": 17,
       "profile": {
         "height": "162cm",
-        "birthday": "2008-10-10",
+        "birthday": "1994-10-10",
         "blood": "AB",
         "hobby": "听雨声发呆",
         "skill": "舞步记忆",
@@ -6363,7 +6924,7 @@
       "favoritePokemon": 31,
       "profile": {
         "height": "150cm",
-        "birthday": "2006-02-25",
+        "birthday": "1994-02-25",
         "blood": "A",
         "hobby": "记录雨伞",
         "skill": "慢动作表演",
@@ -6418,7 +6979,9 @@
         "s_utvdcu2u": "A面选拔（第3排）",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "落选"
+        "s_kv6ne2gm": "落选",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-15T13:16:29.411Z",
       "updatedAt": "2026-07-15T13:16:29.411Z"
@@ -6498,7 +7061,7 @@
       "favoritePokemon": 102,
       "profile": {
         "height": "169cm",
-        "birthday": "2007-02-08",
+        "birthday": "1994-02-08",
         "blood": "B",
         "hobby": "给闹钟设哲学备注",
         "skill": "无意识控场",
@@ -6553,7 +7116,9 @@
         "s_utvdcu2u": "落选",
         "s_5q811xeb": "A面选拔（第2排）",
         "s_9l2u3ftn": "落选",
-        "s_kv6ne2gm": "A面选拔（第3排）"
+        "s_kv6ne2gm": "A面选拔（第3排）",
+        "s_iuvai044": "A面选拔（第3排）",
+        "s_ufq2hy3z": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-16T10:19:31.848Z",
       "updatedAt": "2026-07-16T10:19:31.848Z"
@@ -6628,7 +7193,7 @@
       "favoritePokemon": 70,
       "profile": {
         "height": "163cm",
-        "birthday": "2004-03-14",
+        "birthday": "1994-03-14",
         "blood": "B",
         "hobby": "记录陌生人的鞋子",
         "skill": "安静ending",
@@ -6733,7 +7298,7 @@
       "favoritePokemon": 80,
       "profile": {
         "height": "154cm",
-        "birthday": "2008-06-08",
+        "birthday": "1994-06-08",
         "blood": "AB",
         "hobby": "模拟采访自己",
         "skill": "情绪收尾",
@@ -6816,7 +7381,7 @@
       "favoritePokemon": 11,
       "profile": {
         "height": "156cm",
-        "birthday": "2005-03-19",
+        "birthday": "1994-03-19",
         "blood": "AB",
         "hobby": "制作失败甜点",
         "skill": "情绪切换",
@@ -6886,7 +7451,7 @@
       "favoritePokemon": 64,
       "profile": {
         "height": "158cm",
-        "birthday": "2004-12-13",
+        "birthday": "1994-12-13",
         "blood": "AB",
         "hobby": "记住没用的知识",
         "skill": "气息控制",
@@ -6968,7 +7533,7 @@
       "favoritePokemon": 101,
       "profile": {
         "height": "160cm",
-        "birthday": "2004-03-12",
+        "birthday": "1994-03-12",
         "blood": "A",
         "hobby": "摄影 / 甜点",
         "skill": "舞蹈",
@@ -7057,7 +7622,7 @@
       "favoritePokemon": 138,
       "profile": {
         "height": "158cm",
-        "birthday": "2005-10-02",
+        "birthday": "1995-10-02",
         "blood": "O",
         "hobby": "钢琴 / 旅行",
         "skill": "高音",
@@ -7135,7 +7700,7 @@
       "favoritePokemon": 127,
       "profile": {
         "height": "163cm",
-        "birthday": "2003-07-19",
+        "birthday": "1996-07-19",
         "blood": "B",
         "hobby": "漫画 / 猫咖",
         "skill": "表情管理",
@@ -7215,7 +7780,7 @@
       "favoritePokemon": 9,
       "profile": {
         "height": "156cm",
-        "birthday": "2006-01-28",
+        "birthday": "1996-01-28",
         "blood": "AB",
         "hobby": "料理 / 露营",
         "skill": "MC",
@@ -7315,7 +7880,7 @@
       "favoritePokemon": 146,
       "profile": {
         "height": "165cm",
-        "birthday": "2004-11-11",
+        "birthday": "1996-11-11",
         "blood": "A",
         "hobby": "滑雪 / 美妆",
         "skill": "镜头感",
@@ -7417,7 +7982,7 @@
       "favoritePokemon": 92,
       "profile": {
         "height": "159cm",
-        "birthday": "2005-05-09",
+        "birthday": "1996-05-09",
         "blood": "O",
         "hobby": "和服 / 茶道",
         "skill": "柔软度",
@@ -7504,7 +8069,7 @@
       "favoritePokemon": 100,
       "profile": {
         "height": "162cm",
-        "birthday": "2006-08-21",
+        "birthday": "1996-08-21",
         "blood": "B",
         "hobby": "街拍 / 手账",
         "skill": "Rap",
@@ -7552,10 +8117,10 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-07-29",
+      "graduationSongTitle": "Typo",
+      "inheritanceSuccessorId": "m_11gen_4",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -7602,7 +8167,7 @@
       "favoritePokemon": 103,
       "profile": {
         "height": "154cm",
-        "birthday": "2007-02-14",
+        "birthday": "1996-02-14",
         "blood": "A",
         "hobby": "绘画 / 甜品店巡礼",
         "skill": "可爱担当",
@@ -7657,10 +8222,12 @@
         "s_utvdcu2u": "A面选拔（第2排）",
         "s_5q811xeb": "A面选拔（第3排）",
         "s_9l2u3ftn": "A面选拔（第3排）",
-        "s_kv6ne2gm": "A面选拔（第2排）"
+        "s_kv6ne2gm": "A面选拔（第2排）",
+        "s_iuvai044": "A面选拔（第2排）",
+        "s_ufq2hy3z": "A面选拔（第1排 center）"
       },
-      "createdAt": "2026-07-15T13:16:58.421Z",
-      "updatedAt": "2026-07-15T13:16:58.421Z"
+      "createdAt": "2026-08-03T11:49:56.418Z",
+      "updatedAt": "2026-08-03T11:49:56.418Z"
     },
     {
       "id": "m_reina",
@@ -7712,7 +8279,7 @@
       "favoritePokemon": 22,
       "profile": {
         "height": "167cm",
-        "birthday": "2003-12-03",
+        "birthday": "1996-12-03",
         "blood": "AB",
         "hobby": "爵士乐 / 跑步",
         "skill": "气场",
@@ -7806,7 +8373,7 @@
       "favoritePokemon": 105,
       "profile": {
         "height": "161cm",
-        "birthday": "2006-09-30",
+        "birthday": "1996-09-30",
         "blood": "O",
         "hobby": "运动 / 电影",
         "skill": "稳定唱功",
@@ -10531,6 +11098,126 @@
       "notes": "又一届总选举，德保夏希成功当c！7期集体爆发，这比5期厉害多了吧",
       "createdAt": "2026-07-15T10:34:51.227Z",
       "updatedAt": "2026-07-15T10:34:51.227Z"
+    },
+    {
+      "id": "s_iuvai044",
+      "title": "50th Single · Oh My Darling! ",
+      "release": "2026-07-20",
+      "cover": "/uploads/1785754938943.webp",
+      "tags": [],
+      "singleKind": "纪念单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Oh My Darling! (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1785754955365-7d1h5i.mp4"
+        },
+        {
+          "no": 2,
+          "title": "Blue & White / All",
+          "isAside": false,
+          "audio": "/uploads/audio/1785755021857-d62r7p.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 17,
+        "rows": [
+          7,
+          5,
+          5
+        ],
+        "slots": [
+          "m_bm7qiehk",
+          "m_blncyp2k",
+          "m_7gen_4_8843",
+          "m_7gen_3_5910",
+          "m_9gen_5",
+          "m_8gen_1_4186",
+          "m_7j6tcyhr",
+          "m_10gen_6",
+          "m_6gen_1_4821",
+          "m_10gen_4",
+          "m_hina",
+          "m_9gen_4",
+          "m_5gen_7_2141",
+          "m_7gen_2_4421",
+          "m_9gen_3",
+          "m_7gen_6_7205",
+          "m_rjli97s6"
+        ],
+        "slotRoles": {
+          "13": "guardian",
+          "14": "center",
+          "15": "guardian"
+        }
+      },
+      "notes": "XP里程碑式的第50首单曲，由指定次世代ace山本喜月单独站上c位！XP不知不觉已经发行了50首单曲，成为了性感世界第一大ip，感谢所有粉丝一路以来的支持，XP thanks your support！",
+      "createdAt": "2026-08-03T11:07:49.357Z",
+      "updatedAt": "2026-08-03T11:07:49.357Z"
+    },
+    {
+      "id": "s_ufq2hy3z",
+      "title": "51st Single · Behind the Beat",
+      "release": "2026-07-28",
+      "cover": "/uploads/1785757400968.webp",
+      "tags": [],
+      "singleKind": "常规单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Behind the Beat (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1785757417567-gd9a78.mp4"
+        },
+        {
+          "no": 2,
+          "title": "Typo / 加藤友良乃 毕业曲",
+          "isAside": false,
+          "audio": "/uploads/audio/1785757434754-sz5sds.mp4"
+        },
+        {
+          "no": 3,
+          "title": "Survivorship Bias / XP 11期生 宇治 圣center",
+          "isAside": false,
+          "audio": "/uploads/audio/1785757449152-5346zn.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 17,
+        "rows": [
+          7,
+          7,
+          3
+        ],
+        "slots": [
+          "m_5gen_3_7488",
+          "m_5gen_4_8493",
+          "m_7gen_3_5910",
+          "m_10gen_4",
+          "m_9gen_4",
+          "m_6gen_3_1550",
+          "m_6gen_2_9374",
+          "m_6gen_1_4821",
+          "m_7gen_6_7205",
+          "m_5gen_7_2141",
+          "m_7gen_2_4421",
+          "m_9gen_3",
+          "m_rjli97s6",
+          "m_blncyp2k",
+          "m_7j6tcyhr",
+          "m_hina",
+          "m_bm7qiehk"
+        ],
+        "slotRoles": {
+          "14": "guardian",
+          "15": "center",
+          "16": "guardian"
+        }
+      },
+      "notes": "XP传奇ace加藤友良乃终于要毕业了！前5期所有xp元老前来送别，mv的咚咚咚舞更是引起讨论，谢谢你友良乃！",
+      "createdAt": "2026-08-03T11:48:24.276Z",
+      "updatedAt": "2026-08-03T11:48:24.276Z"
     }
   ],
   "gallery": [
@@ -10888,6 +11575,22 @@
         {
           "singleId": "s_5q811xeb",
           "trackNo": 1
+        },
+        {
+          "singleId": "s_9l2u3ftn",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_kv6ne2gm",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_iuvai044",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_ufq2hy3z",
+          "trackNo": 1
         }
       ],
       "createdAt": "2026-03-16T20:59:00.621Z"
@@ -10928,6 +11631,10 @@
         {
           "singleId": "s_29vsn9pg",
           "trackNo": 4
+        },
+        {
+          "singleId": "s_ufq2hy3z",
+          "trackNo": 2
         }
       ],
       "createdAt": "2026-03-16T21:10:01.057Z"

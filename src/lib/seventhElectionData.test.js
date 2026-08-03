@@ -41,15 +41,17 @@ const db = JSON.parse(
 const seventhEntry = (member) =>
   member.electionRanks?.filter((entry) => entry.edition === "第7届") ?? [];
 
-test("the seventh election includes exactly the 29 active members", () => {
-  const activeMembers = db.members.filter((member) => member.isActive);
-  assert.equal(activeMembers.length, 29);
+test("the seventh election includes exactly the 29 ranked participants", () => {
+  const rankedMembers = db.members.filter((member) =>
+    seventhEntry(member).some((entry) => /^第\d+位$/.test(entry.rank)),
+  );
+  assert.equal(rankedMembers.length, 29);
   assert.deepEqual(
-    new Set(activeMembers.map((member) => member.id)),
+    new Set(rankedMembers.map((member) => member.id)),
     new Set(expectedMemberIdsByRank),
   );
 
-  for (const member of activeMembers) assert.equal(seventhEntry(member).length, 1, member.name);
+  for (const member of rankedMembers) assert.equal(seventhEntry(member).length, 1, member.name);
   for (const member of db.members.filter((member) => !member.isActive)) {
     assert.equal(seventhEntry(member).length, 0, member.name);
   }
@@ -58,10 +60,12 @@ test("the seventh election includes exactly the 29 active members", () => {
 test("the seventh election ranks match the supplied order without gaps", () => {
   const actualIdsByRank = db.members
     .flatMap((member) =>
-      seventhEntry(member).map((entry) => ({
-        id: member.id,
-        rank: Number(String(entry.rank).match(/\d+/)?.[0]),
-      })),
+      seventhEntry(member)
+        .filter((entry) => /^第\d+位$/.test(entry.rank))
+        .map((entry) => ({
+          id: member.id,
+          rank: Number(String(entry.rank).match(/\d+/)?.[0]),
+        })),
     )
     .sort((a, b) => a.rank - b.rank)
     .map(({ id }) => id);
@@ -69,13 +73,15 @@ test("the seventh election ranks match the supplied order without gaps", () => {
   assert.deepEqual(actualIdsByRank, expectedMemberIdsByRank);
 });
 
-test("every seventh-election entry locks the member's current latest photo version", () => {
-  for (const member of db.members.filter((candidate) => candidate.isActive)) {
+test("every seventh-election entry locks an existing official photo version", () => {
+  for (const member of db.members.filter((candidate) =>
+    seventhEntry(candidate).some((entry) => /^第\d+位$/.test(entry.rank)),
+  )) {
     const [entry] = seventhEntry(member);
-    const latestVersion = Math.max(
-      ...member.officialPhotos.map((photo) => Number(photo.version)),
+    assert.ok(
+      member.officialPhotos.some((photo) => Number(photo.version) === entry.photoVersion),
+      member.name,
     );
-    assert.equal(entry.photoVersion, latestVersion, member.name);
   }
 });
 

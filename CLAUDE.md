@@ -107,6 +107,8 @@ Current section labels: TRACKLIST, INTRODUCTION, FORMATION, PROFILE, ELECTION, F
 | 7期 | `#2F7927` | `#FFFFFF` |
 | 8期 | `#3098FE` | `#FFFFFF` |
 | 9期 | `#3CC2B1` | `#FFFFFF` |
+| 10期 | `#FFFFFF` | `#FF1493` |
+| 11期 | `#E7E6E6` | `#000000` |
 All badges: `padding: '2px 8px', fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em'`
 
 ### Dialog / Modal
