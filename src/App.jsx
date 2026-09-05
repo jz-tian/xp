@@ -573,6 +573,30 @@ function generationBadgeStyle(gen = "") {
   return base;
 }
 
+function memberBadgeText(member) {
+  if (member?.group === "QINGNIAN") return "QINGNIAN";
+  return member?.generation || "";
+}
+
+function memberBadgeClass(member) {
+  if (member?.group === "QINGNIAN") return "";
+  return generationBadgeClass(member?.generation);
+}
+
+function memberBadgeStyle(member) {
+  if (member?.group === "QINGNIAN") {
+    return {
+      padding: "2px 8px",
+      fontWeight: 600,
+      fontSize: "10px",
+      letterSpacing: "0.04em",
+      backgroundColor: "#cffaf2",
+      color: "#FFFFFF",
+    };
+  }
+  return generationBadgeStyle(member?.generation);
+}
+
 function generationFilterStyle(gen = "", active = false) {
   const genNo = String(gen || "").match(/\d+/)?.[0];
   const theme = genNo ? GENERATION_THEME[genNo] : null;
@@ -586,13 +610,14 @@ function generationFilterStyle(gen = "", active = false) {
     : { backgroundColor: "#FFFFFF", color: theme.filterColor || theme.backgroundColor, borderColor: theme.borderColor };
 }
 
-function normalizeMemberDraft(member) {
+function normalizeMemberDraft(member, defaultGroup = "XP") {
   const profile = member?.profile || {};
   return {
     id: member?.id || `m_${uid()}`,
     name: member?.name || "",
     romaji: member?.romaji || "",
     origin: member?.origin || "",
+    group: member?.group || defaultGroup,
     generation: member?.generation || "",
     avatar: member?.avatar || "",
     officialPhotos: Array.isArray(member?.officialPhotos) ? member.officialPhotos : [],
@@ -2281,12 +2306,12 @@ function ElectionPage({ data }) {
                     {/* 期数 + 姓名 + romaji */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        {member.generation && (
+                        {memberBadgeText(member) && (
                           <span
-                            style={generationBadgeStyle(member.generation)}
-                            className={generationBadgeClass(member.generation)}
+                            style={memberBadgeStyle(member)}
+                            className={memberBadgeClass(member)}
                           >
-                            {member.generation}
+                            {memberBadgeText(member)}
                           </span>
                         )}
                         <span className="text-sm font-medium text-[#1C1C1C] tracking-[0.04em]">
@@ -2748,9 +2773,9 @@ function MemberDetailContent({ member, data }) {
             <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-[#687d91]">{member.romaji}</div>
           ) : null}
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            {member.generation ? (
-              <span className={generationBadgeClass(member.generation)} style={generationBadgeStyle(member.generation)}>
-                {member.generation}
+            {memberBadgeText(member) ? (
+              <span className={memberBadgeClass(member)} style={memberBadgeStyle(member)}>
+                {memberBadgeText(member)}
               </span>
             ) : null}
             <span className="xp-tag px-2.5 py-1 text-[10px]">{member.isActive ? "ACTIVE" : "OG"}</span>
@@ -3141,6 +3166,7 @@ function MembersPage({ data, setData, admin }) {
   const [selected, setSelected] = useState(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [editing, setEditing] = useState(null);
+  const [groupFilter, setGroupFilter] = useState("XP"); // XP | QINGNIAN
   const [statusFilter, setStatusFilter] = useState("active"); // all | active | inactive
   const [genFilter, setGenFilter] = useState("all"); // all | "1期" | "2期" ...
 
@@ -3157,6 +3183,7 @@ function MembersPage({ data, setData, admin }) {
   const generations = useMemo(() => {
     const set = new Set();
     members.forEach((m) => {
+      if ((m.group || "XP") !== groupFilter) return;
       const g = (m.generation ?? "").toString().trim();
       if (g) set.add(g);
     });
@@ -3169,18 +3196,23 @@ function MembersPage({ data, setData, admin }) {
       return String(a).localeCompare(String(b));
     });
     return arr;
-  }, [members]);
+  }, [members, groupFilter]);
 
   const filteredMembers = useMemo(() => {
-    let list = members;
+    let list = members.filter((m) => (m.group || "XP") === groupFilter);
     if (statusFilter === "active") list = list.filter((m) => m.isActive);
     if (statusFilter === "inactive") list = list.filter((m) => !m.isActive);
     if (genFilter !== "all") list = list.filter((m) => (m.generation ?? "").toString().trim() === genFilter);
     return list;
-  }, [members, statusFilter, genFilter]);
+  }, [members, groupFilter, statusFilter, genFilter]);
+
+  const setGroupFilterAndResetGen = (g) => {
+    setGroupFilter(g);
+    setGenFilter("all");
+  };
 
   const openEdit = (m) => {
-    setEditing(normalizeMemberDraft(m));
+    setEditing(normalizeMemberDraft(m, groupFilter));
     setEditorOpen(true);
   };
 
@@ -3288,6 +3320,26 @@ function MembersPage({ data, setData, admin }) {
           </div>
         ) : null}
 
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        {[
+          { key: "XP", label: "XP" },
+          { key: "QINGNIAN", label: "QINGNIAN" },
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setGroupFilterAndResetGen(key)}
+            className={
+              "text-xs tracking-[0.14em] px-5 py-1.5 rounded-full border transition-colors " +
+              (groupFilter === key
+                ? "bg-[#142235] text-white border-[#142235]"
+                : "border-[#c7e6f8] bg-white/55 text-[#087daf] hover:bg-white")
+            }
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center gap-2">
         {[
           { key: "all", label: "全部" },
@@ -3308,9 +3360,9 @@ function MembersPage({ data, setData, admin }) {
           </button>
         ))}
 
-        <div className="mx-2 h-4 w-px bg-[#E0E0E0]" />
+        {groupFilter !== "QINGNIAN" && <div className="mx-2 h-4 w-px bg-[#E0E0E0]" />}
 
-        {[{ key: "all", label: "全部期" }, ...generations.map((g) => ({ key: g, label: g }))].map(({ key, label }) => (
+        {(groupFilter === "QINGNIAN" ? [] : [{ key: "all", label: "全部期" }, ...generations.map((g) => ({ key: g, label: g }))]).map(({ key, label }) => (
           <button
             key={key}
             onClick={() => setGenFilter(key)}
@@ -3349,8 +3401,8 @@ function MembersPage({ data, setData, admin }) {
                   />
                 </button>
                 <div className="absolute left-2 top-2 flex gap-1">
-                  <span className={generationBadgeClass(m.generation)} style={generationBadgeStyle(m.generation)}>
-                    {m.generation}
+                  <span className={memberBadgeClass(m)} style={memberBadgeStyle(m)}>
+                    {memberBadgeText(m)}
                   </span>
                 </div>
                 {admin ? (
@@ -3443,6 +3495,26 @@ function MembersPage({ data, setData, admin }) {
                   />
                 </div>
                 <div className="grid gap-2">
+                  <div className="text-sm font-medium">所属团体</div>
+                  <div className="flex gap-2">
+                    {["XP", "QINGNIAN"].map((g) => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setEditing((p) => ({ ...p, group: g }))}
+                        className={
+                          "flex-1 text-xs tracking-wider px-3 py-2 border transition-colors " +
+                          ((editing.group || "XP") === g
+                            ? "bg-[#142235] text-white border-[#142235]"
+                            : "border-[#E0E0E0] bg-white text-[#1C1C1C] hover:bg-[#F0F0F0]")
+                        }
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid gap-2">
                   <div className="text-sm font-medium">期数</div>
                   <Input
                     value={editing.generation}
@@ -3451,6 +3523,9 @@ function MembersPage({ data, setData, admin }) {
                     }
                     placeholder="例如：2期"
                   />
+                  {editing.group === "QINGNIAN" && (
+                    <div className="text-xs text-[#6B6B6B]">QINGNIAN 成员的期数不会展示，将统一显示 QINGNIAN 徽章</div>
+                  )}
                 </div>
                 <div className="grid gap-2">
                   <div className="text-sm font-medium">是否在籍</div>
@@ -4642,7 +4717,9 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
                         : "";
 
                     const genTextRaw = m?.generation ? String(m.generation) : "";
-                    const genText = genTextRaw ? (genTextRaw.includes("期") ? genTextRaw : `${genTextRaw}期`) : "";
+                    const genText = m?.group === "QINGNIAN"
+                      ? "QINGNIAN"
+                      : genTextRaw ? (genTextRaw.includes("期") ? genTextRaw : `${genTextRaw}期`) : "";
 
                     const count = m ? (cumulativeCounts?.get(m.id) || 0) : 0;
                     const countText = count <= 0 ? "" : count === 1 ? "（初）" : `（${count}）`;
@@ -4671,8 +4748,8 @@ function SingleDetail({single, singles = [], membersById, admin, cumulativeCount
                               {genText ? (
                                 <div className="mb-0.5 flex justify-center">
                                   <span
-                                    className={generationBadgeClass(genText)}
-                                    style={{ fontSize: badgeFont, ...generationBadgeStyle(genText) }}
+                                    className={m?.group === "QINGNIAN" ? "" : generationBadgeClass(genText)}
+                                    style={{ fontSize: badgeFont, ...(m?.group === "QINGNIAN" ? { backgroundColor: "#cffaf2", color: "#FFFFFF", padding: "2px 8px", fontWeight: 600, letterSpacing: "0.04em" } : generationBadgeStyle(genText)) }}
                                   >
                                     {genText}
                                   </span>
@@ -4859,6 +4936,7 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
   const [pickerSlotIndex, setPickerSlotIndex] = useState(null);
   const [pickerRole, setPickerRole] = useState(null); // null | "center" | "guardian"
   const [pickerPool, setPickerPool] = useState("active"); // "active" | "og"
+  const [pickerGroupFilter, setPickerGroupFilter] = useState("XP"); // "XP" | "QINGNIAN"
 
   const openPickerForSlot = (slotIndex) => {
     setPickerSlotIndex(slotIndex);
@@ -5003,10 +5081,30 @@ function LineupEditor({ singleDraft, setSingleDraft, members }) {
             ))}
           </div>
 
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <div className="text-xs text-[#6B6B6B] mr-1">团体：</div>
+            {["XP", "QINGNIAN"].map((g) => (
+              <button
+                key={g}
+                type="button"
+                className={
+                  "px-3 py-1 border text-xs tracking-wider " +
+                  (pickerGroupFilter === g
+                    ? "bg-[#1C1C1C] text-white border-[#1C1C1C]"
+                    : "bg-white text-[#1C1C1C] border-[#E0E0E0] hover:bg-[#F0F0F0]")
+                }
+                onClick={() => setPickerGroupFilter(g)}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
+
           {(() => {
             const isMemorial = singleDraft.singleKind === "纪念单曲";
-            const activeList = members.filter((m) => m.isActive);
-            const ogList = members.filter((m) => !m.isActive);
+            const groupedMembers = members.filter((m) => (m.group || "XP") === pickerGroupFilter);
+            const activeList = groupedMembers.filter((m) => m.isActive);
+            const ogList = groupedMembers.filter((m) => !m.isActive);
             const renderCard = (m) => (
               <button
                 key={m.id}

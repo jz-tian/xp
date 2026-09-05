@@ -1,6 +1,136 @@
 {
   "members": [
     {
+      "id": "m_qingnian_1",
+      "name": "佐伯 奈緒実",
+      "romaji": "NAOMI SAEKI",
+      "origin": "神奈川県・横浜市",
+      "group": "QINGNIAN",
+      "generation": "",
+      "avatar": "/uploads/1788613442667.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1788613442667.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_9gen_4",
+        "m_nana"
+      ],
+      "friends": [],
+      "favoriteSong": "WooHoo!! Sakura and Hawk (A-side)",
+      "favoriteSongs": [
+        "WooHoo!! Sakura and Hawk (A-side)",
+        "BLACK MOON (A-side)",
+        "Wall of Dreams (A-side)"
+      ],
+      "favoritePokemon": 25,
+      "profile": {
+        "height": "160cm",
+        "birthday": "2004-06-21",
+        "blood": "O",
+        "hobby": "在笔记本上把路过的野猫都画成简笔画，并给它们取名字",
+        "skill": "闭着眼睛也能把吉他和弦按对，五分钟内能扒出一首新歌的伴奏",
+        "catchphrase": "青年的奈绪実，今天也要笑着往前冲！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "落选"
+      },
+      "createdAt": "2026-09-05T13:04:17.758Z",
+      "updatedAt": "2026-09-05T13:04:17.758Z"
+    },
+    {
       "id": "m_11gen_1",
       "name": "大堀 日奈子",
       "romaji": "HINAKO OHORI",
@@ -126,10 +256,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-08-03T11:34:42.728Z",
-      "updatedAt": "2026-08-03T11:34:42.728Z"
+      "updatedAt": "2026-08-03T11:34:42.728Z",
+      "group": "XP"
     },
     {
       "id": "m_11gen_2",
@@ -258,10 +390,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-08-03T11:34:56.983Z",
-      "updatedAt": "2026-08-03T11:34:56.983Z"
+      "updatedAt": "2026-08-03T11:34:56.983Z",
+      "group": "XP"
     },
     {
       "id": "m_11gen_3",
@@ -390,10 +524,12 @@
         "s_dfeqf245": "A面选拔（第2排）",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-08-03T11:35:06.327Z",
-      "updatedAt": "2026-08-03T11:35:06.327Z"
+      "updatedAt": "2026-08-03T11:35:06.327Z",
+      "group": "XP"
     },
     {
       "id": "m_11gen_4",
@@ -520,10 +656,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-08-03T11:35:28.881Z",
-      "updatedAt": "2026-08-03T11:35:28.881Z"
+      "updatedAt": "2026-08-03T11:35:28.881Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_1",
@@ -656,10 +794,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:07:32.060Z",
-      "updatedAt": "2026-07-15T13:07:32.060Z"
+      "updatedAt": "2026-07-15T13:07:32.060Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_2",
@@ -792,10 +932,12 @@
         "s_dfeqf245": "A面选拔（第2排）",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:07:46.820Z",
-      "updatedAt": "2026-07-15T13:07:46.820Z"
+      "updatedAt": "2026-07-15T13:07:46.820Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_3",
@@ -927,10 +1069,12 @@
         "s_dfeqf245": "A面选拔（第2排）",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:08:05.446Z",
-      "updatedAt": "2026-07-15T13:08:05.446Z"
+      "updatedAt": "2026-07-15T13:08:05.446Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_4",
@@ -1063,10 +1207,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "A面选拔（第2排）"
+        "s_zm6ss6kl": "A面选拔（第2排）",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:08:18.892Z",
-      "updatedAt": "2026-07-15T13:08:18.892Z"
+      "updatedAt": "2026-07-15T13:08:18.892Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_5",
@@ -1198,10 +1344,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:08:34.334Z",
-      "updatedAt": "2026-07-15T13:08:34.334Z"
+      "updatedAt": "2026-07-15T13:08:34.334Z",
+      "group": "XP"
     },
     {
       "id": "m_10gen_6",
@@ -1334,10 +1482,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:08:56.022Z",
-      "updatedAt": "2026-07-15T13:08:56.022Z"
+      "updatedAt": "2026-07-15T13:08:56.022Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_1",
@@ -1469,10 +1619,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:09:36.565Z",
-      "updatedAt": "2026-07-15T13:09:36.565Z"
+      "updatedAt": "2026-07-15T13:09:36.565Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_2",
@@ -1605,10 +1757,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:09:48.878Z",
-      "updatedAt": "2026-07-15T13:09:48.878Z"
+      "updatedAt": "2026-07-15T13:09:48.878Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_3",
@@ -1740,10 +1894,12 @@
         "s_dfeqf245": "A面选拔（第1排）",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "A面选拔（第1排 center）",
-        "s_zm6ss6kl": "A面选拔（第2排）"
+        "s_zm6ss6kl": "A面选拔（第2排）",
+        "s_u45gpsal": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-15T13:15:05.271Z",
-      "updatedAt": "2026-07-15T13:15:05.271Z"
+      "updatedAt": "2026-07-15T13:15:05.271Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_4",
@@ -1876,10 +2032,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:10:39.771Z",
-      "updatedAt": "2026-07-15T13:10:39.771Z"
+      "updatedAt": "2026-07-15T13:10:39.771Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_5",
@@ -2011,10 +2169,12 @@
         "s_dfeqf245": "A面选拔（第1排）",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:14:45.813Z",
-      "updatedAt": "2026-07-15T13:14:45.813Z"
+      "updatedAt": "2026-07-15T13:14:45.813Z",
+      "group": "XP"
     },
     {
       "id": "m_9gen_6",
@@ -2147,10 +2307,12 @@
         "s_dfeqf245": "A面选拔（第3排）",
         "s_ha0edqrg": "A面选拔（第1排 center）",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-15T13:10:55.963Z",
-      "updatedAt": "2026-07-15T13:10:55.963Z"
+      "updatedAt": "2026-07-15T13:10:55.963Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_1_4186",
@@ -2287,10 +2449,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:11:10.597Z",
-      "updatedAt": "2026-07-15T13:11:10.597Z"
+      "updatedAt": "2026-07-15T13:11:10.597Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_2_2649",
@@ -2398,7 +2562,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:54:39.587Z",
-      "updatedAt": "2026-07-16T10:54:39.587Z"
+      "updatedAt": "2026-07-16T10:54:39.587Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_3_5730",
@@ -2506,7 +2671,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:54:28.484Z",
-      "updatedAt": "2026-07-16T10:54:28.484Z"
+      "updatedAt": "2026-07-16T10:54:28.484Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_4_9154",
@@ -2614,7 +2780,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:54:13.758Z",
-      "updatedAt": "2026-07-16T10:54:13.758Z"
+      "updatedAt": "2026-07-16T10:54:13.758Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_5_8017",
@@ -2722,7 +2889,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:54:03.789Z",
-      "updatedAt": "2026-07-16T10:54:03.789Z"
+      "updatedAt": "2026-07-16T10:54:03.789Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_6_3375",
@@ -2830,7 +2998,8 @@
         "s_phyou9mt": "A面选拔（第1排）"
       },
       "createdAt": "2026-07-16T10:53:51.217Z",
-      "updatedAt": "2026-07-16T10:53:51.217Z"
+      "updatedAt": "2026-07-16T10:53:51.217Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_7_5521",
@@ -2957,7 +3126,8 @@
         "s_5q811xeb": "落选"
       },
       "createdAt": "2026-07-16T10:18:59.500Z",
-      "updatedAt": "2026-07-16T10:18:59.500Z"
+      "updatedAt": "2026-07-16T10:18:59.500Z",
+      "group": "XP"
     },
     {
       "id": "m_8gen_8_6902",
@@ -3076,7 +3246,8 @@
         "s_abydc9kz": "落选"
       },
       "createdAt": "2026-07-16T10:53:39.648Z",
-      "updatedAt": "2026-07-16T10:53:39.648Z"
+      "updatedAt": "2026-07-16T10:53:39.648Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_1_3104",
@@ -3188,7 +3359,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:18:37.387Z",
-      "updatedAt": "2026-07-16T10:18:37.387Z"
+      "updatedAt": "2026-07-16T10:18:37.387Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_2_4421",
@@ -3329,10 +3501,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:11:23.896Z",
-      "updatedAt": "2026-07-15T13:11:23.896Z"
+      "updatedAt": "2026-07-15T13:11:23.896Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_3_5910",
@@ -3472,10 +3646,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:11:37.860Z",
-      "updatedAt": "2026-07-15T13:11:37.860Z"
+      "updatedAt": "2026-07-15T13:11:37.860Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_4_8843",
@@ -3615,10 +3791,12 @@
         "s_dfeqf245": "A面选拔（第2排）",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:12:22.306Z",
-      "updatedAt": "2026-07-15T13:12:22.306Z"
+      "updatedAt": "2026-07-15T13:12:22.306Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_5_1182",
@@ -3742,7 +3920,8 @@
         "s_9l4bc6jf": "落选"
       },
       "createdAt": "2026-07-16T10:53:25.101Z",
-      "updatedAt": "2026-07-16T10:53:25.101Z"
+      "updatedAt": "2026-07-16T10:53:25.101Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_6_7205",
@@ -3883,10 +4062,12 @@
         "s_dfeqf245": "A面选拔（第1排 center）",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "A面选拔（第2排）"
+        "s_zm6ss6kl": "A面选拔（第2排）",
+        "s_u45gpsal": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-15T13:12:34.595Z",
-      "updatedAt": "2026-07-15T13:12:34.595Z"
+      "updatedAt": "2026-07-15T13:12:34.595Z",
+      "group": "XP"
     },
     {
       "id": "m_7gen_7_9921",
@@ -4026,10 +4207,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:12:50.202Z",
-      "updatedAt": "2026-07-15T13:12:50.202Z"
+      "updatedAt": "2026-07-15T13:12:50.202Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_1_4821",
@@ -4169,10 +4352,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "A面选拔（第3排）"
+        "s_zm6ss6kl": "A面选拔（第3排）",
+        "s_u45gpsal": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-15T13:13:04.427Z",
-      "updatedAt": "2026-07-15T13:13:04.427Z"
+      "updatedAt": "2026-07-15T13:13:04.427Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_2_9374",
@@ -4312,10 +4497,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第2排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:13:26.222Z",
-      "updatedAt": "2026-07-15T13:13:26.222Z"
+      "updatedAt": "2026-07-15T13:13:26.222Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_3_1550",
@@ -4459,7 +4646,8 @@
         "s_luj5nvrt": "A面选拔（第3排）"
       },
       "createdAt": "2026-08-25T13:47:31.438Z",
-      "updatedAt": "2026-08-25T13:47:31.438Z"
+      "updatedAt": "2026-08-25T13:47:31.438Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_4_6829",
@@ -4587,7 +4775,8 @@
         "s_h4jg3kpw": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-16T10:18:11.362Z",
-      "updatedAt": "2026-07-16T10:18:11.362Z"
+      "updatedAt": "2026-07-16T10:18:11.362Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_5_7713",
@@ -4698,7 +4887,8 @@
         "s_6k83o27r": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-16T10:17:31.741Z",
-      "updatedAt": "2026-07-16T10:17:31.741Z"
+      "updatedAt": "2026-07-16T10:17:31.741Z",
+      "group": "XP"
     },
     {
       "id": "m_6gen_6_5098",
@@ -4807,7 +4997,8 @@
         "s_z8u6w72c": "落选"
       },
       "createdAt": "2026-07-16T10:53:06.987Z",
-      "updatedAt": "2026-07-16T10:53:06.987Z"
+      "updatedAt": "2026-07-16T10:53:06.987Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_1_3632",
@@ -4938,7 +5129,8 @@
         "s_5q811xeb": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-07-16T10:17:09.526Z",
-      "updatedAt": "2026-07-16T10:17:09.526Z"
+      "updatedAt": "2026-07-16T10:17:09.526Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_2_7259",
@@ -5021,7 +5213,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:16:55.727Z",
-      "updatedAt": "2026-07-16T10:16:55.727Z"
+      "updatedAt": "2026-07-16T10:16:55.727Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_3_7488",
@@ -5160,10 +5353,12 @@
         "s_dfeqf245": "A面选拔（第3排）",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "A面选拔（第1排 护法）"
+        "s_zm6ss6kl": "A面选拔（第1排 护法）",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:15:26.458Z",
-      "updatedAt": "2026-07-15T13:15:26.458Z"
+      "updatedAt": "2026-07-15T13:15:26.458Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_4_8493",
@@ -5302,10 +5497,12 @@
         "s_dfeqf245": "A面选拔（第3排）",
         "s_ha0edqrg": "A面选拔（第3排）",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "A面选拔（第1排 护法）"
+        "s_zm6ss6kl": "A面选拔（第1排 护法）",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:15:42.431Z",
-      "updatedAt": "2026-07-15T13:15:42.431Z"
+      "updatedAt": "2026-07-15T13:15:42.431Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_5_6677",
@@ -5418,7 +5615,8 @@
         "s_phyou9mt": "落选"
       },
       "createdAt": "2026-07-16T10:52:43.064Z",
-      "updatedAt": "2026-07-16T10:52:43.064Z"
+      "updatedAt": "2026-07-16T10:52:43.064Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_6_2454",
@@ -5495,7 +5693,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:52:27.305Z",
-      "updatedAt": "2026-07-16T10:52:27.305Z"
+      "updatedAt": "2026-07-16T10:52:27.305Z",
+      "group": "XP"
     },
     {
       "id": "m_5gen_7_2141",
@@ -5639,7 +5838,8 @@
         "s_zm6ss6kl": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-08-25T13:58:06.041Z",
-      "updatedAt": "2026-08-25T13:58:06.041Z"
+      "updatedAt": "2026-08-25T13:58:06.041Z",
+      "group": "XP"
     },
     {
       "id": "m_umbw1ji3",
@@ -5732,7 +5932,8 @@
         "s_rxq55d2c": "落选"
       },
       "createdAt": "2026-07-16T10:16:35.897Z",
-      "updatedAt": "2026-07-16T10:16:35.897Z"
+      "updatedAt": "2026-07-16T10:16:35.897Z",
+      "group": "XP"
     },
     {
       "id": "m_pr2yyz25",
@@ -5799,7 +6000,8 @@
         "s_ng2yeb1e": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:15:43.437Z",
-      "updatedAt": "2026-07-16T10:15:43.437Z"
+      "updatedAt": "2026-07-16T10:15:43.437Z",
+      "group": "XP"
     },
     {
       "id": "m_rjli97s6",
@@ -5939,10 +6141,12 @@
         "s_dfeqf245": "A面选拔（第1排）",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "A面选拔（第2排）",
-        "s_zm6ss6kl": "A面选拔（第2排）"
+        "s_zm6ss6kl": "A面选拔（第2排）",
+        "s_u45gpsal": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-07-15T13:16:09.640Z",
-      "updatedAt": "2026-07-15T13:16:09.640Z"
+      "updatedAt": "2026-07-15T13:16:09.640Z",
+      "group": "XP"
     },
     {
       "id": "m_batr9qfj",
@@ -6060,7 +6264,8 @@
         "s_yjn7shxt": "落选"
       },
       "createdAt": "2026-07-16T10:15:08.840Z",
-      "updatedAt": "2026-07-16T10:15:08.840Z"
+      "updatedAt": "2026-07-16T10:15:08.840Z",
+      "group": "XP"
     },
     {
       "id": "m_mdv7k6ml",
@@ -6139,7 +6344,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:52:10.151Z",
-      "updatedAt": "2026-07-16T10:52:10.151Z"
+      "updatedAt": "2026-07-16T10:52:10.151Z",
+      "group": "XP"
     },
     {
       "id": "m_t8u0ysq7",
@@ -6212,7 +6418,8 @@
         "s_0k9y573f": "落选"
       },
       "createdAt": "2026-07-16T10:51:50.792Z",
-      "updatedAt": "2026-07-16T10:51:50.792Z"
+      "updatedAt": "2026-07-16T10:51:50.792Z",
+      "group": "XP"
     },
     {
       "id": "m_blncyp2k",
@@ -6353,7 +6560,8 @@
         "s_ha0edqrg": "A面选拔（第2排）"
       },
       "createdAt": "2026-08-13T07:16:56.296Z",
-      "updatedAt": "2026-08-13T07:16:56.296Z"
+      "updatedAt": "2026-08-13T07:16:56.296Z",
+      "group": "XP"
     },
     {
       "id": "m_l4k686go",
@@ -6463,7 +6671,8 @@
         "s_phyou9mt": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-16T10:14:49.399Z",
-      "updatedAt": "2026-07-16T10:14:49.399Z"
+      "updatedAt": "2026-07-16T10:14:49.399Z",
+      "group": "XP"
     },
     {
       "id": "m_ltlzffea",
@@ -6568,7 +6777,8 @@
         "s_15hm6il2": "落选"
       },
       "createdAt": "2026-07-16T10:14:35.580Z",
-      "updatedAt": "2026-07-16T10:14:35.580Z"
+      "updatedAt": "2026-07-16T10:14:35.580Z",
+      "group": "XP"
     },
     {
       "id": "m_gbojk371",
@@ -6692,7 +6902,8 @@
         "s_gmm7a35g": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-07-16T10:14:20.993Z",
-      "updatedAt": "2026-07-16T10:14:20.993Z"
+      "updatedAt": "2026-07-16T10:14:20.993Z",
+      "group": "XP"
     },
     {
       "id": "m_jh2ureo3",
@@ -6789,7 +7000,8 @@
         "s_rxq55d2c": "落选"
       },
       "createdAt": "2026-07-16T10:51:21.563Z",
-      "updatedAt": "2026-07-16T10:51:21.563Z"
+      "updatedAt": "2026-07-16T10:51:21.563Z",
+      "group": "XP"
     },
     {
       "id": "m_4wmfwcbj",
@@ -6870,7 +7082,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:51:03.773Z",
-      "updatedAt": "2026-07-16T10:51:03.773Z"
+      "updatedAt": "2026-07-16T10:51:03.773Z",
+      "group": "XP"
     },
     {
       "id": "m_c16gtwds",
@@ -6964,7 +7177,8 @@
         "s_rxq55d2c": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:14:02.101Z",
-      "updatedAt": "2026-07-16T10:14:02.101Z"
+      "updatedAt": "2026-07-16T10:14:02.101Z",
+      "group": "XP"
     },
     {
       "id": "m_bm7qiehk",
@@ -7102,10 +7316,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "落选",
         "s_luj5nvrt": "落选",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "落选"
       },
       "createdAt": "2026-07-15T13:16:29.411Z",
-      "updatedAt": "2026-07-15T13:16:29.411Z"
+      "updatedAt": "2026-07-15T13:16:29.411Z",
+      "group": "XP"
     },
     {
       "id": "m_7j6tcyhr",
@@ -7243,10 +7459,12 @@
         "s_dfeqf245": "落选",
         "s_ha0edqrg": "A面选拔（第1排 center）",
         "s_luj5nvrt": "A面选拔（第3排）",
-        "s_zm6ss6kl": "落选"
+        "s_zm6ss6kl": "落选",
+        "s_u45gpsal": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-16T10:19:31.848Z",
-      "updatedAt": "2026-07-16T10:19:31.848Z"
+      "updatedAt": "2026-07-16T10:19:31.848Z",
+      "group": "XP"
     },
     {
       "id": "m_m8fltj0e",
@@ -7371,7 +7589,8 @@
         "s_29vsn9pg": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-07-16T10:13:45.723Z",
-      "updatedAt": "2026-07-16T10:13:45.723Z"
+      "updatedAt": "2026-07-16T10:13:45.723Z",
+      "group": "XP"
     },
     {
       "id": "m_ff4lppj9",
@@ -7454,7 +7673,8 @@
         "s_1qjvgq11": "落选"
       },
       "createdAt": "2026-07-16T10:50:43.860Z",
-      "updatedAt": "2026-07-16T10:50:43.860Z"
+      "updatedAt": "2026-07-16T10:50:43.860Z",
+      "group": "XP"
     },
     {
       "id": "m_ys0s465i",
@@ -7529,7 +7749,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:50:26.509Z",
-      "updatedAt": "2026-07-16T10:50:26.509Z"
+      "updatedAt": "2026-07-16T10:50:26.509Z",
+      "group": "XP"
     },
     {
       "id": "m_symj32y6",
@@ -7598,7 +7819,8 @@
         "s_ng2yeb1e": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:13:20.277Z",
-      "updatedAt": "2026-07-16T10:13:20.277Z"
+      "updatedAt": "2026-07-16T10:13:20.277Z",
+      "group": "XP"
     },
     {
       "id": "m_akari",
@@ -7695,7 +7917,8 @@
         "s_yxynwkos": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:12:40.489Z",
-      "updatedAt": "2026-07-16T10:12:40.489Z"
+      "updatedAt": "2026-07-16T10:12:40.489Z",
+      "group": "XP"
     },
     {
       "id": "m_yuna",
@@ -7773,7 +7996,8 @@
         "s_yxynwkos": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:12:23.707Z",
-      "updatedAt": "2026-07-16T10:12:23.707Z"
+      "updatedAt": "2026-07-16T10:12:23.707Z",
+      "group": "XP"
     },
     {
       "id": "m_rin",
@@ -7853,7 +8077,8 @@
         "s_yxynwkos": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-16T10:12:03.924Z",
-      "updatedAt": "2026-07-16T10:12:03.924Z"
+      "updatedAt": "2026-07-16T10:12:03.924Z",
+      "group": "XP"
     },
     {
       "id": "m_saki",
@@ -7937,7 +8162,8 @@
         "s_yxynwkos": "A面选拔（第1排 护法）"
       },
       "createdAt": "2026-07-16T10:11:53.207Z",
-      "updatedAt": "2026-07-16T10:11:53.207Z"
+      "updatedAt": "2026-07-16T10:11:53.207Z",
+      "group": "XP"
     },
     {
       "id": "m_mika",
@@ -8052,7 +8278,8 @@
         "s_yjn7shxt": "落选"
       },
       "createdAt": "2026-07-16T10:11:42.079Z",
-      "updatedAt": "2026-07-16T10:11:42.079Z"
+      "updatedAt": "2026-07-16T10:11:42.079Z",
+      "group": "XP"
     },
     {
       "id": "m_mayu",
@@ -8142,7 +8369,8 @@
         "s_yxynwkos": "A面选拔（第2排）"
       },
       "createdAt": "2026-07-16T10:10:56.303Z",
-      "updatedAt": "2026-07-16T10:10:56.303Z"
+      "updatedAt": "2026-07-16T10:10:56.303Z",
+      "group": "XP"
     },
     {
       "id": "m_nana",
@@ -8215,7 +8443,8 @@
         "s_awixwkeo": "A面选拔（第3排）"
       },
       "createdAt": "2026-07-16T10:10:15.866Z",
-      "updatedAt": "2026-07-16T10:10:15.866Z"
+      "updatedAt": "2026-07-16T10:10:15.866Z",
+      "group": "XP"
     },
     {
       "id": "m_hina",
@@ -8352,7 +8581,8 @@
         "s_ufq2hy3z": "A面选拔（第1排 center）"
       },
       "createdAt": "2026-08-03T11:49:56.418Z",
-      "updatedAt": "2026-08-03T11:49:56.418Z"
+      "updatedAt": "2026-08-03T11:49:56.418Z",
+      "group": "XP"
     },
     {
       "id": "m_reina",
@@ -8427,7 +8657,8 @@
         "s_updsfvcu": "落选"
       },
       "createdAt": "2026-07-16T10:10:32.061Z",
-      "updatedAt": "2026-07-16T10:10:32.061Z"
+      "updatedAt": "2026-07-16T10:10:32.061Z",
+      "group": "XP"
     },
     {
       "id": "m_ayame",
@@ -8546,7 +8777,8 @@
         "s_abydc9kz": "落选"
       },
       "createdAt": "2026-07-16T10:06:09.371Z",
-      "updatedAt": "2026-07-16T10:06:09.371Z"
+      "updatedAt": "2026-07-16T10:06:09.371Z",
+      "group": "XP"
     }
   ],
   "singles": [
@@ -11555,6 +11787,63 @@
       "notes": "好惨的尤莉娅！作为xp代表性的女王级话题人物，却在新生代ace德保夏希发生致命丑闻的时候被运营拉出来挡流量直接毕业，运营你好狠的心！歌曲突出了尤莉娅的不甘心，两位五期姐妹们给尤莉娅送别，我们会记住这位少女的，goodbye Yuriya! ",
       "createdAt": "2026-08-25T13:56:38.872Z",
       "updatedAt": "2026-08-25T13:56:38.872Z"
+    },
+    {
+      "id": "s_u45gpsal",
+      "title": "56th Single · Pillar",
+      "release": "2026-08-31",
+      "cover": "/uploads/1788613545161.webp",
+      "tags": [],
+      "singleKind": "常规单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Pillar (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1788613564460-fnse37.mp4"
+        },
+        {
+          "no": 2,
+          "title": "Bad Lemonade / UG",
+          "isAside": false,
+          "audio": "/uploads/audio/1788613577377-85kapa.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 17,
+        "rows": [
+          7,
+          7,
+          3
+        ],
+        "slots": [
+          "m_7j6tcyhr",
+          "m_11gen_2",
+          "m_9gen_5",
+          "m_9gen_2",
+          "m_9gen_6",
+          "m_11gen_3",
+          "m_10gen_6",
+          "m_9gen_4",
+          "m_7gen_7_9921",
+          "m_6gen_1_4821",
+          "m_11gen_4",
+          "m_10gen_4",
+          "m_7gen_4_8843",
+          "m_7gen_3_5910",
+          "m_9gen_3",
+          "m_rjli97s6",
+          "m_7gen_6_7205"
+        ],
+        "slotRoles": {
+          "14": "guardian",
+          "15": "center",
+          "16": "guardian"
+        }
+      },
+      "notes": "XP出大事儿啦！次世代绝对ace总选第一的德保夏希爆出陪睡丑闻，其实是一个妓女！运营紧急冷冻并暂停了德保夏希的所有活动，XP陷入了前所未有的大危机。这种情况下凛凛花临危受命出任风口浪尖的单曲center，就像女娲出来补天一样！Thank u凛凛花，我们坚信在宫月的正确领导下，XP定能度过难关！",
+      "createdAt": "2026-09-05T13:12:01.676Z",
+      "updatedAt": "2026-09-05T13:12:01.676Z"
     }
   ],
   "gallery": [
@@ -11936,6 +12225,18 @@
         {
           "singleId": "s_ha0edqrg",
           "trackNo": 1
+        },
+        {
+          "singleId": "s_luj5nvrt",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_zm6ss6kl",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_u45gpsal",
+          "trackNo": 1
         }
       ],
       "createdAt": "2026-03-16T20:59:00.621Z"
@@ -11983,6 +12284,10 @@
         },
         {
           "singleId": "s_ha0edqrg",
+          "trackNo": 2
+        },
+        {
+          "singleId": "s_zm6ss6kl",
           "trackNo": 2
         }
       ],
