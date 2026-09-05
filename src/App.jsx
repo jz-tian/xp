@@ -4136,7 +4136,19 @@ function SinglesPage({ data, setData, admin, playQueue, audioQueue, audioIndex, 
           )
         : [...prev.singles, nextEditing];
 
-      const nextData = { ...prev, singles: nextSingles };
+      let nextPlaylists = prev.playlists;
+      if (!exists) {
+        const asideTrack = (nextEditing.tracks || []).find((t) => t.isAside) || (nextEditing.tracks || [])[0];
+        if (asideTrack) {
+          nextPlaylists = (prev.playlists || []).map((pl) =>
+            pl.title === "XP -All Singles Best-"
+              ? { ...pl, tracks: [...(pl.tracks || []), { singleId: nextEditing.id, trackNo: asideTrack.no }] }
+              : pl
+          );
+        }
+      }
+
+      const nextData = { ...prev, singles: nextSingles, playlists: nextPlaylists };
       return withRecomputedSelections(nextData);
     });
 
