@@ -549,6 +549,7 @@ const GENERATION_THEME = {
   "9": { backgroundColor: "#3CC2B1", color: "#FFFFFF", borderColor: "#3CC2B1" },
   "10": { backgroundColor: "#FFFFFF", color: "#FF1493", borderColor: "#FF1493", filterColor: "#FF1493" },
   "11": { backgroundColor: "#E7E6E6", color: "#000000", borderColor: "#E7E6E6" },
+  "12": { backgroundColor: "#fb9398", color: "#FFFFFF", borderColor: "#fb9398" },
 };
 
 
