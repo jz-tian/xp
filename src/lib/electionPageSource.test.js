@@ -8,6 +8,10 @@ test("the election page declares the seventh-election subtitle", () => {
   assert.match(source, /"第7届":\s*"一途なる想い"/);
 });
 
+test("the election page declares the eighth-election subtitle", () => {
+  assert.match(source, /"第8届":\s*"新浪潮"/);
+});
+
 test("the election page resolves photos from the edition entry snapshot", () => {
   assert.match(
     source,

@@ -326,6 +326,7 @@ const ELECTION_SUBTITLES = {
   "第5届": "Make XP Great Again!",
   "第6届": "The Power of Dreams",
   "第7届": "一途なる想い",
+  "第8届": "新浪潮",
 };
 
 const SINGLE_KIND_OPTIONS = ["常规单曲", "投票单曲", "总选单曲", "猜拳单曲", "企划单曲", "纪念单曲"];
@@ -550,6 +551,7 @@ const GENERATION_THEME = {
   "10": { backgroundColor: "#FFFFFF", color: "#FF1493", borderColor: "#FF1493", filterColor: "#FF1493" },
   "11": { backgroundColor: "#E7E6E6", color: "#000000", borderColor: "#E7E6E6" },
   "12": { backgroundColor: "#fb9398", color: "#FFFFFF", borderColor: "#fb9398" },
+  "13": { backgroundColor: "#800020", color: "#FFFFFF", borderColor: "#800020" },
 };
 
 
@@ -1995,7 +1997,7 @@ function Hero({ data, singles, members, gallery = [], playlists = [], onGo }) {
 
   return (
     <div>
-      <section className="overflow-hidden px-4 pb-10 md:px-10">
+      <section className="xp-hero-stage overflow-hidden px-4 pb-10 md:px-10">
         <div className="relative mx-auto max-w-[1800px] overflow-hidden border border-[#d8eafa] bg-[#f1f8fe] md:min-h-[calc(100svh-8rem)]">
           <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(251,253,255,.98)_0%,rgba(251,253,255,.90)_48%,rgba(57,174,234,.14)_48.2%,rgba(255,255,255,.70)_72%,rgba(251,253,255,.96)_72.2%)]" />
           <div className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(117deg,rgba(20,34,53,.08)_0_1px,transparent_1px_7px)]" />
@@ -2622,12 +2624,12 @@ function OfficialPhotosGalleryDialog({ open, onClose, photos, displayAvatar }) {
 // DialogContent wrapper: fixed height + inner scroll (prevents dialogs being cut off)
 function ScrollDialogContent({ className = "", children, ...props }) {
   const base =
-    "left-1/2 top-[3vh] -translate-x-1/2 translate-y-0 " +
+    "xp-dialog left-1/2 top-[3vh] -translate-x-1/2 translate-y-0 " +
     "w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] max-h-[94vh] overflow-hidden p-0 " +
     "rounded-none border border-[#d8eafa] bg-[#fbfdff] text-[#142235] shadow-[0_32px_120px_rgba(43,121,169,.22)]";
   return (
     <DialogContent {...props} className={`${base} ${className}`}>
-      <div className="overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-5 w-full box-border bg-[linear-gradient(118deg,transparent_0_62%,rgba(241,248,254,.72)_62.2%_76%,transparent_76.2%)]">{children}</div>
+      <div className="xp-dialog-body overflow-y-auto overflow-x-hidden h-full max-h-[94vh] p-4 sm:p-5 w-full box-border bg-[linear-gradient(118deg,transparent_0_62%,rgba(241,248,254,.72)_62.2%_76%,transparent_76.2%)]">{children}</div>
     </DialogContent>
   );
 }

@@ -1,16 +1,16 @@
 {
   "members": [
     {
-      "id": "m_12gen_1",
-      "name": "大久保 七瀬",
-      "romaji": "NANASE OKUBO",
-      "origin": "千葉県・柏市",
+      "id": "m_13gen_1",
+      "name": "渡辺 心花",
+      "romaji": "KOKONA WATANABE",
+      "origin": "北海道・小樽市",
       "group": "XP",
-      "generation": "12期",
-      "avatar": "/uploads/1789912609728.webp",
+      "generation": "13期",
+      "avatar": "/uploads/1793182530366.webp",
       "officialPhotos": [
         {
-          "url": "/uploads/1789912609728.webp",
+          "url": "/uploads/1793182530366.webp",
           "version": 1
         }
       ],
@@ -47,6 +47,874 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_9gen_5",
+        "m_11gen_2"
+      ],
+      "friends": [
+        "m_12gen_2",
+        "m_10gen_3"
+      ],
+      "favoriteSong": "Flower Heart (A-side)",
+      "favoriteSongs": [
+        "Flower Heart (A-side)",
+        "Blue & White / All",
+        "Red Star Love (A-side)"
+      ],
+      "favoritePokemon": 79,
+      "profile": {
+        "height": "153cm",
+        "birthday": "2008-03-18",
+        "blood": "A",
+        "hobby": "把港口的雾、汽笛和海鸟声录成短短的声音日记，回家按天气分类",
+        "skill": "只听几秒就能猜出一段环境音是在清晨还是傍晚录的",
+        "catchphrase": "今天的心花电台，给你播一段刚刚好的海风。"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:15:32.987Z",
+      "updatedAt": "2026-10-28T10:15:32.987Z"
+    },
+    {
+      "id": "m_13gen_2",
+      "name": "高橋 琴音",
+      "romaji": "KOTONE TAKAHASHI",
+      "origin": "福岡県・太宰府市",
+      "group": "XP",
+      "generation": "13期",
+      "avatar": "/uploads/1793182516724.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1793182516724.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_9gen_4",
+        "m_10gen_1",
+        "m_11gen_4"
+      ],
+      "friends": [
+        "m_12gen_3"
+      ],
+      "favoriteSong": "Journey /松村珠理奈 毕业曲",
+      "favoriteSongs": [
+        "Journey /松村珠理奈 毕业曲",
+        "Last Angel",
+        "Dream Left -梦遗- / 山上梦 毕业曲"
+      ],
+      "favoritePokemon": 52,
+      "profile": {
+        "height": "161cm",
+        "birthday": "2007-11-22",
+        "blood": "AB",
+        "hobby": "逛太宰府的古道和小店，给每块熟悉的石碑编一段只有自己知道的前传",
+        "skill": "能用耳朵记住神社雅乐的旋律，再把它改编成轻快的口哨曲",
+        "catchphrase": "琴音一响，古老的故事也会跟着跳起来。"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:15:19.535Z",
+      "updatedAt": "2026-10-28T10:15:19.535Z"
+    },
+    {
+      "id": "m_13gen_3",
+      "name": "久留米 歩",
+      "romaji": "AYUMU KURUME",
+      "origin": "長野県・上田市",
+      "group": "XP",
+      "generation": "13期",
+      "avatar": "/uploads/1793182503936.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1793182503936.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_8gen_2_2649",
+        "m_10gen_6"
+      ],
+      "friends": [
+        "m_11gen_1",
+        "m_12gen_4"
+      ],
+      "favoriteSong": "LEFT 3 RIGHT 3 (A-side)",
+      "favoriteSongs": [
+        "LEFT 3 RIGHT 3 (A-side)",
+        "Advise u to shoot! / Under（鬼塚菜津美center）",
+        "Broken / Girls' Rule"
+      ],
+      "favoritePokemon": 150,
+      "profile": {
+        "height": "168cm",
+        "birthday": "2009-06-07",
+        "blood": "O",
+        "hobby": "天还没亮就去山路徒步，专挑地图上没有名字的小瀑布",
+        "skill": "闭着眼也能沿着节拍走出一整段舞台走位",
+        "catchphrase": "走一步、看一眼风景——歩的步伐不会迷路！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:15:06.244Z",
+      "updatedAt": "2026-10-28T10:15:06.244Z"
+    },
+    {
+      "id": "m_13gen_4",
+      "name": "鈴木 美嘉",
+      "romaji": "MIKA SUZUKI",
+      "origin": "愛知県・名古屋市",
+      "group": "XP",
+      "generation": "13期",
+      "avatar": "/uploads/1793182481518.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1793182481518.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_10gen_4",
+        "m_11gen_3"
+      ],
+      "friends": [
+        "m_9gen_1",
+        "m_12gen_1"
+      ],
+      "favoriteSong": "Make Up / 土木生杏 solo",
+      "favoriteSongs": [
+        "Make Up / 土木生杏 solo",
+        "BUGS / Under （御影林檎center）",
+        "What is BEAUTIFUL? (A-side)"
+      ],
+      "favoritePokemon": 94,
+      "profile": {
+        "height": "156cm",
+        "birthday": "2008-08-30",
+        "blood": "B",
+        "hobby": "收集老式化妆镜，在镜子前给同一张脸设计截然不同的舞台角色",
+        "skill": "变脸：几秒钟就能从冷面侦探切换成热血主持人，连眼神和声线都一起换掉",
+        "catchphrase": "刚才那位是谁？嘿嘿，下一张脸马上登场！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:14:44.905Z",
+      "updatedAt": "2026-10-28T10:14:44.905Z"
+    },
+    {
+      "id": "m_13gen_5",
+      "name": "四国 菜香",
+      "romaji": "SAIKA SHIKOKU",
+      "origin": "徳島県・鳴門市",
+      "group": "XP",
+      "generation": "13期",
+      "avatar": "/uploads/1793182462652.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1793182462652.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_7gen_7_9921",
+        "m_10gen_2"
+      ],
+      "friends": [
+        "m_12gen_5",
+        "m_11gen_2",
+        "m_9gen_6"
+      ],
+      "favoriteSong": "Let's Smile Again! (A-side)",
+      "favoriteSongs": [
+        "Let's Smile Again! (A-side)",
+        "Love Wins... (A-side)",
+        "#Suki Destiny! (A-side)"
+      ],
+      "favoritePokemon": 25,
+      "profile": {
+        "height": "150cm",
+        "birthday": "2010-01-15",
+        "blood": "O",
+        "hobby": "研究阿波舞的队形和拍子，旅行时总要先找当地商店街的节庆海报",
+        "skill": "能把一串长长的地名编成押韵口令，第一次见面就记住全团名字",
+        "catchphrase": "菜香的节奏一到，连海峡的风也会打拍子！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:14:28.386Z",
+      "updatedAt": "2026-10-28T10:14:28.386Z"
+    },
+    {
+      "id": "m_13gen_6",
+      "name": "田名部 英",
+      "romaji": "HANA TANABE",
+      "origin": "熊本県・阿蘇市",
+      "group": "XP",
+      "generation": "13期",
+      "avatar": "/uploads/1793182351332.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1793182351332.webp",
+          "version": 1
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "加入前"
+        }
+      ],
+      "admireSenior": [
+        "m_7gen_4_8843",
+        "m_11gen_1"
+      ],
+      "friends": [
+        "m_10gen_5",
+        "m_12gen_3"
+      ],
+      "favoriteSong": "BE US (A-side)",
+      "favoriteSongs": [
+        "BE US (A-side)",
+        "Pillar (A-side)",
+        "44°C / UG"
+      ],
+      "favoritePokemon": 127,
+      "profile": {
+        "height": "174cm",
+        "birthday": "2007-04-02",
+        "blood": "A",
+        "hobby": "在牧场帮忙搬草捆，休息时给小牛取相扑选手的绰号",
+        "skill": "大力士：能单手提起两只装满道具的行李箱，也能稳稳举起队友做庆典定格",
+        "catchphrase": "力气交给我，大家把笑容举得更高！"
+      },
+      "selectionHistory": {
+        "s1": "加入前",
+        "s2": "加入前",
+        "s_oq7izq79": "加入前",
+        "s_7kxfyxh0": "加入前",
+        "s_bnwbmbn8": "加入前",
+        "s_bpiozglx": "加入前",
+        "s_hwxadq52": "加入前",
+        "s_dmv6qfio": "加入前",
+        "s_0k9y573f": "加入前",
+        "s_awspexel": "加入前",
+        "s_ycgqt5ej": "加入前",
+        "s_awixwkeo": "加入前",
+        "s_p3pegbk7": "加入前",
+        "s_updsfvcu": "加入前",
+        "s_vq925yfe": "加入前",
+        "s_xt9tskmx": "加入前",
+        "s_c5rwv332": "加入前",
+        "s_zr2um0s2": "加入前",
+        "s_2584nm99": "加入前",
+        "s_ng2yeb1e": "加入前",
+        "s_vh9w6l9m": "加入前",
+        "s_1qjvgq11": "加入前",
+        "s_syvyq01g": "加入前",
+        "s_3zj3ezmq": "加入前",
+        "s_rxq55d2c": "加入前",
+        "s_pw9b7nha": "加入前",
+        "s_oey99lit": "加入前",
+        "s_4ofhpcr1": "加入前",
+        "s_z8u6w72c": "加入前",
+        "s_pbzdfn3u": "加入前",
+        "s_15hm6il2": "加入前",
+        "s_6k83o27r": "加入前",
+        "s_nfyjq9j3": "加入前",
+        "s_uftxjn6a": "加入前",
+        "s_arraomx5": "加入前",
+        "s_phyou9mt": "加入前",
+        "s_5n7jsbhe": "加入前",
+        "s_yjn7shxt": "加入前",
+        "s_abydc9kz": "加入前",
+        "s_yxynwkos": "加入前",
+        "s_9l4bc6jf": "加入前",
+        "s_gmm7a35g": "加入前",
+        "s_1j7j5ow2": "加入前",
+        "s_29vsn9pg": "加入前",
+        "s_h4jg3kpw": "加入前",
+        "s_utvdcu2u": "加入前",
+        "s_5q811xeb": "加入前",
+        "s_9l2u3ftn": "加入前",
+        "s_kv6ne2gm": "加入前",
+        "s_iuvai044": "加入前",
+        "s_ufq2hy3z": "加入前",
+        "s_dfeqf245": "加入前",
+        "s_ha0edqrg": "加入前",
+        "s_luj5nvrt": "加入前",
+        "s_zm6ss6kl": "加入前",
+        "s_u45gpsal": "加入前",
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "加入前",
+        "s_j75gbq1p": "加入前",
+        "s_nk8cfl98": "加入前",
+        "s_be46o4rk": "加入前",
+        "s_d4giywz2": "加入前"
+      },
+      "createdAt": "2026-10-28T10:12:34.193Z",
+      "updatedAt": "2026-10-28T10:12:34.193Z"
+    },
+    {
+      "id": "m_12gen_1",
+      "name": "大久保 七瀬",
+      "romaji": "NANASE OKUBO",
+      "origin": "千葉県・柏市",
+      "group": "XP",
+      "generation": "12期",
+      "avatar": "/uploads/1793179932618.webp",
+      "officialPhotos": [
+        {
+          "url": "/uploads/1789912609728.webp",
+          "version": 1
+        },
+        {
+          "url": "/uploads/1793179932618.webp",
+          "version": 2
+        }
+      ],
+      "isActive": true,
+      "graduationDate": "",
+      "graduationSongTitle": "",
+      "inheritanceSuccessorId": "",
+      "inheritancePending": false,
+      "electionRanks": [
+        {
+          "edition": "第1届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第2届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第3届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第4届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第5届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第6届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第7届",
+          "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -129,23 +997,32 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "加入前",
-        "s_g1ofy6um": "加入前"
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "A面选拔（第2排）"
       },
-      "createdAt": "2026-09-20T13:56:52.688Z",
-      "updatedAt": "2026-09-20T13:56:52.688Z"
+      "createdAt": "2026-10-28T09:32:15.778Z",
+      "updatedAt": "2026-10-28T09:32:15.778Z"
     },
     {
       "id": "m_12gen_2",
-      "name": "村狐 芹心",
-      "romaji": "SERIKO MURAKITSUNE",
+      "name": "野吕 芹忻",
+      "romaji": "SERIKI NORO",
       "origin": "島根県・松江市",
       "group": "XP",
       "generation": "12期",
-      "avatar": "/uploads/1789912624040.webp",
+      "avatar": "/uploads/1793179944595.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1789912624040.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793179944595.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -181,6 +1058,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -263,10 +1145,15 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "加入前",
-        "s_g1ofy6um": "加入前"
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-09-20T13:57:06.970Z",
-      "updatedAt": "2026-09-20T13:57:06.970Z"
+      "createdAt": "2026-10-28T09:32:28.275Z",
+      "updatedAt": "2026-10-28T09:32:28.275Z"
     },
     {
       "id": "m_12gen_3",
@@ -275,11 +1162,15 @@
       "origin": "長野県・松本市",
       "group": "XP",
       "generation": "12期",
-      "avatar": "/uploads/1789912645393.webp",
+      "avatar": "/uploads/1793179963150.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1789912645393.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793179963150.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -315,6 +1206,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "第17位",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -396,10 +1292,15 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "加入前",
-        "s_g1ofy6um": "加入前"
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "A面选拔（第2排 护法）",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "A面选拔（第2排）"
       },
-      "createdAt": "2026-09-20T13:57:28.101Z",
-      "updatedAt": "2026-09-20T13:57:28.101Z"
+      "createdAt": "2026-10-28T09:32:47.223Z",
+      "updatedAt": "2026-10-28T09:32:47.223Z"
     },
     {
       "id": "m_12gen_4",
@@ -408,11 +1309,15 @@
       "origin": "大阪府・岸和田市",
       "group": "XP",
       "generation": "12期",
-      "avatar": "/uploads/1789912656767.webp",
+      "avatar": "/uploads/1793179993077.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1789912656767.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793179993077.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -448,6 +1353,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -530,10 +1440,15 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "加入前",
-        "s_g1ofy6um": "加入前"
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-09-20T13:57:40.398Z",
-      "updatedAt": "2026-09-20T13:57:40.398Z"
+      "createdAt": "2026-10-28T09:33:15.802Z",
+      "updatedAt": "2026-10-28T09:33:15.802Z"
     },
     {
       "id": "m_12gen_5",
@@ -542,11 +1457,15 @@
       "origin": "京都府・宇治市",
       "group": "XP",
       "generation": "12期",
-      "avatar": "/uploads/1789912668246.webp",
+      "avatar": "/uploads/1793180010564.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1789912668246.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793180010564.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -582,6 +1501,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -664,10 +1588,15 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "加入前",
-        "s_g1ofy6um": "加入前"
+        "s_g1ofy6um": "加入前",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第2排 护法）",
+        "s_d4giywz2": "A面选拔（第2排）"
       },
-      "createdAt": "2026-09-20T13:57:51.365Z",
-      "updatedAt": "2026-09-20T13:57:51.365Z"
+      "createdAt": "2026-10-28T09:33:33.134Z",
+      "updatedAt": "2026-10-28T09:33:33.134Z"
     },
     {
       "id": "m_qingnian_1",
@@ -716,6 +1645,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "第13位",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -795,7 +1729,12 @@
         "s_luj5nvrt": "加入前",
         "s_zm6ss6kl": "加入前",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "A面选拔（第2排）"
+        "s_g1ofy6um": "A面选拔（第2排）",
+        "s_txo4zxcd": "A面选拔（第2排）",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
       "createdAt": "2026-09-05T13:04:17.758Z",
       "updatedAt": "2026-09-05T13:04:17.758Z"
@@ -805,12 +1744,17 @@
       "name": "大堀 日奈子",
       "romaji": "HINAKO OHORI",
       "origin": "東京都・大田区",
+      "group": "XP",
       "generation": "11期",
-      "avatar": "/uploads/1785756873300.webp",
+      "avatar": "/uploads/1793180022856.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1785756873300.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793180022856.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -846,6 +1790,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -928,23 +1877,32 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-08-03T11:34:42.728Z",
-      "updatedAt": "2026-08-03T11:34:42.728Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:33:45.798Z",
+      "updatedAt": "2026-10-28T09:33:45.798Z"
     },
     {
       "id": "m_11gen_2",
       "name": "水野 絵里奈",
       "romaji": "ERINA MIZUNO",
       "origin": "石川県・金沢市",
+      "group": "XP",
       "generation": "11期",
-      "avatar": "/uploads/1785756893533.webp",
+      "avatar": "/uploads/1793180037956.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1785756893533.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793180037956.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -980,6 +1938,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "第24位",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -1063,23 +2026,32 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-08-03T11:34:56.983Z",
-      "updatedAt": "2026-08-03T11:34:56.983Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:34:00.545Z",
+      "updatedAt": "2026-10-28T09:34:00.545Z"
     },
     {
       "id": "m_11gen_3",
       "name": "新槙 未来",
       "romaji": "MIKU SHINMAKI",
       "origin": "広島県・尾道市",
+      "group": "XP",
       "generation": "11期",
-      "avatar": "/uploads/1785756903665.webp",
+      "avatar": "/uploads/1793180056685.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1785756903665.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793180056685.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -1115,6 +2087,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "第22位",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -1198,23 +2175,32 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-08-03T11:35:06.327Z",
-      "updatedAt": "2026-08-03T11:35:06.327Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:34:19.025Z",
+      "updatedAt": "2026-10-28T09:34:19.025Z"
     },
     {
       "id": "m_11gen_4",
       "name": "宇治 聖",
       "romaji": "MIZUKI UJI",
       "origin": "京都府・宇治市",
+      "group": "XP",
       "generation": "11期",
-      "avatar": "/uploads/1785756915254.webp",
+      "avatar": "/uploads/1793180068668.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1785756915254.webp",
           "version": 1
+        },
+        {
+          "url": "/uploads/1793180068668.webp",
+          "version": 2
         }
       ],
       "isActive": true,
@@ -1250,6 +2236,11 @@
         {
           "edition": "第7届",
           "rank": "加入前"
+        },
+        {
+          "edition": "第8届",
+          "rank": "第21位",
+          "photoVersion": 1
         }
       ],
       "admireSenior": [
@@ -1331,19 +2322,24 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "A面选拔（第2排 护法）",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-08-03T11:35:28.881Z",
-      "updatedAt": "2026-08-03T11:35:28.881Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:34:30.978Z",
+      "updatedAt": "2026-10-28T09:34:30.978Z"
     },
     {
       "id": "m_10gen_1",
       "name": "名渡山 紬",
       "romaji": "TSUMUGI NADOYAMA",
       "origin": "冲绳・石垣",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120849004.webp",
+      "avatar": "/uploads/1793180084968.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212897984.webp",
@@ -1352,6 +2348,10 @@
         {
           "url": "/uploads/1784120849004.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180084968.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -1387,7 +2387,12 @@
         {
           "edition": "第7届",
           "rank": "第28位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -1470,19 +2475,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:07:32.060Z",
-      "updatedAt": "2026-07-15T13:07:32.060Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:34:47.465Z",
+      "updatedAt": "2026-10-28T09:34:47.465Z"
     },
     {
       "id": "m_10gen_2",
       "name": "三上 拉拉",
       "romaji": "RARA MIKAMI",
       "origin": "福冈・博多",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120864455.webp",
+      "avatar": "/uploads/1793180098233.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212935303.webp",
@@ -1491,6 +2501,10 @@
         {
           "url": "/uploads/1784120864455.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180098233.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -1526,7 +2540,12 @@
         {
           "edition": "第7届",
           "rank": "第25位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第23位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -1609,19 +2628,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:07:46.820Z",
-      "updatedAt": "2026-07-15T13:07:46.820Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:35:00.595Z",
+      "updatedAt": "2026-10-28T09:35:00.595Z"
     },
     {
       "id": "m_10gen_3",
       "name": "水無瀬 瑠璃",
       "romaji": "RURI MINASE",
       "origin": "神奈川・镰仓",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120882795.webp",
+      "avatar": "/uploads/1793180111548.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212957160.webp",
@@ -1630,6 +2654,10 @@
         {
           "url": "/uploads/1784120882795.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180111548.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -1665,7 +2693,12 @@
         {
           "edition": "第7届",
           "rank": "第23位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第16位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -1747,19 +2780,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:08:05.446Z",
-      "updatedAt": "2026-07-15T13:08:05.446Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:35:13.776Z",
+      "updatedAt": "2026-10-28T09:35:13.776Z"
     },
     {
       "id": "m_10gen_4",
       "name": "御影 林檎",
       "romaji": "RINGO MIKAGE",
       "origin": "青森・弘前",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120896455.webp",
+      "avatar": "/uploads/1793180137615.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212968720.webp",
@@ -1768,6 +2806,10 @@
         {
           "url": "/uploads/1784120896455.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180137615.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -1803,7 +2845,12 @@
         {
           "edition": "第7届",
           "rank": "第12位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第8位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -1886,19 +2933,24 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "A面选拔（第2排）",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第1排 护法）"
+        "s_g1ofy6um": "A面选拔（第1排 护法）",
+        "s_txo4zxcd": "A面选拔（第1排 护法）",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:08:18.892Z",
-      "updatedAt": "2026-07-15T13:08:18.892Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:35:40.142Z",
+      "updatedAt": "2026-10-28T09:35:40.142Z"
     },
     {
       "id": "m_10gen_5",
       "name": "月城 凛音",
       "romaji": "RINNE TSUKISHIRO",
       "origin": "奈良・生驹",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120911448.webp",
+      "avatar": "/uploads/1793180152125.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212982529.webp",
@@ -1907,6 +2959,10 @@
         {
           "url": "/uploads/1784120911448.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180152125.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -1942,7 +2998,12 @@
         {
           "edition": "第7届",
           "rank": "第26位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第20位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2024,19 +3085,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:08:34.334Z",
-      "updatedAt": "2026-07-15T13:08:34.334Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:35:54.301Z",
+      "updatedAt": "2026-10-28T09:35:54.301Z"
     },
     {
       "id": "m_10gen_6",
       "name": "中山 千穂",
       "romaji": "CHIHO NAKAYAMA",
       "origin": "长野・松本",
+      "group": "XP",
       "generation": "10期",
-      "avatar": "/uploads/1784120932750.webp",
+      "avatar": "/uploads/1793180168175.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1782212994878.webp",
@@ -2045,6 +3111,10 @@
         {
           "url": "/uploads/1784120932750.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180168175.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -2080,7 +3150,12 @@
         {
           "edition": "第7届",
           "rank": "第19位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第19位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2163,19 +3238,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:08:56.022Z",
-      "updatedAt": "2026-07-15T13:08:56.022Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:36:10.465Z",
+      "updatedAt": "2026-10-28T09:36:10.465Z"
     },
     {
       "id": "m_9gen_1",
       "name": "久城 涙",
       "romaji": "NAMIDA HISHIRO",
       "origin": "北海道・函馆",
+      "group": "XP",
       "generation": "9期",
-      "avatar": "/uploads/1784120974076.webp",
+      "avatar": "/uploads/1793180180069.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805311690.webp",
@@ -2184,6 +3264,10 @@
         {
           "url": "/uploads/1784120974076.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180180069.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -2214,12 +3298,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第14位"
+          "rank": "第14位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第21位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2301,11 +3391,15 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:09:36.565Z",
-      "updatedAt": "2026-07-15T13:09:36.565Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:36:22.404Z",
+      "updatedAt": "2026-10-28T09:36:22.404Z"
     },
     {
       "id": "m_9gen_2",
@@ -2353,12 +3447,13 @@
         },
         {
           "edition": "第6届",
-          "rank": "第22位"
+          "rank": "第22位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第22位",
-          "photoVersion": 1
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2450,8 +3545,9 @@
       "name": "山本 喜月",
       "romaji": "KITSUKI YAMAMOTO",
       "origin": "京都・西京区",
+      "group": "XP",
       "generation": "9期",
-      "avatar": "/uploads/1784121299231.webp",
+      "avatar": "/uploads/1793180189101.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805271072.webp",
@@ -2460,6 +3556,10 @@
         {
           "url": "/uploads/1784121299231.webp",
           "version": 3
+        },
+        {
+          "url": "/uploads/1793180189101.webp",
+          "version": 4
         }
       ],
       "isActive": true,
@@ -2490,12 +3590,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第8位"
+          "rank": "第8位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第3位",
-          "photoVersion": 1
+          "photoVersion": 3
+        },
+        {
+          "edition": "第8届",
+          "rank": "第2位",
+          "photoVersion": 3
         }
       ],
       "admireSenior": [
@@ -2577,19 +3683,24 @@
         "s_luj5nvrt": "A面选拔（第1排 center）",
         "s_zm6ss6kl": "A面选拔（第2排）",
         "s_u45gpsal": "A面选拔（第1排 护法）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "A面选拔（第2排 护法）",
+        "s_nk8cfl98": "A面选拔（第2排 护法）",
+        "s_be46o4rk": "A面选拔（第2排）",
+        "s_d4giywz2": "A面选拔（第1排 center）"
       },
-      "createdAt": "2026-07-15T13:15:05.271Z",
-      "updatedAt": "2026-07-15T13:15:05.271Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:36:31.659Z",
+      "updatedAt": "2026-10-28T09:36:31.659Z"
     },
     {
       "id": "m_9gen_4",
       "name": "神崎 百花",
       "romaji": "MOMOKA KANZAKI",
       "origin": "大阪・难波",
+      "group": "XP",
       "generation": "9期",
-      "avatar": "/uploads/1784121037480.webp",
+      "avatar": "/uploads/1793180199629.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805252904.webp",
@@ -2598,6 +3709,10 @@
         {
           "url": "/uploads/1784121037480.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180199629.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -2628,12 +3743,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第15位"
+          "rank": "第15位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第9位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第9位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2716,19 +3837,24 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第1排 center）"
+        "s_g1ofy6um": "A面选拔（第1排 护法）",
+        "s_txo4zxcd": "A面选拔（第1排 护法）",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:10:39.771Z",
-      "updatedAt": "2026-07-15T13:10:39.771Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:36:41.903Z",
+      "updatedAt": "2026-10-28T09:36:41.903Z"
     },
     {
       "id": "m_9gen_5",
       "name": "西園寺 莉央",
       "romaji": "RIO SAIONJI",
       "origin": "东京・港区",
+      "group": "XP",
       "generation": "9期",
-      "avatar": "/uploads/1784121283382.webp",
+      "avatar": "/uploads/1793180214512.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805240618.webp",
@@ -2737,6 +3863,10 @@
         {
           "url": "/uploads/1784121283382.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180214512.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -2767,12 +3897,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第17位"
+          "rank": "第17位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第17位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第14位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2854,19 +3990,24 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:14:45.813Z",
-      "updatedAt": "2026-07-15T13:14:45.813Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:36:56.752Z",
+      "updatedAt": "2026-10-28T09:36:56.752Z"
     },
     {
       "id": "m_9gen_6",
       "name": "最上 芽衣",
       "romaji": "MEI MOGAMI",
       "origin": "山形・米泽",
+      "group": "XP",
       "generation": "9期",
-      "avatar": "/uploads/1784121053754.webp",
+      "avatar": "/uploads/1793180222886.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1774805164815.webp",
@@ -2875,6 +4016,10 @@
         {
           "url": "/uploads/1784121053754.webp",
           "version": 2
+        },
+        {
+          "url": "/uploads/1793180222886.webp",
+          "version": 3
         }
       ],
       "isActive": true,
@@ -2905,12 +4050,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第21位"
+          "rank": "第21位",
+          "photoVersion": 1
         },
         {
           "edition": "第7届",
           "rank": "第27位",
-          "photoVersion": 1
+          "photoVersion": 2
+        },
+        {
+          "edition": "第8届",
+          "rank": "第4位",
+          "photoVersion": 2
         }
       ],
       "admireSenior": [
@@ -2993,17 +4144,22 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "A面选拔（第1排 护法）"
+        "s_g1ofy6um": "A面选拔（第1排 center）",
+        "s_txo4zxcd": "A面选拔（第1排 center）",
+        "s_j75gbq1p": "A面选拔（第2排）",
+        "s_nk8cfl98": "A面选拔（第1排 center）",
+        "s_be46o4rk": "A面选拔（第1排 center）",
+        "s_d4giywz2": "A面选拔（第1排 center）"
       },
-      "createdAt": "2026-07-15T13:10:55.963Z",
-      "updatedAt": "2026-07-15T13:10:55.963Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:37:05.244Z",
+      "updatedAt": "2026-10-28T09:37:05.244Z"
     },
     {
       "id": "m_8gen_1_4186",
       "name": "西野 咲彩",
       "romaji": "SAYA NISHINO",
       "origin": "青森 • 弘前",
+      "group": "XP",
       "generation": "8期",
       "avatar": "/uploads/1784121068332.webp",
       "officialPhotos": [
@@ -3020,10 +4176,10 @@
           "version": 3
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
+      "inheritanceSuccessorId": "m_12gen_4",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -3048,12 +4204,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第19位"
+          "rank": "第19位",
+          "photoVersion": 2
         },
         {
           "edition": "第7届",
           "rank": "第18位",
-          "photoVersion": 2
+          "photoVersion": 3
+        },
+        {
+          "edition": "第8届",
+          "rank": "圈外",
+          "photoVersion": 3
         }
       ],
       "admireSenior": [
@@ -3136,11 +4298,12 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选"
       },
-      "createdAt": "2026-07-15T13:11:10.597Z",
-      "updatedAt": "2026-07-15T13:11:10.597Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:37:33.834Z",
+      "updatedAt": "2026-10-28T09:37:33.834Z"
     },
     {
       "id": "m_8gen_2_2649",
@@ -4053,8 +5216,9 @@
       "name": "徳保 夏希",
       "romaji": "NATSUKI TOKUTAMI",
       "origin": "大阪 • 堺",
+      "group": "XP",
       "generation": "7期",
-      "avatar": "/uploads/1784121081548.webp",
+      "avatar": "/uploads/1793180265042.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796225837.jpg",
@@ -4071,12 +5235,16 @@
         {
           "url": "/uploads/1784121081548.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180265042.webp",
+          "version": 5
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-09-26",
+      "graduationSongTitle": "unapologetic",
+      "inheritanceSuccessorId": "m_12gen_3",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -4101,12 +5269,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第5位"
+          "rank": "第5位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第1位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第3位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -4189,19 +5363,22 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "A面选拔（第2排 护法）",
+        "s_nk8cfl98": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:11:23.896Z",
-      "updatedAt": "2026-07-15T13:11:23.896Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:52:15.387Z",
+      "updatedAt": "2026-10-28T09:52:15.387Z"
     },
     {
       "id": "m_7gen_3_5910",
       "name": "近藤 結衣",
       "romaji": "YUI KONDO",
       "origin": "京都 • 右京区",
+      "group": "XP",
       "generation": "7期",
-      "avatar": "/uploads/1784121094927.webp",
+      "avatar": "/uploads/1793180275582.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796238553.jpg",
@@ -4218,12 +5395,16 @@
         {
           "url": "/uploads/1784121094927.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180275582.webp",
+          "version": 5
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-10-16",
+      "graduationSongTitle": "无",
+      "inheritanceSuccessorId": "m_9gen_5",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -4248,12 +5429,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第20位"
+          "rank": "第20位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第10位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第10位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -4335,19 +5522,24 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第2排）"
+        "s_g1ofy6um": "A面选拔（第2排）",
+        "s_txo4zxcd": "A面选拔（第2排）",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:11:37.860Z",
-      "updatedAt": "2026-07-15T13:11:37.860Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T10:04:31.050Z",
+      "updatedAt": "2026-10-28T10:04:31.050Z"
     },
     {
       "id": "m_7gen_4_8843",
       "name": "井上 詹妮弗",
       "romaji": "JENNIFER INOUE",
       "origin": "美国 • 西雅图",
+      "group": "XP",
       "generation": "7期",
-      "avatar": "/uploads/1784121139342.webp",
+      "avatar": "/uploads/1793180287410.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772817945659.jpg",
@@ -4364,6 +5556,10 @@
         {
           "url": "/uploads/1784121139342.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180287410.webp",
+          "version": 5
         }
       ],
       "isActive": true,
@@ -4394,12 +5590,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第18位"
+          "rank": "第18位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第16位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第12位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -4481,11 +5683,15 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第2排）"
+        "s_g1ofy6um": "A面选拔（第2排）",
+        "s_txo4zxcd": "A面选拔（第2排）",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "落选",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:12:22.306Z",
-      "updatedAt": "2026-07-15T13:12:22.306Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:38:09.842Z",
+      "updatedAt": "2026-10-28T09:38:09.842Z"
     },
     {
       "id": "m_7gen_5_1182",
@@ -4617,8 +5823,9 @@
       "name": "土木生 杏",
       "romaji": "AN TSUCHIKIBU",
       "origin": "北海道 • 带广",
+      "group": "XP",
       "generation": "7期",
-      "avatar": "/uploads/1784121152003.webp",
+      "avatar": "/uploads/1793180300174.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796268149.jpg",
@@ -4635,6 +5842,10 @@
         {
           "url": "/uploads/1784121152003.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180300174.webp",
+          "version": 5
         }
       ],
       "isActive": true,
@@ -4665,12 +5876,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第9位"
+          "rank": "第9位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第7位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第6位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -4753,19 +5970,24 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "A面选拔（第2排）",
         "s_u45gpsal": "A面选拔（第1排 护法）",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:12:34.595Z",
-      "updatedAt": "2026-07-15T13:12:34.595Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:38:22.505Z",
+      "updatedAt": "2026-10-28T09:38:22.505Z"
     },
     {
       "id": "m_7gen_7_9921",
       "name": "新井 心扉菜",
       "romaji": "KOHINA ARAI",
       "origin": "东京 • 杉并",
+      "group": "XP",
       "generation": "7期",
-      "avatar": "/uploads/1784121167717.webp",
+      "avatar": "/uploads/1793180311458.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1772796277862.jpg",
@@ -4782,6 +6004,10 @@
         {
           "url": "/uploads/1784121167717.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180311458.webp",
+          "version": 5
         }
       ],
       "isActive": true,
@@ -4812,12 +6038,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第16位"
+          "rank": "第16位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第13位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第11位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -4899,19 +6131,24 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "A面选拔（第3排）",
+        "s_nk8cfl98": "A面选拔（第3排）",
+        "s_be46o4rk": "落选",
+        "s_d4giywz2": "落选"
       },
-      "createdAt": "2026-07-15T13:12:50.202Z",
-      "updatedAt": "2026-07-15T13:12:50.202Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:38:35.379Z",
+      "updatedAt": "2026-10-28T09:38:35.379Z"
     },
     {
       "id": "m_6gen_1_4821",
       "name": "岡崎 卡莉",
       "romaji": "KARIN OKAZAKI",
       "origin": "东京 • 世田谷",
+      "group": "XP",
       "generation": "6期",
-      "avatar": "/uploads/1784121182005.webp",
+      "avatar": "/uploads/1793180337889.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1771581945609.jpg",
@@ -4928,6 +6165,10 @@
         {
           "url": "/uploads/1784121182005.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180337889.webp",
+          "version": 5
         }
       ],
       "isActive": true,
@@ -4958,12 +6199,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第7位"
+          "rank": "第7位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第6位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第5位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -5045,17 +6292,22 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "A面选拔（第3排）",
         "s_u45gpsal": "A面选拔（第2排）",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "A面选拔（第2排）",
+        "s_nk8cfl98": "A面选拔（第2排）",
+        "s_be46o4rk": "A面选拔（第3排）",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:13:04.427Z",
-      "updatedAt": "2026-07-15T13:13:04.427Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:39:00.211Z",
+      "updatedAt": "2026-10-28T09:39:00.211Z"
     },
     {
       "id": "m_6gen_2_9374",
       "name": "小笠原 詩",
       "romaji": "UTA OGASAWARA",
       "origin": "京都 • 左京区",
+      "group": "XP",
       "generation": "6期",
       "avatar": "/uploads/1784121204112.webp",
       "officialPhotos": [
@@ -5076,9 +6328,9 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
       "inheritanceSuccessorId": "",
       "inheritancePending": false,
       "electionRanks": [
@@ -5104,12 +6356,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第23位"
+          "rank": "第23位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第24位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第26位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -5191,11 +6449,12 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选"
       },
-      "createdAt": "2026-07-15T13:13:26.222Z",
-      "updatedAt": "2026-07-15T13:13:26.222Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:39:13.085Z",
+      "updatedAt": "2026-10-28T09:39:13.085Z"
     },
     {
       "id": "m_6gen_3_1550",
@@ -5250,12 +6509,13 @@
         },
         {
           "edition": "第6届",
-          "rank": "第33位"
+          "rank": "第33位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第20位",
-          "photoVersion": 3
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -5914,6 +7174,7 @@
       "name": "富士松 直希",
       "romaji": "NAOKI FUJIMATSU",
       "origin": "山形 • 山形市",
+      "group": "XP",
       "generation": "5期",
       "avatar": "/uploads/1784121324266.webp",
       "officialPhotos": [
@@ -5934,9 +7195,9 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
       "inheritanceSuccessorId": "",
       "inheritancePending": false,
       "electionRanks": [
@@ -5962,12 +7223,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第29位"
+          "rank": "第29位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第29位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第25位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -6048,17 +7315,19 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "A面选拔（第1排 护法）",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选"
       },
-      "createdAt": "2026-07-15T13:15:26.458Z",
-      "updatedAt": "2026-07-15T13:15:26.458Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:39:23.858Z",
+      "updatedAt": "2026-10-28T09:39:23.858Z"
     },
     {
       "id": "m_5gen_4_8493",
       "name": "来生 菜々",
       "romaji": "NANA KISUI",
       "origin": "福冈 • 福冈市",
+      "group": "XP",
       "generation": "5期",
       "avatar": "/uploads/1784121340008.webp",
       "officialPhotos": [
@@ -6079,10 +7348,10 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
+      "inheritanceSuccessorId": "m_7gen_7_9921",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -6107,12 +7376,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第36位"
+          "rank": "第36位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第15位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第18位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -6193,11 +7468,12 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "A面选拔（第1排 护法）",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "落选"
       },
-      "createdAt": "2026-07-15T13:15:42.431Z",
-      "updatedAt": "2026-07-15T13:15:42.431Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:39:36.366Z",
+      "updatedAt": "2026-10-28T09:39:36.366Z"
     },
     {
       "id": "m_5gen_5_6677",
@@ -6444,12 +7720,13 @@
         },
         {
           "edition": "第6届",
-          "rank": "第1位"
+          "rank": "第1位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第2位",
-          "photoVersion": 3
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -6703,8 +7980,9 @@
       "name": "小林 凛々花",
       "romaji": "RIRIKA KOBAYASHI",
       "origin": "滋贺 • 大津",
+      "group": "XP",
       "generation": "3期",
-      "avatar": "/uploads/1784121367092.webp",
+      "avatar": "/uploads/1793180386757.webp",
       "officialPhotos": [
         {
           "url": "/uploads/1768593904736.jpg",
@@ -6721,6 +7999,10 @@
         {
           "url": "/uploads/1784121367092.webp",
           "version": 4
+        },
+        {
+          "url": "/uploads/1793180386757.webp",
+          "version": 5
         }
       ],
       "isActive": true,
@@ -6751,12 +8033,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第3位"
+          "rank": "第3位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第4位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第1位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -6838,11 +8126,15 @@
         "s_luj5nvrt": "A面选拔（第2排）",
         "s_zm6ss6kl": "A面选拔（第2排）",
         "s_u45gpsal": "A面选拔（第1排 center）",
-        "s_g1ofy6um": "A面选拔（第2排）"
+        "s_g1ofy6um": "A面选拔（第2排）",
+        "s_txo4zxcd": "A面选拔（第2排）",
+        "s_j75gbq1p": "A面选拔（第1排 center）",
+        "s_nk8cfl98": "A面选拔（第2排）",
+        "s_be46o4rk": "A面选拔（第2排）",
+        "s_d4giywz2": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-15T13:16:09.640Z",
-      "updatedAt": "2026-07-15T13:16:09.640Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:39:49.409Z",
+      "updatedAt": "2026-10-28T09:39:49.409Z"
     },
     {
       "id": "m_batr9qfj",
@@ -7170,12 +8462,13 @@
         },
         {
           "edition": "第6届",
-          "rank": "第11位"
+          "rank": "第11位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第11位",
-          "photoVersion": 3
+          "photoVersion": 4
         }
       ],
       "admireSenior": [
@@ -7881,6 +9174,7 @@
       "name": "佐伯 美晴",
       "romaji": "MIHARU SAEKI",
       "origin": "广岛 • 广岛市",
+      "group": "XP",
       "generation": "1期",
       "avatar": "/uploads/1784121387123.webp",
       "officialPhotos": [
@@ -7901,9 +9195,9 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
       "inheritanceSuccessorId": "",
       "inheritancePending": false,
       "electionRanks": [
@@ -7934,7 +9228,12 @@
         {
           "edition": "第7届",
           "rank": "第14位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第15位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [],
@@ -8014,17 +9313,19 @@
         "s_luj5nvrt": "落选",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "落选",
-        "s_g1ofy6um": "A面选拔（第3排）"
+        "s_g1ofy6um": "A面选拔（第3排）",
+        "s_txo4zxcd": "A面选拔（第3排）",
+        "s_j75gbq1p": "落选"
       },
-      "createdAt": "2026-07-15T13:16:29.411Z",
-      "updatedAt": "2026-07-15T13:16:29.411Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:40:00.382Z",
+      "updatedAt": "2026-10-28T09:40:00.382Z"
     },
     {
       "id": "m_7j6tcyhr",
       "name": "竹内 星月",
       "romaji": "SEITSUKI TAKEUCHI",
       "origin": "韩国首尔 • 江南",
+      "group": "XP",
       "generation": "1期",
       "avatar": "/uploads/1784197168248.webp",
       "officialPhotos": [
@@ -8045,10 +9346,10 @@
           "version": 4
         }
       ],
-      "isActive": true,
-      "graduationDate": "",
-      "graduationSongTitle": "",
-      "inheritanceSuccessorId": "",
+      "isActive": false,
+      "graduationDate": "2026-09-21",
+      "graduationSongTitle": "无",
+      "inheritanceSuccessorId": "m_10gen_5",
       "inheritancePending": false,
       "electionRanks": [
         {
@@ -8073,12 +9374,18 @@
         },
         {
           "edition": "第6届",
-          "rank": "第13位"
+          "rank": "第13位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第8位",
-          "photoVersion": 3
+          "photoVersion": 4
+        },
+        {
+          "edition": "第8届",
+          "rank": "第7位",
+          "photoVersion": 4
         }
       ],
       "admireSenior": [],
@@ -8158,11 +9465,12 @@
         "s_luj5nvrt": "A面选拔（第3排）",
         "s_zm6ss6kl": "落选",
         "s_u45gpsal": "A面选拔（第3排）",
-        "s_g1ofy6um": "落选"
+        "s_g1ofy6um": "落选",
+        "s_txo4zxcd": "落选",
+        "s_j75gbq1p": "A面选拔（第3排）"
       },
-      "createdAt": "2026-07-16T10:19:31.848Z",
-      "updatedAt": "2026-07-16T10:19:31.848Z",
-      "group": "XP"
+      "createdAt": "2026-10-28T09:40:11.929Z",
+      "updatedAt": "2026-10-28T09:40:11.929Z"
     },
     {
       "id": "m_m8fltj0e",
@@ -9197,12 +10505,13 @@
         },
         {
           "edition": "第6届",
-          "rank": "第6位"
+          "rank": "第6位",
+          "photoVersion": 3
         },
         {
           "edition": "第7届",
           "rank": "第5位",
-          "photoVersion": 3
+          "photoVersion": 4
         }
       ],
       "admireSenior": [],
@@ -12561,7 +13870,7 @@
           "no": 2,
           "title": "Make Up / 土木生杏 solo",
           "isAside": false,
-          "audio": "/uploads/audio/1789464593126-xy18sf.mp4"
+          "audio": ""
         }
       ],
       "asideLineup": {
@@ -12584,8 +13893,8 @@
           "m_qingnian_1",
           "m_7gen_4_8843",
           "m_10gen_4",
-          "m_9gen_4",
-          "m_9gen_6"
+          "m_9gen_6",
+          "m_9gen_4"
         ],
         "slotRoles": {
           "11": "guardian",
@@ -12593,9 +13902,276 @@
           "13": "guardian"
         }
       },
-      "notes": "XP大体检企划，选拔组都是XP身体最健康的人！9期二姐神崎百花终于也成为了center，最上姐作为最健康的人也重新成为了护法，真是长得漂亮身体好就能当c啊！",
+      "notes": "XP大体检企划，选拔组都是XP身体最健康的人！9期二姐神崎百花终于也成为了center，最上姐作为最健康的人也重新成为了center，真是长得漂亮身体好就能当c啊！",
       "createdAt": "2026-09-15T09:33:26.946Z",
-      "updatedAt": "2026-09-15T09:33:26.946Z"
+      "updatedAt": "2026-10-28T08:07:14.437Z"
+    },
+    {
+      "id": "s_txo4zxcd",
+      "title": "58th Single · Flower Heart",
+      "release": "2026-09-17",
+      "cover": "/uploads/1793174931298.webp",
+      "tags": [],
+      "singleKind": "企划单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Flower Heart (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1793175011668-b2dxia.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 14,
+        "rows": [
+          7,
+          4,
+          3
+        ],
+        "slots": [
+          "m_6gen_1_4821",
+          "m_7gen_6_7205",
+          "m_10gen_1",
+          "m_11gen_4",
+          "m_10gen_3",
+          "m_11gen_3",
+          "m_bm7qiehk",
+          "m_7gen_3_5910",
+          "m_rjli97s6",
+          "m_qingnian_1",
+          "m_7gen_4_8843",
+          "m_10gen_4",
+          "m_9gen_6",
+          "m_9gen_4"
+        ],
+        "slotRoles": {
+          "11": "guardian",
+          "12": "center",
+          "13": "guardian"
+        }
+      },
+      "notes": "传奇人物最上芽衣连续单c！马上要总选举了，会怎么样呢？",
+      "createdAt": "2026-10-28T08:14:33.534Z",
+      "updatedAt": "2026-10-28T08:14:33.534Z"
+    },
+    {
+      "id": "s_j75gbq1p",
+      "title": "59th Single · M",
+      "release": "2026-09-20",
+      "cover": "/uploads/1793178064981.webp",
+      "tags": [],
+      "singleKind": "总选单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "M (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1793178077530-056lt9.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          7,
+          4,
+          1
+        ],
+        "slots": [
+          "m_7gen_7_9921",
+          "m_9gen_4",
+          "m_7j6tcyhr",
+          "m_7gen_6_7205",
+          "m_10gen_4",
+          "m_7gen_3_5910",
+          "m_7gen_4_8843",
+          "m_9gen_6",
+          "m_9gen_3",
+          "m_7gen_2_4421",
+          "m_6gen_1_4821",
+          "m_rjli97s6"
+        ],
+        "slotRoles": {
+          "8": "guardian",
+          "9": "guardian",
+          "11": "center"
+        }
+      },
+      "notes": "XP末代总选举！凛凛花终于登顶，老赖德保夏希依旧第三，最上姐大跃进！最上姐的时代要来了！",
+      "createdAt": "2026-10-28T09:05:45.871Z",
+      "updatedAt": "2026-10-28T09:05:45.871Z"
+    },
+    {
+      "id": "s_nk8cfl98",
+      "title": "60th Single · Let's Smile Again! ",
+      "release": "2026-09-25",
+      "cover": "/uploads/1793180894971.webp",
+      "tags": [],
+      "singleKind": "常规单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Let's Smile Again! (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1793180950661-tge3s1.mp4"
+        },
+        {
+          "no": 2,
+          "title": "BUGS / Under （御影林檎center）",
+          "isAside": false,
+          "audio": ""
+        },
+        {
+          "no": 3,
+          "title": "unapologetic（德保夏希卒业曲） / 德保夏希、近藤结衣、井上詹妮弗、土木生杏、新井心扉菜",
+          "isAside": false,
+          "audio": "/uploads/audio/1793180974277-4pzqp7.mp4"
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          7,
+          4,
+          1
+        ],
+        "slots": [
+          "m_7gen_7_9921",
+          "m_11gen_1",
+          "m_7gen_6_7205",
+          "m_7gen_2_4421",
+          "m_11gen_4",
+          "m_10gen_6",
+          "m_7gen_3_5910",
+          "m_rjli97s6",
+          "m_9gen_3",
+          "m_12gen_3",
+          "m_6gen_1_4821",
+          "m_9gen_6"
+        ],
+        "slotRoles": {
+          "8": "guardian",
+          "9": "guardian",
+          "11": "center"
+        }
+      },
+      "notes": "XP的第二章正式开始了。前辈们大规模毕业，靠现在的成员，XP真的可以吗？",
+      "createdAt": "2026-10-28T09:51:50.636Z",
+      "updatedAt": "2026-10-28T09:51:50.636Z"
+    },
+    {
+      "id": "s_be46o4rk",
+      "title": "61st Single · 1‌‱",
+      "release": "2026-10-10",
+      "cover": "/uploads/1793181226800.webp",
+      "tags": [],
+      "singleKind": "常规单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "1‌‱ (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1793181244133-0ef7af.mp4"
+        },
+        {
+          "no": 2,
+          "title": "XP Sauce / Under （広瀬遥center）",
+          "isAside": false,
+          "audio": ""
+        },
+        {
+          "no": 3,
+          "title": "Big Mistake? Acappella ver. / 唱8选拔",
+          "isAside": false,
+          "audio": ""
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          7,
+          4,
+          1
+        ],
+        "slots": [
+          "m_10gen_4",
+          "m_12gen_1",
+          "m_11gen_3",
+          "m_6gen_1_4821",
+          "m_7gen_6_7205",
+          "m_9gen_4",
+          "m_7gen_4_8843",
+          "m_rjli97s6",
+          "m_12gen_5",
+          "m_11gen_4",
+          "m_9gen_3",
+          "m_9gen_6"
+        ],
+        "slotRoles": {
+          "8": "guardian",
+          "9": "guardian",
+          "11": "center"
+        }
+      },
+      "notes": "正式进入大视频时代 XP获得了前所未有的关注度，什么都争第一的最上姐一直不断连c！",
+      "createdAt": "2026-10-28T09:57:42.536Z",
+      "updatedAt": "2026-10-28T09:57:42.536Z"
+    },
+    {
+      "id": "s_d4giywz2",
+      "title": "62nd Single · Lonely Sun",
+      "release": "2026-10-15",
+      "cover": "/uploads/1793181527978.webp",
+      "tags": [],
+      "singleKind": "企划单曲",
+      "tracks": [
+        {
+          "no": 1,
+          "title": "Lonely Sun (A-side)",
+          "isAside": true,
+          "audio": "/uploads/audio/1793181581895-xv6vq0.mp4"
+        },
+        {
+          "no": 2,
+          "title": "Advise u to shoot! / Under（鬼塚菜津美center）",
+          "isAside": false,
+          "audio": ""
+        },
+        {
+          "no": 3,
+          "title": "Duo / 山本喜月&最上芽衣",
+          "isAside": false,
+          "audio": ""
+        }
+      ],
+      "asideLineup": {
+        "selectionCount": 12,
+        "rows": [
+          7,
+          3,
+          2
+        ],
+        "slots": [
+          "m_rjli97s6",
+          "m_9gen_4",
+          "m_11gen_3",
+          "m_10gen_6",
+          "m_7gen_6_7205",
+          "m_9gen_5",
+          "m_6gen_1_4821",
+          "m_12gen_5",
+          "m_12gen_3",
+          "m_12gen_1",
+          "m_9gen_6",
+          "m_9gen_3"
+        ],
+        "slotRoles": {
+          "10": "center",
+          "11": "center"
+        }
+      },
+      "notes": "XP酒王企划！中村麻里子红的白的啤的都能喝，是当之无愧的酒王！但是c还是得老牌九期双姝来站啊！",
+      "createdAt": "2026-10-28T10:03:15.682Z",
+      "updatedAt": "2026-10-28T10:03:15.682Z"
     }
   ],
   "gallery": [
@@ -13053,6 +14629,26 @@
         {
           "singleId": "s_g1ofy6um",
           "trackNo": 1
+        },
+        {
+          "singleId": "s_txo4zxcd",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_j75gbq1p",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_nk8cfl98",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_be46o4rk",
+          "trackNo": 1
+        },
+        {
+          "singleId": "s_d4giywz2",
+          "trackNo": 1
         }
       ],
       "createdAt": "2026-03-16T20:59:00.621Z"
@@ -13105,6 +14701,10 @@
         {
           "singleId": "s_zm6ss6kl",
           "trackNo": 2
+        },
+        {
+          "singleId": "s_nk8cfl98",
+          "trackNo": 3
         }
       ],
       "createdAt": "2026-03-16T21:10:01.057Z"
